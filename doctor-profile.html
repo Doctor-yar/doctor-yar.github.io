@@ -1,216 +1,184 @@
 <!DOCTYPE html>
 <html lang="fa" dir="rtl">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>مشخصات دکتر - دکتر یار</title>
+  <title>مشخصات داکتر - داکتر یار</title>
 
-<style>
-* {
-  box-sizing: border-box;
-}
+  <style>
+    * {
+      box-sizing: border-box;
+    }
 
-body {
-  margin: 0;
-  font-family: Tahoma, Arial, sans-serif;
-  background: #f5f8fa;
-  color: #222;
-}
+    body {
+      margin: 0;
+      font-family: Tahoma, Arial, sans-serif;
+      background: #f3f8fa;
+      color: #222;
+    }
 
-.container {
-  max-width: 700px;
-  margin: 30px auto;
-  padding: 20px;
-}
+    .container {
+      max-width: 700px;
+      margin: 30px auto;
+      padding: 15px;
+    }
 
-.card {
-  background: white;
-  border-radius: 25px;
-  padding: 30px 22px;
-  box-shadow: 0 8px 25px rgba(0,0,0,0.08);
-}
+    .card {
+      background: white;
+      border-radius: 25px;
+      padding: 25px;
+      box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+    }
 
-h1 {
-  text-align: center;
-  color: #159b91;
-  margin-bottom: 10px;
-}
+    .title {
+      text-align: center;
+      color: #119e98;
+      font-size: 28px;
+      margin-bottom: 25px;
+    }
 
-.subtitle {
-  text-align: center;
-  color: #777;
-  margin-bottom: 30px;
-}
+    .doctor-icon {
+      text-align: center;
+      font-size: 65px;
+      margin-bottom: 10px;
+    }
 
-h2 {
-  color: #159b91;
-  border-bottom: 2px solid #e5eeee;
-  padding-bottom: 10px;
-  margin-top: 30px;
-}
+    .field {
+      margin-bottom: 18px;
+    }
 
-label {
-  display: block;
-  margin-top: 18px;
-  margin-bottom: 7px;
-  font-weight: bold;
-}
+    .field label {
+      display: block;
+      font-weight: bold;
+      margin-bottom: 7px;
+      color: #555;
+    }
 
-input,
-textarea,
-select {
-  width: 100%;
-  padding: 14px;
-  border: 1px solid #d5dddd;
-  border-radius: 12px;
-  font-family: Tahoma, Arial, sans-serif;
-  font-size: 15px;
-  background: #fff;
-}
+    .field input,
+    .field textarea,
+    .field select {
+      width: 100%;
+      padding: 14px;
+      border: 1px solid #ddd;
+      border-radius: 12px;
+      font-size: 16px;
+      font-family: inherit;
+      background: #fafafa;
+    }
 
-textarea {
-  min-height: 110px;
-  resize: vertical;
-}
+    textarea {
+      min-height: 100px;
+      resize: vertical;
+    }
 
-input[type="file"] {
-  padding: 10px;
-}
+    .save-btn {
+      width: 100%;
+      border: none;
+      background: #119e98;
+      color: white;
+      padding: 16px;
+      border-radius: 14px;
+      font-size: 18px;
+      font-family: inherit;
+      cursor: pointer;
+      margin-top: 10px;
+    }
 
-.submit {
-  width: 100%;
-  margin-top: 30px;
-  padding: 16px;
-  border: none;
-  border-radius: 14px;
-  background: #159b91;
-  color: white;
-  font-size: 18px;
-  font-family: Tahoma, Arial, sans-serif;
-  cursor: pointer;
-}
+    .save-btn:hover {
+      background: #0c8580;
+    }
 
-.submit:active {
-  transform: scale(0.98);
-}
+    .back {
+      display: block;
+      text-align: center;
+      margin-top: 20px;
+      color: #119e98;
+      text-decoration: none;
+      font-size: 16px;
+    }
 
-.back {
-  display: block;
-  text-align: center;
-  margin-top: 20px;
-  color: #159b91;
-  text-decoration: none;
-  font-size: 16px;
-}
-
-.note {
-  background: #f0f8f7;
-  padding: 14px;
-  border-radius: 12px;
-  margin-top: 15px;
-  color: #555;
-  line-height: 1.8;
-}
-
-footer {
-  text-align: center;
-  color: #888;
-  margin-top: 25px;
-}
-</style>
+    .message {
+      display: none;
+      text-align: center;
+      margin-top: 15px;
+      color: #119e98;
+      font-weight: bold;
+    }
+  </style>
 </head>
 
 <body>
 
-<div class="container">
+  <div class="container">
 
-  <div class="card">
+    <div class="card">
 
-    <h1>👨‍⚕️ مشخصات دکتر</h1>
+      <div class="doctor-icon">👨‍⚕️</div>
 
-    <p class="subtitle">
-      لطفاً معلومات خود را با دقت وارد کنید
-    </p>
+      <h1 class="title">مشخصات داکتر</h1>
 
-    <form onsubmit="submitForm(event)">
-
-      <h2>معلومات شخصی</h2>
-
-      <label>نام و نام خانوادگی</label>
-      <input type="text" placeholder="مثلاً: دکتر احمد احمدی" required>
-
-      <label>تخصص</label>
-      <input type="text" placeholder="مثلاً: متخصص داخله" required>
-
-      <label>شماره تماس</label>
-      <input type="tel" placeholder="07XXXXXXXX" required>
-
-      <label>شماره جواز طبابت</label>
-      <input type="text" placeholder="شماره جواز طبابت">
-
-      <label>عکس دکتر</label>
-      <input type="file" accept="image/*">
-
-      <h2>معلومات کلینیک</h2>
-
-      <label>نام کلینیک یا شفاخانه</label>
-      <input type="text" placeholder="نام کلینیک">
-
-      <label>آدرس</label>
-      <input type="text" placeholder="آدرس کلینیک">
-
-      <label>ساعات کاری</label>
-      <input type="text" placeholder="مثلاً: ۸ صبح تا ۴ عصر">
-
-      <label>معرفی دکتر</label>
-      <textarea placeholder="درباره خود و تجربه کاری تان بنویسید"></textarea>
-
-      <h2>📄 اسناد دکتر</h2>
-
-      <div class="note">
-        لطفاً اسناد معتبر خود را برای بررسی مدیر دکتر یار انتخاب کنید.
+      <div class="field">
+        <label>نام داکتر</label>
+        <input type="text" placeholder="نام و تخلص داکتر">
       </div>
 
-      <label>سند فراغت / دیپلوم</label>
-      <input type="file" accept=".pdf,.jpg,.jpeg,.png">
+      <div class="field">
+        <label>تخصص</label>
+        <input type="text" placeholder="مثلاً متخصص قلب">
+      </div>
 
-      <label>جواز طبابت</label>
-      <input type="file" accept=".pdf,.jpg,.jpeg,.png">
+      <div class="field">
+        <label>شماره تماس</label>
+        <input type="tel" placeholder="شماره تماس">
+      </div>
 
-      <label>سند تخصص</label>
-      <input type="file" accept=".pdf,.jpg,.jpeg,.png">
+      <div class="field">
+        <label>آدرس مطب</label>
+        <input type="text" placeholder="آدرس مطب یا شفاخانه">
+      </div>
 
-      <label>سایر اسناد</label>
-      <input type="file" accept=".pdf,.jpg,.jpeg,.png">
+      <div class="field">
+        <label>ساعات کاری</label>
+        <input type="text" placeholder="مثلاً شنبه تا پنجشنبه، ۸ صبح تا ۴ عصر">
+      </div>
 
-      <button type="submit" class="submit">
-        📤 ارسال برای بررسی مدیر
+      <div class="field">
+        <label>شماره جواز پزشکی</label>
+        <input type="text" placeholder="شماره جواز">
+      </div>
+
+      <div class="field">
+        <label>معرفی داکتر</label>
+        <textarea placeholder="توضیحات درباره داکتر، تجربه و خدمات..."></textarea>
+      </div>
+
+      <div class="field">
+        <label>خدمات پزشکی</label>
+        <textarea placeholder="خدماتی که داکتر ارائه می‌کند..."></textarea>
+      </div>
+
+      <button class="save-btn" onclick="saveProfile()">
+        ذخیره مشخصات
       </button>
 
-    </form>
+      <div class="message" id="message">
+        ✅ مشخصات با موفقیت ذخیره شد
+      </div>
 
-    <a href="index.html" class="back">
-      ← بازگشت به صفحه اصلی
-    </a>
+      <a class="back" href="index.html">
+        ← بازگشت به صفحه اصلی
+      </a>
+
+    </div>
 
   </div>
 
-  <footer>
-    © 2026 دکتر یار - تمامی حقوق محفوظ است
-  </footer>
-
-</div>
-
-<script>
-function submitForm(event) {
-  event.preventDefault();
-
-  alert(
-    "معلومات شما ثبت شد و برای بررسی مدیر دکتر یار آماده است."
-  );
-}
-</script>
+  <script>
+    function saveProfile() {
+      document.getElementById("message").style.display = "block";
+    }
+  </script>
 
 </body>
 </html>
