@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>ورود داکتر - داکتر یار</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Tahoma, Arial, sans-serif;
+      background: #f5f8fa;
+      color: #222;
+    }
+
+    .container {
+      width: 92%;
+      max-width: 500px;
+      margin: 60px auto;
+    }
+
+    .login-box {
+      background: white;
+      padding: 30px 22px;
+      border-radius: 20px;
+      box-shadow: 0 5px 25px rgba(0,0,0,0.08);
+      text-align: center;
+    }
+
+    .logo {
+      width: 80px;
+      height: 80px;
+      margin: 0 auto 15px;
+      border-radius: 50%;
+      background: #0b8f87;
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 40px;
+      font-weight: bold;
+    }
+
+    h1 {
+      color: #0b8f87;
+      margin-bottom: 10px;
+    }
+
+    p {
+      color: #666;
+      line-height: 1.8;
+    }
+
+    input {
+      width: 100%;
+      padding: 15px;
+      margin: 8px 0;
+      border: 1px solid #ddd;
+      border-radius: 10px;
+      font-family: Tahoma;
+      font-size: 16px;
+      text-align: right;
+    }
+
+    button {
+      width: 100%;
+      padding: 15px;
+      margin-top: 15px;
+      background: #0b8f87;
+      color: white;
+      border: none;
+      border-radius: 12px;
+      font-size: 17px;
+      font-family: Tahoma;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #08756f;
+    }
+
+    .message {
+      margin-top: 15px;
+      font-weight: bold;
+    }
+
+    .dashboard {
+      display: none;
+    }
+
+    .card {
+      background: white;
+      padding: 22px;
+      margin: 15px 0;
+      border-radius: 15px;
+      box-shadow: 0 3px 15px rgba(0,0,0,0.06);
+    }
+
+    .logout {
+      background: #d9534f;
+    }
+
+    .logout:hover {
+      background: #b52b27;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="container">
+
+    <!-- صفحه ورود -->
+    <div class="login-box" id="loginBox">
+
+      <div class="logo">د</div>
+
+      <h1>ورود داکتر</h1>
+
+      <p>
+        برای ورود به بخش مدیریت داکتر یار،
+        نام کاربری و رمز عبور خود را وارد کنید.
+      </p>
+
+      <input
+        type="text"
+        id="username"
+        placeholder="نام کاربری"
+      >
+
+      <input
+        type="password"
+        id="password"
+        placeholder="رمز عبور"
+      >
+
+      <button onclick="login()">
+        ورود به پنل
+      </button>
+
+      <div class="message" id="message"></div>
+
+    </div>
+
+
+    <!-- پنل بعد از ورود -->
+    <div class="login-box dashboard" id="dashboard">
+
+      <div class="logo">✓</div>
+
+      <h1>پنل داکتر یار</h1>
+
+      <p>
+        خوش آمدید. شما وارد بخش مدیریت شدید.
+      </p>
+
+      <div class="card">
+        <h3>👨‍⚕️ مدیریت داکتران</h3>
+        <p>مدیریت اطلاعات داکتران در این بخش قرار می‌گیرد.</p>
+      </div>
+
+      <div class="card">
+        <h3>👤 مدیریت بیماران</h3>
+        <p>اطلاعات و درخواست‌های بیماران در این بخش قرار می‌گیرد.</p>
+      </div>
+
+      <div class="card">
+        <h3>📩 شکایت‌ها و پیام‌ها</h3>
+        <p>پیام‌ها و شکایت‌های کاربران را مشاهده کنید.</p>
+      </div>
+
+      <button class="logout" onclick="logout()">
+        خروج از حساب
+      </button>
+
+    </div>
+
+  </div>
+
+
+  <script>
+
+    function login() {
+
+      const username =
+        document.getElementById("username").value.trim();
+
+      const password =
+        document.getElementById("password").value;
+
+      const message =
+        document.getElementById("message");
+
+      /*
+       * ورود آزمایشی
+       * بعداً این قسمت را به سیستم واقعی
+       * و امن وصل می‌کنیم.
+       */
+
+      if (username === "admin" && password === "123456") {
+
+        localStorage.setItem("doctorYarLogin", "true");
+
+        document.getElementById("loginBox").style.display = "none";
+        document.getElementById("dashboard").style.display = "block";
+
+      } else {
+
+        message.style.color = "red";
+        message.textContent =
+          "نام کاربری یا رمز عبور اشتباه است.";
+
+      }
+    }
+
+
+    function logout() {
+
+      localStorage.removeItem("doctorYarLogin");
+
+      document.getElementById("dashboard").style.display = "none";
+      document.getElementById("loginBox").style.display = "block";
+
+      document.getElementById("username").value = "";
+      document.getElementById("password").value = "";
+      document.getElementById("message").textContent = "";
+    }
+
+
+    // اگر قبلاً وارد شده باشد
+    if (localStorage.getItem("doctorYarLogin") === "true") {
+
+      document.getElementById("loginBox").style.display = "none";
+      document.getElementById("dashboard").style.display = "block";
+
+    }
+
+  </script>
+
+</body>
+</html>
