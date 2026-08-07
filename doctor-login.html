@@ -3,14 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
   <title>ورود داکتر - داکتر یار</title>
 
   <style>
-    * {
-      box-sizing: border-box;
-    }
-
     body {
       margin: 0;
       font-family: Tahoma, Arial, sans-serif;
@@ -19,31 +14,17 @@
     }
 
     .container {
-      width: 92%;
       max-width: 500px;
       margin: 60px auto;
+      padding: 20px;
     }
 
-    .login-box {
+    .card {
       background: white;
-      padding: 30px 22px;
-      border-radius: 20px;
-      box-shadow: 0 5px 25px rgba(0,0,0,0.08);
+      padding: 35px 25px;
+      border-radius: 25px;
+      box-shadow: 0 8px 25px rgba(0,0,0,0.08);
       text-align: center;
-    }
-
-    .logo {
-      width: 80px;
-      height: 80px;
-      margin: 0 auto 15px;
-      border-radius: 50%;
-      background: #0b8f87;
-      color: white;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 40px;
-      font-weight: bold;
     }
 
     h1 {
@@ -51,62 +32,48 @@
       margin-bottom: 10px;
     }
 
-    p {
-      color: #666;
-      line-height: 1.8;
+    .subtitle {
+      color: #777;
+      margin-bottom: 30px;
     }
 
     input {
-      width: 100%;
-      padding: 15px;
-      margin: 8px 0;
+      width: 90%;
+      padding: 16px;
+      margin: 10px 0;
       border: 1px solid #ddd;
-      border-radius: 10px;
-      font-family: Tahoma;
+      border-radius: 12px;
       font-size: 16px;
       text-align: right;
     }
 
     button {
-      width: 100%;
-      padding: 15px;
-      margin-top: 15px;
-      background: #0b8f87;
-      color: white;
+      width: 95%;
+      padding: 16px;
+      margin-top: 20px;
       border: none;
       border-radius: 12px;
-      font-size: 17px;
-      font-family: Tahoma;
+      background: #0b968e;
+      color: white;
+      font-size: 18px;
       cursor: pointer;
     }
 
     button:hover {
-      background: #08756f;
+      background: #087d76;
     }
 
     .message {
-      margin-top: 15px;
+      margin-top: 20px;
+      font-size: 16px;
       font-weight: bold;
     }
 
-    .dashboard {
-      display: none;
-    }
-
-    .card {
-      background: white;
-      padding: 22px;
-      margin: 15px 0;
-      border-radius: 15px;
-      box-shadow: 0 3px 15px rgba(0,0,0,0.06);
-    }
-
-    .logout {
-      background: #d9534f;
-    }
-
-    .logout:hover {
-      background: #b52b27;
+    .back {
+      display: block;
+      margin-top: 25px;
+      color: #0b8f87;
+      text-decoration: none;
     }
   </style>
 </head>
@@ -114,17 +81,12 @@
 <body>
 
   <div class="container">
+    <div class="card">
 
-    <!-- صفحه ورود -->
-    <div class="login-box" id="loginBox">
+      <h1>🩺 ورود داکتر</h1>
 
-      <div class="logo">د</div>
-
-      <h1>ورود داکتر</h1>
-
-      <p>
-        برای ورود به بخش مدیریت داکتر یار،
-        نام کاربری و رمز عبور خود را وارد کنید.
+      <p class="subtitle">
+        به پنل داکتر یار خوش آمدید
       </p>
 
       <input
@@ -143,52 +105,20 @@
         ورود به پنل
       </button>
 
-      <div class="message" id="message"></div>
+      <div id="message" class="message"></div>
+
+      <a class="back" href="index.html">
+        ← بازگشت به صفحه اصلی
+      </a>
 
     </div>
-
-
-    <!-- پنل بعد از ورود -->
-    <div class="login-box dashboard" id="dashboard">
-
-      <div class="logo">✓</div>
-
-      <h1>پنل داکتر یار</h1>
-
-      <p>
-        خوش آمدید. شما وارد بخش مدیریت شدید.
-      </p>
-
-      <div class="card">
-        <h3>👨‍⚕️ مدیریت داکتران</h3>
-        <p>مدیریت اطلاعات داکتران در این بخش قرار می‌گیرد.</p>
-      </div>
-
-      <div class="card">
-        <h3>👤 مدیریت بیماران</h3>
-        <p>اطلاعات و درخواست‌های بیماران در این بخش قرار می‌گیرد.</p>
-      </div>
-
-      <div class="card">
-        <h3>📩 شکایت‌ها و پیام‌ها</h3>
-        <p>پیام‌ها و شکایت‌های کاربران را مشاهده کنید.</p>
-      </div>
-
-      <button class="logout" onclick="logout()">
-        خروج از حساب
-      </button>
-
-    </div>
-
   </div>
 
-
   <script>
-
     function login() {
 
       const username =
-        document.getElementById("username").value.trim();
+        document.getElementById("username").value;
 
       const password =
         document.getElementById("password").value;
@@ -196,50 +126,24 @@
       const message =
         document.getElementById("message");
 
-      /*
-       * ورود آزمایشی
-       * بعداً این قسمت را به سیستم واقعی
-       * و امن وصل می‌کنیم.
-       */
+      if (username === "doctor" && password === "1234") {
 
-      if (username === "admin" && password === "123456") {
+        message.style.color = "green";
+        message.innerHTML =
+          "ورود موفق بود ✅";
 
-        localStorage.setItem("doctorYarLogin", "true");
-
-        document.getElementById("loginBox").style.display = "none";
-        document.getElementById("dashboard").style.display = "block";
+        setTimeout(function() {
+          window.location.href = "doctor-panel.html";
+        }, 1000);
 
       } else {
 
         message.style.color = "red";
-        message.textContent =
-          "نام کاربری یا رمز عبور اشتباه است.";
+        message.innerHTML =
+          "نام کاربری یا رمز عبور اشتباه است ❌";
 
       }
     }
-
-
-    function logout() {
-
-      localStorage.removeItem("doctorYarLogin");
-
-      document.getElementById("dashboard").style.display = "none";
-      document.getElementById("loginBox").style.display = "block";
-
-      document.getElementById("username").value = "";
-      document.getElementById("password").value = "";
-      document.getElementById("message").textContent = "";
-    }
-
-
-    // اگر قبلاً وارد شده باشد
-    if (localStorage.getItem("doctorYarLogin") === "true") {
-
-      document.getElementById("loginBox").style.display = "none";
-      document.getElementById("dashboard").style.display = "block";
-
-    }
-
   </script>
 
 </body>
