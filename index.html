@@ -98,6 +98,97 @@
   <footer>
     © 2026 دکتر یار - تمامی حقوق محفوظ است
   </footer>
+<section class="support">
+    <h2>پشتیبانی و شکایت</h2>
 
+    <p>
+        اگر مریض یا داکتر مشکلی دارد، می‌تواند از طریق این بخش با مدیریت داکتر یار تماس بگیرد.
+    </p>
+
+    <a href="tel:+93700000000" class="support-btn">
+        📞 تماس با پشتیبانی
+    </a>
+
+    <h3>ثبت شکایت</h3>
+
+    <form>
+        <input type="text" placeholder="نام شما" required>
+
+        <input type="tel" placeholder="شماره تماس" required>
+
+        <select required>
+            <option value="">نوع شکایت را انتخاب کنید</option>
+            <option>شکایت مریض از داکتر</option>
+            <option>شکایت داکتر از مریض</option>
+            <option>مشکل فنی سایت</option>
+            <option>سایر</option>
+        </select>
+
+        <textarea placeholder="شرح شکایت یا مشکل خود را بنویسید" required></textarea>
+
+        <button type="submit">ارسال شکایت</button>
+    </form>
+</section>
+
+<style>
+.support {
+    background: white;
+    margin: 30px 20px;
+    padding: 25px;
+    border-radius: 20px;
+    text-align: center;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+}
+
+.support h2 {
+    color: #0b8f87;
+    font-size: 28px;
+}
+
+.support h3 {
+    color: #0b8f87;
+    margin-top: 30px;
+}
+
+.support p {
+    line-height: 2;
+}
+
+.support-btn {
+    display: block;
+    background: #0b8f87;
+    color: white;
+    text-decoration: none;
+    padding: 15px;
+    margin: 12px auto;
+    border-radius: 12px;
+    max-width: 300px;
+}
+
+.support input,
+.support select,
+.support textarea {
+    width: 90%;
+    padding: 14px;
+    margin: 8px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    font-family: Tahoma;
+    box-sizing: border-box;
+}
+
+.support textarea {
+    height: 120px;
+}
+
+.support button {
+    background: #0b8f87;
+    color: white;
+    border: none;
+    padding: 15px 35px;
+    border-radius: 12px;
+    font-size: 17px;
+}
+</style>
 </body>
 </html>
