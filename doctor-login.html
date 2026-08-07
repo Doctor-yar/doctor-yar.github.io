@@ -126,25 +126,26 @@ button:active{
 
 <script>
 
-function login(){
+funct<script>
+function login() {
 
-  let username =
-    document.getElementById("username").value.trim();
+  let username = document.getElementById("username").value.trim();
+  let password = document.getElementById("password").value.trim();
 
-  let password =
-    document.getElementById("password").value;
-
-  if(username === "Doctor" && password === "1234"){
+  if (
+    username.toLowerCase() === "doctor" &&
+    password === "1234"
+  ) {
 
     window.location.href = "doctor-profile.html";
 
-  }else{
+  } else {
 
     document.getElementById("error").style.display = "block";
 
   }
-
 }
+</script>
 
 </script>
 
