@@ -192,5 +192,25 @@
     font-size: 17px;
 }
 </style>
+  <div class="support-section">
+  <h2>🆘 پشتیبانی و شکایات</h2>
+
+  <input type="text" id="supportName" placeholder="نام شما">
+
+  <input type="text" id="supportPhone" placeholder="شماره تماس">
+
+  <textarea id="supportMessage" placeholder="پیام یا شکایت خود را بنویسید..."></textarea>
+
+  <button onclick="sendSupport()">ارسال پیام</button>
+
+  <p id="supportResult"></p>
+</div>
+
+<script>
+function sendSupport() {
+  document.getElementById("supportResult").innerText =
+    "✅ پیام شما ثبت شد. از تماس شما سپاسگزاریم.";
+}
+</script>
 </body>
 </html>
