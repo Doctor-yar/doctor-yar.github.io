@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>پروفایل داکتر | داکتر یار</title>
+
+  <style>
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Tahoma, Arial, sans-serif;
+      background: #f5f7f7;
+      color: #444;
+    }
+
+    .container {
+      width: 92%;
+      max-width: 650px;
+      margin: 25px auto;
+    }
+
+    .header {
+      background: #149e9a;
+      color: white;
+      padding: 28px 20px;
+      border-radius: 25px;
+      text-align: center;
+      box-shadow: 0 3px 15px rgba(0,0,0,0.08);
+    }
+
+    .doctor-icon {
+      font-size: 55px;
+      margin-bottom: 8px;
+    }
+
+    .doctor-name {
+      font-size: 27px;
+      font-weight: bold;
+    }
+
+    .specialty {
+      font-size: 18px;
+      margin-top: 8px;
+    }
+
+    .card {
+      background: white;
+      margin-top: 18px;
+      padding: 22px;
+      border-radius: 22px;
+      box-shadow: 0 2px 14px rgba(0,0,0,0.07);
+    }
+
+    .card-title {
+      font-size: 21px;
+      font-weight: bold;
+      color: #149e9a;
+      margin-bottom: 16px;
+    }
+
+    .info-row {
+      padding: 10px 0;
+      border-bottom: 1px solid #eee;
+      font-size: 17px;
+      line-height: 1.8;
+    }
+
+    .info-row:last-child {
+      border-bottom: none;
+    }
+
+    .label {
+      font-weight: bold;
+      color: #555;
+    }
+
+    .visit-type {
+      display: inline-block;
+      background: #e9f8f7;
+      color: #149e9a;
+      padding: 7px 12px;
+      border-radius: 10px;
+      margin: 4px;
+    }
+
+    .day {
+      background: #f5f7f7;
+      margin-bottom: 10px;
+      padding: 13px;
+      border-radius: 15px;
+      font-size: 16px;
+    }
+
+    .day-name {
+      font-weight: bold;
+      color: #149e9a;
+      display: inline-block;
+      min-width: 80px;
+    }
+
+    .closed {
+      color: #b32626;
+    }
+
+    .contact-btn {
+      display: block;
+      width: 100%;
+      padding: 17px;
+      margin-top: 10px;
+      background: #149e9a;
+      color: white;
+      text-align: center;
+      text-decoration: none;
+      border-radius: 18px;
+      font-size: 19px;
+    }
+
+    .back-link {
+      display: block;
+      text-align: center;
+      margin: 22px 0;
+      color: #149e9a;
+      text-decoration: none;
+      font-size: 18px;
+    }
+
+    .no-doctor {
+      background: white;
+      padding: 30px;
+      border-radius: 22px;
+      text-align: center;
+      font-size: 18px;
+      line-height: 2;
+    }
+
+  </style>
+
+</head>
+
+<body>
+
+  <div class="container">
+
+    <div id="profile"></div>
+
+    <a
+      href="doctor-search.html"
+      class="back-link"
+    >
+      ← بازگشت به جستجوی داکتر
+    </a>
+
+  </div>
+
+
+  <script>
+
+    const savedProfile =
+      localStorage.getItem("doctorProfile");
+
+
+    const profileBox =
+      document.getElementById("profile");
+
+
+    if (!savedProfile) {
+
+      profileBox.innerHTML = `
+        <div class="no-doctor">
+          هنوز مشخصات داکتری ثبت نشده است.
+          <br><br>
+          لطفاً ابتدا مشخصات داکتر را ثبت کنید.
+        </div>
+      `;
+
+    } else {
+
+      try {
+
+        const doctor =
+          JSON.parse(savedProfile);
+
+
+        // نوع ویزیت
+        let visitTypesHTML = "";
+
+        if (
+          Array.isArray(doctor.visitTypes) &&
+          doctor.visitTypes.length > 0
+        ) {
+
+          doctor.visitTypes.forEach(function(type) {
+
+            visitTypesHTML += `
+              <span class="visit-type">
+                ${type}
+              </span>
+            `;
+
+          });
+
+        } else {
+
+          visitTypesHTML = "ثبت نشده";
+
+        }
+
+
+        // قیمت ویزیت
+        const price =
+          doctor.visitPrice
+            ? doctor.visitPrice + " افغانی"
+            : "ثبت نشده";
+
+
+        // ساعات کاری
+        let workingHoursHTML = "";
+
+        if (doctor.workingHours) {
+
+          workingHoursHTML = `
+            <div class="day">
+              <span class="day-name">ساعات کاری</span>
+              ${doctor.workingHours}
+            </div>
+          `;
+
+        } else {
+
+          workingHoursHTML = `
+            <div class="day">
+              ساعات کاری ثبت نشده است.
+            </div>
+          `;
+
+        }
+
+
+        profileBox.innerHTML = `
+
+          <div class="header">
+
+            <div class="doctor-icon">
+              👨‍⚕️
+            </div>
+
+            <div class="doctor-name">
+              ${doctor.doctorName || "نام ثبت نشده"}
+            </div>
+
+            <div class="specialty">
+              ${doctor.specialty || "تخصص ثبت نشده"}
+            </div>
+
+          </div>
+
+
+          <div class="card">
+
+            <div class="card-title">
+              اطلاعات داکتر
+            </div>
+
+            <div class="info-row">
+              <span class="label">📍 شهر:</span>
+              ${doctor.city || "ثبت نشده"}
+            </div>
+
+            <div class="info-row">
+              <span class="label">📍 آدرس مطب:</span>
+              ${doctor.address || "ثبت نشده"}
+            </div>
+
+            <div class="info-row">
+              <span class="label">📞 شماره تماس:</span>
+              ${doctor.phone || "ثبت نشده"}
+            </div>
+
+          </div>
+
+
+          <div class="card">
+
+            <div class="card-title">
+              🕐 ساعات کاری
+            </div>
+
+            ${workingHoursHTML}
+
+          </div>
+
+
+          <div class="card">
+
+            <div class="card-title">
+              💰 اطلاعات ویزیت
+            </div>
+
+            <div class="info-row">
+              <span class="label">قیمت ویزیت:</span>
+              ${price}
+            </div>
+
+            <div class="info-row">
+              <span class="label">نوع ویزیت:</span>
+              <br>
+              ${visitTypesHTML}
+            </div>
+
+          </div>
+
+
+          <div class="card">
+
+            <div class="card-title">
+              👨‍⚕️ معرفی داکتر
+            </div>
+
+            <div class="info-row">
+              ${doctor.about || "معرفی داکتر ثبت نشده است."}
+            </div>
+
+          </div>
+
+
+          <div class="card">
+
+            <div class="card-title">
+              🩺 خدمات پزشکی
+            </div>
+
+            <div class="info-row">
+              ${doctor.services || "خدمات ثبت نشده است."}
+            </div>
+
+          </div>
+
+
+          <div class="card">
+
+            <div class="card-title">
+              📞 تماس با داکتر
+            </div>
+
+            <a
+              href="tel:${doctor.phone || ""}"
+              class="contact-btn"
+            >
+              تماس با داکتر
+            </a>
+
+          </div>
+
+        `;
+
+      } catch (error) {
+
+        profileBox.innerHTML = `
+          <div class="no-doctor">
+            اطلاعات داکتر قابل خواندن نیست.
+          </div>
+        `;
+
+      }
+
+    }
+
+  </script>
+
+</body>
+
+</html>
