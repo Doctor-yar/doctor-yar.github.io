@@ -1,397 +1,387 @@
 <!DOCTYPE html>
 <html lang="fa" dir="rtl">
+
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
   <title>جستجوی داکتر | داکتر یار</title>
 
   <style>
+
     * {
       box-sizing: border-box;
     }
 
     body {
       margin: 0;
-      font-family: Arial, Tahoma, sans-serif;
-      background: #f5f7fa;
-      color: #222;
+      font-family: Tahoma, Arial, sans-serif;
+      background: #f5f7f7;
+      color: #444;
     }
 
-    header {
-      background: #0d9488;
+    .container {
+      width: 92%;
+      max-width: 650px;
+      margin: 25px auto;
+    }
+
+    .header {
+      background: #149e9a;
       color: white;
-      padding: 22px 15px;
+      padding: 25px;
+      border-radius: 25px;
       text-align: center;
+      margin-bottom: 20px;
     }
 
-    header h1 {
+    .header h1 {
       margin: 0 0 8px;
       font-size: 28px;
     }
 
-    header p {
+    .header p {
       margin: 0;
-      font-size: 15px;
-    }
-
-    .container {
-      max-width: 700px;
-      margin: 25px auto;
-      padding: 0 15px;
+      font-size: 16px;
     }
 
     .search-box {
       background: white;
       padding: 20px;
-      border-radius: 15px;
-      box-shadow: 0 3px 12px rgba(0,0,0,0.08);
+      border-radius: 25px;
+      box-shadow: 0 2px 15px rgba(0,0,0,0.08);
     }
 
-    .search-box h2 {
-      margin-top: 0;
-      color: #0d9488;
-    }
-
-    input,
-    select,
-    button {
+    .search-input {
       width: 100%;
-      padding: 13px;
-      margin-top: 10px;
-      border-radius: 10px;
-      font-size: 16px;
+      padding: 18px;
+      border: 1px solid #ddd;
+      border-radius: 20px;
+      font-size: 17px;
+      font-family: inherit;
+      outline: none;
     }
 
-    input,
-    select {
-      border: 1px solid #ccc;
-      background: white;
+    .search-input:focus {
+      border-color: #149e9a;
     }
 
-    button {
+    .search-btn {
+      width: 100%;
+      margin-top: 12px;
+      padding: 18px;
       border: none;
-      background: #0d9488;
+      border-radius: 20px;
+      background: #149e9a;
       color: white;
+      font-size: 19px;
+      font-family: inherit;
       cursor: pointer;
-      font-weight: bold;
     }
 
-    button:hover {
-      background: #087f75;
-    }
-
-    #results {
+    .results {
       margin-top: 20px;
     }
 
     .doctor-card {
       background: white;
+      padding: 20px;
+      border-radius: 22px;
       margin-bottom: 15px;
-      padding: 18px;
-      border-radius: 15px;
-      box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+      box-shadow: 0 2px 12px rgba(0,0,0,0.08);
     }
 
-    .doctor-card h3 {
-      margin-top: 0;
-      color: #0d9488;
+    .doctor-name {
+      color: #149e9a;
+      font-size: 22px;
+      font-weight: bold;
+      margin-bottom: 12px;
     }
 
-    .doctor-card p {
-      margin: 8px 0;
+    .doctor-info {
+      font-size: 16px;
+      line-height: 2;
+    }
+
+    .doctor-info strong {
+      color: #555;
+    }
+
+    .visit-type {
+      display: inline-block;
+      background: #e9f8f7;
+      color: #149e9a;
+      padding: 6px 10px;
+      border-radius: 10px;
+      margin: 3px;
     }
 
     .no-result {
-      text-align: center;
       background: white;
-      padding: 20px;
-      border-radius: 12px;
+      padding: 25px;
+      border-radius: 20px;
+      text-align: center;
       color: #777;
     }
+
+    .back-link {
+      display: block;
+      text-align: center;
+      margin-top: 20px;
+      color: #149e9a;
+      text-decoration: none;
+      font-size: 18px;
+    }
+
   </style>
+
 </head>
 
 <body>
 
-  <header>
-    <h1>داکتر یار 🩺</h1>
-    <p>جستجوی داکتر و خدمات صحی</p>
-  </header>
-
   <div class="container">
 
+    <div class="header">
+
+      <h1>جستجوی داکتر</h1>
+
+      <p>
+        نام، تخصص یا شهر را جستجو کنید
+      </p>
+
+    </div>
+
+
     <div class="search-box">
-      <h2>جستجوی داکتر</h2>
 
       <input
         type="text"
         id="searchInput"
-        placeholder="نام داکتر یا تخصص را بنویسید..."
+        class="search-input"
+        placeholder="مثلاً احمد، قلب، کابل..."
       >
 
-      <select id="specialty">
-        <option value="">همه تخصص‌ها</option>
-        <option value="قلب">قلب</option>
-        <option value="اطفال">اطفال</option>
-        <option value="داخله">داخله</option>
-        <option value="جراحی">جراحی</option>
-        <option value="نسایی ولادی">نسایی ولادی</option>
-      </select>
+      <button
+        class="search-btn"
+        onclick="searchDoctor()"
+      >
+        جستجوی داکتر
+      </button>
 
-      <button onclick="searchDoctors()">جستجو 🔎</button>
     </div>
 
-    <div id="results"></div>
+
+    <div
+      id="results"
+      class="results"
+    ></div>
+
+
+    <a
+      href="index.html"
+      class="back-link"
+    >
+      ← بازگشت به صفحه اصلی
+    </a>
 
   </div>
 
+
   <script>
 
-const doctors = [
-  {
-    name: "داکتر احمد احمدی",
-    specialty: "قلب",
-    city: "کابل",
-    phone: "0700000000"
-  },
-  {
-    name: "داکتر فاطمه محمدی",
-    specialty: "اطفال",
-    city: "کابل",
-    phone: "0711111111"
-  },
-  {
-    name: "داکتر محمد رحیمی",
-    specialty: "داخله",
-    city: "هرات",
-    phone: "0722222222"
-  },
-  {
-    name: "داکتر سمیع الله",
-    specialty: "جراحی",
-    city: "مزار شریف",
-    phone: "0733333333"
-  }
-];
+    function searchDoctor() {
 
-function normalizeText(text) {
-  return text
-    .trim()
-    .toLowerCase()
-    .replace(/ي/g, "ی")
-    .replace(/ى/g, "ی")
-    .replace(/ك/g, "ک")
-    .replace(/\s+/g, " ");
-}
-
-function searchDoctors() {
-
-  const searchInput = document.getElementById("searchInput");
-  const specialtyInput = document.getElementById("specialty");
-  const results = document.getElementById("results");
-
-  const searchText = normalizeText(searchInput.value);
-  const specialty = specialtyInput.value;
-
-  const filteredDoctors = doctors.filter(function(doctor) {
-
-    const doctorName = normalizeText(doctor.name);
-    const doctorSpecialty = normalizeText(doctor.specialty);
-    const doctorCity = normalizeText(doctor.city);
-
-    const matchesText =
-      searchText === "" ||
-      doctorName.includes(searchText) ||
-      doctorSpecialty.includes(searchText) ||
-      doctorCity.includes(searchText);
-
-    const matchesSpecialty =
-      specialty === "" ||
-      doctor.specialty === specialty;
-
-    return matchesText && matchesSpecialty;
-  });
-
-  results.innerHTML = "";
-
-  if (filteredDoctors.length === 0) {
-
-    results.innerHTML = `
-      <div class="no-result">
-        <p>❌ داکتری با این مشخصات پیدا نشد.</p>
-        <p>لطفاً نام داکتر، تخصص یا شهر را بررسی کنید.</p>
-      </div>
-    `;
-
-    return;
-  }
-
-  filteredDoctors.forEach(function(doctor) {
-
-    results.innerHTML += `
-      <div class="doctor-card">
-
-        <h3>${doctor.name}</h3>
-
-        <p>🩺 تخصص: ${doctor.specialty}</p>
-
-        <p>📍 شهر: ${doctor.city}</p>
-
-        <p>📞 تماس: ${doctor.phone}</p>
-
-        <a href="tel:${doctor.phone}"
-           style="
-           display:block;
-           text-align:center;
-           background:#0d9488;
-           color:white;
-           text-decoration:none;
-           padding:12px;
-           border-radius:10px;
-           margin-top:15px;
-           ">
-           📞 تماس با داکتر
-        </a>
-
-      </div>
-    `;
-  });
-}
+      const searchText =
+        document
+          .getElementById("searchInput")
+          .value
+          .trim()
+          .toLowerCase();
 
 
-// جستجو با دکمه
-<script>
+      const results =
+        document.getElementById("results");
 
-const doctors = [
-  {
-    name: "داکتر احمد احمدی",
-    specialty: "قلب",
-    city: "کابل",
-    phone: "0700000000"
-  },
-  {
-    name: "داکتر فاطمه محمدی",
-    specialty: "اطفال",
-    city: "کابل",
-    phone: "0711111111"
-  },
-  {
-    name: "داکتر محمد رحیمی",
-    specialty: "داخله",
-    city: "هرات",
-    phone: "0722222222"
-  },
-  {
-    name: "داکتر سمیع الله",
-    specialty: "جراحی",
-    city: "مزار شریف",
-    phone: "0733333333"
-  }
-];
 
-function normalizeText(text) {
-  return text
-    .trim()
-    .toLowerCase()
-    .replace(/ي/g, "ی")
-    .replace(/ى/g, "ی")
-    .replace(/ك/g, "ک")
-    .replace(/\s+/g, " ");
-}
+      const savedProfile =
+        localStorage.getItem("doctorProfile");
 
-function searchDoctors() {
 
-  const searchText = normalizeText(
-    document.getElementById("searchInput").value
-  );
+      // اگر هنوز داکتری ثبت نشده باشد
+      if (!savedProfile) {
 
-  const specialty =
-    document.getElementById("specialty").value;
+        results.innerHTML = `
+          <div class="no-result">
+            هنوز مشخصات هیچ داکتری ثبت نشده است.
+          </div>
+        `;
 
-  const results =
-    document.getElementById("results");
+        return;
+      }
 
-  const filteredDoctors = doctors.filter(function(doctor) {
 
-    const name = normalizeText(doctor.name);
-    const doctorSpecialty = normalizeText(doctor.specialty);
-    const city = normalizeText(doctor.city);
+      let doctor;
 
-    const textMatch =
-      searchText === "" ||
-      name.includes(searchText) ||
-      doctorSpecialty.includes(searchText) ||
-      city.includes(searchText);
+      try {
 
-    const specialtyMatch =
-      specialty === "" ||
-      doctor.specialty === specialty;
+        doctor =
+          JSON.parse(savedProfile);
 
-    return textMatch && specialtyMatch;
-  });
+      } catch (error) {
 
-  results.innerHTML = "";
+        results.innerHTML = `
+          <div class="no-result">
+            اطلاعات داکتر قابل خواندن نیست.
+          </div>
+        `;
 
-  if (filteredDoctors.length === 0) {
+        return;
+      }
 
-    results.innerHTML = `
-      <div class="no-result">
-        ❌ داکتری با این مشخصات پیدا نشد.
-      </div>
-    `;
 
-    return;
-  }
+      // متن قابل جستجو
+      const searchableText = (
 
-  filteredDoctors.forEach(function(doctor) {
+        (doctor.doctorName || "") + " " +
+        (doctor.specialty || "") + " " +
+        (doctor.city || "") + " " +
+        (doctor.address || "")
 
-    results.innerHTML += `
-      <div class="doctor-card">
+      ).toLowerCase();
 
-        <h3>${doctor.name}</h3>
 
-        <p>🩺 تخصص: ${doctor.specialty}</p>
+      // اگر چیزی جستجو نشده باشد
+      // همه اطلاعات داکتر نمایش داده می‌شود
+      if (
+        searchText !== "" &&
+        !searchableText.includes(searchText)
+      ) {
 
-        <p>📍 شهر: ${doctor.city}</p>
+        results.innerHTML = `
+          <div class="no-result">
+            داکتری با این مشخصات پیدا نشد.
+          </div>
+        `;
 
-        <p>📞 تماس: ${doctor.phone}</p>
+        return;
+      }
 
-        <a href="tel:${doctor.phone}"
-           style="
-             display:block;
-             text-align:center;
-             background:#0d9488;
-             color:white;
-             text-decoration:none;
-             padding:12px;
-             border-radius:10px;
-             margin-top:15px;
-           ">
-          📞 تماس با داکتر
-        </a>
 
-      </div>
-    `;
-  });
-}
+      // نوع ویزیت
+      let visitTypesHTML = "";
 
-document
-  .querySelector("button")
-  .addEventListener("click", searchDoctors);
+      if (
+        Array.isArray(doctor.visitTypes) &&
+        doctor.visitTypes.length > 0
+      ) {
 
-document
-  .getElementById("searchInput")
-  .addEventListener("keypress", function(event) {
+        doctor.visitTypes.forEach(function(type) {
 
-    if (event.key === "Enter") {
-      searchDoctors();
+          visitTypesHTML += `
+            <span class="visit-type">
+              ${type}
+            </span>
+          `;
+
+        });
+
+      } else {
+
+        visitTypesHTML =
+          "ثبت نشده";
+
+      }
+
+
+      // قیمت ویزیت
+      let priceHTML = "ثبت نشده";
+
+      if (doctor.visitPrice) {
+
+        priceHTML =
+          doctor.visitPrice + " افغانی";
+
+      }
+
+
+      // نمایش داکتر
+      results.innerHTML = `
+
+        <div class="doctor-card">
+
+          <div class="doctor-name">
+            ${doctor.doctorName || "نام ثبت نشده"}
+          </div>
+
+          <div class="doctor-info">
+
+            <strong>تخصص:</strong>
+            ${doctor.specialty || "ثبت نشده"}
+            <br>
+
+            <strong>شهر:</strong>
+            ${doctor.city || "ثبت نشده"}
+            <br>
+
+            <strong>شماره تماس:</strong>
+            ${doctor.phone || "ثبت نشده"}
+            <br>
+
+            <strong>آدرس:</strong>
+            ${doctor.address || "ثبت نشده"}
+            <br>
+
+            <strong>ساعات کاری:</strong>
+            ${doctor.workingHours || "ثبت نشده"}
+            <br>
+
+            <strong>قیمت ویزیت:</strong>
+            ${priceHTML}
+            <br>
+
+            <strong>نوع ویزیت:</strong>
+            <br>
+
+            ${visitTypesHTML}
+
+            <br>
+
+            <strong>معرفی:</strong>
+            ${doctor.about || "ثبت نشده"}
+
+            <br><br>
+
+            <strong>خدمات:</strong>
+            ${doctor.services || "ثبت نشده"}
+
+          </div>
+
+        </div>
+
+      `;
+
     }
 
-  });
 
-searchDoctors();
+    // با زدن Enter هم جستجو انجام شود
+    document
+      .getElementById("searchInput")
+      .addEventListener("keydown", function(event) {
 
-</script>
+        if (event.key === "Enter") {
+
+          searchDoctor();
+
+        }
+
+      });
+
+  </script>
 
 </body>
+
 </html>
