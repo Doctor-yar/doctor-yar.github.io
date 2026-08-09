@@ -260,12 +260,125 @@ function searchDoctors() {
 
 
 // جستجو با دکمه
+<script>
+
+const doctors = [
+  {
+    name: "داکتر احمد احمدی",
+    specialty: "قلب",
+    city: "کابل",
+    phone: "0700000000"
+  },
+  {
+    name: "داکتر فاطمه محمدی",
+    specialty: "اطفال",
+    city: "کابل",
+    phone: "0711111111"
+  },
+  {
+    name: "داکتر محمد رحیمی",
+    specialty: "داخله",
+    city: "هرات",
+    phone: "0722222222"
+  },
+  {
+    name: "داکتر سمیع الله",
+    specialty: "جراحی",
+    city: "مزار شریف",
+    phone: "0733333333"
+  }
+];
+
+function normalizeText(text) {
+  return text
+    .trim()
+    .toLowerCase()
+    .replace(/ي/g, "ی")
+    .replace(/ى/g, "ی")
+    .replace(/ك/g, "ک")
+    .replace(/\s+/g, " ");
+}
+
+function searchDoctors() {
+
+  const searchText = normalizeText(
+    document.getElementById("searchInput").value
+  );
+
+  const specialty =
+    document.getElementById("specialty").value;
+
+  const results =
+    document.getElementById("results");
+
+  const filteredDoctors = doctors.filter(function(doctor) {
+
+    const name = normalizeText(doctor.name);
+    const doctorSpecialty = normalizeText(doctor.specialty);
+    const city = normalizeText(doctor.city);
+
+    const textMatch =
+      searchText === "" ||
+      name.includes(searchText) ||
+      doctorSpecialty.includes(searchText) ||
+      city.includes(searchText);
+
+    const specialtyMatch =
+      specialty === "" ||
+      doctor.specialty === specialty;
+
+    return textMatch && specialtyMatch;
+  });
+
+  results.innerHTML = "";
+
+  if (filteredDoctors.length === 0) {
+
+    results.innerHTML = `
+      <div class="no-result">
+        ❌ داکتری با این مشخصات پیدا نشد.
+      </div>
+    `;
+
+    return;
+  }
+
+  filteredDoctors.forEach(function(doctor) {
+
+    results.innerHTML += `
+      <div class="doctor-card">
+
+        <h3>${doctor.name}</h3>
+
+        <p>🩺 تخصص: ${doctor.specialty}</p>
+
+        <p>📍 شهر: ${doctor.city}</p>
+
+        <p>📞 تماس: ${doctor.phone}</p>
+
+        <a href="tel:${doctor.phone}"
+           style="
+             display:block;
+             text-align:center;
+             background:#0d9488;
+             color:white;
+             text-decoration:none;
+             padding:12px;
+             border-radius:10px;
+             margin-top:15px;
+           ">
+          📞 تماس با داکتر
+        </a>
+
+      </div>
+    `;
+  });
+}
+
 document
   .querySelector("button")
   .addEventListener("click", searchDoctors);
 
-
-// جستجو با دکمه Enter
 document
   .getElementById("searchInput")
   .addEventListener("keypress", function(event) {
@@ -276,11 +389,9 @@ document
 
   });
 
-
-// نمایش همه داکترها هنگام باز شدن صفحه
 searchDoctors();
 
-  </script>
+</script>
 
 </body>
 </html>
