@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>ورود بیمار - داکتر یار</title>
+
+  <style>
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Tahoma, Arial, sans-serif;
+      background: #f5f7f7;
+      color: #444;
+    }
+
+    .container {
+      width: 92%;
+      max-width: 600px;
+      margin: 30px auto;
+      background: white;
+      padding: 28px;
+      border-radius: 25px;
+      box-shadow: 0 2px 15px rgba(0,0,0,0.08);
+    }
+
+    .logo {
+      text-align: center;
+      color: #149e9a;
+      font-size: 30px;
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+
+    h1 {
+      text-align: center;
+      color: #444;
+      font-size: 25px;
+      margin-bottom: 25px;
+    }
+
+    .info {
+      background: #e9f8f7;
+      padding: 15px;
+      border-radius: 16px;
+      text-align: center;
+      color: #147b78;
+      font-size: 16px;
+      margin-bottom: 25px;
+      line-height: 1.8;
+    }
+
+    label {
+      display: block;
+      font-size: 18px;
+      font-weight: bold;
+      margin-top: 20px;
+      margin-bottom: 8px;
+    }
+
+    input,
+    textarea {
+      width: 100%;
+      padding: 17px;
+      border: 1px solid #ddd;
+      border-radius: 20px;
+      font-size: 17px;
+      font-family: inherit;
+      outline: none;
+      background: white;
+    }
+
+    input:focus,
+    textarea:focus {
+      border-color: #14a39e;
+    }
+
+    textarea {
+      min-height: 120px;
+      resize: vertical;
+    }
+
+    .gender-options {
+      display: flex;
+      gap: 10px;
+      margin-top: 10px;
+    }
+
+    .gender-option {
+      flex: 1;
+      border: 1px solid #ddd;
+      border-radius: 18px;
+      padding: 15px;
+      text-align: center;
+      cursor: pointer;
+      background: #fafafa;
+      font-size: 17px;
+    }
+
+    .gender-option input {
+      width: auto;
+      margin-left: 7px;
+    }
+
+    .gender-option:has(input:checked) {
+      border-color: #14a39e;
+      background: #e9f8f7;
+    }
+
+    .continue-btn {
+      width: 100%;
+      margin-top: 30px;
+      padding: 19px;
+      border: none;
+      border-radius: 22px;
+      background: #14a39e;
+      color: white;
+      font-size: 20px;
+      font-family: inherit;
+      cursor: pointer;
+    }
+
+    .continue-btn:active {
+      transform: scale(0.98);
+    }
+
+    .message {
+      display: none;
+      margin-top: 18px;
+      padding: 15px;
+      border-radius: 15px;
+      text-align: center;
+      font-size: 17px;
+    }
+
+    .error {
+      display: block;
+      background: #fdeaea;
+      color: #b32626;
+    }
+
+    .back-link {
+      display: block;
+      text-align: center;
+      margin-top: 25px;
+      color: #149e9a;
+      text-decoration: none;
+      font-size: 18px;
+    }
+
+  </style>
+
+</head>
+
+<body>
+
+  <div class="container">
+
+    <div class="logo">
+      داکتر یار
+    </div>
+
+    <h1>
+      👤 ورود بیمار
+    </h1>
+
+    <div class="info">
+      لطفاً مشخصات خود را وارد کنید تا وارد صفحه اصلی بیمار شوید.
+    </div>
+
+
+    <label for="patientName">
+      اسم بیمار
+    </label>
+
+    <input
+      type="text"
+      id="patientName"
+      placeholder="نام و تخلص بیمار"
+    >
+
+
+    <label for="patientAge">
+      سن بیمار
+    </label>
+
+    <input
+      type="number"
+      id="patientAge"
+      placeholder="مثلاً 25"
+      min="1"
+      max="120"
+    >
+
+
+    <label>
+      جنسیت
+    </label>
+
+    <div class="gender-options">
+
+      <label class="gender-option">
+
+        <input
+          type="radio"
+          name="gender"
+          value="مرد"
+        >
+
+        مرد
+
+      </label>
+
+
+      <label class="gender-option">
+
+        <input
+          type="radio"
+          name="gender"
+          value="زن"
+        >
+
+        زن
+
+      </label>
+
+    </div>
+
+
+    <label for="illness">
+      علت بیماری
+    </label>
+
+    <textarea
+      id="illness"
+      placeholder="مثلاً سردرد، تب، درد قلب، مشکل معده و..."
+    ></textarea>
+
+
+    <button
+      type="button"
+      class="continue-btn"
+      onclick="enterPatient()"
+    >
+      ورود به صفحه اصلی
+    </button>
+
+
+    <div
+      id="message"
+      class="message"
+    ></div>
+
+
+    <a
+      href="index.html"
+      class="back-link"
+    >
+      ← بازگشت به صفحه اصلی
+    </a>
+
+  </div>
+
+
+  <script>
+
+    function enterPatient() {
+
+      const name =
+        document.getElementById("patientName")
+        .value.trim();
+
+      const age =
+        document.getElementById("patientAge")
+        .value.trim();
+
+      const illness =
+        document.getElementById("illness")
+        .value.trim();
+
+      const genderElement =
+        document.querySelector(
+          'input[name="gender"]:checked'
+        );
+
+      const gender =
+        genderElement
+          ? genderElement.value
+          : "";
+
+
+      if (
+        name === "" ||
+        age === "" ||
+        gender === "" ||
+        illness === ""
+      ) {
+
+        showMessage(
+          "لطفاً اسم، سن، جنسیت و علت بیماری را وارد کنید.",
+          "error"
+        );
+
+        return;
+      }
+
+
+      const patientProfile = {
+
+        name: name,
+
+        age: age,
+
+        gender: gender,
+
+        illness: illness,
+
+        savedAt: new Date().toISOString()
+
+      };
+
+
+      localStorage.setItem(
+        "patientProfile",
+        JSON.stringify(patientProfile)
+      );
+
+
+      localStorage.setItem(
+        "patientLoggedIn",
+        "true"
+      );
+
+
+      window.location.href =
+        "patient-dashboard.html";
+
+    }
+
+
+    function showMessage(text, type) {
+
+      const message =
+        document.getElementById("message");
+
+      message.textContent = text;
+
+      message.className =
+        "message " + type;
+
+    }
+
+  </script>
+
+</body>
+
+</html>
