@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>ورود بیمار - داکتر یار</title>
+  <title>صفحه اصلی بیمار - داکتر یار</title>
 
   <style>
 
@@ -22,136 +22,106 @@
 
     .container {
       width: 92%;
-      max-width: 600px;
-      margin: 30px auto;
+      max-width: 700px;
+      margin: 25px auto;
+    }
+
+    .header {
+      background: #149e9a;
+      color: white;
+      padding: 25px;
+      border-radius: 25px;
+      box-shadow: 0 3px 15px rgba(0,0,0,0.08);
+    }
+
+    .logo {
+      font-size: 28px;
+      font-weight: bold;
+    }
+
+    .welcome {
+      margin-top: 12px;
+      font-size: 18px;
+    }
+
+    .search-card {
       background: white;
-      padding: 28px;
+      margin-top: 20px;
+      padding: 25px;
       border-radius: 25px;
       box-shadow: 0 2px 15px rgba(0,0,0,0.08);
     }
 
-    .logo {
-      text-align: center;
-      color: #149e9a;
-      font-size: 30px;
-      font-weight: bold;
-      margin-bottom: 10px;
-    }
-
-    h1 {
-      text-align: center;
+    .search-card h2 {
+      margin-top: 0;
       color: #444;
-      font-size: 25px;
-      margin-bottom: 25px;
+      font-size: 22px;
     }
 
-    .info {
-      background: #e9f8f7;
-      padding: 15px;
-      border-radius: 16px;
-      text-align: center;
-      color: #147b78;
-      font-size: 16px;
-      margin-bottom: 25px;
+    .search-text {
+      color: #777;
       line-height: 1.8;
+      margin-bottom: 20px;
     }
 
-    label {
+    .search-btn {
       display: block;
-      font-size: 18px;
+      width: 100%;
+      padding: 19px;
+      border-radius: 20px;
+      background: #149e9a;
+      color: white;
+      text-decoration: none;
+      text-align: center;
+      font-size: 20px;
       font-weight: bold;
-      margin-top: 20px;
+    }
+
+    .section-title {
+      font-size: 22px;
+      font-weight: bold;
+      margin: 25px 5px 12px;
+    }
+
+    .options {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    .option {
+      background: white;
+      padding: 20px 12px;
+      border-radius: 20px;
+      text-align: center;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+      text-decoration: none;
+      color: #444;
+      font-size: 17px;
+    }
+
+    .option-icon {
+      font-size: 30px;
+      display: block;
       margin-bottom: 8px;
     }
 
-    input,
-    textarea {
-      width: 100%;
-      padding: 17px;
-      border: 1px solid #ddd;
-      border-radius: 20px;
-      font-size: 17px;
-      font-family: inherit;
-      outline: none;
-      background: white;
-    }
-
-    input:focus,
-    textarea:focus {
-      border-color: #14a39e;
-    }
-
-    textarea {
-      min-height: 120px;
-      resize: vertical;
-    }
-
-    .gender-options {
-      display: flex;
-      gap: 10px;
-      margin-top: 10px;
-    }
-
-    .gender-option {
-      flex: 1;
-      border: 1px solid #ddd;
-      border-radius: 18px;
-      padding: 15px;
-      text-align: center;
-      cursor: pointer;
-      background: #fafafa;
-      font-size: 17px;
-    }
-
-    .gender-option input {
-      width: auto;
-      margin-left: 7px;
-    }
-
-    .gender-option:has(input:checked) {
-      border-color: #14a39e;
-      background: #e9f8f7;
-    }
-
-    .continue-btn {
-      width: 100%;
-      margin-top: 30px;
-      padding: 19px;
-      border: none;
-      border-radius: 22px;
-      background: #14a39e;
-      color: white;
-      font-size: 20px;
-      font-family: inherit;
-      cursor: pointer;
-    }
-
-    .continue-btn:active {
-      transform: scale(0.98);
-    }
-
-    .message {
-      display: none;
-      margin-top: 18px;
-      padding: 15px;
-      border-radius: 15px;
-      text-align: center;
-      font-size: 17px;
-    }
-
-    .error {
+    .logout {
       display: block;
-      background: #fdeaea;
-      color: #b32626;
-    }
-
-    .back-link {
-      display: block;
-      text-align: center;
       margin-top: 25px;
-      color: #149e9a;
+      text-align: center;
+      color: #b32626;
       text-decoration: none;
-      font-size: 18px;
+      font-size: 17px;
+      padding: 15px;
+    }
+
+    @media (max-width: 450px) {
+
+      .options {
+        grid-template-columns: 1fr;
+      }
+
     }
 
   </style>
@@ -162,107 +132,116 @@
 
   <div class="container">
 
-    <div class="logo">
-      داکتر یار
-    </div>
+    <div class="header">
 
-    <h1>
-      👤 ورود بیمار
-    </h1>
+      <div class="logo">
+        داکتر یار
+      </div>
 
-    <div class="info">
-      لطفاً مشخصات خود را وارد کنید تا وارد صفحه اصلی بیمار شوید.
-    </div>
-
-
-    <label for="patientName">
-      اسم بیمار
-    </label>
-
-    <input
-      type="text"
-      id="patientName"
-      placeholder="نام و تخلص بیمار"
-    >
-
-
-    <label for="patientAge">
-      سن بیمار
-    </label>
-
-    <input
-      type="number"
-      id="patientAge"
-      placeholder="مثلاً 25"
-      min="1"
-      max="120"
-    >
-
-
-    <label>
-      جنسیت
-    </label>
-
-    <div class="gender-options">
-
-      <label class="gender-option">
-
-        <input
-          type="radio"
-          name="gender"
-          value="مرد"
-        >
-
-        مرد
-
-      </label>
-
-
-      <label class="gender-option">
-
-        <input
-          type="radio"
-          name="gender"
-          value="زن"
-        >
-
-        زن
-
-      </label>
+      <div
+        class="welcome"
+        id="welcomeText"
+      >
+        خوش آمدید
+      </div>
 
     </div>
 
 
-    <label for="illness">
-      علت بیماری
-    </label>
+    <div class="search-card">
 
-    <textarea
-      id="illness"
-      placeholder="مثلاً سردرد، تب، درد قلب، مشکل معده و..."
-    ></textarea>
+      <h2>
+        🔎 جستجوی داکتر
+      </h2>
+
+      <div class="search-text">
+        داکتر مورد نظر خود را بر اساس نام، تخصص یا شهر پیدا کنید.
+      </div>
+
+      <a
+        href="doctor-search.html"
+        class="search-btn"
+      >
+        جستجوی داکتر
+      </a>
+
+    </div>
 
 
-    <button
-      type="button"
-      class="continue-btn"
-      onclick="enterPatient()"
-    >
-      ورود به صفحه اصلی
-    </button>
+    <div class="section-title">
+      امکانات بیمار
+    </div>
 
 
-    <div
-      id="message"
-      class="message"
-    ></div>
+    <div class="options">
+
+      <a
+        href="doctor-search.html"
+        class="option"
+      >
+        <span class="option-icon">👨‍⚕️</span>
+        داکتران
+      </a>
+
+
+      <a
+        href="#"
+        class="option"
+        onclick="comingSoon(event)"
+      >
+        <span class="option-icon">📅</span>
+        نوبت‌های من
+      </a>
+
+
+      <a
+        href="#"
+        class="option"
+        onclick="comingSoon(event)"
+      >
+        <span class="option-icon">❤️</span>
+        داکتران مورد علاقه
+      </a>
+
+
+      <a
+        href="#"
+        class="option"
+        onclick="comingSoon(event)"
+      >
+        <span class="option-icon">👤</span>
+        پروفایل من
+      </a>
+
+
+      <a
+        href="#"
+        class="option"
+        onclick="comingSoon(event)"
+      >
+        <span class="option-icon">📋</span>
+        سوابق مراجعه
+      </a>
+
+
+      <a
+        href="#"
+        class="option"
+        onclick="comingSoon(event)"
+      >
+        <span class="option-icon">🚨</span>
+        شکایت / گزارش
+      </a>
+
+    </div>
 
 
     <a
-      href="index.html"
-      class="back-link"
+      href="#"
+      class="logout"
+      onclick="logoutPatient(event)"
     >
-      ← بازگشت به صفحه اصلی
+      خروج از حساب بیمار
     </a>
 
   </div>
@@ -270,89 +249,65 @@
 
   <script>
 
-    function enterPatient() {
+    const loggedIn =
+      localStorage.getItem("patientLoggedIn");
 
-      const name =
-        document.getElementById("patientName")
-        .value.trim();
-
-      const age =
-        document.getElementById("patientAge")
-        .value.trim();
-
-      const illness =
-        document.getElementById("illness")
-        .value.trim();
-
-      const genderElement =
-        document.querySelector(
-          'input[name="gender"]:checked'
-        );
-
-      const gender =
-        genderElement
-          ? genderElement.value
-          : "";
-
-
-      if (
-        name === "" ||
-        age === "" ||
-        gender === "" ||
-        illness === ""
-      ) {
-
-        showMessage(
-          "لطفاً اسم، سن، جنسیت و علت بیماری را وارد کنید.",
-          "error"
-        );
-
-        return;
-      }
-
-
-      const patientProfile = {
-
-        name: name,
-
-        age: age,
-
-        gender: gender,
-
-        illness: illness,
-
-        savedAt: new Date().toISOString()
-
-      };
-
-
-      localStorage.setItem(
-        "patientProfile",
-        JSON.stringify(patientProfile)
-      );
-
-
-      localStorage.setItem(
-        "patientLoggedIn",
-        "true"
-      );
-
+    if (loggedIn !== "true") {
 
       window.location.href =
-        "patient-dashboard.html";
+        "patient-login.html";
 
     }
 
 
-    function showMessage(text, type) {
+    const savedPatient =
+      localStorage.getItem("patientProfile");
 
-      const message =
-        document.getElementById("message");
 
-      message.textContent = text;
+    if (savedPatient) {
 
-      message.className =
-        "message " + type;
+      try {
+
+        const patient =
+          JSON.parse(savedPatient);
+
+        document.getElementById(
+          "welcomeText"
+        ).textContent =
+          "خوش آمدید " + patient.name;
+
+      } catch (error) {
+
+        console.log(
+          "خطا در اطلاعات بیمار"
+        );
+
+      }
+
+    }
+
+
+    function comingSoon(event) {
+
+      event.preventDefault();
+
+      alert(
+        "این بخش به زودی فعال می‌شود."
+      );
+
+    }
+
+
+    function logoutPatient(event) {
+
+      event.preventDefault();
+
+      localStorage.removeItem(
+        "patientLoggedIn"
+      );
+
+      window.location.href =
+        "patient-login.html";
 
     }
 
