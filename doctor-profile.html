@@ -1,12 +1,14 @@
 <!DOCTYPE html>
 <html lang="fa" dir="rtl">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>مشخصات داکتر - داکتر یار</title>
+  <title>مشخصات داکتر | داکتر یار</title>
 
   <style>
+
     * {
       box-sizing: border-box;
     }
@@ -19,29 +21,28 @@
     }
 
     .container {
-      max-width: 700px;
-      margin: 30px auto;
+      max-width: 750px;
+      margin: 25px auto;
       padding: 15px;
     }
 
     .card {
       background: white;
-      border-radius: 25px;
+      border-radius: 22px;
       padding: 25px;
       box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+    }
+
+    .doctor-icon {
+      text-align: center;
+      font-size: 65px;
     }
 
     .title {
       text-align: center;
       color: #119e98;
       font-size: 28px;
-      margin-bottom: 25px;
-    }
-
-    .doctor-icon {
-      text-align: center;
-      font-size: 65px;
-      margin-bottom: 10px;
+      margin: 10px 0 25px;
     }
 
     .field {
@@ -72,6 +73,32 @@
       resize: vertical;
     }
 
+    .optional {
+      color: #888;
+      font-size: 13px;
+      font-weight: normal;
+    }
+
+    .visit-options {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+    }
+
+    .visit-option {
+      border: 1px solid #ddd;
+      border-radius: 12px;
+      padding: 12px;
+      text-align: center;
+      cursor: pointer;
+      background: #fafafa;
+    }
+
+    .visit-option input {
+      width: auto;
+      margin-left: 5px;
+    }
+
     .save-btn {
       width: 100%;
       border: none;
@@ -89,15 +116,6 @@
       background: #0c8580;
     }
 
-    .back {
-      display: block;
-      text-align: center;
-      margin-top: 20px;
-      color: #119e98;
-      text-decoration: none;
-      font-size: 16px;
-    }
-
     .message {
       display: none;
       text-align: center;
@@ -105,103 +123,427 @@
       color: #119e98;
       font-weight: bold;
     }
+
+    .back {
+      display: block;
+      text-align: center;
+      margin-top: 20px;
+      color: #119e98;
+      text-decoration: none;
+    }
+
+    .documents {
+      margin-top: 30px;
+      padding-top: 20px;
+      border-top: 1px solid #eee;
+    }
+
+    .documents h2 {
+      color: #119e98;
+    }
+
+    .document-card {
+      background: #f8fafb;
+      padding: 15px;
+      border-radius: 12px;
+      margin-bottom: 12px;
+    }
+
+    .document-card h3 {
+      margin-top: 0;
+    }
+
+    @media (max-width: 600px) {
+
+      .visit-options {
+        grid-template-columns: 1fr;
+      }
+
+    }
+
   </style>
+
 </head>
+
 
 <body>
 
-  <div class="container">
+<div class="container">
 
-    <div class="card">
+  <div class="card">
 
-      <div class="doctor-icon">👨‍⚕️</div>
+    <div class="doctor-icon">
+      👨‍⚕️
+    </div>
 
-      <h1 class="title">مشخصات داکتر</h1>
+    <h1 class="title">
+      مشخصات داکتر
+    </h1>
 
-      <div class="field">
-        <label>نام داکتر</label>
-        <input type="text" placeholder="نام و تخلص داکتر">
-      </div>
 
-      <div class="field">
-        <label>تخصص</label>
-        <input type="text" placeholder="مثلاً متخصص قلب">
-      </div>
+    <div class="field">
 
-      <div class="field">
-        <label>شماره تماس</label>
-        <input type="tel" placeholder="شماره تماس">
-      </div>
+      <label>
+        نام داکتر
+      </label>
 
-      <div class="field">
-        <label>آدرس مطب</label>
-        <input type="text" placeholder="آدرس مطب یا شفاخانه">
-      </div>
-
-      <div class="field">
-        <label>ساعات کاری</label>
-        <input type="text" placeholder="مثلاً شنبه تا پنجشنبه، ۸ صبح تا ۴ عصر">
-      </div>
-
-      <div class="field">
-        <label>شماره جواز پزشکی</label>
-        <input type="text" placeholder="شماره جواز">
-      </div>
-
-      <div class="field">
-        <label>معرفی داکتر</label>
-        <textarea placeholder="توضیحات درباره داکتر، تجربه و خدمات..."></textarea>
-      </div>
-
-      <div class="field">
-        <label>خدمات پزشکی</label>
-        <textarea placeholder="خدماتی که داکتر ارائه می‌کند..."></textarea>
-      </div>
-
-      <button class="save-btn" onclick="saveProfile()">
-        ذخیره مشخصات
-      </button>
-
-      <div class="message" id="message">
-        ✅ مشخصات با موفقیت ذخیره شد
-      </div>
-
-      <a class="back" href="index.html">
-        ← بازگشت به صفحه اصلی
-      </a>
+      <input
+        type="text"
+        id="doctorName"
+        placeholder="نام و تخلص داکتر"
+      >
 
     </div>
 
+
+    <div class="field">
+
+      <label>
+        تخصص
+      </label>
+
+      <input
+        type="text"
+        id="specialty"
+        placeholder="مثلاً متخصص قلب"
+      >
+
+    </div>
+
+
+    <div class="field">
+
+      <label>
+        شهر
+      </label>
+
+      <input
+        type="text"
+        id="city"
+        placeholder="مثلاً کابل"
+      >
+
+    </div>
+
+
+    <div class="field">
+
+      <label>
+        شماره تماس
+      </label>
+
+      <input
+        type="tel"
+        id="phone"
+        placeholder="شماره تماس"
+      >
+
+    </div>
+
+
+    <div class="field">
+
+      <label>
+        آدرس مطب یا شفاخانه
+      </label>
+
+      <input
+        type="text"
+        id="address"
+        placeholder="آدرس مطب یا شفاخانه"
+      >
+
+    </div>
+
+
+    <div class="field">
+
+      <label>
+        ساعات کاری
+      </label>
+
+      <input
+        type="text"
+        id="workingHours"
+        placeholder="مثلاً شنبه تا پنجشنبه، ۸ صبح تا ۴ عصر"
+      >
+
+    </div>
+
+
+    <div class="field">
+
+      <label>
+        قیمت ویزیت
+        <span class="optional">(اختیاری)</span>
+      </label>
+
+      <input
+        type="number"
+        id="visitPrice"
+        placeholder="مثلاً 500 افغانی"
+        min="0"
+      >
+
+    </div>
+
+
+    <div class="field">
+
+      <label>
+        نوع ویزیت
+        <span class="optional">(اختیاری)</span>
+      </label>
+
+      <div class="visit-options">
+
+        <label class="visit-option">
+          <input
+            type="checkbox"
+            name="visitType"
+            value="حضوری"
+          >
+          🏥 حضوری
+        </label>
+
+        <label class="visit-option">
+          <input
+            type="checkbox"
+            name="visitType"
+            value="آنلاین"
+          >
+          💻 آنلاین
+        </label>
+
+        <label class="visit-option">
+          <input
+            type="checkbox"
+            name="visitType"
+            value="هر دو"
+          >
+          🔄 هر دو
+        </label>
+
+      </div>
+
+    </div>
+
+
+    <div class="field">
+
+      <label>
+        شماره جواز پزشکی
+      </label>
+
+      <input
+        type="text"
+        id="license"
+        placeholder="شماره جواز"
+      >
+
+    </div>
+
+
+    <div class="field">
+
+      <label>
+        معرفی داکتر
+      </label>
+
+      <textarea
+        id="about"
+        placeholder="توضیحات درباره داکتر، تجربه و خدمات..."
+      ></textarea>
+
+    </div>
+
+
+    <div class="field">
+
+      <label>
+        خدمات پزشکی
+      </label>
+
+      <textarea
+        id="services"
+        placeholder="خدماتی که داکتر ارائه می‌کند..."
+      ></textarea>
+
+    </div>
+
+
+    <div class="documents">
+
+      <h2>
+        📄 اسناد داکتر
+      </h2>
+
+
+      <div class="document-card">
+
+        <h3>
+          جواز طبابت
+        </h3>
+
+        <input
+          type="text"
+          id="licenseDocument"
+          placeholder="شماره جواز یا لینک سند"
+        >
+
+      </div>
+
+
+      <div class="document-card">
+
+        <h3>
+          مدرک تحصیلی
+        </h3>
+
+        <input
+          type="text"
+          id="educationDocument"
+          placeholder="مشخصات یا لینک مدرک"
+        >
+
+      </div>
+
+
+      <div class="document-card">
+
+        <h3>
+          کارت هویت
+        </h3>
+
+        <input
+          type="text"
+          id="identityDocument"
+          placeholder="مشخصات سند"
+        >
+
+      </div>
+
+    </div>
+
+
+    <button
+      class="save-btn"
+      onclick="saveProfile()"
+    >
+      💾 ذخیره مشخصات
+    </button>
+
+
+    <div
+      class="message"
+      id="message"
+    >
+      ✅ مشخصات با موفقیت ذخیره شد
+    </div>
+
+
+    <a
+      class="back"
+      href="index.html"
+    >
+      ← بازگشت به صفحه اصلی
+    </a>
+
   </div>
-
-  <script>
-    function saveProfile() {
-      document.getElementById("message").style.display = "block";
-    }
-  </script>
-<div class="documents-section">
-
-  <h2>📄 اسناد داکتر</h2>
-
-  <div class="document-card">
-    <h3>جواز طبابت</h3>
-    <input type="text" placeholder="شماره جواز یا لینک سند">
-  </div>
-
-  <div class="document-card">
-    <h3>مدرک تحصیلی</h3>
-    <input type="text" placeholder="مشخصات یا لینک مدرک">
-  </div>
-
-  <div class="document-card">
-    <h3>کارت هویت</h3>
-    <input type="text" placeholder="مشخصات سند">
-  </div>
-
-  <button class="save-btn" type="button">
-    ذخیره اسناد
-  </button>
 
 </div>
+
+
+<script>
+
+function saveProfile() {
+
+  const name =
+    document.getElementById("doctorName").value.trim();
+
+  const specialty =
+    document.getElementById("specialty").value.trim();
+
+  const city =
+    document.getElementById("city").value.trim();
+
+  const phone =
+    document.getElementById("phone").value.trim();
+
+  if (!name || !specialty || !city || !phone) {
+
+    alert("لطفاً نام، تخصص، شهر و شماره تماس را وارد کنید.");
+
+    return;
+  }
+
+
+  const selectedTypes =
+    Array.from(
+      document.querySelectorAll(
+        'input[name="visitType"]:checked'
+      )
+    ).map(function(item) {
+      return item.value;
+    });
+
+
+  const profile = {
+
+    name: name,
+
+    specialty: specialty,
+
+    city: city,
+
+    phone: phone,
+
+    address:
+      document.getElementById("address").value.trim(),
+
+    workingHours:
+      document.getElementById("workingHours").value.trim(),
+
+    visitPrice:
+      document.getElementById("visitPrice").value.trim(),
+
+    visitType:
+      selectedTypes.join("، "),
+
+    license:
+      document.getElementById("license").value.trim(),
+
+    about:
+      document.getElementById("about").value.trim(),
+
+    services:
+      document.getElementById("services").value.trim(),
+
+    licenseDocument:
+      document.getElementById("licenseDocument").value.trim(),
+
+    educationDocument:
+      document.getElementById("educationDocument").value.trim(),
+
+    identityDocument:
+      document.getElementById("identityDocument").value.trim()
+
+  };
+
+
+  localStorage.setItem(
+    "doctorProfile",
+    JSON.stringify(profile)
+  );
+
+
+  document.getElementById("message").style.display = "block";
+
+}
+
+</script>
+
+
 </body>
+
 </html>
