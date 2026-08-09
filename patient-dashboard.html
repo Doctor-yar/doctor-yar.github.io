@@ -263,87 +263,9 @@
   </div>
 
 
-  <script>
-
-    /*
-      بررسی ورود بیمار
-    */
-
-    const loggedIn =
-      localStorage.getItem("patientLoggedIn");
-
-    if (loggedIn !== "true") {
-
-      window.location.href =
-        "patient-login.html";
-
-    }
-
-
-    /*
-      نمایش نام بیمار
-    */
-
-    const savedPatient =
-      localStorage.getItem("patientProfile");
-
-
-    if (savedPatient) {
-
-      try {
-
-        const patient =
-          JSON.parse(savedPatient);
-
-        document.getElementById(
-          "welcomeText"
-        ).textContent =
-          "خوش آمدید " + patient.name;
-
-      } catch (error) {
-
-        console.log(
-          "خطا در اطلاعات بیمار"
-        );
-
-      }
-
-    }
-
-
-    /*
-      گزینه‌هایی که هنوز ساخته نشده‌اند
-    */
-
-    function comingSoon(event) {
-
-      event.preventDefault();
-
-      alert(
-        "این بخش به زودی فعال می‌شود."
-      );
-
-    }
-
-
-    /*
-      خروج بیمار
-    */
-
-    function logoutPatient(event) {
-
-      event.preventDefault();
-
-      localStorage.removeItem(
-        "patientLoggedIn"
-      );
-
-      window.location.href =
-        "patient-login.html";
-
-    }
-
-  </script>
+<script>
+  console.log("صفحه بیمار فعال است");
+</script>
 
 </body>
 
