@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>جستجوی داکتر | داکتر یار</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, Tahoma, sans-serif;
+      background: #f5f7fa;
+      color: #222;
+    }
+
+    header {
+      background: #0d9488;
+      color: white;
+      padding: 22px 15px;
+      text-align: center;
+    }
+
+    header h1 {
+      margin: 0 0 8px;
+      font-size: 28px;
+    }
+
+    header p {
+      margin: 0;
+      font-size: 15px;
+    }
+
+    .container {
+      max-width: 700px;
+      margin: 25px auto;
+      padding: 0 15px;
+    }
+
+    .search-box {
+      background: white;
+      padding: 20px;
+      border-radius: 15px;
+      box-shadow: 0 3px 12px rgba(0,0,0,0.08);
+    }
+
+    .search-box h2 {
+      margin-top: 0;
+      color: #0d9488;
+    }
+
+    input,
+    select,
+    button {
+      width: 100%;
+      padding: 13px;
+      margin-top: 10px;
+      border-radius: 10px;
+      font-size: 16px;
+    }
+
+    input,
+    select {
+      border: 1px solid #ccc;
+      background: white;
+    }
+
+    button {
+      border: none;
+      background: #0d9488;
+      color: white;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    button:hover {
+      background: #087f75;
+    }
+
+    #results {
+      margin-top: 20px;
+    }
+
+    .doctor-card {
+      background: white;
+      margin-bottom: 15px;
+      padding: 18px;
+      border-radius: 15px;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+    }
+
+    .doctor-card h3 {
+      margin-top: 0;
+      color: #0d9488;
+    }
+
+    .doctor-card p {
+      margin: 8px 0;
+    }
+
+    .no-result {
+      text-align: center;
+      background: white;
+      padding: 20px;
+      border-radius: 12px;
+      color: #777;
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <h1>داکتر یار 🩺</h1>
+    <p>جستجوی داکتر و خدمات صحی</p>
+  </header>
+
+  <div class="container">
+
+    <div class="search-box">
+      <h2>جستجوی داکتر</h2>
+
+      <input
+        type="text"
+        id="searchInput"
+        placeholder="نام داکتر یا تخصص را بنویسید..."
+      >
+
+      <select id="specialty">
+        <option value="">همه تخصص‌ها</option>
+        <option value="قلب">قلب</option>
+        <option value="اطفال">اطفال</option>
+        <option value="داخله">داخله</option>
+        <option value="جراحی">جراحی</option>
+        <option value="نسایی ولادی">نسایی ولادی</option>
+      </select>
+
+      <button onclick="searchDoctors()">جستجو 🔎</button>
+    </div>
+
+    <div id="results"></div>
+
+  </div>
+
+  <script>
+
+    const doctors = [
+      {
+        name: "داکتر احمد احمدی",
+        specialty: "قلب",
+        city: "کابل",
+        phone: "0700000000"
+      },
+      {
+        name: "داکتر فاطمه محمدی",
+        specialty: "اطفال",
+        city: "کابل",
+        phone: "0711111111"
+      },
+      {
+        name: "داکتر محمد رحیمی",
+        specialty: "داخله",
+        city: "هرات",
+        phone: "0722222222"
+      },
+      {
+        name: "داکتر سمیع الله",
+        specialty: "جراحی",
+        city: "مزار شریف",
+        phone: "0733333333"
+      }
+    ];
+
+    function searchDoctors() {
+
+      const searchText =
+        document.getElementById("searchInput").value
+        .trim()
+        .toLowerCase();
+
+      const specialty =
+        document.getElementById("specialty").value;
+
+      const results =
+        document.getElementById("results");
+
+      const filteredDoctors = doctors.filter(function(doctor) {
+
+        const matchesText =
+          doctor.name.toLowerCase().includes(searchText) ||
+          doctor.specialty.toLowerCase().includes(searchText);
+
+        const matchesSpecialty =
+          specialty === "" ||
+          doctor.specialty === specialty;
+
+        return matchesText && matchesSpecialty;
+      });
+
+      results.innerHTML = "";
+
+      if (filteredDoctors.length === 0) {
+
+        results.innerHTML =
+          '<div class="no-result">داکتری با این مشخصات پیدا نشد.</div>';
+
+        return;
+      }
+
+      filteredDoctors.forEach(function(doctor) {
+
+        results.innerHTML += `
+          <div class="doctor-card">
+
+            <h3>${doctor.name}</h3>
+
+            <p>🩺 تخصص: ${doctor.specialty}</p>
+
+            <p>📍 شهر: ${doctor.city}</p>
+
+            <p>📞 تماس: ${doctor.phone}</p>
+
+          </div>
+        `;
+      });
+    }
+
+    searchDoctors();
+
+  </script>
+
+</body>
+</html>
