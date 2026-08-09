@@ -1,1 +1,352 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
 
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>صفحه اصلی بیمار - داکتر یار</title>
+
+  <style>
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Tahoma, Arial, sans-serif;
+      background: #f5f7f7;
+      color: #444;
+    }
+
+    .container {
+      width: 92%;
+      max-width: 700px;
+      margin: 25px auto;
+    }
+
+    /* سرصفحه */
+
+    .header {
+      background: #149e9a;
+      color: white;
+      padding: 25px;
+      border-radius: 25px;
+      box-shadow: 0 3px 15px rgba(0,0,0,0.08);
+    }
+
+    .logo {
+      font-size: 28px;
+      font-weight: bold;
+    }
+
+    .welcome {
+      margin-top: 12px;
+      font-size: 18px;
+    }
+
+    /* جستجو */
+
+    .search-card {
+      background: white;
+      margin-top: 20px;
+      padding: 25px;
+      border-radius: 25px;
+      box-shadow: 0 2px 15px rgba(0,0,0,0.08);
+    }
+
+    .search-card h2 {
+      margin-top: 0;
+      color: #444;
+      font-size: 22px;
+    }
+
+    .search-text {
+      color: #777;
+      line-height: 1.8;
+      margin-bottom: 20px;
+    }
+
+    .search-btn {
+      display: block;
+      width: 100%;
+      padding: 19px;
+      border-radius: 20px;
+      background: #149e9a;
+      color: white;
+      text-decoration: none;
+      text-align: center;
+      font-size: 20px;
+      font-weight: bold;
+    }
+
+    .search-btn:active {
+      transform: scale(0.98);
+    }
+
+    /* گزینه‌ها */
+
+    .section-title {
+      font-size: 22px;
+      font-weight: bold;
+      margin: 25px 5px 12px;
+    }
+
+    .options {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    .option {
+      background: white;
+      padding: 20px 12px;
+      border-radius: 20px;
+      text-align: center;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+      text-decoration: none;
+      color: #444;
+      font-size: 17px;
+    }
+
+    .option-icon {
+      font-size: 30px;
+      display: block;
+      margin-bottom: 8px;
+    }
+
+    .logout {
+      display: block;
+      margin-top: 25px;
+      text-align: center;
+      color: #b32626;
+      text-decoration: none;
+      font-size: 17px;
+      padding: 15px;
+    }
+
+    @media (max-width: 450px) {
+
+      .options {
+        grid-template-columns: 1fr;
+      }
+
+    }
+
+  </style>
+
+</head>
+
+<body>
+
+  <div class="container">
+
+    <!-- سرصفحه -->
+
+    <div class="header">
+
+      <div class="logo">
+        داکتر یار
+      </div>
+
+      <div
+        class="welcome"
+        id="welcomeText"
+      >
+        خوش آمدید
+      </div>
+
+    </div>
+
+
+    <!-- جستجوی داکتر -->
+
+    <div class="search-card">
+
+      <h2>
+        🔎 جستجوی داکتر
+      </h2>
+
+      <div class="search-text">
+        داکتر مورد نظر خود را بر اساس نام، تخصص یا شهر پیدا کنید.
+      </div>
+
+      <a
+        href="doctor-search.html"
+        class="search-btn"
+      >
+        جستجوی داکتر
+      </a>
+
+    </div>
+
+
+    <!-- گزینه‌های بیمار -->
+
+    <div class="section-title">
+      امکانات بیمار
+    </div>
+
+
+    <div class="options">
+
+      <a
+        href="doctor-search.html"
+        class="option"
+      >
+        <span class="option-icon">👨‍⚕️</span>
+        داکتران
+      </a>
+
+
+      <a
+        href="#"
+        class="option"
+        onclick="comingSoon(event)"
+      >
+        <span class="option-icon">📅</span>
+        نوبت‌های من
+      </a>
+
+
+      <a
+        href="#"
+        class="option"
+        onclick="comingSoon(event)"
+      >
+        <span class="option-icon">❤️</span>
+        داکتران مورد علاقه
+      </a>
+
+
+      <a
+        href="#"
+        class="option"
+        onclick="comingSoon(event)"
+      >
+        <span class="option-icon">👤</span>
+        پروفایل من
+      </a>
+
+
+      <a
+        href="#"
+        class="option"
+        onclick="comingSoon(event)"
+      >
+        <span class="option-icon">📋</span>
+        سوابق مراجعه
+      </a>
+
+
+      <a
+        href="#"
+        class="option"
+        onclick="comingSoon(event)"
+      >
+        <span class="option-icon">🚨</span>
+        شکایت / گزارش
+      </a>
+
+    </div>
+
+
+    <!-- خروج -->
+
+    <a
+      href="#"
+      class="logout"
+      onclick="logoutPatient(event)"
+    >
+      خروج از حساب بیمار
+    </a>
+
+  </div>
+
+
+  <script>
+
+    /*
+      بررسی ورود بیمار
+    */
+
+    const loggedIn =
+      localStorage.getItem("patientLoggedIn");
+
+    if (loggedIn !== "true") {
+
+      window.location.href =
+        "patient-login.html";
+
+    }
+
+
+    /*
+      نمایش نام بیمار
+    */
+
+    const savedPatient =
+      localStorage.getItem("patientProfile");
+
+
+    if (savedPatient) {
+
+      try {
+
+        const patient =
+          JSON.parse(savedPatient);
+
+        document.getElementById(
+          "welcomeText"
+        ).textContent =
+          "خوش آمدید " + patient.name;
+
+      } catch (error) {
+
+        console.log(
+          "خطا در اطلاعات بیمار"
+        );
+
+      }
+
+    }
+
+
+    /*
+      گزینه‌هایی که هنوز ساخته نشده‌اند
+    */
+
+    function comingSoon(event) {
+
+      event.preventDefault();
+
+      alert(
+        "این بخش به زودی فعال می‌شود."
+      );
+
+    }
+
+
+    /*
+      خروج بیمار
+    */
+
+    function logoutPatient(event) {
+
+      event.preventDefault();
+
+      localStorage.removeItem(
+        "patientLoggedIn"
+      );
+
+      window.location.href =
+        "patient-login.html";
+
+    }
+
+  </script>
+
+</body>
+
+</html>
