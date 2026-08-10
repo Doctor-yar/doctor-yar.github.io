@@ -15,139 +15,125 @@
 
     body {
       margin: 0;
+      padding: 20px;
       font-family: Tahoma, Arial, sans-serif;
       background: #f5f7f7;
       color: #444;
     }
 
     .container {
-      width: 92%;
+      width: 100%;
       max-width: 650px;
-      margin: 25px auto;
+      margin: auto;
     }
 
     .header {
       background: #149e9a;
       color: white;
-      padding: 25px 20px;
+      padding: 25px;
       border-radius: 25px;
       text-align: center;
     }
 
-    .doctor-icon {
-      font-size: 50px;
-    }
-
-    .doctor-name {
-      font-size: 25px;
-      font-weight: bold;
-      margin-top: 8px;
-    }
-
-    .specialty {
-      font-size: 17px;
-      margin-top: 7px;
+    .header h1 {
+      margin: 0;
+      font-size: 27px;
     }
 
     .card {
       background: white;
-      margin-top: 18px;
+      margin-top: 20px;
       padding: 22px;
       border-radius: 22px;
-      box-shadow: 0 2px 14px rgba(0,0,0,0.07);
+      box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+    }
+
+    .doctor-name {
+      color: #149e9a;
+      font-size: 23px;
+      font-weight: bold;
+      text-align: center;
+    }
+
+    .doctor-specialty {
+      text-align: center;
+      margin-top: 8px;
+      color: #777;
     }
 
     .title {
       color: #149e9a;
       font-size: 21px;
       font-weight: bold;
-      margin-bottom: 18px;
+      margin-bottom: 15px;
     }
 
     label {
       display: block;
-      font-weight: bold;
+      margin-top: 15px;
       margin-bottom: 8px;
+      font-weight: bold;
+      font-size: 17px;
     }
 
-    input,
     select {
       width: 100%;
-      padding: 14px;
+      padding: 15px;
       border: 1px solid #ddd;
-      border-radius: 12px;
+      border-radius: 15px;
       font-family: Tahoma;
-      font-size: 16px;
-      margin-bottom: 16px;
+      font-size: 17px;
       background: white;
     }
 
-    .times {
+    .day-buttons {
       display: grid;
-      grid-template-columns: repeat(2, 1fr);
+      grid-template-columns: 1fr 1fr;
       gap: 10px;
     }
 
-    .time {
-      padding: 14px;
-      border: 2px solid #149e9a;
-      color: #149e9a;
+    .day-btn,
+    .time-btn {
+      border: 1px solid #149e9a;
       background: white;
-      border-radius: 12px;
-      text-align: center;
-      cursor: pointer;
+      color: #149e9a;
+      padding: 14px 8px;
+      border-radius: 14px;
+      font-family: Tahoma;
       font-size: 16px;
+      cursor: pointer;
     }
 
-    .time.selected {
+    .day-btn.selected,
+    .time-btn.selected {
       background: #149e9a;
       color: white;
     }
 
-    .time.taken {
-      background: #eee;
-      border-color: #ccc;
-      color: #999;
-      cursor: not-allowed;
-      text-decoration: line-through;
+    .time-buttons {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
     }
 
     .submit-btn {
       width: 100%;
-      padding: 16px;
-      margin-top: 18px;
+      margin-top: 20px;
+      padding: 17px;
       border: none;
-      border-radius: 15px;
+      border-radius: 16px;
       background: #149e9a;
       color: white;
       font-family: Tahoma;
-      font-size: 18px;
+      font-size: 19px;
+      font-weight: bold;
       cursor: pointer;
     }
 
-    .submit-btn:active {
-      transform: scale(0.98);
-    }
-
     .message {
-      margin-top: 15px;
-      padding: 15px;
-      border-radius: 12px;
       text-align: center;
-      display: none;
-      line-height: 1.8;
-    }
-
-    .success {
-      display: block;
-      background: #e8f8f2;
-      color: #147a57;
-    }
-
-    .error {
-      display: block;
-      background: #fff0f0;
-      color: #b32626;
+      margin-top: 15px;
+      line-height: 2;
     }
 
     .back {
@@ -165,428 +151,378 @@
 
 <body>
 
-  <div class="container">
+<div class="container">
 
-    <div id="doctorHeader"></div>
 
-    <div class="card">
+  <div class="header">
 
-      <div class="title">
-        📅 گرفتن نوبت
-      </div>
-
-      <label>
-        نام شما
-      </label>
-
-      <input
-        type="text"
-        id="patientName"
-        placeholder="نام و نام خانوادگی"
-      >
-
-      <label>
-        شماره تماس
-      </label>
-
-      <input
-        type="tel"
-        id="patientPhone"
-        placeholder="شماره تماس"
-      >
-
-      <label>
-        انتخاب تاریخ
-      </label>
-
-      <input
-        type="date"
-        id="appointmentDate"
-      >
-
-      <label>
-        انتخاب ساعت
-      </label>
-
-      <div
-        class="times"
-        id="times"
-      ></div>
-
-      <button
-        class="submit-btn"
-        onclick="bookAppointment()"
-      >
-        ✅ ثبت نوبت
-      </button>
-
-      <div
-        id="message"
-        class="message"
-      ></div>
-
-    </div>
-
-    <a
-      href="doctor-profile.html"
-      class="back"
-    >
-      ← بازگشت به پروفایل داکتر
-    </a>
+    <h1>
+      📅 گرفتن نوبت
+    </h1>
 
   </div>
 
 
-  <script>
+  <!-- مشخصات داکتر -->
+
+  <div class="card">
+
+    <div
+      id="doctorName"
+      class="doctor-name"
+    >
+      داکتر
+    </div>
+
+    <div
+      id="doctorSpecialty"
+      class="doctor-specialty"
+    >
+      تخصص
+    </div>
+
+  </div>
+
+
+  <!-- انتخاب روز -->
+
+  <div class="card">
+
+    <div class="title">
+      📅 انتخاب روز
+    </div>
+
+    <div class="day-buttons">
+
+      <button
+        class="day-btn"
+        onclick="selectDay(this,'شنبه')"
+      >
+        شنبه
+      </button>
+
+      <button
+        class="day-btn"
+        onclick="selectDay(this,'یکشنبه')"
+      >
+        یکشنبه
+      </button>
+
+      <button
+        class="day-btn"
+        onclick="selectDay(this,'دوشنبه')"
+      >
+        دوشنبه
+      </button>
+
+      <button
+        class="day-btn"
+        onclick="selectDay(this,'سه‌شنبه')"
+      >
+        سه‌شنبه
+      </button>
+
+      <button
+        class="day-btn"
+        onclick="selectDay(this,'چهارشنبه')"
+      >
+        چهارشنبه
+      </button>
+
+      <button
+        class="day-btn"
+        onclick="selectDay(this,'پنجشنبه')"
+      >
+        پنجشنبه
+      </button>
 
-    // دریافت اطلاعات داکتر
-    const savedProfile =
-      localStorage.getItem("doctorProfile");
+    </div>
 
-    let doctor = null;
+  </div>
 
-    if (savedProfile) {
 
-      try {
+  <!-- انتخاب ساعت -->
 
-        doctor = JSON.parse(savedProfile);
+  <div class="card">
+
+    <div class="title">
+      🕐 انتخاب ساعت
+    </div>
 
-      } catch (error) {
+    <div class="time-buttons">
 
-        doctor = null;
+      <button
+        class="time-btn"
+        onclick="selectTime(this,'09:00')"
+      >
+        ۹:۰۰ صبح
+      </button>
 
-      }
+      <button
+        class="time-btn"
+        onclick="selectTime(this,'10:00')"
+      >
+        ۱۰:۰۰ صبح
+      </button>
 
-    }
+      <button
+        class="time-btn"
+        onclick="selectTime(this,'11:00')"
+      >
+        ۱۱:۰۰ صبح
+      </button>
 
+      <button
+        class="time-btn"
+        onclick="selectTime(this,'14:00')"
+      >
+        ۲:۰۰ بعد از ظهر
+      </button>
 
-    // نمایش نام داکتر
-    const doctorHeader =
-      document.getElementById("doctorHeader");
+      <button
+        class="time-btn"
+        onclick="selectTime(this,'15:00')"
+      >
+        ۳:۰۰ بعد از ظهر
+      </button>
 
+      <button
+        class="time-btn"
+        onclick="selectTime(this,'16:00')"
+      >
+        ۴:۰۰ بعد از ظهر
+      </button>
 
-    if (doctor) {
+    </div>
 
-      doctorHeader.innerHTML = `
+  </div>
 
-        <div class="header">
 
-          <div class="doctor-icon">
-            👨‍⚕️
-          </div>
+  <!-- نوع ویزیت -->
 
-          <div class="doctor-name">
-            ${doctor.doctorName || "داکتر"}
-          </div>
+  <div class="card">
 
-          <div class="specialty">
-            ${doctor.specialty || ""}
-          </div>
+    <div class="title">
+      🩺 نوع ویزیت
+    </div>
 
-        </div>
+    <select id="visitType">
 
-      `;
+      <option value="">
+        نوع ویزیت را انتخاب کنید
+      </option>
 
-    } else {
+      <option>
+        ویزیت حضوری
+      </option>
 
-      doctorHeader.innerHTML = `
+      <option>
+        ویزیت آنلاین
+      </option>
 
-        <div class="header">
+    </select>
 
-          <div class="doctor-icon">
-            👨‍⚕️
-          </div>
 
-          <div class="doctor-name">
-            داکتر
-          </div>
+    <button
+      class="submit-btn"
+      onclick="bookAppointment()"
+    >
+      ✅ ثبت نوبت
+    </button>
 
-        </div>
+    <div
+      id="message"
+      class="message"
+    ></div>
 
-      `;
+  </div>
 
-    }
 
+  <a
+    href="doctor-profile-view.html"
+    class="back"
+  >
+    ← بازگشت به پروفایل داکتر
+  </a>
 
-    // ساعت‌های نمونه
-    const availableTimes = [
 
-      "08:00",
-      "08:30",
-      "09:00",
-      "09:30",
-      "10:00",
-      "10:30",
-      "11:00",
-      "11:30",
-      "14:00",
-      "14:30",
-      "15:00",
-      "15:30",
-      "16:00",
-      "16:30"
+</div>
 
-    ];
 
+<script>
 
-    let selectedTime = "";
+let selectedDay = "";
+let selectedTime = "";
 
 
-    // نمایش ساعت‌ها
-    function showTimes() {
+/* گرفتن اطلاعات داکتر */
 
-      const timesBox =
-        document.getElementById("times");
+const savedDoctor =
+  localStorage.getItem("doctorProfile");
 
-      timesBox.innerHTML = "";
 
-      availableTimes.forEach(function(time) {
+if (savedDoctor) {
 
-        const button =
-          document.createElement("div");
+  try {
 
-        button.className = "time";
+    const doctor =
+      JSON.parse(savedDoctor);
 
-        button.innerText = time;
+    document.getElementById(
+      "doctorName"
+    ).textContent =
+      doctor.doctorName || "داکتر";
 
-        button.onclick = function() {
+    document.getElementById(
+      "doctorSpecialty"
+    ).textContent =
+      doctor.specialty || "تخصص ثبت نشده";
 
-          document
-            .querySelectorAll(".time")
-            .forEach(function(item) {
+  } catch(error) {
 
-              item.classList.remove("selected");
+    console.log("خطا در اطلاعات داکتر");
 
-            });
+  }
 
-          button.classList.add("selected");
+}
 
-          selectedTime = time;
 
-        };
+/* انتخاب روز */
 
-        timesBox.appendChild(button);
+function selectDay(button, day) {
 
-      });
+  document
+    .querySelectorAll(".day-btn")
+    .forEach(function(btn) {
 
-    }
+      btn.classList.remove("selected");
 
+    });
 
-    showTimes();
+  button.classList.add("selected");
 
+  selectedDay = day;
 
-    // تاریخ امروز
-    const dateInput =
-      document.getElementById("appointmentDate");
+}
 
-    const today =
-      new Date();
 
-    const year =
-      today.getFullYear();
+/* انتخاب ساعت */
 
-    const month =
-      String(today.getMonth() + 1)
-      .padStart(2, "0");
+function selectTime(button, time) {
 
-    const day =
-      String(today.getDate())
-      .padStart(2, "0");
+  document
+    .querySelectorAll(".time-btn")
+    .forEach(function(btn) {
 
-    const todayString =
-      year + "-" + month + "-" + day;
+      btn.classList.remove("selected");
 
-    dateInput.min = todayString;
+    });
 
+  button.classList.add("selected");
 
-    // ثبت نوبت
-    function bookAppointment() {
+  selectedTime = time;
 
-      const name =
-        document
-          .getElementById("patientName")
-          .value
-          .trim();
+}
 
-      const phone =
-        document
-          .getElementById("patientPhone")
-          .value
-          .trim();
 
-      const date =
-        document
-          .getElementById("appointmentDate")
-          .value;
+/* ثبت نوبت */
 
+function bookAppointment() {
 
-      const message =
-        document.getElementById("message");
+  const visitType =
+    document.getElementById("visitType").value;
 
+  const message =
+    document.getElementById("message");
 
-      if (!name) {
 
-        showMessage(
-          "لطفاً نام خود را وارد کنید.",
-          "error"
-        );
+  if (!selectedDay) {
 
-        return;
+    message.innerHTML =
+      "⚠️ لطفاً یک روز را انتخاب کنید.";
 
-      }
+    message.style.color = "#b32626";
 
+    return;
 
-      if (!phone) {
+  }
 
-        showMessage(
-          "لطفاً شماره تماس خود را وارد کنید.",
-          "error"
-        );
 
-        return;
+  if (!selectedTime) {
 
-      }
+    message.innerHTML =
+      "⚠️ لطفاً یک ساعت را انتخاب کنید.";
 
+    message.style.color = "#b32626";
 
-      if (!date) {
+    return;
 
-        showMessage(
-          "لطفاً تاریخ نوبت را انتخاب کنید.",
-          "error"
-        );
+  }
 
-        return;
 
-      }
+  if (!visitType) {
 
+    message.innerHTML =
+      "⚠️ لطفاً نوع ویزیت را انتخاب کنید.";
 
-      if (!selectedTime) {
+    message.style.color = "#b32626";
 
-        showMessage(
-          "لطفاً یک ساعت را انتخاب کنید.",
-          "error"
-        );
+    return;
 
-        return;
+  }
 
-      }
 
+  let doctorName = "داکتر";
 
-      // دریافت نوبت‌های قبلی
-      let appointments =
-        JSON.parse(
-          localStorage.getItem("appointments") || "[]"
-        );
+  if (savedDoctor) {
 
+    try {
 
-      // بررسی اینکه این ساعت قبلاً گرفته نشده باشد
-      const alreadyBooked =
-        appointments.some(function(item) {
+      const doctor =
+        JSON.parse(savedDoctor);
 
-          return (
-            item.doctorName ===
-              (doctor?.doctorName || "داکتر")
-            &&
-            item.date === date
-            &&
-            item.time === selectedTime
-          );
+      doctorName =
+        doctor.doctorName || "داکتر";
 
-        });
+    } catch(error) {}
 
+  }
 
-      if (alreadyBooked) {
 
-        showMessage(
-          "این ساعت قبلاً گرفته شده است. لطفاً ساعت دیگری انتخاب کنید.",
-          "error"
-        );
+  const appointment = {
 
-        return;
+    doctorName: doctorName,
 
-      }
+    day: selectedDay,
 
+    time: selectedTime,
 
-      // ساخت نوبت
-      const appointment = {
+    visitType: visitType,
 
-        id: Date.now(),
+    date: new Date().toLocaleString("fa-IR")
 
-        doctorName:
-          doctor?.doctorName || "داکتر",
+  };
 
-        specialty:
-          doctor?.specialty || "",
 
-        patientName:
-          name,
+  localStorage.setItem(
+    "myAppointment",
+    JSON.stringify(appointment)
+  );
 
-        patientPhone:
-          phone,
 
-        date:
-          date,
+  message.innerHTML =
+    "✅ نوبت شما با موفقیت ثبت شد.<br>" +
+    "📅 " + selectedDay +
+    "<br>" +
+    "🕐 " + selectedTime;
 
-        time:
-          selectedTime
 
-      };
+  message.style.color =
+    "#149e9a";
 
+}
 
-      // ذخیره نوبت
-      appointments.push(appointment);
-
-
-      localStorage.setItem(
-        "appointments",
-        JSON.stringify(appointments)
-      );
-
-
-      showMessage(
-        "✅ نوبت شما با موفقیت ثبت شد.<br>" +
-        "تاریخ: " + date +
-        "<br>" +
-        "ساعت: " + selectedTime,
-        "success"
-      );
-
-
-      // پاک کردن فرم
-      document
-        .getElementById("patientName")
-        .value = "";
-
-      document
-        .getElementById("patientPhone")
-        .value = "";
-
-      selectedTime = "";
-
-      document
-        .querySelectorAll(".time")
-        .forEach(function(item) {
-
-          item.classList.remove("selected");
-
-        });
-
-    }
-
-
-    function showMessage(text, type) {
-
-      const message =
-        document.getElementById("message");
-
-      message.innerHTML = text;
-
-      message.className =
-        "message " + type;
-
-    }
-
-  </script>
+</script>
 
 </body>
 
