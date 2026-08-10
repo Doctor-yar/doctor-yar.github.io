@@ -1,0 +1,410 @@
+<!DOCTYPE html><html lang="fa" dir="rtl"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">  <title>مدیریت | داکتر یار</title>  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Tahoma, Arial, sans-serif;
+      background: #f4f7f9;
+      color: #263238;
+    }
+
+    /* Header */
+    .header {
+      background: #0d9488;
+      color: white;
+      padding: 18px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+    }
+
+    .header h1 {
+      margin: 0;
+      font-size: 22px;
+    }
+
+    .admin-name {
+      font-size: 14px;
+    }
+
+    /* Container */
+    .container {
+      max-width: 1100px;
+      margin: 25px auto;
+      padding: 0 15px;
+    }
+
+    .welcome {
+      background: white;
+      padding: 22px;
+      border-radius: 14px;
+      margin-bottom: 22px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+    }
+
+    .welcome h2 {
+      margin: 0 0 8px;
+      color: #0d9488;
+      font-size: 21px;
+    }
+
+    .welcome p {
+      margin: 0;
+      color: #607d8b;
+    }
+
+    /* Statistics */
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 15px;
+      margin-bottom: 25px;
+    }
+
+    .stat {
+      background: white;
+      padding: 20px;
+      border-radius: 14px;
+      text-align: center;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+    }
+
+    .stat-icon {
+      font-size: 30px;
+      margin-bottom: 8px;
+    }
+
+    .stat-number {
+      font-size: 25px;
+      font-weight: bold;
+      color: #0d9488;
+    }
+
+    .stat-title {
+      margin-top: 5px;
+      color: #607d8b;
+      font-size: 14px;
+    }
+
+    /* Management */
+    .section-title {
+      margin: 25px 0 15px;
+      font-size: 20px;
+      color: #263238;
+    }
+
+    .management-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 18px;
+    }
+
+    .management-card {
+      background: white;
+      border-radius: 16px;
+      padding: 24px;
+      text-decoration: none;
+      color: inherit;
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      border: 1px solid #e6eeee;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.07);
+      transition: 0.2s;
+      cursor: pointer;
+    }
+
+    .management-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 6px 16px rgba(0,0,0,0.12);
+      border-color: #0d9488;
+    }
+
+    .card-icon {
+      width: 62px;
+      height: 62px;
+      border-radius: 14px;
+      background: #e6fffb;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 31px;
+      flex-shrink: 0;
+    }
+
+    .card-content h3 {
+      margin: 0 0 7px;
+      font-size: 18px;
+      color: #263238;
+    }
+
+    .card-content p {
+      margin: 0;
+      color: #78909c;
+      font-size: 13px;
+      line-height: 1.7;
+    }
+
+    .arrow {
+      margin-right: auto;
+      font-size: 22px;
+      color: #0d9488;
+    }
+
+    /* Logout */
+    .logout {
+      margin-top: 30px;
+      width: 100%;
+      padding: 14px;
+      border: none;
+      border-radius: 12px;
+      background: #ef4444;
+      color: white;
+      font-size: 16px;
+      font-family: inherit;
+      cursor: pointer;
+    }
+
+    .logout:hover {
+      background: #dc2626;
+    }
+
+    /* Mobile */
+    @media (max-width: 700px) {
+
+      .header h1 {
+        font-size: 18px;
+      }
+
+      .admin-name {
+        font-size: 12px;
+      }
+
+      .stats {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .management-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .management-card {
+        padding: 20px;
+      }
+    }
+  </style></head><body>  <header class="header">
+    <h1>🩺 داکتر یار | مدیریت</h1>
+    <div class="admin-name">مدیر سیستم</div>
+  </header>  <main class="container"><div class="welcome">
+  <h2>خوش آمدید، مدیر 👋</h2>
+  <p>
+    از این قسمت می‌توانید تمام بخش‌های داکتر یار را مدیریت کنید.
+  </p>
+</div>
+
+<!-- Statistics -->
+<div class="stats">
+
+  <div class="stat">
+    <div class="stat-icon">👨‍⚕️</div>
+    <div class="stat-number" id="doctorCount">0</div>
+    <div class="stat-title">داکتران</div>
+  </div>
+
+  <div class="stat">
+    <div class="stat-icon">👤</div>
+    <div class="stat-number" id="patientCount">0</div>
+    <div class="stat-title">مریضان</div>
+  </div>
+
+  <div class="stat">
+    <div class="stat-icon">📅</div>
+    <div class="stat-number">0</div>
+    <div class="stat-title">نوبت‌ها</div>
+  </div>
+
+  <div class="stat">
+    <div class="stat-icon">⚠️</div>
+    <div class="stat-number">0</div>
+    <div class="stat-title">شکایت‌ها</div>
+  </div>
+
+</div>
+
+<h2 class="section-title">مدیریت سیستم</h2>
+
+<div class="management-grid">
+
+  <!-- Doctors -->
+  <a href="admin-doctors.html" class="management-card">
+
+    <div class="card-icon">
+      👨‍⚕️
+    </div>
+
+    <div class="card-content">
+      <h3>مدیریت داکتران</h3>
+      <p>
+        مشاهده، تأیید، ویرایش و مدیریت معلومات داکتران
+      </p>
+    </div>
+
+    <div class="arrow">‹</div>
+
+  </a>
+
+  <!-- Patients -->
+  <a href="admin-patients.html" class="management-card">
+
+    <div class="card-icon">
+      👤
+    </div>
+
+    <div class="card-content">
+      <h3>مدیریت مریضان</h3>
+      <p>
+        مشاهده و مدیریت حساب‌ها و معلومات مریضان
+      </p>
+    </div>
+
+    <div class="arrow">‹</div>
+
+  </a>
+
+  <!-- Appointments -->
+  <a href="admin-appointments.html" class="management-card">
+
+    <div class="card-icon">
+      📅
+    </div>
+
+    <div class="card-content">
+      <h3>مدیریت نوبت‌ها</h3>
+      <p>
+        مشاهده و مدیریت تمام نوبت‌های ثبت‌شده
+      </p>
+    </div>
+
+    <div class="arrow">‹</div>
+
+  </a>
+
+  <!-- Doctor Requests -->
+  <a href="doctor-requests.html" class="management-card">
+
+    <div class="card-icon">
+      📝
+    </div>
+
+    <div class="card-content">
+      <h3>بررسی ثبت‌نام داکتران</h3>
+      <p>
+        بررسی و تأیید درخواست‌های جدید داکتران
+      </p>
+    </div>
+
+    <div class="arrow">‹</div>
+
+  </a>
+
+  <!-- Complaints -->
+  <a href="admin-complaints.html" class="management-card">
+
+    <div class="card-icon">
+      ⚠️
+    </div>
+
+    <div class="card-content">
+      <h3>شکایت‌ها و گزارش‌ها</h3>
+      <p>
+        مشاهده و رسیدگی به شکایت‌های مریضان و داکتران
+      </p>
+    </div>
+
+    <div class="arrow">‹</div>
+
+  </a>
+
+  <!-- Search -->
+  <a href="admin-search.html" class="management-card">
+
+    <div class="card-icon">
+      🔍
+    </div>
+
+    <div class="card-content">
+      <h3>جستجوی کاربران</h3>
+      <p>
+        جستجو و مشاهده سریع داکتران و مریضان
+      </p>
+    </div>
+
+    <div class="arrow">‹</div>
+
+  </a>
+
+  <!-- Statistics -->
+  <a href="admin-statistics.html" class="management-card">
+
+    <div class="card-icon">
+      📊
+    </div>
+
+    <div class="card-content">
+      <h3>آمار و گزارش‌ها</h3>
+      <p>
+        مشاهده آمار و وضعیت کلی سیستم
+      </p>
+    </div>
+
+    <div class="arrow">‹</div>
+
+  </a>
+
+  <!-- Settings -->
+  <a href="admin-settings.html" class="management-card">
+
+    <div class="card-icon">
+      ⚙️
+    </div>
+
+    <div class="card-content">
+      <h3>تنظیمات سیستم</h3>
+      <p>
+        مدیریت تنظیمات و امکانات داکتر یار
+      </p>
+    </div>
+
+    <div class="arrow">‹</div>
+
+  </a>
+
+</div>
+
+<button class="logout" onclick="logout()">
+  🚪 خروج از مدیریت
+</button>
+
+  </main>  <script>
+
+    // نمایش تعداد داکتران و مریضان در صورت موجود بودن اطلاعات
+    const doctors = JSON.parse(localStorage.getItem("doctors") || "[]");
+    const patients = JSON.parse(localStorage.getItem("patients") || "[]");
+
+    document.getElementById("doctorCount").textContent = doctors.length;
+    document.getElementById("patientCount").textContent = patients.length;
+
+    function logout() {
+      const confirmLogout = confirm("آیا مطمئن هستید که می‌خواهید خارج شوید؟");
+
+      if (confirmLogout) {
+        window.location.href = "admin-login.html";
+      }
+    }
+
+  </script></body></html>
