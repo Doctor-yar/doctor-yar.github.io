@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>نوبت‌های بیماران | داکتر یار</title>
+
+  <style>
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Tahoma, Arial, sans-serif;
+      background: #f5f7f7;
+      color: #444;
+    }
+
+    .container {
+      width: 92%;
+      max-width: 650px;
+      margin: 25px auto;
+    }
+
+    .header {
+      background: #149e9a;
+      color: white;
+      padding: 25px;
+      border-radius: 25px;
+      text-align: center;
+    }
+
+    .header-icon {
+      font-size: 45px;
+    }
+
+    .header-title {
+      font-size: 25px;
+      font-weight: bold;
+      margin-top: 8px;
+    }
+
+    .appointment {
+      background: white;
+      margin-top: 18px;
+      padding: 20px;
+      border-radius: 20px;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.07);
+    }
+
+    .patient-name {
+      font-size: 21px;
+      font-weight: bold;
+      color: #149e9a;
+      margin-bottom: 12px;
+    }
+
+    .info {
+      padding: 8px 0;
+      border-bottom: 1px solid #eee;
+      line-height: 1.8;
+    }
+
+    .info:last-child {
+      border-bottom: none;
+    }
+
+    .label {
+      font-weight: bold;
+    }
+
+    .status {
+      display: inline-block;
+      margin-top: 12px;
+      padding: 7px 12px;
+      border-radius: 10px;
+      background: #e8f8f2;
+      color: #147a57;
+    }
+
+    .empty {
+      background: white;
+      margin-top: 20px;
+      padding: 30px 20px;
+      border-radius: 20px;
+      text-align: center;
+      line-height: 2;
+      color: #777;
+    }
+
+    .back {
+      display: block;
+      margin: 22px 0;
+      text-align: center;
+      color: #149e9a;
+      text-decoration: none;
+      font-size: 18px;
+    }
+
+  </style>
+
+</head>
+
+<body>
+
+  <div class="container">
+
+    <div class="header">
+
+      <div class="header-icon">
+        📅
+      </div>
+
+      <div class="header-title">
+        نوبت‌های بیماران
+      </div>
+
+    </div>
+
+
+    <div id="appointments"></div>
+
+
+    <a
+      href="doctor-profile.html"
+      class="back"
+    >
+      ← بازگشت به صفحه داکتر
+    </a>
+
+  </div>
+
+
+  <script>
+
+    const appointmentsBox =
+      document.getElementById("appointments");
+
+
+    let appointments =
+      JSON.parse(
+        localStorage.getItem("appointments") || "[]"
+      );
+
+
+    /*
+      اگر هیچ نوبتی ثبت نشده باشد
+    */
+
+    if (appointments.length === 0) {
+
+      appointmentsBox.innerHTML = `
+
+        <div class="empty">
+
+          📭
+
+          <br>
+
+          هنوز هیچ بیماری نوبت نگرفته است.
+
+          <br><br>
+
+          وقتی بیمار نوبت بگیرد،
+          اطلاعات او در اینجا نمایش داده می‌شود.
+
+        </div>
+
+      `;
+
+    }
+
+
+    /*
+      نمایش نوبت‌های بیماران
+    */
+
+    appointments.forEach(function(item) {
+
+      const card =
+        document.createElement("div");
+
+      card.className = "appointment";
+
+
+      card.innerHTML = `
+
+        <div class="patient-name">
+
+          👤 بیمار:
+          ${item.patientName || "نام ثبت نشده"}
+
+        </div>
+
+
+        <div class="info">
+
+          <span class="label">
+            📞 شماره تماس:
+          </span>
+
+          ${item.patientPhone || "ثبت نشده"}
+
+        </div>
+
+
+        <div class="info">
+
+          <span class="label">
+            👨‍⚕️ داکتر:
+          </span>
+
+          ${item.doctorName || "ثبت نشده"}
+
+        </div>
+
+
+        <div class="info">
+
+          <span class="label">
+            🩺 تخصص:
+          </span>
+
+          ${item.specialty || "ثبت نشده"}
+
+        </div>
+
+
+        <div class="info">
+
+          <span class="label">
+            📅 تاریخ نوبت:
+          </span>
+
+          ${item.date || "ثبت نشده"}
+
+        </div>
+
+
+        <div class="info">
+
+          <span class="label">
+            🕐 ساعت:
+          </span>
+
+          ${item.time || "ثبت نشده"}
+
+        </div>
+
+
+        <div class="status">
+          ✅ نوبت ثبت شده
+        </div>
+
+      `;
+
+
+      appointmentsBox.appendChild(card);
+
+    });
+
+  </script>
+
+</body>
+
+</html>
