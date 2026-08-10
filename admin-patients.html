@@ -20,6 +20,8 @@
       color: #263238;
     }
 
+    /* Header */
+
     .header {
       background: #0d9488;
       color: white;
@@ -41,11 +43,15 @@
       font-size: 14px;
     }
 
+    /* Container */
+
     .container {
-      max-width: 1100px;
+      max-width: 900px;
       margin: 25px auto;
       padding: 0 15px;
     }
+
+    /* Title */
 
     .page-title {
       background: white;
@@ -63,7 +69,10 @@
     .page-title p {
       margin: 0;
       color: #78909c;
+      line-height: 1.8;
     }
+
+    /* Statistics */
 
     .stats {
       display: grid;
@@ -85,7 +94,7 @@
     }
 
     .stat-number {
-      font-size: 27px;
+      font-size: 26px;
       font-weight: bold;
       color: #0d9488;
       margin-top: 5px;
@@ -96,6 +105,8 @@
       margin-top: 5px;
       font-size: 14px;
     }
+
+    /* Search */
 
     .search-box {
       background: white;
@@ -119,99 +130,135 @@
       border-color: #0d9488;
     }
 
+    /* Patient Card */
+
     .patient-card {
       background: white;
-      border-radius: 17px;
-      margin-bottom: 18px;
-      padding: 22px;
+      border-radius: 16px;
+      margin-bottom: 15px;
       box-shadow: 0 3px 12px rgba(0,0,0,0.07);
       border: 1px solid #e6eeee;
+      overflow: hidden;
     }
 
-    .patient-top {
+    .patient-main {
+      padding: 20px;
       display: flex;
       align-items: center;
       gap: 15px;
-      margin-bottom: 18px;
+      cursor: pointer;
     }
 
-    .patient-avatar {
-      width: 65px;
-      height: 65px;
-      border-radius: 50%;
+    .patient-main:hover {
+      background: #f8fffe;
+    }
+
+    .patient-icon {
+      width: 58px;
+      height: 58px;
       background: #e6fffb;
+      border-radius: 14px;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 34px;
+      font-size: 30px;
       flex-shrink: 0;
     }
 
-    .patient-name h3 {
-      margin: 0 0 6px;
-      font-size: 19px;
+    .patient-summary {
+      flex: 1;
     }
 
-    .patient-name p {
+    .patient-summary h3 {
+      margin: 0 0 7px;
+      font-size: 18px;
+      color: #263238;
+    }
+
+    .patient-summary p {
       margin: 0;
       color: #607d8b;
       font-size: 14px;
+      line-height: 1.7;
     }
 
-    .patient-info {
+    .patient-arrow {
+      color: #0d9488;
+      font-size: 25px;
+    }
+
+    /* Details */
+
+    .patient-details {
+      display: none;
+      border-top: 1px solid #eeeeee;
+      padding: 20px;
+      background: #fbfdfd;
+    }
+
+    .patient-details.show {
+      display: block;
+    }
+
+    .details-title {
+      color: #0d9488;
+      font-size: 18px;
+      margin: 0 0 15px;
+    }
+
+    .details-grid {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
       gap: 10px;
-      border-top: 1px solid #eee;
-      padding-top: 15px;
     }
 
-    .info-item {
-      background: #f8fafb;
-      padding: 11px;
+    .detail-item {
+      background: white;
+      padding: 13px;
       border-radius: 10px;
-      font-size: 13px;
+      border: 1px solid #edf1f2;
+      line-height: 1.8;
+      font-size: 14px;
     }
 
-    .info-item strong {
+    .detail-item strong {
+      display: block;
       color: #455a64;
+      margin-bottom: 3px;
     }
 
-    .actions {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
+    .description {
+      grid-column: 1 / -1;
+    }
+
+    /* Actions */
+
+    .patient-actions {
       margin-top: 18px;
-      border-top: 1px solid #eee;
       padding-top: 15px;
-    }
-
-    button {
-      border: none;
-      padding: 11px 15px;
-      border-radius: 10px;
-      font-family: inherit;
-      cursor: pointer;
-      font-size: 13px;
-    }
-
-    .edit-btn {
-      background: #e2e8f0;
-      color: #334155;
+      border-top: 1px solid #eeeeee;
     }
 
     .delete-btn {
+      border: none;
       background: #fee2e2;
       color: #dc2626;
+      padding: 11px 18px;
+      border-radius: 10px;
+      font-family: inherit;
+      cursor: pointer;
+      font-size: 14px;
     }
 
     .delete-btn:hover {
       background: #fecaca;
     }
 
+    /* Empty */
+
     .empty {
       background: white;
-      padding: 40px 20px;
+      padding: 45px 20px;
       border-radius: 16px;
       text-align: center;
       color: #78909c;
@@ -219,9 +266,11 @@
     }
 
     .empty-icon {
-      font-size: 45px;
+      font-size: 50px;
       margin-bottom: 10px;
     }
+
+    /* Mobile */
 
     @media (max-width: 700px) {
 
@@ -234,19 +283,29 @@
       }
 
       .stats {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .patient-main {
+        padding: 16px;
+      }
+
+      .patient-icon {
+        width: 50px;
+        height: 50px;
+        font-size: 26px;
+      }
+
+      .patient-summary h3 {
+        font-size: 16px;
+      }
+
+      .details-grid {
         grid-template-columns: 1fr;
       }
 
-      .patient-info {
-        grid-template-columns: 1fr;
-      }
-
-      .patient-top {
-        align-items: flex-start;
-      }
-
-      .actions button {
-        flex: 1;
+      .description {
+        grid-column: auto;
       }
 
     }
@@ -262,7 +321,7 @@
 <header class="header">
 
   <h1>
-    🩺 مدیریت مریضان
+    👤 مدیریت مریضان
   </h1>
 
   <a
@@ -281,11 +340,11 @@
   <div class="page-title">
 
     <h2>
-      👤 مریضان داکتر یار
+      👤 تمام مریضان
     </h2>
 
     <p>
-      تمام مریضانی که در سایت ثبت‌نام کرده‌اند در اینجا نمایش داده می‌شوند.
+      برای مشاهده مشخصات کامل هر مریض، روی نام او کلیک کنید.
     </p>
 
   </div>
@@ -318,18 +377,18 @@
     <div class="stat">
 
       <div class="stat-icon">
-        📅
+        🩺
       </div>
 
       <div
         class="stat-number"
-        id="totalAppointments"
+        id="patientsWithReason"
       >
         0
       </div>
 
       <div class="stat-title">
-        نوبت‌های مریضان
+        دارای علت مراجعه
       </div>
 
     </div>
@@ -344,7 +403,7 @@
     <input
       type="text"
       id="searchInput"
-      placeholder="🔎 جستجوی مریض بر اساس نام، شماره یا شهر..."
+      placeholder="🔎 جستجوی نام مریض یا علت بیماری..."
       oninput="showPatients()"
     >
 
@@ -388,30 +447,20 @@ let patients =
 
 
 /* =====================================
-   دریافت نوبت‌ها
+   گرفتن مقدار از چند نام احتمالی
 ===================================== */
 
-let appointments =
-  JSON.parse(
-    localStorage.getItem("appointments") || "[]"
-  );
-
-
-/* =====================================
-   تابع دریافت اطلاعات
-===================================== */
-
-function getValue(patient, names) {
+function getValue(item, names) {
 
   for (let name of names) {
 
     if (
-      patient[name] !== undefined &&
-      patient[name] !== null &&
-      patient[name] !== ""
+      item[name] !== undefined &&
+      item[name] !== null &&
+      item[name] !== ""
     ) {
 
-      return patient[name];
+      return item[name];
 
     }
 
@@ -443,62 +492,55 @@ function showPatients() {
 
 
   const filtered =
-    patients.filter(function(patient) {
+    patients.filter(
+      function(patient) {
+
+        const name =
+          getValue(
+            patient,
+            [
+              "name",
+              "fullName",
+              "patientName",
+              "firstName"
+            ]
+          );
 
 
-      const name =
-        getValue(
-          patient,
-          [
-            "name",
-            "fullName",
-            "patientName",
-            "fullname"
-          ]
-        );
+        const reason =
+          getValue(
+            patient,
+            [
+              "reason",
+              "illness",
+              "disease",
+              "medicalReason",
+              "visitReason",
+              "complaint"
+            ]
+          );
 
 
-      const phone =
-        getValue(
-          patient,
-          [
-            "phone",
-            "mobile",
-            "phoneNumber",
-            "contact"
-          ]
-        );
+        const text =
+          (
+            name +
+            " " +
+            reason
+          ).toLowerCase();
 
 
-      const city =
-        getValue(
-          patient,
-          [
-            "city",
-            "location"
-          ]
-        );
+        return text.includes(search);
 
-
-      const text =
-        (
-          name +
-          " " +
-          phone +
-          " " +
-          city
-        ).toLowerCase();
-
-
-      return text.includes(search);
-
-    });
+      }
+    );
 
 
   updateStatistics();
 
 
-  if (filtered.length === 0) {
+  if (
+    filtered.length === 0
+  ) {
 
     list.innerHTML = `
 
@@ -509,12 +551,11 @@ function showPatients() {
         </div>
 
         <h3>
-          هنوز مریضی ثبت‌نام نکرده است
+          مریضی پیدا نشد
         </h3>
 
         <p>
-          وقتی یک مریض در سایت ثبت‌نام کند،
-          معلومات او در اینجا نمایش داده می‌شود.
+          هنوز مریضی ثبت نشده است یا مورد جستجو پیدا نشد.
         </p>
 
       </div>
@@ -529,191 +570,311 @@ function showPatients() {
   list.innerHTML = "";
 
 
-  filtered.forEach(function(patient) {
+  filtered.forEach(
+    function(patient) {
+
+      const realIndex =
+        patients.indexOf(patient);
 
 
-    const realIndex =
-      patients.indexOf(patient);
+      const name =
+        getValue(
+          patient,
+          [
+            "name",
+            "fullName",
+            "patientName",
+            "firstName"
+          ]
+        );
 
 
-    const name =
-      getValue(
-        patient,
-        [
-          "name",
-          "fullName",
-          "patientName",
-          "fullname"
-        ]
-      );
+      const reason =
+        getValue(
+          patient,
+          [
+            "reason",
+            "illness",
+            "disease",
+            "medicalReason",
+            "visitReason",
+            "complaint"
+          ]
+        );
 
 
-    const phone =
-      getValue(
-        patient,
-        [
-          "phone",
-          "mobile",
-          "phoneNumber",
-          "contact"
-        ]
-      );
+      list.innerHTML += `
+
+        <div class="patient-card">
 
 
-    const city =
-      getValue(
-        patient,
-        [
-          "city",
-          "location"
-        ]
-      );
+          <!-- قسمت قابل کلیک -->
+
+          <div
+            class="patient-main"
+            onclick="toggleDetails(${realIndex})"
+          >
+
+            <div class="patient-icon">
+              👤
+            </div>
 
 
-    const age =
-      getValue(
-        patient,
-        [
-          "age"
-        ]
-      );
+            <div class="patient-summary">
+
+              <h3>
+                ${escapeHTML(name)}
+              </h3>
+
+              <p>
+                🩺 علت مراجعه:
+                ${escapeHTML(reason)}
+              </p>
+
+            </div>
 
 
-    const gender =
-      getValue(
-        patient,
-        [
-          "gender",
-          "sex"
-        ]
-      );
+            <div
+              class="patient-arrow"
+              id="arrow-${realIndex}"
+            >
+              ‹
+            </div>
 
-
-    const email =
-      getValue(
-        patient,
-        [
-          "email",
-          "emailAddress"
-        ]
-      );
-
-
-    list.innerHTML += `
-
-      <div class="patient-card">
-
-
-        <div class="patient-top">
-
-          <div class="patient-avatar">
-            👤
           </div>
 
 
-          <div class="patient-name">
+          <!-- مشخصات کامل -->
 
-            <h3>
-              ${escapeHTML(name)}
+          <div
+            class="patient-details"
+            id="details-${realIndex}"
+          >
+
+            <h3 class="details-title">
+              📋 مشخصات کامل مریض
             </h3>
 
-            <p>
-              👤 حساب مریض
-            </p>
+
+            <div class="details-grid">
+
+
+              <div class="detail-item">
+
+                <strong>
+                  👤 نام و نام خانوادگی
+                </strong>
+
+                ${escapeHTML(
+                  getValue(patient, [
+                    "name",
+                    "fullName",
+                    "patientName"
+                  ])
+                )}
+
+              </div>
+
+
+              <div class="detail-item">
+
+                <strong>
+                  📞 شماره تماس
+                </strong>
+
+                ${escapeHTML(
+                  getValue(patient, [
+                    "phone",
+                    "mobile",
+                    "phoneNumber",
+                    "patientPhone"
+                  ])
+                )}
+
+              </div>
+
+
+              <div class="detail-item">
+
+                <strong>
+                  📧 ایمیل
+                </strong>
+
+                ${escapeHTML(
+                  getValue(patient, [
+                    "email",
+                    "patientEmail"
+                  ])
+                )}
+
+              </div>
+
+
+              <div class="detail-item">
+
+                <strong>
+                  🎂 سن
+                </strong>
+
+                ${escapeHTML(
+                  getValue(patient, [
+                    "age",
+                    "patientAge"
+                  ])
+                )}
+
+              </div>
+
+
+              <div class="detail-item">
+
+                <strong>
+                  🎂 تاریخ تولد
+                </strong>
+
+                ${escapeHTML(
+                  getValue(patient, [
+                    "birthDate",
+                    "dateOfBirth",
+                    "dob"
+                  ])
+                )}
+
+              </div>
+
+
+              <div class="detail-item">
+
+                <strong>
+                  🏙️ شهر
+                </strong>
+
+                ${escapeHTML(
+                  getValue(patient, [
+                    "city",
+                    "location",
+                    "patientCity"
+                  ])
+                )}
+
+              </div>
+
+
+              <div class="detail-item">
+
+                <strong>
+                  🩺 علت بیماری / مراجعه
+                </strong>
+
+                ${escapeHTML(
+                  getValue(patient, [
+                    "reason",
+                    "illness",
+                    "disease",
+                    "medicalReason",
+                    "visitReason",
+                    "complaint"
+                  ])
+                )}
+
+              </div>
+
+
+              <div class="detail-item">
+
+                <strong>
+                  🚻 جنسیت
+                </strong>
+
+                ${escapeHTML(
+                  getValue(patient, [
+                    "gender",
+                    "sex"
+                  ])
+                )}
+
+              </div>
+
+
+              <div class="detail-item description">
+
+                <strong>
+                  📝 توضیحات
+                </strong>
+
+                ${escapeHTML(
+                  getValue(patient, [
+                    "description",
+                    "notes",
+                    "medicalNotes",
+                    "message"
+                  ])
+                )}
+
+              </div>
+
+
+            </div>
+
+
+            <div class="patient-actions">
+
+              <button
+                class="delete-btn"
+                onclick="deletePatient(${realIndex})"
+              >
+                🗑️ حذف حساب مریض
+              </button>
+
+            </div>
+
 
           </div>
+
 
         </div>
 
+      `;
 
-        <div class="patient-info">
+    }
+  );
 
-
-          <div class="info-item">
-
-            <strong>
-              📞 شماره تماس:
-            </strong>
-
-            ${escapeHTML(phone)}
-
-          </div>
+}
 
 
-          <div class="info-item">
+/* =====================================
+   باز و بسته کردن مشخصات
+===================================== */
 
-            <strong>
-              📍 شهر:
-            </strong>
+function toggleDetails(index) {
 
-            ${escapeHTML(city)}
-
-          </div>
-
-
-          <div class="info-item">
-
-            <strong>
-              🎂 سن:
-            </strong>
-
-            ${escapeHTML(age)}
-
-          </div>
+  const details =
+    document.getElementById(
+      "details-" + index
+    );
 
 
-          <div class="info-item">
-
-            <strong>
-              ⚥ جنسیت:
-            </strong>
-
-            ${escapeHTML(gender)}
-
-          </div>
+  const arrow =
+    document.getElementById(
+      "arrow-" + index
+    );
 
 
-          <div class="info-item">
+  if (
+    details.classList.contains("show")
+  ) {
 
-            <strong>
-              📧 ایمیل:
-            </strong>
+    details.classList.remove("show");
 
-            ${escapeHTML(email)}
+    arrow.textContent = "‹";
 
-          </div>
+  } else {
 
+    details.classList.add("show");
 
-        </div>
+    arrow.textContent = "⌄";
 
-
-        <div class="actions">
-
-
-          <button
-            class="edit-btn"
-            onclick="editPatient(${realIndex})"
-          >
-            ✏️ ویرایش
-          </button>
-
-
-          <button
-            class="delete-btn"
-            onclick="deletePatient(${realIndex})"
-          >
-            🗑️ حذف
-          </button>
-
-
-        </div>
-
-
-      </div>
-
-    `;
-
-  });
+  }
 
 }
 
@@ -730,10 +891,33 @@ function updateStatistics() {
     patients.length;
 
 
+  const withReason =
+    patients.filter(
+      function(patient) {
+
+        const reason =
+          getValue(
+            patient,
+            [
+              "reason",
+              "illness",
+              "disease",
+              "medicalReason",
+              "visitReason",
+              "complaint"
+            ]
+          );
+
+        return reason !== "ثبت نشده";
+
+      }
+    ).length;
+
+
   document.getElementById(
-    "totalAppointments"
+    "patientsWithReason"
   ).textContent =
-    appointments.length;
+    withReason;
 
 }
 
@@ -744,7 +928,6 @@ function updateStatistics() {
 
 function deletePatient(index) {
 
-
   const patient =
     patients[index];
 
@@ -755,24 +938,21 @@ function deletePatient(index) {
       [
         "name",
         "fullName",
-        "patientName",
-        "fullname"
+        "patientName"
       ]
     );
 
 
-  const confirmDelete =
+  const ok =
     confirm(
-      "آیا مطمئن هستید که می‌خواهید مریض «" +
+      "آیا مطمئن هستید که می‌خواهید حساب «" +
       name +
       "» را حذف کنید؟"
     );
 
 
-  if (!confirmDelete) {
-
+  if (!ok) {
     return;
-
   }
 
 
@@ -780,170 +960,6 @@ function deletePatient(index) {
     index,
     1
   );
-
-
-  localStorage.setItem(
-    "patients",
-    JSON.stringify(patients)
-  );
-
-
-  showPatients();
-
-}
-
-
-/* =====================================
-   ویرایش مریض
-===================================== */
-
-function editPatient(index) {
-
-
-  const patient =
-    patients[index];
-
-
-  const name =
-    getValue(
-      patient,
-      [
-        "name",
-        "fullName",
-        "patientName",
-        "fullname"
-      ]
-    );
-
-
-  const phone =
-    getValue(
-      patient,
-      [
-        "phone",
-        "mobile",
-        "phoneNumber",
-        "contact"
-      ]
-    );
-
-
-  const city =
-    getValue(
-      patient,
-      [
-        "city",
-        "location"
-      ]
-    );
-
-
-  const newName =
-    prompt(
-      "نام مریض:",
-      name === "ثبت نشده"
-        ? ""
-        : name
-    );
-
-
-  if (
-    newName === null
-  ) {
-
-    return;
-
-  }
-
-
-  const newPhone =
-    prompt(
-      "شماره تماس:",
-      phone === "ثبت نشده"
-        ? ""
-        : phone
-    );
-
-
-  if (
-    newPhone === null
-  ) {
-
-    return;
-
-  }
-
-
-  const newCity =
-    prompt(
-      "شهر:",
-      city === "ثبت نشده"
-        ? ""
-        : city
-    );
-
-
-  if (
-    newCity === null
-  ) {
-
-    return;
-
-  }
-
-
-  /* حفظ ساختار اطلاعات قبلی */
-
-  if (
-    patient.name !== undefined
-  ) {
-
-    patient.name =
-      newName;
-
-  } else {
-
-    patient.fullName =
-      newName;
-
-  }
-
-
-  if (
-    patient.phone !== undefined
-  ) {
-
-    patient.phone =
-      newPhone;
-
-  } else if (
-    patient.mobile !== undefined
-  ) {
-
-    patient.mobile =
-      newPhone;
-
-  } else {
-
-    patient.phone =
-      newPhone;
-
-  }
-
-
-  if (
-    patient.city !== undefined
-  ) {
-
-    patient.city =
-      newCity;
-
-  } else {
-
-    patient.location =
-      newCity;
-
-  }
 
 
   localStorage.setItem(
@@ -974,7 +990,7 @@ function escapeHTML(value) {
 
 
 /* =====================================
-   شروع صفحه
+   شروع
 ===================================== */
 
 showPatients();
