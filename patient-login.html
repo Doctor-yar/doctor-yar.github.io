@@ -8,6 +8,7 @@
   <title>ورود بیمار - داکتر یار</title>
 
   <style>
+
     * {
       box-sizing: border-box;
     }
@@ -21,45 +22,50 @@
 
     .container {
       width: 92%;
-      max-width: 500px;
-      margin: 50px auto;
+      max-width: 650px;
+      margin: 30px auto;
     }
 
-    .login-card {
+    .card {
       background: white;
-      padding: 30px 25px;
-      border-radius: 25px;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+      padding: 35px 25px;
+      border-radius: 30px;
+      box-shadow: 0 3px 20px rgba(0,0,0,0.08);
     }
 
     .logo {
       text-align: center;
       color: #149e9a;
-      font-size: 32px;
+      font-size: 36px;
       font-weight: bold;
       margin-bottom: 10px;
     }
 
-    h1 {
+    .title {
       text-align: center;
-      font-size: 25px;
-      margin: 10px 0 25px;
+      font-size: 28px;
+      margin-bottom: 35px;
       color: #444;
     }
 
-    label {
+    .field {
+      margin-bottom: 22px;
+    }
+
+    .field label {
       display: block;
-      margin: 15px 5px 7px;
+      font-size: 20px;
       font-weight: bold;
+      margin-bottom: 10px;
     }
 
     input {
       width: 100%;
-      padding: 15px;
+      padding: 17px;
       border: 1px solid #ddd;
-      border-radius: 12px;
+      border-radius: 18px;
       font-family: Tahoma;
-      font-size: 16px;
+      font-size: 17px;
       outline: none;
     }
 
@@ -67,108 +73,394 @@
       border-color: #149e9a;
     }
 
-    .login-btn {
-      width: 100%;
+    /* جنسیت */
+
+    .gender-box {
+      display: flex;
+      gap: 12px;
+    }
+
+    .gender-option {
+      flex: 1;
+      position: relative;
+    }
+
+    .gender-option input {
+      display: none;
+    }
+
+    .gender-option label {
+      display: block;
+      text-align: center;
       padding: 16px;
-      margin-top: 25px;
-      border: none;
+      border: 1px solid #ddd;
+      border-radius: 18px;
+      background: #fafafa;
+      cursor: pointer;
+      font-size: 18px;
+      font-weight: normal;
+    }
+
+    .gender-option input:checked + label {
+      background: #149e9a;
+      color: white;
+      border-color: #149e9a;
+    }
+
+    /* علت مریضی */
+
+    .disease-box {
+      background: #fafafa;
+      border: 1px solid #ddd;
+      border-radius: 20px;
+      padding: 15px;
+    }
+
+    .disease-options {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+
+    .disease-option {
+      position: relative;
+    }
+
+    .disease-option input {
+      display: none;
+    }
+
+    .disease-option label {
+      display: block;
+      padding: 14px 8px;
+      text-align: center;
+      border: 1px solid #ddd;
       border-radius: 14px;
+      background: white;
+      color: #666;
+      font-size: 16px;
+      font-weight: normal;
+      cursor: pointer;
+    }
+
+    .disease-option input:checked + label {
+      background: #149e9a;
+      color: white;
+      border-color: #149e9a;
+    }
+
+    .hint {
+      color: #aaa;
+      font-size: 14px;
+      margin-top: 8px;
+    }
+
+    .submit-btn {
+      width: 100%;
+      margin-top: 25px;
+      padding: 18px;
+      border: none;
+      border-radius: 20px;
       background: #149e9a;
       color: white;
       font-family: Tahoma;
-      font-size: 19px;
+      font-size: 21px;
       font-weight: bold;
       cursor: pointer;
     }
 
-    .login-btn:active {
+    .submit-btn:active {
       transform: scale(0.98);
-    }
-
-    .register {
-      text-align: center;
-      margin-top: 25px;
-      line-height: 2;
-    }
-
-    .register a {
-      color: #149e9a;
-      font-weight: bold;
-      text-decoration: none;
     }
 
     .back {
       display: block;
       text-align: center;
-      margin-top: 20px;
-      color: #777;
+      margin-top: 25px;
+      color: #149e9a;
       text-decoration: none;
+      font-size: 18px;
     }
 
-    #message {
-      text-align: center;
-      margin-top: 15px;
-      font-weight: bold;
-    }
   </style>
+
 </head>
 
 <body>
 
   <div class="container">
 
-    <div class="login-card">
+    <div class="card">
 
       <div class="logo">
         داکتر یار
       </div>
 
-      <h1>
+      <div class="title">
         ورود بیمار
-      </h1>
-
-      <form id="loginForm">
-
-        <label for="phone">
-          شماره موبایل
-        </label>
-
-        <input
-          type="tel"
-          id="phone"
-          placeholder="مثلاً 0700000000"
-          required
-        >
-
-        <label for="password">
-          رمز عبور
-        </label>
-
-        <input
-          type="password"
-          id="password"
-          placeholder="رمز عبور خود را وارد کنید"
-          required
-        >
-
-        <button
-          type="submit"
-          class="login-btn"
-        >
-          ورود به حساب
-        </button>
-
-      </form>
-
-      <div id="message"></div>
-
-      <div class="register">
-        حساب بیمار ندارید؟
-        <br>
-        <a href="#">
-          ثبت‌نام بیمار
-        </a>
       </div>
+
+
+      <!-- اسم -->
+
+      <div class="field">
+
+        <label>
+          اسم
+        </label>
+
+        <input
+          type="text"
+          id="patientName"
+          placeholder="نام خود را وارد کنید"
+          required
+        >
+
+      </div>
+
+
+      <!-- سن -->
+
+      <div class="field">
+
+        <label>
+          سن
+        </label>
+
+        <input
+          type="number"
+          id="patientAge"
+          placeholder="سن خود را وارد کنید"
+          min="1"
+          max="120"
+          required
+        >
+
+      </div>
+
+
+      <!-- جنسیت -->
+
+      <div class="field">
+
+        <label>
+          جنسیت
+        </label>
+
+        <div class="gender-box">
+
+          <div class="gender-option">
+
+            <input
+              type="radio"
+              name="gender"
+              id="male"
+              value="مرد"
+            >
+
+            <label for="male">
+              مرد
+            </label>
+
+          </div>
+
+
+          <div class="gender-option">
+
+            <input
+              type="radio"
+              name="gender"
+              id="female"
+              value="زن"
+            >
+
+            <label for="female">
+              زن
+            </label>
+
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <!-- علت مریضی -->
+
+      <div class="field">
+
+        <label>
+          علت مریضی
+        </label>
+
+        <div class="disease-box">
+
+          <div class="disease-options">
+
+
+            <div class="disease-option">
+
+              <input
+                type="radio"
+                name="disease"
+                id="heart"
+                value="قلبی"
+              >
+
+              <label for="heart">
+                ❤️ قلبی
+              </label>
+
+            </div>
+
+
+            <div class="disease-option">
+
+              <input
+                type="radio"
+                name="disease"
+                id="stomach"
+                value="معده"
+              >
+
+              <label for="stomach">
+                🩺 معده
+              </label>
+
+            </div>
+
+
+            <div class="disease-option">
+
+              <input
+                type="radio"
+                name="disease"
+                id="orthopedic"
+                value="ارتوپیدی"
+              >
+
+              <label for="orthopedic">
+                🦴 ارتوپیدی
+              </label>
+
+            </div>
+
+
+            <div class="disease-option">
+
+              <input
+                type="radio"
+                name="disease"
+                id="neurology"
+                value="اعصاب"
+              >
+
+              <label for="neurology">
+                🧠 اعصاب
+              </label>
+
+            </div>
+
+
+            <div class="disease-option">
+
+              <input
+                type="radio"
+                name="disease"
+                id="eye"
+                value="چشم"
+              >
+
+              <label for="eye">
+                👁 چشم
+              </label>
+
+            </div>
+
+
+            <div class="disease-option">
+
+              <input
+                type="radio"
+                name="disease"
+                id="ent"
+                value="گوش، حلق و بینی"
+              >
+
+              <label for="ent">
+                👂 گوش، حلق و بینی
+              </label>
+
+            </div>
+
+
+            <div class="disease-option">
+
+              <input
+                type="radio"
+                name="disease"
+                id="skin"
+                value="پوست"
+              >
+
+              <label for="skin">
+                🩹 پوست
+              </label>
+
+            </div>
+
+
+            <div class="disease-option">
+
+              <input
+                type="radio"
+                name="disease"
+                id="dental"
+                value="دندان"
+              >
+
+              <label for="dental">
+                🦷 دندان
+              </label>
+
+            </div>
+
+
+            <div class="disease-option">
+
+              <input
+                type="radio"
+                name="disease"
+                id="other"
+                value="سایر"
+              >
+
+              <label for="other">
+                سایر
+              </label>
+
+            </div>
+
+          </div>
+
+          <div class="hint">
+            یک مورد را انتخاب کنید
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <!-- دکمه -->
+
+      <button
+        class="submit-btn"
+        onclick="loginPatient()"
+      >
+        ثبت و ورود
+      </button>
+
 
       <a
         href="index.html"
@@ -184,70 +476,86 @@
 
   <script>
 
-    document
-      .getElementById("loginForm")
-      .addEventListener("submit", function(event) {
+    function loginPatient() {
 
-        event.preventDefault();
+      const name =
+        document.getElementById("patientName").value.trim();
 
-        const phone =
-          document.getElementById("phone").value.trim();
+      const age =
+        document.getElementById("patientAge").value;
 
-        const password =
-          document.getElementById("password").value.trim();
+      const gender =
+        document.querySelector(
+          'input[name="gender"]:checked'
+        );
 
-        const message =
-          document.getElementById("message");
-
-
-        if (phone === "" || password === "") {
-
-          message.style.color = "red";
-
-          message.textContent =
-            "لطفاً شماره موبایل و رمز عبور را وارد کنید.";
-
-          return;
-        }
-
-
-        /*
-          فعلاً ورود آزمایشی است.
-          بعداً سیستم واقعی ثبت‌نام و حساب بیمار را وصل می‌کنیم.
-        */
-
-        const patient = {
-          name: "بیمار",
-          phone: phone
-        };
-
-
-        localStorage.setItem(
-          "patientLoggedIn",
-          "true"
+      const disease =
+        document.querySelector(
+          'input[name="disease"]:checked'
         );
 
 
-        localStorage.setItem(
-          "patientProfile",
-          JSON.stringify(patient)
-        );
+      if (!name) {
+
+        alert("لطفاً اسم خود را وارد کنید.");
+
+        return;
+      }
 
 
-        message.style.color = "#149e9a";
+      if (!age) {
 
-        message.textContent =
-          "ورود موفق بود...";
+        alert("لطفاً سن خود را وارد کنید.");
+
+        return;
+      }
 
 
-        setTimeout(function() {
+      if (!gender) {
 
-          window.location.href =
-            "patient-dashboard.html";
+        alert("لطفاً جنسیت خود را انتخاب کنید.");
 
-        }, 700);
+        return;
+      }
 
-      });
+
+      if (!disease) {
+
+        alert("لطفاً علت مریضی را انتخاب کنید.");
+
+        return;
+      }
+
+
+      const patient = {
+
+        name: name,
+
+        age: age,
+
+        gender: gender.value,
+
+        disease: disease.value
+
+      };
+
+
+      localStorage.setItem(
+        "patientProfile",
+        JSON.stringify(patient)
+      );
+
+
+      localStorage.setItem(
+        "patientLoggedIn",
+        "true"
+      );
+
+
+      window.location.href =
+        "patient-dashboard.html";
+
+    }
 
   </script>
 
