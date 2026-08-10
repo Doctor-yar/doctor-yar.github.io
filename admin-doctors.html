@@ -1,0 +1,1102 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>مدیریت داکتران | داکتر یار</title>
+
+  <style>
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Tahoma, Arial, sans-serif;
+      background: #f4f7f9;
+      color: #263238;
+    }
+
+    /* Header */
+
+    .header {
+      background: #0d9488;
+      color: white;
+      padding: 18px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+    }
+
+    .header h1 {
+      margin: 0;
+      font-size: 21px;
+    }
+
+    .back {
+      color: white;
+      text-decoration: none;
+      font-size: 14px;
+    }
+
+    /* Container */
+
+    .container {
+      max-width: 1100px;
+      margin: 25px auto;
+      padding: 0 15px;
+    }
+
+    /* Title */
+
+    .page-title {
+      background: white;
+      padding: 22px;
+      border-radius: 16px;
+      margin-bottom: 20px;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.07);
+    }
+
+    .page-title h2 {
+      margin: 0 0 8px;
+      color: #0d9488;
+    }
+
+    .page-title p {
+      margin: 0;
+      color: #78909c;
+    }
+
+    /* Statistics */
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 15px;
+      margin-bottom: 20px;
+    }
+
+    .stat {
+      background: white;
+      padding: 18px;
+      border-radius: 15px;
+      text-align: center;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.07);
+    }
+
+    .stat-icon {
+      font-size: 30px;
+    }
+
+    .stat-number {
+      font-size: 25px;
+      font-weight: bold;
+      color: #0d9488;
+      margin-top: 5px;
+    }
+
+    .stat-title {
+      color: #78909c;
+      margin-top: 5px;
+      font-size: 13px;
+    }
+
+    /* Search */
+
+    .search-box {
+      background: white;
+      padding: 18px;
+      border-radius: 15px;
+      margin-bottom: 20px;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.07);
+    }
+
+    .search-box input {
+      width: 100%;
+      padding: 14px;
+      border: 1px solid #d9e3e5;
+      border-radius: 10px;
+      font-family: inherit;
+      font-size: 15px;
+      outline: none;
+    }
+
+    .search-box input:focus {
+      border-color: #0d9488;
+    }
+
+    /* Doctor Card */
+
+    .doctor-card {
+      background: white;
+      border-radius: 17px;
+      margin-bottom: 18px;
+      padding: 22px;
+      box-shadow: 0 3px 12px rgba(0,0,0,0.07);
+      border: 1px solid #e6eeee;
+    }
+
+    .doctor-top {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      margin-bottom: 18px;
+    }
+
+    .doctor-avatar {
+      width: 65px;
+      height: 65px;
+      border-radius: 50%;
+      background: #e6fffb;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 34px;
+      flex-shrink: 0;
+    }
+
+    .doctor-name h3 {
+      margin: 0 0 6px;
+      font-size: 19px;
+    }
+
+    .doctor-name p {
+      margin: 0;
+      color: #607d8b;
+      font-size: 14px;
+    }
+
+    /* Status */
+
+    .status {
+      display: inline-block;
+      padding: 6px 11px;
+      border-radius: 20px;
+      font-size: 12px;
+      margin-top: 8px;
+    }
+
+    .approved {
+      background: #dcfce7;
+      color: #15803d;
+    }
+
+    .pending {
+      background: #fef3c7;
+      color: #b45309;
+    }
+
+    /* Information */
+
+    .doctor-info {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+      border-top: 1px solid #eee;
+      padding-top: 15px;
+    }
+
+    .info-item {
+      background: #f8fafb;
+      padding: 11px;
+      border-radius: 10px;
+      font-size: 13px;
+    }
+
+    .info-item strong {
+      color: #455a64;
+    }
+
+    /* Buttons */
+
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 18px;
+      border-top: 1px solid #eee;
+      padding-top: 15px;
+    }
+
+    button {
+      border: none;
+      padding: 11px 15px;
+      border-radius: 10px;
+      font-family: inherit;
+      cursor: pointer;
+      font-size: 13px;
+    }
+
+    .approve-btn {
+      background: #0d9488;
+      color: white;
+    }
+
+    .edit-btn {
+      background: #e2e8f0;
+      color: #334155;
+    }
+
+    .delete-btn {
+      background: #fee2e2;
+      color: #dc2626;
+    }
+
+    .approve-btn:hover {
+      background: #0f766e;
+    }
+
+    .delete-btn:hover {
+      background: #fecaca;
+    }
+
+    /* Empty */
+
+    .empty {
+      background: white;
+      padding: 40px 20px;
+      border-radius: 16px;
+      text-align: center;
+      color: #78909c;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.07);
+    }
+
+    .empty-icon {
+      font-size: 45px;
+      margin-bottom: 10px;
+    }
+
+    /* Mobile */
+
+    @media (max-width: 700px) {
+
+      .header h1 {
+        font-size: 17px;
+      }
+
+      .back {
+        font-size: 12px;
+      }
+
+      .stats {
+        grid-template-columns: 1fr;
+      }
+
+      .doctor-info {
+        grid-template-columns: 1fr;
+      }
+
+      .doctor-top {
+        align-items: flex-start;
+      }
+
+      .actions button {
+        flex: 1;
+      }
+
+    }
+
+  </style>
+
+</head>
+
+
+<body>
+
+
+  <header class="header">
+
+    <h1>
+      🩺 مدیریت داکتران
+    </h1>
+
+    <a
+      href="admin-dashboard.html"
+      class="back"
+    >
+      ← بازگشت به مدیریت
+    </a>
+
+  </header>
+
+
+  <main class="container">
+
+
+    <div class="page-title">
+
+      <h2>
+        👨‍⚕️ داکتران داکتر یار
+      </h2>
+
+      <p>
+        تمام داکترانی که در سایت ثبت‌نام کرده‌اند در اینجا نمایش داده می‌شوند.
+      </p>
+
+    </div>
+
+
+    <!-- Statistics -->
+
+    <div class="stats">
+
+      <div class="stat">
+
+        <div class="stat-icon">
+          👨‍⚕️
+        </div>
+
+        <div
+          class="stat-number"
+          id="totalDoctors"
+        >
+          0
+        </div>
+
+        <div class="stat-title">
+          تمام داکتران
+        </div>
+
+      </div>
+
+
+      <div class="stat">
+
+        <div class="stat-icon">
+          ✅
+        </div>
+
+        <div
+          class="stat-number"
+          id="approvedDoctors"
+        >
+          0
+        </div>
+
+        <div class="stat-title">
+          تأیید شده
+        </div>
+
+      </div>
+
+
+      <div class="stat">
+
+        <div class="stat-icon">
+          ⏳
+        </div>
+
+        <div
+          class="stat-number"
+          id="pendingDoctors"
+        >
+          0
+        </div>
+
+        <div class="stat-title">
+          در انتظار تأیید
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <!-- Search -->
+
+    <div class="search-box">
+
+      <input
+        type="text"
+        id="searchInput"
+        placeholder="🔎 جستجوی داکتر بر اساس نام، تخصص یا شهر..."
+        oninput="showDoctors()"
+      >
+
+    </div>
+
+
+    <!-- Doctors -->
+
+    <div id="doctorsList"></div>
+
+
+  </main>
+
+
+  <script>
+
+    /* =====================================
+       بررسی ورود مدیر
+    ===================================== */
+
+    if (
+      localStorage.getItem("adminLoggedIn") !== "true"
+    ) {
+
+      window.location.replace(
+        "admin-login.html"
+      );
+
+    }
+
+
+    /* =====================================
+       دریافت داکتران
+    ===================================== */
+
+    let doctors =
+      JSON.parse(
+        localStorage.getItem("doctors") || "[]"
+      );
+
+
+    /* =====================================
+       توابع کمکی
+    ===================================== */
+
+    function getValue(doctor, names) {
+
+      for (let name of names) {
+
+        if (
+          doctor[name] !== undefined &&
+          doctor[name] !== null &&
+          doctor[name] !== ""
+        ) {
+
+          return doctor[name];
+
+        }
+
+      }
+
+      return "ثبت نشده";
+
+    }
+
+
+    function isApproved(doctor) {
+
+      return (
+        doctor.approved === true ||
+        doctor.approved === "true" ||
+        doctor.status === "approved" ||
+        doctor.status === "تأیید شده" ||
+        doctor.verified === true ||
+        doctor.verified === "true"
+      );
+
+    }
+
+
+    /* =====================================
+       نمایش داکتران
+    ===================================== */
+
+    function showDoctors() {
+
+      const list =
+        document.getElementById(
+          "doctorsList"
+        );
+
+      const search =
+        document.getElementById(
+          "searchInput"
+        ).value
+        .trim()
+        .toLowerCase();
+
+
+      let filtered =
+        doctors.filter(function(doctor) {
+
+          const name =
+            getValue(
+              doctor,
+              [
+                "name",
+                "fullName",
+                "doctorName",
+                "fullname"
+              ]
+            );
+
+          const specialty =
+            getValue(
+              doctor,
+              [
+                "specialty",
+                "speciality",
+                "field",
+                " تخصص"
+              ]
+            );
+
+          const city =
+            getValue(
+              doctor,
+              [
+                "city",
+                "location"
+              ]
+            );
+
+
+          const text =
+            (
+              name +
+              " " +
+              specialty +
+              " " +
+              city
+            ).toLowerCase();
+
+
+          return text.includes(search);
+
+        });
+
+
+      updateStatistics();
+
+
+      if (filtered.length === 0) {
+
+        list.innerHTML = `
+
+          <div class="empty">
+
+            <div class="empty-icon">
+              👨‍⚕️
+            </div>
+
+            <h3>
+              هنوز داکتری ثبت‌نام نکرده است
+            </h3>
+
+            <p>
+              وقتی یک داکتر در سایت ثبت‌نام کند،
+              معلومات او در اینجا نمایش داده می‌شود.
+            </p>
+
+          </div>
+
+        `;
+
+        return;
+
+      }
+
+
+      list.innerHTML = "";
+
+
+      filtered.forEach(function(doctor) {
+
+        const realIndex =
+          doctors.indexOf(doctor);
+
+
+        const name =
+          getValue(
+            doctor,
+            [
+              "name",
+              "fullName",
+              "doctorName",
+              "fullname"
+            ]
+          );
+
+
+        const specialty =
+          getValue(
+            doctor,
+            [
+              "specialty",
+              "speciality",
+              "field"
+            ]
+          );
+
+
+        const city =
+          getValue(
+            doctor,
+            [
+              "city",
+              "location"
+            ]
+          );
+
+
+        const phone =
+          getValue(
+            doctor,
+            [
+              "phone",
+              "mobile",
+              "phoneNumber",
+              "contact"
+            ]
+          );
+
+
+        const price =
+          getValue(
+            doctor,
+            [
+              "visitPrice",
+              "price",
+              "consultationPrice"
+            ]
+          );
+
+
+        const workplace =
+          getValue(
+            doctor,
+            [
+              "workplace",
+              "clinic",
+              "hospital",
+              "workAddress"
+            ]
+          );
+
+
+        const workHours =
+          getValue(
+            doctor,
+            [
+              "workHours",
+              "workingHours",
+              "hours"
+            ]
+          );
+
+
+        const approved =
+          isApproved(doctor);
+
+
+        const statusClass =
+          approved
+            ? "approved"
+            : "pending";
+
+
+        const statusText =
+          approved
+            ? "✅ تأیید شده"
+            : "⏳ در انتظار تأیید";
+
+
+        list.innerHTML += `
+
+          <div class="doctor-card">
+
+            <div class="doctor-top">
+
+              <div class="doctor-avatar">
+                👨‍⚕️
+              </div>
+
+              <div class="doctor-name">
+
+                <h3>
+                  ${escapeHTML(name)}
+                </h3>
+
+                <p>
+                  🩺 ${escapeHTML(specialty)}
+                </p>
+
+                <span class="status ${statusClass}">
+                  ${statusText}
+                </span>
+
+              </div>
+
+            </div>
+
+
+            <div class="doctor-info">
+
+              <div class="info-item">
+                <strong>📍 شهر:</strong>
+                ${escapeHTML(city)}
+              </div>
+
+              <div class="info-item">
+                <strong>📞 تماس:</strong>
+                ${escapeHTML(phone)}
+              </div>
+
+              <div class="info-item">
+                <strong>💰 قیمت ویزیت:</strong>
+                ${escapeHTML(price)}
+              </div>
+
+              <div class="info-item">
+                <strong>🏥 محل کار:</strong>
+                ${escapeHTML(workplace)}
+              </div>
+
+              <div class="info-item">
+                <strong>⏰ ساعات کاری:</strong>
+                ${escapeHTML(workHours)}
+              </div>
+
+            </div>
+
+
+            <div class="actions">
+
+              ${
+                approved
+
+                ?
+
+                `<button
+                  class="approve-btn"
+                  onclick="changeApproval(${realIndex})"
+                >
+                  ✅ تأیید شده
+                </button>`
+
+                :
+
+                `<button
+                  class="approve-btn"
+                  onclick="changeApproval(${realIndex})"
+                >
+                  ✅ تأیید داکتر
+                </button>`
+              }
+
+
+              <button
+                class="edit-btn"
+                onclick="editDoctor(${realIndex})"
+              >
+                ✏️ ویرایش
+              </button>
+
+
+              <button
+                class="delete-btn"
+                onclick="deleteDoctor(${realIndex})"
+              >
+                🗑️ حذف
+              </button>
+
+            </div>
+
+          </div>
+
+        `;
+
+      });
+
+    }
+
+
+    /* =====================================
+       آمار
+    ===================================== */
+
+    function updateStatistics() {
+
+      const total =
+        doctors.length;
+
+
+      const approved =
+        doctors.filter(
+          isApproved
+        ).length;
+
+
+      const pending =
+        total - approved;
+
+
+      document.getElementById(
+        "totalDoctors"
+      ).textContent = total;
+
+
+      document.getElementById(
+        "approvedDoctors"
+      ).textContent = approved;
+
+
+      document.getElementById(
+        "pendingDoctors"
+      ).textContent = pending;
+
+    }
+
+
+    /* =====================================
+       تأیید / لغو تأیید
+    ===================================== */
+
+    function changeApproval(index) {
+
+      const doctor =
+        doctors[index];
+
+
+      const approved =
+        isApproved(doctor);
+
+
+      if (approved) {
+
+        doctor.approved = false;
+
+        doctor.verified = false;
+
+        doctor.status = "pending";
+
+      } else {
+
+        doctor.approved = true;
+
+        doctor.verified = true;
+
+        doctor.status = "approved";
+
+      }
+
+
+      localStorage.setItem(
+        "doctors",
+        JSON.stringify(doctors)
+      );
+
+
+      showDoctors();
+
+    }
+
+
+    /* =====================================
+       حذف داکتر
+    ===================================== */
+
+    function deleteDoctor(index) {
+
+      const doctor =
+        doctors[index];
+
+
+      const name =
+        getValue(
+          doctor,
+          [
+            "name",
+            "fullName",
+            "doctorName",
+            "fullname"
+          ]
+        );
+
+
+      const confirmDelete =
+        confirm(
+          "آیا مطمئن هستید که می‌خواهید داکتر «" +
+          name +
+          "» را حذف کنید؟"
+        );
+
+
+      if (!confirmDelete) {
+        return;
+      }
+
+
+      doctors.splice(
+        index,
+        1
+      );
+
+
+      localStorage.setItem(
+        "doctors",
+        JSON.stringify(doctors)
+      );
+
+
+      showDoctors();
+
+    }
+
+
+    /* =====================================
+       ویرایش داکتر
+    ===================================== */
+
+    function editDoctor(index) {
+
+      const doctor =
+        doctors[index];
+
+
+      const name =
+        getValue(
+          doctor,
+          [
+            "name",
+            "fullName",
+            "doctorName",
+            "fullname"
+          ]
+        );
+
+
+      const specialty =
+        getValue(
+          doctor,
+          [
+            "specialty",
+            "speciality",
+            "field"
+          ]
+        );
+
+
+      const city =
+        getValue(
+          doctor,
+          [
+            "city",
+            "location"
+          ]
+        );
+
+
+      const newName =
+        prompt(
+          "نام داکتر:",
+          name === "ثبت نشده"
+            ? ""
+            : name
+        );
+
+
+      if (
+        newName === null
+      ) {
+        return;
+      }
+
+
+      const newSpecialty =
+        prompt(
+          "تخصص داکتر:",
+          specialty === "ثبت نشده"
+            ? ""
+            : specialty
+        );
+
+
+      if (
+        newSpecialty === null
+      ) {
+        return;
+      }
+
+
+      const newCity =
+        prompt(
+          "شهر:",
+          city === "ثبت نشده"
+            ? ""
+            : city
+        );
+
+
+      if (
+        newCity === null
+      ) {
+        return;
+      }
+
+
+      /*
+        حفظ ساختار اطلاعات قبلی
+      */
+
+      if (doctor.name !== undefined) {
+        doctor.name = newName;
+      } else {
+        doctor.fullName = newName;
+      }
+
+
+      if (doctor.specialty !== undefined) {
+        doctor.specialty =
+          newSpecialty;
+      } else {
+        doctor.field =
+          newSpecialty;
+      }
+
+
+      if (doctor.city !== undefined) {
+        doctor.city =
+          newCity;
+      } else {
+        doctor.location =
+          newCity;
+      }
+
+
+      localStorage.setItem(
+        "doctors",
+        JSON.stringify(doctors)
+      );
+
+
+      showDoctors();
+
+    }
+
+
+    /* =====================================
+       جلوگیری از HTML ناخواسته
+    ===================================== */
+
+    function escapeHTML(value) {
+
+      return String(value)
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+
+    }
+
+
+    /* =====================================
+       شروع صفحه
+    ===================================== */
+
+    showDoctors();
+
+  </script>
+
+
+</body>
+
+</html>
