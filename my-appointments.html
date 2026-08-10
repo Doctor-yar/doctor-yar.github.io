@@ -18,12 +18,13 @@
       font-family: Tahoma, Arial, sans-serif;
       background: #f5f7f7;
       color: #444;
+      padding: 20px;
     }
 
     .container {
-      width: 92%;
+      width: 100%;
       max-width: 650px;
-      margin: 25px auto;
+      margin: auto;
     }
 
     .header {
@@ -32,7 +33,6 @@
       padding: 25px;
       border-radius: 25px;
       text-align: center;
-      box-shadow: 0 3px 15px rgba(0,0,0,0.08);
     }
 
     .header-icon {
@@ -47,23 +47,25 @@
 
     .appointment {
       background: white;
-      margin-top: 18px;
-      padding: 20px;
-      border-radius: 20px;
-      box-shadow: 0 2px 12px rgba(0,0,0,0.07);
+      margin-top: 20px;
+      padding: 22px;
+      border-radius: 22px;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.08);
     }
 
     .doctor-name {
-      font-size: 21px;
+      font-size: 22px;
       font-weight: bold;
       color: #149e9a;
-      margin-bottom: 12px;
+      text-align: center;
+      margin-bottom: 18px;
     }
 
     .info {
-      padding: 8px 0;
+      padding: 10px 0;
       border-bottom: 1px solid #eee;
       line-height: 1.8;
+      font-size: 17px;
     }
 
     .info:last-child {
@@ -72,15 +74,17 @@
 
     .label {
       font-weight: bold;
+      color: #555;
     }
 
     .status {
-      display: inline-block;
-      margin-top: 12px;
-      padding: 7px 12px;
-      border-radius: 10px;
+      margin-top: 18px;
+      padding: 10px;
+      border-radius: 12px;
       background: #e8f8f2;
       color: #147a57;
+      text-align: center;
+      font-weight: bold;
     }
 
     .empty {
@@ -104,8 +108,8 @@
 
     .cancel-btn {
       width: 100%;
-      margin-top: 15px;
-      padding: 13px;
+      margin-top: 18px;
+      padding: 14px;
       border: none;
       border-radius: 12px;
       background: #fff0f0;
@@ -121,219 +125,200 @@
 
 <body>
 
-  <div class="container">
+<div class="container">
 
-    <div class="header">
+  <div class="header">
 
-      <div class="header-icon">
-        📅
-      </div>
-
-      <div class="header-title">
-        نوبت‌های من
-      </div>
-
+    <div class="header-icon">
+      📅
     </div>
 
-
-    <div id="appointments"></div>
-
-
-    <a
-      href="patient-dashboard.html"
-      class="back"
-    >
-      ← بازگشت به صفحه اصلی بیمار
-    </a>
+    <div class="header-title">
+      نوبت‌های من
+    </div>
 
   </div>
 
 
-  <script>
+  <div id="appointments"></div>
 
-    const appointmentsBox =
-      document.getElementById("appointments");
 
+  <a
+    href="patient-dashboard.html"
+    class="back"
+  >
+    ← بازگشت به صفحه اصلی بیمار
+  </a>
 
-    // دریافت نوبت‌ها
-    let appointments =
-      JSON.parse(
-        localStorage.getItem("appointments") || "[]"
-      );
+</div>
 
 
-    // دریافت اطلاعات بیمار
-    let patient = null;
+<script>
 
-    const savedPatient =
-      localStorage.getItem("patientProfile");
+const appointmentsBox =
+  document.getElementById("appointments");
 
 
-    if (savedPatient) {
+/* دریافت نوبت ثبت‌شده */
 
-      try {
+const savedAppointment =
+  localStorage.getItem("myAppointment");
 
-        patient =
-          JSON.parse(savedPatient);
 
-      } catch (error) {
+/* اگر نوبتی وجود ندارد */
 
-        patient = null;
+if (!savedAppointment) {
 
-      }
+  appointmentsBox.innerHTML = `
 
-    }
+    <div class="empty">
 
+      📭
 
-    /*
-      فقط نوبت‌های همین بیمار نمایش داده شود
-    */
+      <br>
 
-    if (patient && patient.name) {
+      هنوز هیچ نوبتی ثبت نکرده‌اید.
 
-      appointments =
-        appointments.filter(function(item) {
+      <br><br>
 
-          return item.patientName === patient.name;
+      برای گرفتن نوبت، ابتدا یک داکتر را جستجو کنید.
 
-        });
+    </div>
 
-    }
+  `;
 
+}
 
-    // اگر نوبتی وجود ندارد
-    if (appointments.length === 0) {
 
-      appointmentsBox.innerHTML = `
+/* اگر نوبت وجود دارد */
 
-        <div class="empty">
+else {
 
-          📭
+  try {
 
-          <br>
+    const appointment =
+      JSON.parse(savedAppointment);
 
-          هنوز هیچ نوبتی ثبت نکرده‌اید.
 
-          <br><br>
+    const card =
+      document.createElement("div");
 
-          برای گرفتن نوبت، ابتدا یک داکتر را جستجو کنید.
 
-        </div>
+    card.className =
+      "appointment";
 
-      `;
 
-    }
+    card.innerHTML = `
 
+      <div class="doctor-name">
+        👨‍⚕️ ${appointment.doctorName || "داکتر"}
+      </div>
 
-    // نمایش نوبت‌ها
-    appointments.forEach(function(item, index) {
 
-      const card =
-        document.createElement("div");
+      <div class="info">
 
-      card.className = "appointment";
+        <span class="label">
+          📅 روز نوبت:
+        </span>
 
+        ${appointment.day || "ثبت نشده"}
 
-      card.innerHTML = `
+      </div>
 
-        <div class="doctor-name">
-          👨‍⚕️ ${item.doctorName || "داکتر"}
-        </div>
 
-        <div class="info">
-          <span class="label">
-            تخصص:
-          </span>
-          ${item.specialty || "ثبت نشده"}
-        </div>
+      <div class="info">
 
-        <div class="info">
-          <span class="label">
-            👤 بیمار:
-          </span>
-          ${item.patientName || "ثبت نشده"}
-        </div>
+        <span class="label">
+          🕐 ساعت:
+        </span>
 
-        <div class="info">
-          <span class="label">
-            📞 شماره تماس:
-          </span>
-          ${item.patientPhone || "ثبت نشده"}
-        </div>
+        ${appointment.time || "ثبت نشده"}
 
-        <div class="info">
-          <span class="label">
-            📅 تاریخ:
-          </span>
-          ${item.date || "ثبت نشده"}
-        </div>
+      </div>
 
-        <div class="info">
-          <span class="label">
-            🕐 ساعت:
-          </span>
-          ${item.time || "ثبت نشده"}
-        </div>
 
-        <div class="status">
-          ✅ نوبت ثبت شده
-        </div>
+      <div class="info">
 
-        <button
-          class="cancel-btn"
-          onclick="cancelAppointment(${item.id})"
-        >
-          لغو نوبت
-        </button>
+        <span class="label">
+          🩺 نوع ویزیت:
+        </span>
 
-      `;
+        ${appointment.visitType || "ثبت نشده"}
 
+      </div>
 
-      appointmentsBox.appendChild(card);
 
-    });
+      <div class="info">
 
+        <span class="label">
+          📝 زمان ثبت:
+        </span>
 
-    // لغو نوبت
-    function cancelAppointment(id) {
+        ${appointment.date || "ثبت نشده"}
 
-      const confirmCancel =
-        confirm(
-          "آیا مطمئن هستید که می‌خواهید این نوبت را لغو کنید؟"
-        );
+      </div>
 
 
-      if (!confirmCancel) {
-        return;
-      }
+      <div class="status">
+        ✅ نوبت با موفقیت ثبت شده است
+      </div>
 
 
-      let allAppointments =
-        JSON.parse(
-          localStorage.getItem("appointments") || "[]"
-        );
+      <button
+        class="cancel-btn"
+        onclick="cancelAppointment()"
+      >
+        لغو نوبت
+      </button>
 
+    `;
 
-      allAppointments =
-        allAppointments.filter(function(item) {
 
-          return item.id !== id;
+    appointmentsBox.appendChild(card);
 
-        });
 
+  } catch(error) {
 
-      localStorage.setItem(
-        "appointments",
-        JSON.stringify(allAppointments)
-      );
+    appointmentsBox.innerHTML = `
 
+      <div class="empty">
 
-      // تازه‌سازی صفحه
-      location.reload();
+        ⚠️ اطلاعات نوبت قابل خواندن نیست.
 
-    }
+      </div>
 
-  </script>
+    `;
+
+  }
+
+}
+
+
+/* لغو نوبت */
+
+function cancelAppointment() {
+
+  const answer =
+    confirm(
+      "آیا مطمئن هستید که می‌خواهید نوبت را لغو کنید؟"
+    );
+
+
+  if (!answer) {
+    return;
+  }
+
+
+  localStorage.removeItem(
+    "myAppointment"
+  );
+
+
+  location.reload();
+
+}
+
+</script>
 
 </body>
 
