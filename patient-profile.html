@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>پروفایل بیمار | داکتر یار</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      padding: 20px;
+      font-family: Tahoma, Arial, sans-serif;
+      background: #f5f7f7;
+      color: #444;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 650px;
+      margin: auto;
+    }
+
+    .card {
+      background: white;
+      padding: 25px;
+      border-radius: 25px;
+      box-shadow: 0 3px 15px rgba(0,0,0,0.08);
+    }
+
+    h1 {
+      text-align: center;
+      color: #149e9a;
+      margin-bottom: 30px;
+    }
+
+    label {
+      display: block;
+      margin-top: 18px;
+      margin-bottom: 8px;
+      font-size: 18px;
+      font-weight: bold;
+    }
+
+    input {
+      width: 100%;
+      padding: 15px;
+      border: 1px solid #ddd;
+      border-radius: 15px;
+      font-family: Tahoma;
+      font-size: 17px;
+    }
+
+    .save {
+      width: 100%;
+      margin-top: 25px;
+      padding: 17px;
+      background: #149e9a;
+      color: white;
+      border: none;
+      border-radius: 15px;
+      font-size: 19px;
+      font-family: Tahoma;
+    }
+
+    .back {
+      display: block;
+      text-align: center;
+      margin-top: 20px;
+      color: #149e9a;
+      text-decoration: none;
+      font-size: 17px;
+    }
+
+    #message {
+      text-align: center;
+      margin-top: 15px;
+      color: #149e9a;
+    }
+  </style>
+
+</head>
+
+<body>
+
+  <div class="container">
+
+    <div class="card">
+
+      <h1>👤 پروفایل من</h1>
+
+      <label>اسم</label>
+      <input
+        type="text"
+        id="name"
+        placeholder="اسم خود را وارد کنید"
+      >
+
+      <label>سن</label>
+      <input
+        type="number"
+        id="age"
+        placeholder="سن"
+      >
+
+      <label>شماره موبایل</label>
+      <input
+        type="tel"
+        id="phone"
+        placeholder="شماره موبایل"
+      >
+
+      <button
+        class="save"
+        onclick="saveProfile()"
+      >
+        ذخیره مشخصات
+      </button>
+
+      <p id="message"></p>
+
+      <a
+        href="patient-dashboard.html"
+        class="back"
+      >
+        ← بازگشت به صفحه بیمار
+      </a>
+
+    </div>
+
+  </div>
+
+  <script>
+
+    function saveProfile() {
+
+      const profile = {
+        name: document.getElementById("name").value,
+        age: document.getElementById("age").value,
+        phone: document.getElementById("phone").value
+      };
+
+      localStorage.setItem(
+        "patientProfile",
+        JSON.stringify(profile)
+      );
+
+      document.getElementById("message").textContent =
+        "✅ مشخصات شما ذخیره شد.";
+
+    }
+
+    const saved =
+      localStorage.getItem("patientProfile");
+
+    if (saved) {
+
+      try {
+
+        const profile = JSON.parse(saved);
+
+        document.getElementById("name").value =
+          profile.name || "";
+
+        document.getElementById("age").value =
+          profile.age || "";
+
+        document.getElementById("phone").value =
+          profile.phone || "";
+
+      } catch (error) {
+
+        console.log("خطا در اطلاعات پروفایل");
+
+      }
+
+    }
+
+  </script>
+
+</body>
+
+</html>
