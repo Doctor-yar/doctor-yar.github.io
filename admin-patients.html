@@ -293,4 +293,696 @@
 
   <!-- آمار -->
 
-  <
+  <div class="stats">
+
+    <div class="stat">
+
+      <div class="stat-icon">
+        👤
+      </div>
+
+      <div
+        class="stat-number"
+        id="totalPatients"
+      >
+        0
+      </div>
+
+      <div class="stat-title">
+        تمام مریضان
+      </div>
+
+    </div>
+
+
+    <div class="stat">
+
+      <div class="stat-icon">
+        📅
+      </div>
+
+      <div
+        class="stat-number"
+        id="totalAppointments"
+      >
+        0
+      </div>
+
+      <div class="stat-title">
+        نوبت‌های مریضان
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- جستجو -->
+
+  <div class="search-box">
+
+    <input
+      type="text"
+      id="searchInput"
+      placeholder="🔎 جستجوی مریض بر اساس نام، شماره یا شهر..."
+      oninput="showPatients()"
+    >
+
+  </div>
+
+
+  <!-- لیست مریضان -->
+
+  <div id="patientsList"></div>
+
+
+</main>
+
+
+<script>
+
+
+/* =====================================
+   بررسی ورود مدیر
+===================================== */
+
+if (
+  localStorage.getItem("adminLoggedIn") !== "true"
+) {
+
+  window.location.replace(
+    "admin-login.html"
+  );
+
+}
+
+
+/* =====================================
+   دریافت مریضان
+===================================== */
+
+let patients =
+  JSON.parse(
+    localStorage.getItem("patients") || "[]"
+  );
+
+
+/* =====================================
+   دریافت نوبت‌ها
+===================================== */
+
+let appointments =
+  JSON.parse(
+    localStorage.getItem("appointments") || "[]"
+  );
+
+
+/* =====================================
+   تابع دریافت اطلاعات
+===================================== */
+
+function getValue(patient, names) {
+
+  for (let name of names) {
+
+    if (
+      patient[name] !== undefined &&
+      patient[name] !== null &&
+      patient[name] !== ""
+    ) {
+
+      return patient[name];
+
+    }
+
+  }
+
+  return "ثبت نشده";
+
+}
+
+
+/* =====================================
+   نمایش مریضان
+===================================== */
+
+function showPatients() {
+
+  const list =
+    document.getElementById(
+      "patientsList"
+    );
+
+
+  const search =
+    document.getElementById(
+      "searchInput"
+    ).value
+    .trim()
+    .toLowerCase();
+
+
+  const filtered =
+    patients.filter(function(patient) {
+
+
+      const name =
+        getValue(
+          patient,
+          [
+            "name",
+            "fullName",
+            "patientName",
+            "fullname"
+          ]
+        );
+
+
+      const phone =
+        getValue(
+          patient,
+          [
+            "phone",
+            "mobile",
+            "phoneNumber",
+            "contact"
+          ]
+        );
+
+
+      const city =
+        getValue(
+          patient,
+          [
+            "city",
+            "location"
+          ]
+        );
+
+
+      const text =
+        (
+          name +
+          " " +
+          phone +
+          " " +
+          city
+        ).toLowerCase();
+
+
+      return text.includes(search);
+
+    });
+
+
+  updateStatistics();
+
+
+  if (filtered.length === 0) {
+
+    list.innerHTML = `
+
+      <div class="empty">
+
+        <div class="empty-icon">
+          👤
+        </div>
+
+        <h3>
+          هنوز مریضی ثبت‌نام نکرده است
+        </h3>
+
+        <p>
+          وقتی یک مریض در سایت ثبت‌نام کند،
+          معلومات او در اینجا نمایش داده می‌شود.
+        </p>
+
+      </div>
+
+    `;
+
+    return;
+
+  }
+
+
+  list.innerHTML = "";
+
+
+  filtered.forEach(function(patient) {
+
+
+    const realIndex =
+      patients.indexOf(patient);
+
+
+    const name =
+      getValue(
+        patient,
+        [
+          "name",
+          "fullName",
+          "patientName",
+          "fullname"
+        ]
+      );
+
+
+    const phone =
+      getValue(
+        patient,
+        [
+          "phone",
+          "mobile",
+          "phoneNumber",
+          "contact"
+        ]
+      );
+
+
+    const city =
+      getValue(
+        patient,
+        [
+          "city",
+          "location"
+        ]
+      );
+
+
+    const age =
+      getValue(
+        patient,
+        [
+          "age"
+        ]
+      );
+
+
+    const gender =
+      getValue(
+        patient,
+        [
+          "gender",
+          "sex"
+        ]
+      );
+
+
+    const email =
+      getValue(
+        patient,
+        [
+          "email",
+          "emailAddress"
+        ]
+      );
+
+
+    list.innerHTML += `
+
+      <div class="patient-card">
+
+
+        <div class="patient-top">
+
+          <div class="patient-avatar">
+            👤
+          </div>
+
+
+          <div class="patient-name">
+
+            <h3>
+              ${escapeHTML(name)}
+            </h3>
+
+            <p>
+              👤 حساب مریض
+            </p>
+
+          </div>
+
+        </div>
+
+
+        <div class="patient-info">
+
+
+          <div class="info-item">
+
+            <strong>
+              📞 شماره تماس:
+            </strong>
+
+            ${escapeHTML(phone)}
+
+          </div>
+
+
+          <div class="info-item">
+
+            <strong>
+              📍 شهر:
+            </strong>
+
+            ${escapeHTML(city)}
+
+          </div>
+
+
+          <div class="info-item">
+
+            <strong>
+              🎂 سن:
+            </strong>
+
+            ${escapeHTML(age)}
+
+          </div>
+
+
+          <div class="info-item">
+
+            <strong>
+              ⚥ جنسیت:
+            </strong>
+
+            ${escapeHTML(gender)}
+
+          </div>
+
+
+          <div class="info-item">
+
+            <strong>
+              📧 ایمیل:
+            </strong>
+
+            ${escapeHTML(email)}
+
+          </div>
+
+
+        </div>
+
+
+        <div class="actions">
+
+
+          <button
+            class="edit-btn"
+            onclick="editPatient(${realIndex})"
+          >
+            ✏️ ویرایش
+          </button>
+
+
+          <button
+            class="delete-btn"
+            onclick="deletePatient(${realIndex})"
+          >
+            🗑️ حذف
+          </button>
+
+
+        </div>
+
+
+      </div>
+
+    `;
+
+  });
+
+}
+
+
+/* =====================================
+   آمار
+===================================== */
+
+function updateStatistics() {
+
+  document.getElementById(
+    "totalPatients"
+  ).textContent =
+    patients.length;
+
+
+  document.getElementById(
+    "totalAppointments"
+  ).textContent =
+    appointments.length;
+
+}
+
+
+/* =====================================
+   حذف مریض
+===================================== */
+
+function deletePatient(index) {
+
+
+  const patient =
+    patients[index];
+
+
+  const name =
+    getValue(
+      patient,
+      [
+        "name",
+        "fullName",
+        "patientName",
+        "fullname"
+      ]
+    );
+
+
+  const confirmDelete =
+    confirm(
+      "آیا مطمئن هستید که می‌خواهید مریض «" +
+      name +
+      "» را حذف کنید؟"
+    );
+
+
+  if (!confirmDelete) {
+
+    return;
+
+  }
+
+
+  patients.splice(
+    index,
+    1
+  );
+
+
+  localStorage.setItem(
+    "patients",
+    JSON.stringify(patients)
+  );
+
+
+  showPatients();
+
+}
+
+
+/* =====================================
+   ویرایش مریض
+===================================== */
+
+function editPatient(index) {
+
+
+  const patient =
+    patients[index];
+
+
+  const name =
+    getValue(
+      patient,
+      [
+        "name",
+        "fullName",
+        "patientName",
+        "fullname"
+      ]
+    );
+
+
+  const phone =
+    getValue(
+      patient,
+      [
+        "phone",
+        "mobile",
+        "phoneNumber",
+        "contact"
+      ]
+    );
+
+
+  const city =
+    getValue(
+      patient,
+      [
+        "city",
+        "location"
+      ]
+    );
+
+
+  const newName =
+    prompt(
+      "نام مریض:",
+      name === "ثبت نشده"
+        ? ""
+        : name
+    );
+
+
+  if (
+    newName === null
+  ) {
+
+    return;
+
+  }
+
+
+  const newPhone =
+    prompt(
+      "شماره تماس:",
+      phone === "ثبت نشده"
+        ? ""
+        : phone
+    );
+
+
+  if (
+    newPhone === null
+  ) {
+
+    return;
+
+  }
+
+
+  const newCity =
+    prompt(
+      "شهر:",
+      city === "ثبت نشده"
+        ? ""
+        : city
+    );
+
+
+  if (
+    newCity === null
+  ) {
+
+    return;
+
+  }
+
+
+  /* حفظ ساختار اطلاعات قبلی */
+
+  if (
+    patient.name !== undefined
+  ) {
+
+    patient.name =
+      newName;
+
+  } else {
+
+    patient.fullName =
+      newName;
+
+  }
+
+
+  if (
+    patient.phone !== undefined
+  ) {
+
+    patient.phone =
+      newPhone;
+
+  } else if (
+    patient.mobile !== undefined
+  ) {
+
+    patient.mobile =
+      newPhone;
+
+  } else {
+
+    patient.phone =
+      newPhone;
+
+  }
+
+
+  if (
+    patient.city !== undefined
+  ) {
+
+    patient.city =
+      newCity;
+
+  } else {
+
+    patient.location =
+      newCity;
+
+  }
+
+
+  localStorage.setItem(
+    "patients",
+    JSON.stringify(patients)
+  );
+
+
+  showPatients();
+
+}
+
+
+/* =====================================
+   جلوگیری از HTML ناخواسته
+===================================== */
+
+function escapeHTML(value) {
+
+  return String(value)
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#039;");
+
+}
+
+
+/* =====================================
+   شروع صفحه
+===================================== */
+
+showPatients();
+
+
+</script>
+
+
+</body>
+
+</html>
