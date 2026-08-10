@@ -68,10 +68,6 @@
       font-size: 17px;
     }
 
-    .info:last-child {
-      border-bottom: none;
-    }
-
     .label {
       font-weight: bold;
       color: #555;
@@ -79,12 +75,26 @@
 
     .status {
       margin-top: 18px;
-      padding: 10px;
+      padding: 12px;
       border-radius: 12px;
-      background: #e8f8f2;
-      color: #147a57;
       text-align: center;
       font-weight: bold;
+      line-height: 1.8;
+    }
+
+    .pending {
+      background: #fff7df;
+      color: #9a7000;
+    }
+
+    .confirmed {
+      background: #e8f8f2;
+      color: #147a57;
+    }
+
+    .cancelled {
+      background: #fff0f0;
+      color: #b32626;
     }
 
     .empty {
@@ -159,15 +169,67 @@ const appointmentsBox =
   document.getElementById("appointments");
 
 
-/* دریافت نوبت ثبت‌شده */
+/* اطلاعات بیمار */
 
-const savedAppointment =
-  localStorage.getItem("myAppointment");
+let patient = null;
+
+const savedPatient =
+  localStorage.getItem("patientProfile");
+
+
+if (savedPatient) {
+
+  try {
+
+    patient =
+      JSON.parse(savedPatient);
+
+  } catch (error) {
+
+    patient = null;
+
+  }
+
+}
+
+
+/* دریافت تمام نوبت‌ها */
+
+let appointments = [];
+
+try {
+
+  appointments =
+    JSON.parse(
+      localStorage.getItem("appointments") || "[]"
+    );
+
+} catch (error) {
+
+  appointments = [];
+
+}
+
+
+/*
+  فقط نوبت‌های همین بیمار نمایش داده شود
+*/
+
+if (patient && patient.name) {
+
+  appointments =
+    appointments.filter(function(item) {
+
+      return item.patientName === patient.name;
+
+    });
+
+}
 
 
 /* اگر نوبتی وجود ندارد */
 
-if (!savedAppointment) {
+if (appointments.length === 0) {
 
   appointmentsBox.innerHTML = `
 
@@ -190,117 +252,153 @@ if (!savedAppointment) {
 }
 
 
-/* اگر نوبت وجود دارد */
+/* نمایش نوبت‌ها */
 
-else {
+appointments.forEach(function(item, index) {
 
-  try {
+  const card =
+    document.createElement("div");
 
-    const appointment =
-      JSON.parse(savedAppointment);
-
-
-    const card =
-      document.createElement("div");
+  card.className =
+    "appointment";
 
 
-    card.className =
-      "appointment";
+  /* وضعیت نوبت */
+
+  const status =
+    item.status || "pending";
 
 
-    card.innerHTML = `
+  let statusText =
+    "⏳ نوبت شما در انتظار تأیید داکتر است.";
 
-      <div class="doctor-name">
-        👨‍⚕️ ${appointment.doctorName || "داکتر"}
-      </div>
-
-
-      <div class="info">
-
-        <span class="label">
-          📅 روز نوبت:
-        </span>
-
-        ${appointment.day || "ثبت نشده"}
-
-      </div>
+  let statusClass =
+    "pending";
 
 
-      <div class="info">
+  if (status === "confirmed") {
 
-        <span class="label">
-          🕐 ساعت:
-        </span>
+    statusText =
+      "✅ نوبت شما توسط داکتر تأیید شده است.";
 
-        ${appointment.time || "ثبت نشده"}
-
-      </div>
-
-
-      <div class="info">
-
-        <span class="label">
-          🩺 نوع ویزیت:
-        </span>
-
-        ${appointment.visitType || "ثبت نشده"}
-
-      </div>
-
-
-      <div class="info">
-
-        <span class="label">
-          📝 زمان ثبت:
-        </span>
-
-        ${appointment.date || "ثبت نشده"}
-
-      </div>
-
-
-      <div class="status">
-        ✅ نوبت با موفقیت ثبت شده است
-      </div>
-
-
-      <button
-        class="cancel-btn"
-        onclick="cancelAppointment()"
-      >
-        لغو نوبت
-      </button>
-
-    `;
-
-
-    appointmentsBox.appendChild(card);
-
-
-  } catch(error) {
-
-    appointmentsBox.innerHTML = `
-
-      <div class="empty">
-
-        ⚠️ اطلاعات نوبت قابل خواندن نیست.
-
-      </div>
-
-    `;
+    statusClass =
+      "confirmed";
 
   }
 
-}
+
+  if (status === "cancelled") {
+
+    statusText =
+      "❌ این نوبت توسط داکتر لغو شده است.";
+
+    statusClass =
+      "cancelled";
+
+  }
 
 
-/* لغو نوبت */
+  card.innerHTML = `
 
-function cancelAppointment() {
+    <div class="doctor-name">
+
+      👨‍⚕️ ${item.doctorName || "داکتر"}
+
+    </div>
+
+
+    <div class="info">
+
+      <span class="label">
+        🩺 تخصص:
+      </span>
+
+      ${item.specialty || "ثبت نشده"}
+
+    </div>
+
+
+    <div class="info">
+
+      <span class="label">
+        📅 روز نوبت:
+      </span>
+
+      ${item.day || "ثبت نشده"}
+
+    </div>
+
+
+    <div class="info">
+
+      <span class="label">
+        🕐 ساعت:
+      </span>
+
+      ${item.time || "ثبت نشده"}
+
+    </div>
+
+
+    <div class="info">
+
+      <span class="label">
+        🩺 نوع ویزیت:
+      </span>
+
+      ${item.visitType || "ثبت نشده"}
+
+    </div>
+
+
+    <div class="info">
+
+      <span class="label">
+        📝 زمان ثبت:
+      </span>
+
+      ${item.date || "ثبت نشده"}
+
+    </div>
+
+
+    <div class="status ${statusClass}">
+
+      ${statusText}
+
+    </div>
+
+
+    ${
+      status !== "cancelled"
+      ? `
+
+        <button
+          class="cancel-btn"
+          onclick="cancelAppointment(${item.id})"
+        >
+          لغو نوبت
+        </button>
+
+      `
+      : ""
+    }
+
+  `;
+
+
+  appointmentsBox.appendChild(card);
+
+});
+
+
+/* لغو نوبت بیمار */
+
+function cancelAppointment(id) {
 
   const answer =
     confirm(
-      "آیا مطمئن هستید که می‌خواهید نوبت را لغو کنید؟"
+      "آیا مطمئن هستید که می‌خواهید این نوبت را لغو کنید؟"
     );
 
 
@@ -309,8 +407,49 @@ function cancelAppointment() {
   }
 
 
-  localStorage.removeItem(
-    "myAppointment"
+  let allAppointments = [];
+
+  try {
+
+    allAppointments =
+      JSON.parse(
+        localStorage.getItem("appointments") || "[]"
+      );
+
+  } catch (error) {
+
+    allAppointments = [];
+
+  }
+
+
+  /*
+    تغییر وضعیت نوبت به لغو شده
+  */
+
+  allAppointments =
+    allAppointments.map(function(item) {
+
+      if (item.id === id) {
+
+        item.status =
+          "cancelled";
+
+      }
+
+      return item;
+
+    });
+
+
+  localStorage.setItem(
+    "appointments",
+    JSON.stringify(allAppointments)
+  );
+
+
+  alert(
+    "❌ نوبت شما لغو شد."
   );
 
 
