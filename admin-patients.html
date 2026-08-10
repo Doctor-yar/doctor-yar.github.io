@@ -46,7 +46,7 @@
     /* Container */
 
     .container {
-      max-width: 900px;
+      max-width: 1000px;
       margin: 25px auto;
       padding: 0 15px;
     }
@@ -64,53 +64,69 @@
     .page-title h2 {
       margin: 0 0 8px;
       color: #0d9488;
+      font-size: 21px;
     }
 
     .page-title p {
       margin: 0;
       color: #78909c;
       line-height: 1.8;
+      font-size: 14px;
     }
 
-    /* Statistics */
+    /* سه گزینه */
 
-    .stats {
+    .menu {
       display: grid;
-      grid-template-columns: repeat(2, 1fr);
+      grid-template-columns: repeat(3, 1fr);
       gap: 15px;
       margin-bottom: 20px;
     }
 
-    .stat {
+    .menu-btn {
       background: white;
-      padding: 20px;
-      border-radius: 15px;
+      border: 2px solid transparent;
+      border-radius: 16px;
+      padding: 22px 15px;
       text-align: center;
+      font-family: inherit;
+      cursor: pointer;
       box-shadow: 0 3px 10px rgba(0,0,0,0.07);
+      transition: 0.2s;
     }
 
-    .stat-icon {
-      font-size: 32px;
+    .menu-btn:hover {
+      transform: translateY(-2px);
+      border-color: #0d9488;
     }
 
-    .stat-number {
-      font-size: 26px;
+    .menu-btn.active {
+      border-color: #0d9488;
+      background: #e6fffb;
+    }
+
+    .menu-icon {
+      font-size: 34px;
+      margin-bottom: 8px;
+    }
+
+    .menu-title {
+      font-size: 16px;
       font-weight: bold;
-      color: #0d9488;
-      margin-top: 5px;
+      color: #263238;
     }
 
-    .stat-title {
+    .menu-count {
+      margin-top: 6px;
       color: #78909c;
-      margin-top: 5px;
-      font-size: 14px;
+      font-size: 13px;
     }
 
     /* Search */
 
     .search-box {
       background: white;
-      padding: 18px;
+      padding: 17px;
       border-radius: 15px;
       margin-bottom: 20px;
       box-shadow: 0 3px 10px rgba(0,0,0,0.07);
@@ -130,128 +146,91 @@
       border-color: #0d9488;
     }
 
-    /* Patient Card */
+    /* List */
+
+    #patientsList {
+      margin-bottom: 20px;
+    }
 
     .patient-card {
       background: white;
       border-radius: 16px;
-      margin-bottom: 15px;
-      box-shadow: 0 3px 12px rgba(0,0,0,0.07);
+      padding: 18px;
+      margin-bottom: 13px;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.07);
       border: 1px solid #e6eeee;
-      overflow: hidden;
+      cursor: pointer;
+      transition: 0.2s;
     }
 
-    .patient-main {
-      padding: 20px;
+    .patient-card:hover {
+      transform: translateY(-2px);
+      border-color: #0d9488;
+      box-shadow: 0 6px 15px rgba(0,0,0,0.10);
+    }
+
+    .patient-row {
       display: flex;
       align-items: center;
       gap: 15px;
-      cursor: pointer;
-    }
-
-    .patient-main:hover {
-      background: #f8fffe;
     }
 
     .patient-icon {
-      width: 58px;
-      height: 58px;
-      background: #e6fffb;
+      width: 55px;
+      height: 55px;
       border-radius: 14px;
+      background: #e6fffb;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 30px;
+      font-size: 28px;
       flex-shrink: 0;
     }
 
-    .patient-summary {
+    .patient-info {
       flex: 1;
     }
 
-    .patient-summary h3 {
-      margin: 0 0 7px;
-      font-size: 18px;
+    .patient-name {
+      font-size: 17px;
+      font-weight: bold;
+      margin-bottom: 6px;
       color: #263238;
     }
 
-    .patient-summary p {
-      margin: 0;
+    .patient-illness {
       color: #607d8b;
-      font-size: 14px;
-      line-height: 1.7;
+      font-size: 13px;
     }
 
     .patient-arrow {
       color: #0d9488;
-      font-size: 25px;
+      font-size: 24px;
     }
 
-    /* Details */
+    /* Status */
 
-    .patient-details {
-      display: none;
-      border-top: 1px solid #eeeeee;
-      padding: 20px;
-      background: #fbfdfd;
+    .patient-status {
+      display: inline-block;
+      margin-top: 9px;
+      padding: 5px 10px;
+      border-radius: 15px;
+      font-size: 11px;
     }
 
-    .patient-details.show {
-      display: block;
+    .status-confirmed {
+      background: #dcfce7;
+      color: #15803d;
     }
 
-    .details-title {
-      color: #0d9488;
-      font-size: 18px;
-      margin: 0 0 15px;
+    .status-pending {
+      background: #fef3c7;
+      color: #b45309;
     }
 
-    .details-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 10px;
-    }
-
-    .detail-item {
-      background: white;
-      padding: 13px;
-      border-radius: 10px;
-      border: 1px solid #edf1f2;
-      line-height: 1.8;
-      font-size: 14px;
-    }
-
-    .detail-item strong {
-      display: block;
-      color: #455a64;
-      margin-bottom: 3px;
-    }
-
-    .description {
-      grid-column: 1 / -1;
-    }
-
-    /* Actions */
-
-    .patient-actions {
-      margin-top: 18px;
-      padding-top: 15px;
-      border-top: 1px solid #eeeeee;
-    }
-
-    .delete-btn {
-      border: none;
-      background: #fee2e2;
-      color: #dc2626;
-      padding: 11px 18px;
-      border-radius: 10px;
-      font-family: inherit;
-      cursor: pointer;
-      font-size: 14px;
-    }
-
-    .delete-btn:hover {
-      background: #fecaca;
+    .status-none {
+      background: #e2e8f0;
+      color: #475569;
     }
 
     /* Empty */
@@ -270,6 +249,133 @@
       margin-bottom: 10px;
     }
 
+    /* Modal */
+
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 1000;
+      inset: 0;
+      background: rgba(0,0,0,0.55);
+      padding: 20px;
+      overflow-y: auto;
+    }
+
+    .modal.show {
+      display: block;
+    }
+
+    .modal-box {
+      background: white;
+      max-width: 700px;
+      margin: 30px auto;
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 10px 35px rgba(0,0,0,0.20);
+    }
+
+    .modal-header {
+      background: #0d9488;
+      color: white;
+      padding: 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .modal-header h2 {
+      margin: 0;
+      font-size: 19px;
+    }
+
+    .close-btn {
+      background: transparent;
+      color: white;
+      font-size: 28px;
+      padding: 0;
+      margin: 0;
+    }
+
+    .modal-content {
+      padding: 20px;
+    }
+
+    .profile-top {
+      text-align: center;
+      padding: 10px 0 20px;
+      border-bottom: 1px solid #eee;
+      margin-bottom: 18px;
+    }
+
+    .profile-icon {
+      width: 75px;
+      height: 75px;
+      margin: auto;
+      border-radius: 20px;
+      background: #e6fffb;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 40px;
+    }
+
+    .profile-top h3 {
+      margin: 12px 0 5px;
+      color: #263238;
+    }
+
+    .profile-top p {
+      margin: 0;
+      color: #78909c;
+      font-size: 13px;
+    }
+
+    .details {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 11px;
+    }
+
+    .detail {
+      background: #f8fafb;
+      border-radius: 11px;
+      padding: 13px;
+      line-height: 1.8;
+      font-size: 13px;
+    }
+
+    .detail strong {
+      display: block;
+      color: #455a64;
+      margin-bottom: 2px;
+    }
+
+    .disease-box {
+      grid-column: 1 / -1;
+    }
+
+    .appointment-box {
+      margin-top: 18px;
+      background: #f8fafb;
+      padding: 15px;
+      border-radius: 12px;
+    }
+
+    .appointment-box h3 {
+      margin: 0 0 10px;
+      color: #0d9488;
+      font-size: 16px;
+    }
+
+    .close-bottom {
+      width: 100%;
+      background: #0d9488;
+      color: white;
+      margin-top: 20px;
+      padding: 14px;
+      font-size: 15px;
+    }
+
     /* Mobile */
 
     @media (max-width: 700px) {
@@ -282,29 +388,32 @@
         font-size: 12px;
       }
 
-      .stats {
-        grid-template-columns: 1fr 1fr;
-      }
-
-      .patient-main {
-        padding: 16px;
-      }
-
-      .patient-icon {
-        width: 50px;
-        height: 50px;
-        font-size: 26px;
-      }
-
-      .patient-summary h3 {
-        font-size: 16px;
-      }
-
-      .details-grid {
+      .menu {
         grid-template-columns: 1fr;
       }
 
-      .description {
+      .menu-btn {
+        display: flex;
+        align-items: center;
+        text-align: right;
+        gap: 13px;
+        padding: 16px;
+      }
+
+      .menu-icon {
+        margin: 0;
+        font-size: 30px;
+      }
+
+      .menu-count {
+        margin-right: auto;
+      }
+
+      .details {
+        grid-template-columns: 1fr;
+      }
+
+      .disease-box {
         grid-column: auto;
       }
 
@@ -321,7 +430,7 @@
 <header class="header">
 
   <h1>
-    👤 مدیریت مریضان
+    👥 مدیریت مریضان
   </h1>
 
   <a
@@ -340,58 +449,105 @@
   <div class="page-title">
 
     <h2>
-      👤 تمام مریضان
+      👥 مدیریت مریضان داکتر یار
     </h2>
 
     <p>
-      برای مشاهده مشخصات کامل هر مریض، روی نام او کلیک کنید.
+      مریضان را بر اساس وضعیت نوبت مشاهده کنید.
+      برای دیدن تمام مشخصات، روی نام مریض کلیک کنید.
     </p>
 
   </div>
 
 
-  <!-- آمار -->
+  <!-- سه گزینه -->
 
-  <div class="stats">
+  <div class="menu">
 
-    <div class="stat">
 
-      <div class="stat-icon">
-        👤
+    <button
+      class="menu-btn active"
+      id="allBtn"
+      onclick="changeCategory('all')"
+    >
+
+      <div class="menu-icon">
+        👥
       </div>
 
-      <div
-        class="stat-number"
-        id="totalPatients"
-      >
-        0
+      <div>
+
+        <div class="menu-title">
+          تمام مریضان
+        </div>
+
+        <div
+          class="menu-count"
+          id="allCount"
+        >
+          0 مریض
+        </div>
+
       </div>
 
-      <div class="stat-title">
-        تمام مریضان
+    </button>
+
+
+    <button
+      class="menu-btn"
+      id="confirmedBtn"
+      onclick="changeCategory('confirmed')"
+    >
+
+      <div class="menu-icon">
+        ✅
       </div>
 
-    </div>
+      <div>
 
+        <div class="menu-title">
+          تأیید شده
+        </div>
 
-    <div class="stat">
+        <div
+          class="menu-count"
+          id="confirmedCount"
+        >
+          0 مریض
+        </div>
 
-      <div class="stat-icon">
-        🩺
       </div>
 
-      <div
-        class="stat-number"
-        id="patientsWithReason"
-      >
-        0
+    </button>
+
+
+    <button
+      class="menu-btn"
+      id="pendingBtn"
+      onclick="changeCategory('pending')"
+    >
+
+      <div class="menu-icon">
+        ⏳
       </div>
 
-      <div class="stat-title">
-        دارای علت مراجعه
+      <div>
+
+        <div class="menu-title">
+          در انتظار
+        </div>
+
+        <div
+          class="menu-count"
+          id="pendingCount"
+        >
+          0 مریض
+        </div>
+
       </div>
 
-    </div>
+    </button>
+
 
   </div>
 
@@ -410,7 +566,7 @@
   </div>
 
 
-  <!-- لیست مریضان -->
+  <!-- لیست -->
 
   <div id="patientsList"></div>
 
@@ -418,8 +574,49 @@
 </main>
 
 
-<script>
+<!-- مشخصات کامل مریض -->
 
+<div
+  class="modal"
+  id="patientModal"
+  onclick="closeModalOutside(event)"
+>
+
+
+  <div
+    class="modal-box"
+    onclick="event.stopPropagation()"
+  >
+
+
+    <div class="modal-header">
+
+      <h2>
+        👤 مشخصات کامل مریض
+      </h2>
+
+      <button
+        class="close-btn"
+        onclick="closeModal()"
+      >
+        ×
+      </button>
+
+    </div>
+
+
+    <div
+      class="modal-content"
+      id="patientDetails"
+    ></div>
+
+
+  </div>
+
+</div>
+
+
+<script>
 
 /* =====================================
    بررسی ورود مدیر
@@ -437,7 +634,7 @@ if (
 
 
 /* =====================================
-   دریافت مریضان
+   دریافت اطلاعات
 ===================================== */
 
 let patients =
@@ -446,8 +643,17 @@ let patients =
   );
 
 
+let appointments =
+  JSON.parse(
+    localStorage.getItem("appointments") || "[]"
+  );
+
+
+let currentCategory = "all";
+
+
 /* =====================================
-   گرفتن مقدار از چند نام احتمالی
+   پیدا کردن مقدار
 ===================================== */
 
 function getValue(item, names) {
@@ -455,6 +661,7 @@ function getValue(item, names) {
   for (let name of names) {
 
     if (
+      item &&
       item[name] !== undefined &&
       item[name] !== null &&
       item[name] !== ""
@@ -472,6 +679,306 @@ function getValue(item, names) {
 
 
 /* =====================================
+   نام مریض
+===================================== */
+
+function getPatientName(patient) {
+
+  return getValue(
+    patient,
+    [
+      "fullName",
+      "patientName",
+      "name",
+      "patientFullName",
+      "username"
+    ]
+  );
+
+}
+
+
+/* =====================================
+   علت بیماری
+===================================== */
+
+function getDisease(patient) {
+
+  return getValue(
+    patient,
+    [
+      "disease",
+      "illness",
+      "reason",
+      "medicalProblem",
+      "problem",
+      "diseaseReason",
+      "complaint"
+    ]
+  );
+
+}
+
+
+/* =====================================
+   پیدا کردن نوبت مریض
+===================================== */
+
+function getPatientAppointments(patient) {
+
+  const patientName =
+    getPatientName(patient);
+
+  const patientPhone =
+    getValue(
+      patient,
+      [
+        "phone",
+        "mobile",
+        "patientPhone",
+        "phoneNumber"
+      ]
+    );
+
+  return appointments.filter(
+    function(appointment) {
+
+      const appointmentPatientName =
+        getValue(
+          appointment,
+          [
+            "patientName",
+            "patientFullName",
+            "patient",
+            "name"
+          ]
+        );
+
+      const appointmentPhone =
+        getValue(
+          appointment,
+          [
+            "patientPhone",
+            "phone",
+            "mobile",
+            "phoneNumber"
+          ]
+        );
+
+      if (
+        patientPhone !== "ثبت نشده" &&
+        appointmentPhone !== "ثبت نشده"
+      ) {
+
+        return String(patientPhone) ===
+               String(appointmentPhone);
+
+      }
+
+      return String(appointmentPatientName)
+        .trim()
+        .toLowerCase() ===
+        String(patientName)
+        .trim()
+        .toLowerCase();
+
+    }
+  );
+
+}
+
+
+/* =====================================
+   وضعیت نوبت
+===================================== */
+
+function getAppointmentStatus(appointment) {
+
+  const status =
+    getValue(
+      appointment,
+      [
+        "status",
+        "appointmentStatus"
+      ]
+    );
+
+
+  if (
+    status === "confirmed" ||
+    status === "تأیید شده"
+  ) {
+
+    return "confirmed";
+
+  }
+
+
+  if (
+    status === "cancelled" ||
+    status === "canceled" ||
+    status === "لغو شده"
+  ) {
+
+    return "cancelled";
+
+  }
+
+
+  if (
+    status === "completed" ||
+    status === "تکمیل شده"
+  ) {
+
+    return "completed";
+
+  }
+
+
+  return "pending";
+
+}
+
+
+/* =====================================
+   وضعیت مریض برای سه بخش
+===================================== */
+
+function getPatientStatus(patient) {
+
+  const patientAppointments =
+    getPatientAppointments(patient);
+
+
+  if (
+    patientAppointments.length === 0
+  ) {
+
+    return "none";
+
+  }
+
+
+  const hasConfirmed =
+    patientAppointments.some(
+      function(item) {
+
+        return getAppointmentStatus(item)
+          === "confirmed";
+
+      }
+    );
+
+
+  if (hasConfirmed) {
+
+    return "confirmed";
+
+  }
+
+
+  const hasPending =
+    patientAppointments.some(
+      function(item) {
+
+        return getAppointmentStatus(item)
+          === "pending";
+
+      }
+    );
+
+
+  if (hasPending) {
+
+    return "pending";
+
+  }
+
+
+  return "none";
+
+}
+
+
+/* =====================================
+   متن وضعیت
+===================================== */
+
+function getStatusText(status) {
+
+  if (status === "confirmed") {
+
+    return "✅ نوبت تأیید شده";
+
+  }
+
+  if (status === "pending") {
+
+    return "⏳ نوبت در انتظار";
+
+  }
+
+  return "ℹ️ بدون نوبت فعال";
+
+}
+
+
+/* =====================================
+   تغییر دسته
+===================================== */
+
+function changeCategory(category) {
+
+  currentCategory =
+    category;
+
+
+  document
+    .getElementById("allBtn")
+    .classList.remove("active");
+
+  document
+    .getElementById("confirmedBtn")
+    .classList.remove("active");
+
+  document
+    .getElementById("pendingBtn")
+    .classList.remove("active");
+
+
+  if (category === "all") {
+
+    document
+      .getElementById("allBtn")
+      .classList.add("active");
+
+  }
+
+
+  if (category === "confirmed") {
+
+    document
+      .getElementById("confirmedBtn")
+      .classList.add("active");
+
+  }
+
+
+  if (category === "pending") {
+
+    document
+      .getElementById("pendingBtn")
+      .classList.add("active");
+
+  }
+
+
+  showPatients();
+
+}
+
+
+/* =====================================
    نمایش مریضان
 ===================================== */
 
@@ -484,11 +991,14 @@ function showPatients() {
 
 
   const search =
-    document.getElementById(
-      "searchInput"
-    ).value
-    .trim()
-    .toLowerCase();
+    document
+      .getElementById("searchInput")
+      .value
+      .trim()
+      .toLowerCase();
+
+
+  updateCounts();
 
 
   const filtered =
@@ -496,46 +1006,58 @@ function showPatients() {
       function(patient) {
 
         const name =
-          getValue(
-            patient,
-            [
-              "name",
-              "fullName",
-              "patientName",
-              "firstName"
-            ]
-          );
+          getPatientName(patient);
 
+        const disease =
+          getDisease(patient);
 
-        const reason =
-          getValue(
-            patient,
-            [
-              "reason",
-              "illness",
-              "disease",
-              "medicalReason",
-              "visitReason",
-              "complaint"
-            ]
-          );
+        const status =
+          getPatientStatus(patient);
 
 
         const text =
           (
             name +
             " " +
-            reason
+            disease
           ).toLowerCase();
 
 
-        return text.includes(search);
+        const searchMatch =
+          text.includes(search);
+
+
+        let categoryMatch =
+          true;
+
+
+        if (
+          currentCategory === "confirmed"
+        ) {
+
+          categoryMatch =
+            status === "confirmed";
+
+        }
+
+
+        if (
+          currentCategory === "pending"
+        ) {
+
+          categoryMatch =
+            status === "pending";
+
+        }
+
+
+        return (
+          searchMatch &&
+          categoryMatch
+        );
 
       }
     );
-
-
-  updateStatistics();
 
 
   if (
@@ -555,7 +1077,7 @@ function showPatients() {
         </h3>
 
         <p>
-          هنوز مریضی ثبت نشده است یا مورد جستجو پیدا نشد.
+          در این بخش فعلاً مریضی موجود نیست.
         </p>
 
       </div>
@@ -573,264 +1095,66 @@ function showPatients() {
   filtered.forEach(
     function(patient) {
 
-      const realIndex =
-        patients.indexOf(patient);
-
-
       const name =
-        getValue(
-          patient,
-          [
-            "name",
-            "fullName",
-            "patientName",
-            "firstName"
-          ]
-        );
+        getPatientName(patient);
+
+      const disease =
+        getDisease(patient);
+
+      const status =
+        getPatientStatus(patient);
+
+      const statusText =
+        getStatusText(status);
 
 
-      const reason =
-        getValue(
-          patient,
-          [
-            "reason",
-            "illness",
-            "disease",
-            "medicalReason",
-            "visitReason",
-            "complaint"
-          ]
-        );
+      const index =
+        patients.indexOf(patient);
 
 
       list.innerHTML += `
 
-        <div class="patient-card">
+        <div
+          class="patient-card"
+          onclick="showPatientDetails(${index})"
+        >
 
-
-          <!-- قسمت قابل کلیک -->
-
-          <div
-            class="patient-main"
-            onclick="toggleDetails(${realIndex})"
-          >
+          <div class="patient-row">
 
             <div class="patient-icon">
               👤
             </div>
 
+            <div class="patient-info">
 
-            <div class="patient-summary">
-
-              <h3>
+              <div class="patient-name">
                 ${escapeHTML(name)}
-              </h3>
+              </div>
 
-              <p>
-                🩺 علت مراجعه:
-                ${escapeHTML(reason)}
-              </p>
+              <div class="patient-illness">
+                🩺 علت بیماری:
+                ${escapeHTML(disease)}
+              </div>
+
+              <span
+                class="patient-status ${
+                  status === "confirmed"
+                  ? "status-confirmed"
+                  : status === "pending"
+                  ? "status-pending"
+                  : "status-none"
+                }"
+              >
+                ${statusText}
+              </span>
 
             </div>
 
-
-            <div
-              class="patient-arrow"
-              id="arrow-${realIndex}"
-            >
+            <div class="patient-arrow">
               ‹
             </div>
 
           </div>
-
-
-          <!-- مشخصات کامل -->
-
-          <div
-            class="patient-details"
-            id="details-${realIndex}"
-          >
-
-            <h3 class="details-title">
-              📋 مشخصات کامل مریض
-            </h3>
-
-
-            <div class="details-grid">
-
-
-              <div class="detail-item">
-
-                <strong>
-                  👤 نام و نام خانوادگی
-                </strong>
-
-                ${escapeHTML(
-                  getValue(patient, [
-                    "name",
-                    "fullName",
-                    "patientName"
-                  ])
-                )}
-
-              </div>
-
-
-              <div class="detail-item">
-
-                <strong>
-                  📞 شماره تماس
-                </strong>
-
-                ${escapeHTML(
-                  getValue(patient, [
-                    "phone",
-                    "mobile",
-                    "phoneNumber",
-                    "patientPhone"
-                  ])
-                )}
-
-              </div>
-
-
-              <div class="detail-item">
-
-                <strong>
-                  📧 ایمیل
-                </strong>
-
-                ${escapeHTML(
-                  getValue(patient, [
-                    "email",
-                    "patientEmail"
-                  ])
-                )}
-
-              </div>
-
-
-              <div class="detail-item">
-
-                <strong>
-                  🎂 سن
-                </strong>
-
-                ${escapeHTML(
-                  getValue(patient, [
-                    "age",
-                    "patientAge"
-                  ])
-                )}
-
-              </div>
-
-
-              <div class="detail-item">
-
-                <strong>
-                  🎂 تاریخ تولد
-                </strong>
-
-                ${escapeHTML(
-                  getValue(patient, [
-                    "birthDate",
-                    "dateOfBirth",
-                    "dob"
-                  ])
-                )}
-
-              </div>
-
-
-              <div class="detail-item">
-
-                <strong>
-                  🏙️ شهر
-                </strong>
-
-                ${escapeHTML(
-                  getValue(patient, [
-                    "city",
-                    "location",
-                    "patientCity"
-                  ])
-                )}
-
-              </div>
-
-
-              <div class="detail-item">
-
-                <strong>
-                  🩺 علت بیماری / مراجعه
-                </strong>
-
-                ${escapeHTML(
-                  getValue(patient, [
-                    "reason",
-                    "illness",
-                    "disease",
-                    "medicalReason",
-                    "visitReason",
-                    "complaint"
-                  ])
-                )}
-
-              </div>
-
-
-              <div class="detail-item">
-
-                <strong>
-                  🚻 جنسیت
-                </strong>
-
-                ${escapeHTML(
-                  getValue(patient, [
-                    "gender",
-                    "sex"
-                  ])
-                )}
-
-              </div>
-
-
-              <div class="detail-item description">
-
-                <strong>
-                  📝 توضیحات
-                </strong>
-
-                ${escapeHTML(
-                  getValue(patient, [
-                    "description",
-                    "notes",
-                    "medicalNotes",
-                    "message"
-                  ])
-                )}
-
-              </div>
-
-
-            </div>
-
-
-            <div class="patient-actions">
-
-              <button
-                class="delete-btn"
-                onclick="deletePatient(${realIndex})"
-              >
-                🗑️ حذف حساب مریض
-              </button>
-
-            </div>
-
-
-          </div>
-
 
         </div>
 
@@ -843,138 +1167,467 @@ function showPatients() {
 
 
 /* =====================================
-   باز و بسته کردن مشخصات
+   شمارش
 ===================================== */
 
-function toggleDetails(index) {
+function updateCounts() {
 
-  const details =
-    document.getElementById(
-      "details-" + index
-    );
+  let confirmed = 0;
+  let pending = 0;
 
 
-  const arrow =
-    document.getElementById(
-      "arrow-" + index
-    );
+  patients.forEach(
+    function(patient) {
+
+      const status =
+        getPatientStatus(patient);
 
 
-  if (
-    details.classList.contains("show")
-  ) {
+      if (
+        status === "confirmed"
+      ) {
 
-    details.classList.remove("show");
-
-    arrow.textContent = "‹";
-
-  } else {
-
-    details.classList.add("show");
-
-    arrow.textContent = "⌄";
-
-  }
-
-}
-
-
-/* =====================================
-   آمار
-===================================== */
-
-function updateStatistics() {
-
-  document.getElementById(
-    "totalPatients"
-  ).textContent =
-    patients.length;
-
-
-  const withReason =
-    patients.filter(
-      function(patient) {
-
-        const reason =
-          getValue(
-            patient,
-            [
-              "reason",
-              "illness",
-              "disease",
-              "medicalReason",
-              "visitReason",
-              "complaint"
-            ]
-          );
-
-        return reason !== "ثبت نشده";
+        confirmed++;
 
       }
-    ).length;
+
+
+      if (
+        status === "pending"
+      ) {
+
+        pending++;
+
+      }
+
+    }
+  );
 
 
   document.getElementById(
-    "patientsWithReason"
+    "allCount"
   ).textContent =
-    withReason;
+    patients.length + " مریض";
+
+
+  document.getElementById(
+    "confirmedCount"
+  ).textContent =
+    confirmed + " مریض";
+
+
+  document.getElementById(
+    "pendingCount"
+  ).textContent =
+    pending + " مریض";
 
 }
 
 
 /* =====================================
-   حذف مریض
+   نمایش مشخصات کامل
 ===================================== */
 
-function deletePatient(index) {
+function showPatientDetails(index) {
 
   const patient =
     patients[index];
 
 
-  const name =
-    getValue(
-      patient,
-      [
-        "name",
-        "fullName",
-        "patientName"
-      ]
-    );
-
-
-  const ok =
-    confirm(
-      "آیا مطمئن هستید که می‌خواهید حساب «" +
-      name +
-      "» را حذف کنید؟"
-    );
-
-
-  if (!ok) {
+  if (!patient) {
     return;
   }
 
 
-  patients.splice(
-    index,
-    1
-  );
+  const name =
+    getPatientName(patient);
+
+  const disease =
+    getDisease(patient);
+
+  const phone =
+    getValue(
+      patient,
+      [
+        "phone",
+        "mobile",
+        "phoneNumber",
+        "patientPhone"
+      ]
+    );
+
+  const age =
+    getValue(
+      patient,
+      [
+        "age",
+        "patientAge"
+      ]
+    );
+
+  const gender =
+    getValue(
+      patient,
+      [
+        "gender",
+        "sex"
+      ]
+    );
+
+  const address =
+    getValue(
+      patient,
+      [
+        "address",
+        "location",
+        "city"
+      ]
+    );
+
+  const email =
+    getValue(
+      patient,
+      [
+        "email",
+        "emailAddress"
+      ]
+    );
+
+  const username =
+    getValue(
+      patient,
+      [
+        "username",
+        "userName"
+      ]
+    );
+
+  const description =
+    getValue(
+      patient,
+      [
+        "description",
+        "diseaseDescription",
+        "medicalHistory",
+        "details",
+        "message"
+      ]
+    );
+
+  const registerDate =
+    getValue(
+      patient,
+      [
+        "createdAt",
+        "registerDate",
+        "date",
+        "createdDate"
+      ]
+    );
 
 
-  localStorage.setItem(
-    "patients",
-    JSON.stringify(patients)
-  );
+  const status =
+    getPatientStatus(patient);
 
 
-  showPatients();
+  const statusText =
+    getStatusText(status);
+
+
+  const patientAppointments =
+    getPatientAppointments(patient);
+
+
+  let appointmentHTML = "";
+
+
+  if (
+    patientAppointments.length > 0
+  ) {
+
+    appointmentHTML = `
+
+      <div class="appointment-box">
+
+        <h3>
+          📅 معلومات نوبت
+        </h3>
+
+        ${
+          patientAppointments
+            .map(
+              function(item) {
+
+                const doctor =
+                  getValue(
+                    item,
+                    [
+                      "doctorName",
+                      "doctor",
+                      "doctorFullName"
+                    ]
+                  );
+
+                const date =
+                  getValue(
+                    item,
+                    [
+                      "date",
+                      "appointmentDate",
+                      "day"
+                    ]
+                  );
+
+                const time =
+                  getValue(
+                    item,
+                    [
+                      "time",
+                      "appointmentTime"
+                    ]
+                  );
+
+                const type =
+                  getValue(
+                    item,
+                    [
+                      "visitType",
+                      "appointmentType",
+                      "type"
+                    ]
+                  );
+
+                const appointmentStatus =
+                  getAppointmentStatus(item);
+
+
+                return `
+
+                  <div
+                    class="detail"
+                    style="margin-top:10px;"
+                  >
+
+                    <strong>
+                      👨‍⚕️ داکتر
+                    </strong>
+
+                    ${escapeHTML(doctor)}
+
+                    <strong style="margin-top:7px;">
+                      📅 تاریخ
+                    </strong>
+
+                    ${escapeHTML(date)}
+
+                    <strong style="margin-top:7px;">
+                      ⏰ ساعت
+                    </strong>
+
+                    ${escapeHTML(time)}
+
+                    <strong style="margin-top:7px;">
+                      🩺 نوع ویزیت
+                    </strong>
+
+                    ${escapeHTML(type)}
+
+                    <strong style="margin-top:7px;">
+                      📌 وضعیت
+                    </strong>
+
+                    ${escapeHTML(
+                      getStatusText(appointmentStatus)
+                    )}
+
+                  </div>
+
+                `;
+
+              }
+            )
+            .join("")
+        }
+
+      </div>
+
+    `;
+
+  }
+
+
+  document.getElementById(
+    "patientDetails"
+  ).innerHTML = `
+
+    <div class="profile-top">
+
+      <div class="profile-icon">
+        👤
+      </div>
+
+      <h3>
+        ${escapeHTML(name)}
+      </h3>
+
+      <p>
+        ${escapeHTML(statusText)}
+      </p>
+
+    </div>
+
+
+    <div class="details">
+
+      <div class="detail">
+
+        <strong>
+          👤 نام مریض
+        </strong>
+
+        ${escapeHTML(name)}
+
+      </div>
+
+
+      <div class="detail">
+
+        <strong>
+          🩺 علت بیماری
+        </strong>
+
+        ${escapeHTML(disease)}
+
+      </div>
+
+
+      <div class="detail">
+
+        <strong>
+          📱 شماره تماس
+        </strong>
+
+        ${escapeHTML(phone)}
+
+      </div>
+
+
+      <div class="detail">
+
+        <strong>
+          🎂 سن
+        </strong>
+
+        ${escapeHTML(age)}
+
+      </div>
+
+
+      <div class="detail">
+
+        <strong>
+          ⚥ جنسیت
+        </strong>
+
+        ${escapeHTML(gender)}
+
+      </div>
+
+
+      <div class="detail">
+
+        <strong>
+          🏠 آدرس / شهر
+        </strong>
+
+        ${escapeHTML(address)}
+
+      </div>
+
+
+      <div class="detail">
+
+        <strong>
+          📧 ایمیل
+        </strong>
+
+        ${escapeHTML(email)}
+
+      </div>
+
+
+      <div class="detail">
+
+        <strong>
+          🔑 نام کاربری
+        </strong>
+
+        ${escapeHTML(username)}
+
+      </div>
+
+
+      <div class="detail disease-box">
+
+        <strong>
+          📝 توضیحات بیماری
+        </strong>
+
+        ${escapeHTML(description)}
+
+      </div>
+
+    </div>
+
+
+    ${appointmentHTML}
+
+
+    <button
+      class="close-bottom"
+      onclick="closeModal()"
+    >
+      بستن
+    </button>
+
+  `;
+
+
+  document
+    .getElementById("patientModal")
+    .classList.add("show");
 
 }
 
 
 /* =====================================
-   جلوگیری از HTML ناخواسته
+   بستن مشخصات
+===================================== */
+
+function closeModal() {
+
+  document
+    .getElementById("patientModal")
+    .classList.remove("show");
+
+}
+
+
+function closeModalOutside(event) {
+
+  if (
+    event.target.id === "patientModal"
+  ) {
+
+    closeModal();
+
+  }
+
+}
+
+
+/* =====================================
+   جلوگیری از HTML
 ===================================== */
 
 function escapeHTML(value) {
@@ -994,7 +1647,6 @@ function escapeHTML(value) {
 ===================================== */
 
 showPatients();
-
 
 </script>
 
