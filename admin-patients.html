@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>مدیریت مریضان | داکتر یار</title>
+
+  <style>
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Tahoma, Arial, sans-serif;
+      background: #f4f7f9;
+      color: #263238;
+    }
+
+    .header {
+      background: #0d9488;
+      color: white;
+      padding: 18px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+    }
+
+    .header h1 {
+      margin: 0;
+      font-size: 21px;
+    }
+
+    .back {
+      color: white;
+      text-decoration: none;
+      font-size: 14px;
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: 25px auto;
+      padding: 0 15px;
+    }
+
+    .page-title {
+      background: white;
+      padding: 22px;
+      border-radius: 16px;
+      margin-bottom: 20px;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.07);
+    }
+
+    .page-title h2 {
+      margin: 0 0 8px;
+      color: #0d9488;
+    }
+
+    .page-title p {
+      margin: 0;
+      color: #78909c;
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 15px;
+      margin-bottom: 20px;
+    }
+
+    .stat {
+      background: white;
+      padding: 20px;
+      border-radius: 15px;
+      text-align: center;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.07);
+    }
+
+    .stat-icon {
+      font-size: 32px;
+    }
+
+    .stat-number {
+      font-size: 27px;
+      font-weight: bold;
+      color: #0d9488;
+      margin-top: 5px;
+    }
+
+    .stat-title {
+      color: #78909c;
+      margin-top: 5px;
+      font-size: 14px;
+    }
+
+    .search-box {
+      background: white;
+      padding: 18px;
+      border-radius: 15px;
+      margin-bottom: 20px;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.07);
+    }
+
+    .search-box input {
+      width: 100%;
+      padding: 14px;
+      border: 1px solid #d9e3e5;
+      border-radius: 10px;
+      font-family: inherit;
+      font-size: 15px;
+      outline: none;
+    }
+
+    .search-box input:focus {
+      border-color: #0d9488;
+    }
+
+    .patient-card {
+      background: white;
+      border-radius: 17px;
+      margin-bottom: 18px;
+      padding: 22px;
+      box-shadow: 0 3px 12px rgba(0,0,0,0.07);
+      border: 1px solid #e6eeee;
+    }
+
+    .patient-top {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      margin-bottom: 18px;
+    }
+
+    .patient-avatar {
+      width: 65px;
+      height: 65px;
+      border-radius: 50%;
+      background: #e6fffb;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 34px;
+      flex-shrink: 0;
+    }
+
+    .patient-name h3 {
+      margin: 0 0 6px;
+      font-size: 19px;
+    }
+
+    .patient-name p {
+      margin: 0;
+      color: #607d8b;
+      font-size: 14px;
+    }
+
+    .patient-info {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+      border-top: 1px solid #eee;
+      padding-top: 15px;
+    }
+
+    .info-item {
+      background: #f8fafb;
+      padding: 11px;
+      border-radius: 10px;
+      font-size: 13px;
+    }
+
+    .info-item strong {
+      color: #455a64;
+    }
+
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 18px;
+      border-top: 1px solid #eee;
+      padding-top: 15px;
+    }
+
+    button {
+      border: none;
+      padding: 11px 15px;
+      border-radius: 10px;
+      font-family: inherit;
+      cursor: pointer;
+      font-size: 13px;
+    }
+
+    .edit-btn {
+      background: #e2e8f0;
+      color: #334155;
+    }
+
+    .delete-btn {
+      background: #fee2e2;
+      color: #dc2626;
+    }
+
+    .delete-btn:hover {
+      background: #fecaca;
+    }
+
+    .empty {
+      background: white;
+      padding: 40px 20px;
+      border-radius: 16px;
+      text-align: center;
+      color: #78909c;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.07);
+    }
+
+    .empty-icon {
+      font-size: 45px;
+      margin-bottom: 10px;
+    }
+
+    @media (max-width: 700px) {
+
+      .header h1 {
+        font-size: 17px;
+      }
+
+      .back {
+        font-size: 12px;
+      }
+
+      .stats {
+        grid-template-columns: 1fr;
+      }
+
+      .patient-info {
+        grid-template-columns: 1fr;
+      }
+
+      .patient-top {
+        align-items: flex-start;
+      }
+
+      .actions button {
+        flex: 1;
+      }
+
+    }
+
+  </style>
+
+</head>
+
+
+<body>
+
+
+<header class="header">
+
+  <h1>
+    🩺 مدیریت مریضان
+  </h1>
+
+  <a
+    href="admin-dashboard.html"
+    class="back"
+  >
+    ← بازگشت به مدیریت
+  </a>
+
+</header>
+
+
+<main class="container">
+
+
+  <div class="page-title">
+
+    <h2>
+      👤 مریضان داکتر یار
+    </h2>
+
+    <p>
+      تمام مریضانی که در سایت ثبت‌نام کرده‌اند در اینجا نمایش داده می‌شوند.
+    </p>
+
+  </div>
+
+
+  <!-- آمار -->
+
+  <
