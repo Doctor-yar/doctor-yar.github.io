@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>شکایت و گزارش | داکتر یار</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      padding: 20px;
+      font-family: Tahoma, Arial, sans-serif;
+      background: #f5f7f7;
+      color: #444;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 650px;
+      margin: auto;
+    }
+
+    .card {
+      background: white;
+      padding: 25px;
+      border-radius: 25px;
+      box-shadow: 0 3px 15px rgba(0,0,0,0.08);
+    }
+
+    h1 {
+      text-align: center;
+      color: #149e9a;
+      margin-bottom: 15px;
+    }
+
+    .text {
+      text-align: center;
+      color: #777;
+      line-height: 1.8;
+      margin-bottom: 25px;
+    }
+
+    label {
+      display: block;
+      margin-top: 18px;
+      margin-bottom: 8px;
+      font-size: 18px;
+      font-weight: bold;
+    }
+
+    select,
+    textarea {
+      width: 100%;
+      padding: 15px;
+      border: 1px solid #ddd;
+      border-radius: 15px;
+      font-family: Tahoma;
+      font-size: 17px;
+    }
+
+    textarea {
+      height: 150px;
+      resize: vertical;
+    }
+
+    .send {
+      width: 100%;
+      margin-top: 25px;
+      padding: 17px;
+      background: #149e9a;
+      color: white;
+      border: none;
+      border-radius: 15px;
+      font-size: 19px;
+      font-family: Tahoma;
+    }
+
+    #message {
+      text-align: center;
+      color: #149e9a;
+      margin-top: 18px;
+    }
+
+    .back {
+      display: block;
+      text-align: center;
+      margin-top: 20px;
+      color: #149e9a;
+      text-decoration: none;
+      font-size: 17px;
+    }
+  </style>
+
+</head>
+
+<body>
+
+  <div class="container">
+
+    <div class="card">
+
+      <h1>🚨 شکایت / گزارش</h1>
+
+      <div class="text">
+        اگر مشکلی با داکتر یا خدمات داکتر یار دارید،
+        می‌توانید از این بخش گزارش دهید.
+      </div>
+
+      <label>نوع گزارش</label>
+
+      <select id="type">
+
+        <option value="">
+          نوع گزارش را انتخاب کنید
+        </option>
+
+        <option>
+          شکایت از داکتر
+        </option>
+
+        <option>
+          مشکل نوبت‌گیری
+        </option>
+
+        <option>
+          مشکل فنی سایت
+        </option>
+
+        <option>
+          سایر
+        </option>
+
+      </select>
+
+
+      <label>شرح شکایت / گزارش</label>
+
+      <textarea
+        id="messageText"
+        placeholder="مشکل خود را بنویسید..."
+      ></textarea>
+
+
+      <button
+        class="send"
+        onclick="sendComplaint()"
+      >
+        ارسال گزارش
+      </button>
+
+      <p id="message"></p>
+
+
+      <a
+        href="patient-dashboard.html"
+        class="back"
+      >
+        ← بازگشت به صفحه بیمار
+      </a>
+
+    </div>
+
+  </div>
+
+
+  <script>
+
+    function sendComplaint() {
+
+      const type =
+        document.getElementById("type").value;
+
+      const text =
+        document.getElementById("messageText").value;
+
+      if (!type || !text) {
+
+        alert("لطفاً نوع گزارش و شرح شکایت را وارد کنید.");
+
+        return;
+      }
+
+      const complaint = {
+
+        type: type,
+
+        text: text,
+
+        date: new Date().toLocaleString("fa-IR")
+
+      };
+
+      localStorage.setItem(
+        "patientComplaint",
+        JSON.stringify(complaint)
+      );
+
+      document.getElementById("message").textContent =
+        "✅ گزارش شما ثبت شد.";
+
+      document.getElementById("type").value = "";
+
+      document.getElementById("messageText").value = "";
+
+    }
+
+  </script>
+
+</body>
+
+</html>
