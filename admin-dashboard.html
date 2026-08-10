@@ -1,6 +1,11 @@
 <!DOCTYPE html><html lang="fa" dir="rtl"><head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">  <title>مدیریت | داکتر یار</title>  <style>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">  <title>مدیریت | داکتر یار</title>  <script>
+    // بررسی ورود مدیر قبل از نمایش پنل
+    if (localStorage.getItem("adminLoggedIn") !== "true") {
+      window.location.replace("admin-login.html");
+    }
+  </script>  <style>
     * {
       box-sizing: border-box;
     }
@@ -12,7 +17,6 @@
       color: #263238;
     }
 
-    /* Header */
     .header {
       background: #0d9488;
       color: white;
@@ -32,7 +36,6 @@
       font-size: 14px;
     }
 
-    /* Container */
     .container {
       max-width: 1100px;
       margin: 25px auto;
@@ -58,7 +61,6 @@
       color: #607d8b;
     }
 
-    /* Statistics */
     .stats {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
@@ -91,7 +93,6 @@
       font-size: 14px;
     }
 
-    /* Management */
     .section-title {
       margin: 25px 0 15px;
       font-size: 20px;
@@ -156,7 +157,6 @@
       color: #0d9488;
     }
 
-    /* Logout */
     .logout {
       margin-top: 30px;
       width: 100%;
@@ -174,7 +174,6 @@
       background: #dc2626;
     }
 
-    /* Mobile */
     @media (max-width: 700px) {
 
       .header h1 {
@@ -224,13 +223,13 @@
 
   <div class="stat">
     <div class="stat-icon">📅</div>
-    <div class="stat-number">0</div>
+    <div class="stat-number" id="appointmentCount">0</div>
     <div class="stat-title">نوبت‌ها</div>
   </div>
 
   <div class="stat">
     <div class="stat-icon">⚠️</div>
-    <div class="stat-number">0</div>
+    <div class="stat-number" id="complaintCount">0</div>
     <div class="stat-title">شکایت‌ها</div>
   </div>
 
@@ -242,10 +241,7 @@
 
   <!-- Doctors -->
   <a href="admin-doctors.html" class="management-card">
-
-    <div class="card-icon">
-      👨‍⚕️
-    </div>
+    <div class="card-icon">👨‍⚕️</div>
 
     <div class="card-content">
       <h3>مدیریت داکتران</h3>
@@ -255,15 +251,11 @@
     </div>
 
     <div class="arrow">‹</div>
-
   </a>
 
   <!-- Patients -->
   <a href="admin-patients.html" class="management-card">
-
-    <div class="card-icon">
-      👤
-    </div>
+    <div class="card-icon">👤</div>
 
     <div class="card-content">
       <h3>مدیریت مریضان</h3>
@@ -273,15 +265,11 @@
     </div>
 
     <div class="arrow">‹</div>
-
   </a>
 
   <!-- Appointments -->
   <a href="admin-appointments.html" class="management-card">
-
-    <div class="card-icon">
-      📅
-    </div>
+    <div class="card-icon">📅</div>
 
     <div class="card-content">
       <h3>مدیریت نوبت‌ها</h3>
@@ -291,15 +279,11 @@
     </div>
 
     <div class="arrow">‹</div>
-
   </a>
 
   <!-- Doctor Requests -->
   <a href="doctor-requests.html" class="management-card">
-
-    <div class="card-icon">
-      📝
-    </div>
+    <div class="card-icon">📝</div>
 
     <div class="card-content">
       <h3>بررسی ثبت‌نام داکتران</h3>
@@ -309,15 +293,11 @@
     </div>
 
     <div class="arrow">‹</div>
-
   </a>
 
   <!-- Complaints -->
   <a href="admin-complaints.html" class="management-card">
-
-    <div class="card-icon">
-      ⚠️
-    </div>
+    <div class="card-icon">⚠️</div>
 
     <div class="card-content">
       <h3>شکایت‌ها و گزارش‌ها</h3>
@@ -327,15 +307,11 @@
     </div>
 
     <div class="arrow">‹</div>
-
   </a>
 
   <!-- Search -->
   <a href="admin-search.html" class="management-card">
-
-    <div class="card-icon">
-      🔍
-    </div>
+    <div class="card-icon">🔍</div>
 
     <div class="card-content">
       <h3>جستجوی کاربران</h3>
@@ -345,15 +321,11 @@
     </div>
 
     <div class="arrow">‹</div>
-
   </a>
 
   <!-- Statistics -->
   <a href="admin-statistics.html" class="management-card">
-
-    <div class="card-icon">
-      📊
-    </div>
+    <div class="card-icon">📊</div>
 
     <div class="card-content">
       <h3>آمار و گزارش‌ها</h3>
@@ -363,15 +335,11 @@
     </div>
 
     <div class="arrow">‹</div>
-
   </a>
 
   <!-- Settings -->
   <a href="admin-settings.html" class="management-card">
-
-    <div class="card-icon">
-      ⚙️
-    </div>
+    <div class="card-icon">⚙️</div>
 
     <div class="card-content">
       <h3>تنظیمات سیستم</h3>
@@ -381,7 +349,6 @@
     </div>
 
     <div class="arrow">‹</div>
-
   </a>
 
 </div>
@@ -392,19 +359,49 @@
 
   </main>  <script>
 
-    // نمایش تعداد داکتران و مریضان در صورت موجود بودن اطلاعات
-    const doctors = JSON.parse(localStorage.getItem("doctors") || "[]");
-    const patients = JSON.parse(localStorage.getItem("patients") || "[]");
+    // دریافت اطلاعات
+    const doctors =
+      JSON.parse(localStorage.getItem("doctors") || "[]");
 
-    document.getElementById("doctorCount").textContent = doctors.length;
-    document.getElementById("patientCount").textContent = patients.length;
+    const patients =
+      JSON.parse(localStorage.getItem("patients") || "[]");
 
+    const appointments =
+      JSON.parse(localStorage.getItem("appointments") || "[]");
+
+    const complaints =
+      JSON.parse(localStorage.getItem("complaints") || "[]");
+
+
+    // نمایش تعدادها
+    document.getElementById("doctorCount").textContent =
+      doctors.length;
+
+    document.getElementById("patientCount").textContent =
+      patients.length;
+
+    document.getElementById("appointmentCount").textContent =
+      appointments.length;
+
+    document.getElementById("complaintCount").textContent =
+      complaints.length;
+
+
+    // خروج مدیر
     function logout() {
-      const confirmLogout = confirm("آیا مطمئن هستید که می‌خواهید خارج شوید؟");
+
+      const confirmLogout =
+        confirm("آیا مطمئن هستید که می‌خواهید خارج شوید؟");
 
       if (confirmLogout) {
-        window.location.href = "admin-login.html";
+
+        // حذف دسترسی مدیر
+        localStorage.removeItem("adminLoggedIn");
+
+        // برگشت به ورود مدیر
+        window.location.replace("admin-login.html");
       }
     }
 
-  </script></body></html>
+  </script></body>
+</html>
