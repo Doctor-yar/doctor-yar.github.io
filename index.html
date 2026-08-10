@@ -1,1 +1,422 @@
-7
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+
+<head>
+
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <title>داکتر یار | صفحه اصلی</title>
+
+  <style>
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Tahoma, Arial, sans-serif;
+      background: #f5f7f7;
+      color: #333;
+    }
+
+    .container {
+      width: 92%;
+      max-width: 700px;
+      margin: auto;
+      padding: 20px 0 35px;
+    }
+
+    /* هدر */
+
+    .header {
+      background: #149e9a;
+      color: white;
+      text-align: center;
+      padding: 35px 20px;
+      border-radius: 28px;
+      box-shadow: 0 4px 18px rgba(0,0,0,0.10);
+    }
+
+    .logo {
+      font-size: 65px;
+      margin-bottom: 8px;
+    }
+
+    .title {
+      font-size: 32px;
+      font-weight: bold;
+    }
+
+    .subtitle {
+      font-size: 17px;
+      margin-top: 10px;
+      line-height: 1.8;
+    }
+
+    /* جستجوی اصلی */
+
+    .search-card {
+      background: white;
+      margin-top: 20px;
+      padding: 22px;
+      border-radius: 23px;
+      box-shadow: 0 2px 14px rgba(0,0,0,0.07);
+    }
+
+    .search-title {
+      text-align: center;
+      color: #149e9a;
+      font-size: 21px;
+      font-weight: bold;
+      margin-bottom: 15px;
+    }
+
+    .search-btn {
+      display: block;
+      width: 100%;
+      padding: 17px;
+      background: #149e9a;
+      color: white;
+      text-decoration: none;
+      text-align: center;
+      border-radius: 17px;
+      font-size: 19px;
+      font-weight: bold;
+    }
+
+    /* گزینه‌ها */
+
+    .section-title {
+      text-align: center;
+      margin: 25px 0 15px;
+      font-size: 21px;
+      color: #444;
+    }
+
+    .menu {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 13px;
+    }
+
+    .menu-item {
+      background: white;
+      text-decoration: none;
+      color: #333;
+      padding: 20px 12px;
+      border-radius: 20px;
+      text-align: center;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.07);
+      transition: 0.2s;
+    }
+
+    .menu-item:active {
+      transform: scale(0.97);
+    }
+
+    .icon {
+      font-size: 38px;
+      margin-bottom: 9px;
+    }
+
+    .menu-title {
+      font-size: 17px;
+      font-weight: bold;
+      color: #149e9a;
+    }
+
+    .menu-text {
+      font-size: 12px;
+      color: #777;
+      margin-top: 6px;
+      line-height: 1.6;
+    }
+
+    /* شکایت */
+
+    .complaint {
+      display: block;
+      background: white;
+      margin-top: 15px;
+      padding: 18px;
+      border-radius: 20px;
+      text-align: center;
+      text-decoration: none;
+      color: #b32626;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.07);
+    }
+
+    .complaint-icon {
+      font-size: 30px;
+    }
+
+    .complaint-title {
+      font-size: 17px;
+      font-weight: bold;
+      margin-top: 5px;
+    }
+
+    /* معرفی */
+
+    .about {
+      background: white;
+      margin-top: 20px;
+      padding: 22px;
+      border-radius: 22px;
+      line-height: 2;
+      text-align: center;
+      color: #555;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+    }
+
+    .about-title {
+      color: #149e9a;
+      font-size: 20px;
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+
+    /* فوتر */
+
+    .footer {
+      text-align: center;
+      margin-top: 25px;
+      color: #888;
+      font-size: 13px;
+      line-height: 1.8;
+    }
+
+    @media (max-width: 500px) {
+
+      .menu {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .title {
+        font-size: 28px;
+      }
+
+      .subtitle {
+        font-size: 15px;
+      }
+
+    }
+
+  </style>
+
+</head>
+
+
+<body>
+
+
+<div class="container">
+
+
+  <!-- هدر -->
+
+  <div class="header">
+
+    <div class="logo">
+      🩺
+    </div>
+
+    <div class="title">
+      داکتر یار
+    </div>
+
+    <div class="subtitle">
+      راهی آسان برای پیدا کردن داکتر
+      <br>
+      و گرفتن نوبت پزشکی
+    </div>
+
+  </div>
+
+
+  <!-- جستجوی داکتر -->
+
+  <div class="search-card">
+
+    <div class="search-title">
+      🔍 پیدا کردن داکتر
+    </div>
+
+    <a
+      href="doctor-search.html"
+      class="search-btn"
+    >
+      جستجوی داکتر
+    </a>
+
+  </div>
+
+
+  <!-- گزینه‌های اصلی -->
+
+  <div class="section-title">
+    ورود به داکتر یار
+  </div>
+
+
+  <div class="menu">
+
+
+    <!-- بیمار -->
+
+    <a
+      href="patient-login.html"
+      class="menu-item"
+    >
+
+      <div class="icon">
+        👤
+      </div>
+
+      <div class="menu-title">
+        ورود بیمار
+      </div>
+
+      <div class="menu-text">
+        ورود به حساب بیمار
+      </div>
+
+    </a>
+
+
+    <!-- داکتر -->
+
+    <a
+      href="doctor-login.html"
+      class="menu-item"
+    >
+
+      <div class="icon">
+        👨‍⚕️
+      </div>
+
+      <div class="menu-title">
+        ورود داکتر
+      </div>
+
+      <div class="menu-text">
+        ورود به پنل داکتر
+      </div>
+
+    </a>
+
+
+    <!-- مدیریت -->
+
+    <a
+      href="admin-login.html"
+      class="menu-item"
+    >
+
+      <div class="icon">
+        🛡️
+      </div>
+
+      <div class="menu-title">
+        مدیریت
+      </div>
+
+      <div class="menu-text">
+        ورود مدیر سیستم
+      </div>
+
+    </a>
+
+
+    <!-- جستجوی داکتر -->
+
+    <a
+      href="doctor-search.html"
+      class="menu-item"
+    >
+
+      <div class="icon">
+        🔎
+      </div>
+
+      <div class="menu-title">
+        جستجوی داکتر
+      </div>
+
+      <div class="menu-text">
+        مشاهده داکتران
+      </div>
+
+    </a>
+
+
+  </div>
+
+
+  <!-- شکایت -->
+
+  <a
+    href="patient-complaint.html"
+    class="complaint"
+  >
+
+    <div class="complaint-icon">
+      ⚠️
+    </div>
+
+    <div class="complaint-title">
+      ثبت شکایت
+    </div>
+
+    <div class="menu-text">
+      اگر مشکلی دارید، شکایت خود را ثبت کنید
+    </div>
+
+  </a>
+
+
+  <!-- درباره داکتر یار -->
+
+  <div class="about">
+
+    <div class="about-title">
+      🩺 درباره داکتر یار
+    </div>
+
+    داکتر یار یک پلتفرم برای آسان‌تر شدن
+    پیدا کردن داکتران و گرفتن نوبت پزشکی است.
+
+    <br>
+
+    هدف ما این است که بیمار بتواند
+    داکتر مناسب خود را راحت‌تر پیدا کند
+    و برای دریافت خدمات پزشکی نوبت بگیرد.
+
+  </div>
+
+
+  <!-- فوتر -->
+
+  <div class="footer">
+
+    © داکتر یار
+
+    <br>
+
+    سیستم جستجو و نوبت‌دهی داکتران
+
+  </div>
+
+
+</div>
+
+
+</body>
+
+</html>
