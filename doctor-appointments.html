@@ -15,15 +15,16 @@
 
     body {
       margin: 0;
+      padding: 20px;
       font-family: Tahoma, Arial, sans-serif;
       background: #f5f7f7;
       color: #444;
     }
 
     .container {
-      width: 92%;
+      width: 100%;
       max-width: 650px;
-      margin: 25px auto;
+      margin: auto;
     }
 
     .header {
@@ -52,7 +53,7 @@
       box-shadow: 0 2px 12px rgba(0,0,0,0.07);
     }
 
-    .patient-name {
+    .doctor-name {
       font-size: 21px;
       font-weight: bold;
       color: #149e9a;
@@ -107,163 +108,189 @@
 
 <body>
 
-  <div class="container">
+<div class="container">
 
-    <div class="header">
+  <div class="header">
 
-      <div class="header-icon">
-        📅
-      </div>
-
-      <div class="header-title">
-        نوبت‌های بیماران
-      </div>
-
+    <div class="header-icon">
+      📅
     </div>
 
-
-    <div id="appointments"></div>
-
-
-    <a
-      href="doctor-profile.html"
-      class="back"
-    >
-      ← بازگشت به صفحه داکتر
-    </a>
+    <div class="header-title">
+      نوبت‌های بیماران
+    </div>
 
   </div>
 
 
-  <script>
-
-    const appointmentsBox =
-      document.getElementById("appointments");
+  <div id="appointments"></div>
 
 
-    let appointments =
-      JSON.parse(
-        localStorage.getItem("appointments") || "[]"
-      );
+  <a
+    href="doctor-profile.html"
+    class="back"
+  >
+    ← بازگشت به پنل داکتر
+  </a>
+
+</div>
 
 
-    /*
-      اگر هیچ نوبتی ثبت نشده باشد
-    */
+<script>
 
-    if (appointments.length === 0) {
-
-      appointmentsBox.innerHTML = `
-
-        <div class="empty">
-
-          📭
-
-          <br>
-
-          هنوز هیچ بیماری نوبت نگرفته است.
-
-          <br><br>
-
-          وقتی بیمار نوبت بگیرد،
-          اطلاعات او در اینجا نمایش داده می‌شود.
-
-        </div>
-
-      `;
-
-    }
+const appointmentsBox =
+  document.getElementById("appointments");
 
 
-    /*
-      نمایش نوبت‌های بیماران
-    */
+/*
+  دریافت تمام نوبت‌ها
+*/
 
-    appointments.forEach(function(item) {
+let appointments = [];
 
-      const card =
-        document.createElement("div");
+try {
 
-      card.className = "appointment";
+  appointments =
+    JSON.parse(
+      localStorage.getItem("appointments") || "[]"
+    );
 
+} catch (error) {
 
-      card.innerHTML = `
+  appointments = [];
 
-        <div class="patient-name">
-
-          👤 بیمار:
-          ${item.patientName || "نام ثبت نشده"}
-
-        </div>
+}
 
 
-        <div class="info">
+/*
+  اگر نوبتی پیدا نشد
+*/
 
-          <span class="label">
-            📞 شماره تماس:
-          </span>
+if (appointments.length === 0) {
 
-          ${item.patientPhone || "ثبت نشده"}
+  appointmentsBox.innerHTML = `
 
-        </div>
+    <div class="empty">
 
+      📭
 
-        <div class="info">
+      <br><br>
 
-          <span class="label">
-            👨‍⚕️ داکتر:
-          </span>
+      هنوز هیچ بیماری نوبت ثبت نکرده است.
 
-          ${item.doctorName || "ثبت نشده"}
+      <br><br>
 
-        </div>
+      وقتی بیمار نوبت بگیرد،
+      نوبت او در اینجا نمایش داده می‌شود.
 
+    </div>
 
-        <div class="info">
+  `;
 
-          <span class="label">
-            🩺 تخصص:
-          </span>
-
-          ${item.specialty || "ثبت نشده"}
-
-        </div>
+}
 
 
-        <div class="info">
+/*
+  نمایش نوبت‌های بیماران
+*/
 
-          <span class="label">
-            📅 تاریخ نوبت:
-          </span>
+appointments.forEach(function(item) {
 
-          ${item.date || "ثبت نشده"}
+  const card =
+    document.createElement("div");
 
-        </div>
-
-
-        <div class="info">
-
-          <span class="label">
-            🕐 ساعت:
-          </span>
-
-          ${item.time || "ثبت نشده"}
-
-        </div>
+  card.className = "appointment";
 
 
-        <div class="status">
-          ✅ نوبت ثبت شده
-        </div>
+  card.innerHTML = `
 
-      `;
+    <div class="doctor-name">
+
+      👨‍⚕️ ${item.doctorName || "داکتر"}
+
+    </div>
 
 
-      appointmentsBox.appendChild(card);
+    <div class="info">
 
-    });
+      <span class="label">
+        👤 نام بیمار:
+      </span>
 
-  </script>
+      ${item.patientName || "ثبت نشده"}
+
+    </div>
+
+
+    <div class="info">
+
+      <span class="label">
+        📞 شماره تماس بیمار:
+      </span>
+
+      ${item.patientPhone || "ثبت نشده"}
+
+    </div>
+
+
+    <div class="info">
+
+      <span class="label">
+        📅 روز:
+      </span>
+
+      ${item.day || "ثبت نشده"}
+
+    </div>
+
+
+    <div class="info">
+
+      <span class="label">
+        🕐 ساعت:
+      </span>
+
+      ${item.time || "ثبت نشده"}
+
+    </div>
+
+
+    <div class="info">
+
+      <span class="label">
+        🩺 نوع ویزیت:
+      </span>
+
+      ${item.visitType || "ثبت نشده"}
+
+    </div>
+
+
+    <div class="info">
+
+      <span class="label">
+        📋 تاریخ ثبت:
+      </span>
+
+      ${item.date || "ثبت نشده"}
+
+    </div>
+
+
+    <div class="status">
+
+      ✅ نوبت ثبت شده
+
+    </div>
+
+  `;
+
+
+  appointmentsBox.appendChild(card);
+
+});
+
+</script>
 
 </body>
 
