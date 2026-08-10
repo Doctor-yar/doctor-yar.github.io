@@ -1,11 +1,18 @@
 <!DOCTYPE html>
 <html lang="fa" dir="rtl">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>تست دکتر یار 123</title>
+
+  <title>دکتر یار</title>
 
   <style>
+
+    * {
+      box-sizing: border-box;
+    }
+
     body {
       margin: 0;
       font-family: Tahoma, Arial, sans-serif;
@@ -16,7 +23,7 @@
     header {
       background: #0b8f87;
       color: white;
-      padding: 20px;
+      padding: 25px 15px;
       text-align: center;
     }
 
@@ -27,38 +34,122 @@
 
     header p {
       margin: 8px 0 0;
+      font-size: 16px;
     }
 
     .container {
+      width: 92%;
       max-width: 900px;
       margin: 30px auto;
-      padding: 20px;
     }
 
     .welcome {
       background: white;
-      padding: 30px;
-      border-radius: 15px;
+      padding: 30px 20px;
+      border-radius: 20px;
       text-align: center;
       box-shadow: 0 3px 15px #ddd;
     }
 
     .welcome h2 {
       color: #0b8f87;
+      margin-top: 0;
     }
+
+    .welcome p {
+      line-height: 2;
+    }
+
+    /* دکمه های اصلی */
 
     .buttons {
       margin-top: 25px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
     }
 
-    button {
+    .main-btn {
+      display: block;
+      width: 100%;
+      padding: 17px;
+      background: #0b8f87;
+      color: white;
+      text-decoration: none;
+      border-radius: 12px;
+      font-size: 18px;
+      font-weight: bold;
+      text-align: center;
+      cursor: pointer;
+    }
+
+    .main-btn:active {
+      transform: scale(0.98);
+    }
+
+    /* پشتیبانی */
+
+    .support {
+      background: white;
+      margin-top: 30px;
+      padding: 25px 20px;
+      border-radius: 20px;
+      text-align: center;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+    }
+
+    .support h2 {
+      color: #0b8f87;
+      font-size: 25px;
+    }
+
+    .support h3 {
+      color: #0b8f87;
+      margin-top: 30px;
+    }
+
+    .support p {
+      line-height: 2;
+    }
+
+    .support-btn {
+      display: block;
+      background: #0b8f87;
+      color: white;
+      text-decoration: none;
+      padding: 15px;
+      margin: 15px auto;
+      border-radius: 12px;
+      max-width: 300px;
+    }
+
+    .support input,
+    .support select,
+    .support textarea {
+      width: 100%;
+      padding: 14px;
+      margin: 8px 0;
+      border: 1px solid #ddd;
+      border-radius: 10px;
+      font-family: Tahoma;
+      font-size: 16px;
+    }
+
+    .support textarea {
+      height: 120px;
+      resize: vertical;
+    }
+
+    .support-submit {
+      width: 100%;
       background: #0b8f87;
       color: white;
       border: none;
-      padding: 14px 25px;
-      margin: 5px;
-      border-radius: 10px;
-      font-size: 16px;
+      padding: 15px;
+      border-radius: 12px;
+      font-family: Tahoma;
+      font-size: 17px;
+      cursor: pointer;
     }
 
     footer {
@@ -66,152 +157,192 @@
       padding: 25px;
       color: #777;
     }
+
   </style>
+
 </head>
+
 
 <body>
 
+
   <header>
-    <h1>دکتر یار</h1>
-    <p>پلتفرم خدمات صحی و پزشکی</p>
+
+    <h1>
+      دکتر یار
+    </h1>
+
+    <p>
+      پلتفرم خدمات صحی و پزشکی
+    </p>
+
   </header>
+
 
   <div class="container">
 
+
     <div class="welcome">
-      <h2>به دکتر یار خوش آمدید</h2>
+
+      <h2>
+        به دکتر یار خوش آمدید
+      </h2>
 
       <p>
         دکتر یار یک پلتفرم برای ارتباط آسان میان بیماران،
         داکتران و خدمات صحی است.
       </p>
 
+
       <div class="buttons">
-      <a href="doctor-search.html"><button>جستجوی داکتر</button></a>
-        <a href="doctor-login.html">
-  <button>ورود داکتر</button>
+
+        <!-- جستجوی داکتر -->
+
+        <a
+          href="doctor-search.html"
+          class="main-btn"
+        >
+          🔎 جستجوی داکتر
         </a>
-      <a href="patient-login.html">
-  <button>ورود بیمار</button>
-      </a>
+
+
+        <!-- ورود داکتر -->
+
+        <a
+          href="doctor-login.html"
+          class="main-btn"
+        >
+          👨‍⚕️ ورود داکتر
+        </a>
+
+
+        <!-- ورود بیمار -->
+
+        <a
+          href="patient-login.html"
+          class="main-btn"
+        >
+          👤 ورود بیمار
+        </a>
+
       </div>
-    
+
+    </div>
+
+
+    <!-- پشتیبانی -->
+
+    <section class="support">
+
+      <h2>
+        🆘 پشتیبانی و شکایت
+      </h2>
+
+      <p>
+        اگر مریض یا داکتر مشکلی دارد،
+        می‌تواند از طریق این بخش با مدیریت داکتر یار تماس بگیرد.
+      </p>
+
+
+      <a
+        href="tel:+93700000000"
+        class="support-btn"
+      >
+        📞 تماس با پشتیبانی
+      </a>
+
+
+      <h3>
+        ثبت شکایت
+      </h3>
+
+
+      <input
+        type="text"
+        id="supportName"
+        placeholder="نام شما"
+      >
+
+
+      <input
+        type="tel"
+        id="supportPhone"
+        placeholder="شماره تماس"
+      >
+
+
+      <select id="supportType">
+
+        <option value="">
+          نوع شکایت را انتخاب کنید
+        </option>
+
+        <option>
+          شکایت مریض از داکتر
+        </option>
+
+        <option>
+          شکایت داکتر از مریض
+        </option>
+
+        <option>
+          مشکل فنی سایت
+        </option>
+
+        <option>
+          سایر
+        </option>
+
+      </select>
+
+
+      <textarea
+        id="supportMessage"
+        placeholder="شرح شکایت یا مشکل خود را بنویسید"
+      ></textarea>
+
+
+      <button
+        class="support-submit"
+        onclick="sendSupport()"
+      >
+        ارسال شکایت
+      </button>
+
+
+      <p id="supportResult"></p>
+
+    </section>
+
+
   </div>
 
+
   <footer>
+
     © 2026 دکتر یار - تمامی حقوق محفوظ است
+
   </footer>
-<section class="support">
-    <h2>پشتیبانی و شکایت</h2>
 
-    <p>
-        اگر مریض یا داکتر مشکلی دارد، می‌تواند از طریق این بخش با مدیریت داکتر یار تماس بگیرد.
-    </p>
 
-    <a href="tel:+93700000000" class="support-btn">
-        📞 تماس با پشتیبانی
-    </a>
+  <script>
 
-    <h3>ثبت شکایت</h3>
+    function sendSupport() {
 
-    <form>
-        <input type="text" placeholder="نام شما" required>
+      const result =
+        document.getElementById("supportResult");
 
-        <input type="tel" placeholder="شماره تماس" required>
+      result.innerText =
+        "✅ پیام شما ثبت شد. از تماس شما سپاسگزاریم.";
 
-        <select required>
-            <option value="">نوع شکایت را انتخاب کنید</option>
-            <option>شکایت مریض از داکتر</option>
-            <option>شکایت داکتر از مریض</option>
-            <option>مشکل فنی سایت</option>
-            <option>سایر</option>
-        </select>
+      result.style.color =
+        "#0b8f87";
 
-        <textarea placeholder="شرح شکایت یا مشکل خود را بنویسید" required></textarea>
+    }
 
-        <button type="submit">ارسال شکایت</button>
-    </form>
-</section>
+  </script>
 
-<style>
-.support {
-    background: white;
-    margin: 30px 20px;
-    padding: 25px;
-    border-radius: 20px;
-    text-align: center;
-    box-shadow: 0 5px 20px rgba(0,0,0,0.08);
-}
 
-.support h2 {
-    color: #0b8f87;
-    font-size: 28px;
-}
-
-.support h3 {
-    color: #0b8f87;
-    margin-top: 30px;
-}
-
-.support p {
-    line-height: 2;
-}
-
-.support-btn {
-    display: block;
-    background: #0b8f87;
-    color: white;
-    text-decoration: none;
-    padding: 15px;
-    margin: 12px auto;
-    border-radius: 12px;
-    max-width: 300px;
-}
-
-.support input,
-.support select,
-.support textarea {
-    width: 90%;
-    padding: 14px;
-    margin: 8px;
-    border: 1px solid #ddd;
-    border-radius: 10px;
-    font-family: Tahoma;
-    box-sizing: border-box;
-}
-
-.support textarea {
-    height: 120px;
-}
-
-.support button {
-    background: #0b8f87;
-    color: white;
-    border: none;
-    padding: 15px 35px;
-    border-radius: 12px;
-    font-size: 17px;
-}
-</style>
-  <div class="support-section">
-  <h2>🆘 پشتیبانی و شکایات</h2>
-
-  <input type="text" id="supportName" placeholder="نام شما">
-
-  <input type="text" id="supportPhone" placeholder="شماره تماس">
-
-  <textarea id="supportMessage" placeholder="پیام یا شکایت خود را بنویسید..."></textarea>
-
-  <button onclick="sendSupport()">ارسال پیام</button>
-
-  <p id="supportResult"></p>
-</div>
-
-<script>
-function sendSupport() {
-  document.getElementById("supportResult").innerText =
-    "✅ پیام شما ثبت شد. از تماس شما سپاسگزاریم.";
-}
-</script>
 </body>
+
 </html>
