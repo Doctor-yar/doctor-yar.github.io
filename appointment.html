@@ -153,7 +153,6 @@
 
 <div class="container">
 
-
   <div class="header">
 
     <h1>
@@ -194,45 +193,33 @@
 
     <div class="day-buttons">
 
-      <button
-        class="day-btn"
-        onclick="selectDay(this,'شنبه')"
-      >
+      <button class="day-btn"
+        onclick="selectDay(this,'شنبه')">
         شنبه
       </button>
 
-      <button
-        class="day-btn"
-        onclick="selectDay(this,'یکشنبه')"
-      >
+      <button class="day-btn"
+        onclick="selectDay(this,'یکشنبه')">
         یکشنبه
       </button>
 
-      <button
-        class="day-btn"
-        onclick="selectDay(this,'دوشنبه')"
-      >
+      <button class="day-btn"
+        onclick="selectDay(this,'دوشنبه')">
         دوشنبه
       </button>
 
-      <button
-        class="day-btn"
-        onclick="selectDay(this,'سه‌شنبه')"
-      >
+      <button class="day-btn"
+        onclick="selectDay(this,'سه‌شنبه')">
         سه‌شنبه
       </button>
 
-      <button
-        class="day-btn"
-        onclick="selectDay(this,'چهارشنبه')"
-      >
+      <button class="day-btn"
+        onclick="selectDay(this,'چهارشنبه')">
         چهارشنبه
       </button>
 
-      <button
-        class="day-btn"
-        onclick="selectDay(this,'پنجشنبه')"
-      >
+      <button class="day-btn"
+        onclick="selectDay(this,'پنجشنبه')">
         پنجشنبه
       </button>
 
@@ -251,45 +238,33 @@
 
     <div class="time-buttons">
 
-      <button
-        class="time-btn"
-        onclick="selectTime(this,'09:00')"
-      >
+      <button class="time-btn"
+        onclick="selectTime(this,'09:00')">
         ۹:۰۰ صبح
       </button>
 
-      <button
-        class="time-btn"
-        onclick="selectTime(this,'10:00')"
-      >
+      <button class="time-btn"
+        onclick="selectTime(this,'10:00')">
         ۱۰:۰۰ صبح
       </button>
 
-      <button
-        class="time-btn"
-        onclick="selectTime(this,'11:00')"
-      >
+      <button class="time-btn"
+        onclick="selectTime(this,'11:00')">
         ۱۱:۰۰ صبح
       </button>
 
-      <button
-        class="time-btn"
-        onclick="selectTime(this,'14:00')"
-      >
+      <button class="time-btn"
+        onclick="selectTime(this,'14:00')">
         ۲:۰۰ بعد از ظهر
       </button>
 
-      <button
-        class="time-btn"
-        onclick="selectTime(this,'15:00')"
-      >
+      <button class="time-btn"
+        onclick="selectTime(this,'15:00')">
         ۳:۰۰ بعد از ظهر
       </button>
 
-      <button
-        class="time-btn"
-        onclick="selectTime(this,'16:00')"
-      >
+      <button class="time-btn"
+        onclick="selectTime(this,'16:00')">
         ۴:۰۰ بعد از ظهر
       </button>
 
@@ -312,11 +287,11 @@
         نوع ویزیت را انتخاب کنید
       </option>
 
-      <option>
+      <option value="ویزیت حضوری">
         ویزیت حضوری
       </option>
 
-      <option>
+      <option value="ویزیت آنلاین">
         ویزیت آنلاین
       </option>
 
@@ -345,7 +320,6 @@
     ← بازگشت به پروفایل داکتر
   </a>
 
-
 </div>
 
 
@@ -355,32 +329,50 @@ let selectedDay = "";
 let selectedTime = "";
 
 
-/* گرفتن اطلاعات داکتر */
+/* اطلاعات داکتر */
 
 const savedDoctor =
   localStorage.getItem("doctorProfile");
 
+let doctor = {};
 
 if (savedDoctor) {
 
   try {
 
-    const doctor =
-      JSON.parse(savedDoctor);
+    doctor = JSON.parse(savedDoctor);
 
-    document.getElementById(
-      "doctorName"
-    ).textContent =
+    document.getElementById("doctorName").textContent =
       doctor.doctorName || "داکتر";
 
-    document.getElementById(
-      "doctorSpecialty"
-    ).textContent =
+    document.getElementById("doctorSpecialty").textContent =
       doctor.specialty || "تخصص ثبت نشده";
 
   } catch(error) {
 
     console.log("خطا در اطلاعات داکتر");
+
+  }
+
+}
+
+
+/* اطلاعات بیمار */
+
+let patient = {};
+
+const savedPatient =
+  localStorage.getItem("patientProfile");
+
+if (savedPatient) {
+
+  try {
+
+    patient = JSON.parse(savedPatient);
+
+  } catch(error) {
+
+    console.log("خطا در اطلاعات بیمار");
 
   }
 
@@ -444,7 +436,6 @@ function bookAppointment() {
     message.style.color = "#b32626";
 
     return;
-
   }
 
 
@@ -456,7 +447,6 @@ function bookAppointment() {
     message.style.color = "#b32626";
 
     return;
-
   }
 
 
@@ -468,57 +458,85 @@ function bookAppointment() {
     message.style.color = "#b32626";
 
     return;
-
   }
 
 
-  let doctorName = "داکتر";
+  /* دریافت نوبت‌های قبلی */
 
-  if (savedDoctor) {
+  let appointments =
+    JSON.parse(
+      localStorage.getItem("appointments") || "[]"
+    );
 
-    try {
 
-      const doctor =
-        JSON.parse(savedDoctor);
-
-      doctorName =
-        doctor.doctorName || "داکتر";
-
-    } catch(error) {}
-
-  }
-
+  /* ساخت نوبت جدید */
 
   const appointment = {
 
-    doctorName: doctorName,
+    id: Date.now(),
 
-    day: selectedDay,
+    doctorName:
+      doctor.doctorName || "داکتر",
 
-    time: selectedTime,
+    specialty:
+      doctor.specialty || "ثبت نشده",
 
-    visitType: visitType,
+    patientName:
+      patient.name || "بیمار",
 
-    date: new Date().toLocaleString("fa-IR")
+    patientPhone:
+      patient.phone || patient.phoneNumber || "ثبت نشده",
+
+    day:
+      selectedDay,
+
+    time:
+      selectedTime,
+
+    visitType:
+      visitType,
+
+    date:
+      new Date().toLocaleString("fa-IR")
 
   };
 
 
+  /* اضافه کردن نوبت به لیست */
+
+  appointments.push(appointment);
+
+
+  /* ذخیره نوبت */
+
   localStorage.setItem(
-    "myAppointment",
-    JSON.stringify(appointment)
+    "appointments",
+    JSON.stringify(appointments)
   );
 
 
-  message.innerHTML =
-    "✅ نوبت شما با موفقیت ثبت شد.<br>" +
-    "📅 " + selectedDay +
-    "<br>" +
-    "🕐 " + selectedTime;
+  /* پیام موفقیت */
 
+  message.innerHTML =
+    "✅ نوبت شما با موفقیت ثبت شد." +
+    "<br>👨‍⚕️ " +
+    appointment.doctorName +
+    "<br>📅 " +
+    selectedDay +
+    "<br>🕐 " +
+    selectedTime +
+    "<br>🩺 " +
+    visitType;
 
   message.style.color =
     "#149e9a";
+
+
+  /* غیرفعال کردن دکمه برای جلوگیری از ثبت دوباره */
+
+  document.querySelector(".submit-btn").disabled = true;
+
+  document.querySelector(".submit-btn").style.opacity = "0.6";
 
 }
 
