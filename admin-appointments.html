@@ -27,7 +27,6 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.12);
     }
 
     .header h1 {
@@ -66,16 +65,15 @@
       line-height: 1.8;
     }
 
-    .admin-note {
+    .doctor-note {
       margin-top: 15px;
+      background: #ecfdf5;
+      color: #047857;
       padding: 13px;
-      background: #e6fffb;
-      color: #0d766e;
       border-radius: 10px;
-      font-size: 13px;
+      line-height: 1.8;
+      font-size: 14px;
     }
-
-    /* آمار */
 
     .stats {
       display: grid;
@@ -109,14 +107,11 @@
       font-size: 13px;
     }
 
-    /* جستجو */
-
     .search-box {
       background: white;
       padding: 18px;
       border-radius: 15px;
       margin-bottom: 20px;
-      box-shadow: 0 3px 10px rgba(0,0,0,0.07);
     }
 
     .search-box input {
@@ -129,18 +124,11 @@
       outline: none;
     }
 
-    .search-box input:focus {
-      border-color: #0d9488;
-    }
-
-    /* فیلتر */
-
     .filter-box {
       background: white;
       padding: 15px;
       border-radius: 15px;
       margin-bottom: 20px;
-      box-shadow: 0 3px 10px rgba(0,0,0,0.07);
     }
 
     .filter-box select {
@@ -152,8 +140,6 @@
       font-size: 14px;
       background: white;
     }
-
-    /* کارت نوبت */
 
     .appointment-card {
       background: white;
@@ -183,8 +169,6 @@
       font-size: 13px;
     }
 
-    /* وضعیت */
-
     .status {
       display: inline-block;
       padding: 7px 12px;
@@ -213,8 +197,6 @@
       color: #4338ca;
     }
 
-    /* معلومات */
-
     .appointment-info {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
@@ -235,21 +217,25 @@
       color: #455a64;
     }
 
-    /* فقط مشاهده */
+    /* فقط حذف برای مدیر */
 
-    .view-only {
+    .actions {
       margin-top: 18px;
       border-top: 1px solid #eee;
       padding-top: 15px;
-      text-align: center;
-      color: #78909c;
-      font-size: 13px;
-      background: #f8fafb;
-      padding: 12px;
-      border-radius: 10px;
+      text-align: left;
     }
 
-    /* خالی */
+    .delete-btn {
+      border: none;
+      background: #333;
+      color: white;
+      padding: 11px 20px;
+      border-radius: 10px;
+      font-family: inherit;
+      cursor: pointer;
+      font-size: 13px;
+    }
 
     .empty {
       background: white;
@@ -257,7 +243,6 @@
       border-radius: 16px;
       text-align: center;
       color: #78909c;
-      box-shadow: 0 3px 10px rgba(0,0,0,0.07);
     }
 
     .empty-icon {
@@ -327,9 +312,12 @@
       در این قسمت برای مدیر نمایش داده می‌شوند.
     </p>
 
-    <div class="admin-note">
-      👨‍💼 این بخش فقط برای مشاهده و نظارت مدیر است.
-      تأیید، لغو و تکمیل نوبت فقط توسط داکتر انجام می‌شود.
+    <div class="doctor-note">
+
+      👨‍⚕️ <strong>توجه:</strong>
+      تأیید یا لغو نوبت فقط توسط خود داکتر انجام می‌شود.
+      مدیر فقط می‌تواند نوبت‌ها را مشاهده و در صورت نیاز حذف کند.
+
     </div>
 
   </div>
@@ -341,9 +329,7 @@
 
     <div class="stat">
 
-      <div class="stat-icon">
-        📅
-      </div>
+      <div class="stat-icon">📅</div>
 
       <div
         class="stat-number"
@@ -361,9 +347,7 @@
 
     <div class="stat">
 
-      <div class="stat-icon">
-        ⏳
-      </div>
+      <div class="stat-icon">⏳</div>
 
       <div
         class="stat-number"
@@ -373,7 +357,7 @@
       </div>
 
       <div class="stat-title">
-        در انتظار
+        در انتظار داکتر
       </div>
 
     </div>
@@ -381,9 +365,7 @@
 
     <div class="stat">
 
-      <div class="stat-icon">
-        ✅
-      </div>
+      <div class="stat-icon">✅</div>
 
       <div
         class="stat-number"
@@ -401,9 +383,7 @@
 
     <div class="stat">
 
-      <div class="stat-icon">
-        ❌
-      </div>
+      <div class="stat-icon">❌</div>
 
       <div
         class="stat-number"
@@ -469,8 +449,6 @@
   </div>
 
 
-  <!-- لیست نوبت‌ها -->
-
   <div id="appointmentsList"></div>
 
 
@@ -480,24 +458,22 @@
 <script>
 
 
-/* =====================================
+/* ================================
    بررسی ورود مدیر
-===================================== */
+================================ */
 
 if (
   localStorage.getItem("adminLoggedIn") !== "true"
 ) {
 
-  window.location.replace(
-    "admin-login.html"
-  );
+  window.location.replace("admin-login.html");
 
 }
 
 
-/* =====================================
+/* ================================
    دریافت نوبت‌ها
-===================================== */
+================================ */
 
 let appointments =
   JSON.parse(
@@ -505,9 +481,9 @@ let appointments =
   );
 
 
-/* =====================================
+/* ================================
    دریافت مقدار
-===================================== */
+================================ */
 
 function getValue(item, names) {
 
@@ -530,9 +506,9 @@ function getValue(item, names) {
 }
 
 
-/* =====================================
+/* ================================
    وضعیت نوبت
-===================================== */
+================================ */
 
 function getStatus(appointment) {
 
@@ -582,32 +558,32 @@ function getStatus(appointment) {
 }
 
 
-/* =====================================
+/* ================================
    متن وضعیت
-===================================== */
+================================ */
 
 function getStatusText(status) {
 
   if (status === "confirmed") {
-    return "✅ تأیید شده توسط داکتر";
+    return "✅ تأیید شده";
   }
 
   if (status === "cancelled") {
-    return "❌ لغو شده توسط داکتر";
+    return "❌ لغو شده";
   }
 
   if (status === "completed") {
-    return "✔️ تکمیل شده توسط داکتر";
+    return "✔️ تکمیل شده";
   }
 
-  return "⏳ در انتظار تصمیم داکتر";
+  return "⏳ در انتظار داکتر";
 
 }
 
 
-/* =====================================
+/* ================================
    نمایش نوبت‌ها
-===================================== */
+================================ */
 
 function showAppointments() {
 
@@ -681,9 +657,7 @@ function showAppointments() {
 
 
         const status =
-          getStatus(
-            appointment
-          );
+          getStatus(appointment);
 
 
         const text =
@@ -698,18 +672,12 @@ function showAppointments() {
           ).toLowerCase();
 
 
-        const searchMatch =
-          text.includes(search);
-
-
-        const statusMatch =
-          filter === "all" ||
-          status === filter;
-
-
         return (
-          searchMatch &&
-          statusMatch
+          text.includes(search) &&
+          (
+            filter === "all" ||
+            status === filter
+          )
         );
 
       }
@@ -719,9 +687,7 @@ function showAppointments() {
   updateStatistics();
 
 
-  if (
-    filtered.length === 0
-  ) {
+  if (filtered.length === 0) {
 
     list.innerHTML = `
 
@@ -754,6 +720,12 @@ function showAppointments() {
 
   filtered.forEach(
     function(appointment) {
+
+
+      const realIndex =
+        appointments.indexOf(
+          appointment
+        );
 
 
       const patientName =
@@ -845,39 +817,32 @@ function showAppointments() {
 
 
       const status =
-        getStatus(
-          appointment
-        );
-
-
-      const statusText =
-        getStatusText(
-          status
-        );
+        getStatus(appointment);
 
 
       list.innerHTML += `
 
         <div class="appointment-card">
 
-
           <div class="appointment-header">
 
             <div class="appointment-title">
 
               <h3>
-                📅 نوبت مریض: ${escapeHTML(patientName)}
+                📅 نوبت مریض:
+                ${escapeHTML(patientName)}
               </h3>
 
               <p>
-                👨‍⚕️ داکتر: ${escapeHTML(doctorName)}
+                👨‍⚕️ داکتر:
+                ${escapeHTML(doctorName)}
               </p>
 
             </div>
 
 
             <span class="status ${status}">
-              ${statusText}
+              ${getStatusText(status)}
             </span>
 
           </div>
@@ -888,9 +853,7 @@ function showAppointments() {
 
             <div class="info-item">
 
-              <strong>
-                👤 مریض:
-              </strong>
+              <strong>👤 مریض:</strong>
 
               ${escapeHTML(patientName)}
 
@@ -899,9 +862,7 @@ function showAppointments() {
 
             <div class="info-item">
 
-              <strong>
-                👨‍⚕️ داکتر:
-              </strong>
+              <strong>👨‍⚕️ داکتر:</strong>
 
               ${escapeHTML(doctorName)}
 
@@ -910,9 +871,7 @@ function showAppointments() {
 
             <div class="info-item">
 
-              <strong>
-                🩺 تخصص:
-              </strong>
+              <strong>🩺 تخصص:</strong>
 
               ${escapeHTML(specialty)}
 
@@ -921,9 +880,7 @@ function showAppointments() {
 
             <div class="info-item">
 
-              <strong>
-                📅 تاریخ:
-              </strong>
+              <strong>📅 تاریخ:</strong>
 
               ${escapeHTML(date)}
 
@@ -932,9 +889,7 @@ function showAppointments() {
 
             <div class="info-item">
 
-              <strong>
-                ⏰ ساعت:
-              </strong>
+              <strong>⏰ ساعت:</strong>
 
               ${escapeHTML(time)}
 
@@ -943,9 +898,7 @@ function showAppointments() {
 
             <div class="info-item">
 
-              <strong>
-                📞 شماره مریض:
-              </strong>
+              <strong>📞 شماره مریض:</strong>
 
               ${escapeHTML(phone)}
 
@@ -954,9 +907,7 @@ function showAppointments() {
 
             <div class="info-item">
 
-              <strong>
-                🩺 نوع ویزیت:
-              </strong>
+              <strong>🩺 نوع ویزیت:</strong>
 
               ${escapeHTML(type)}
 
@@ -965,9 +916,7 @@ function showAppointments() {
 
             <div class="info-item">
 
-              <strong>
-                💰 قیمت:
-              </strong>
+              <strong>💰 قیمت:</strong>
 
               ${escapeHTML(price)}
 
@@ -977,12 +926,16 @@ function showAppointments() {
           </div>
 
 
-          <div class="view-only">
+          <!-- فقط مدیر می‌تواند حذف کند -->
 
-            👁️ این نوبت فقط برای مشاهده مدیر نمایش داده می‌شود.
-            <br>
+          <div class="actions">
 
-            وضعیت نوبت توسط داکتر تعیین می‌شود.
+            <button
+              class="delete-btn"
+              onclick="deleteAppointment(${realIndex})"
+            >
+              🗑️ حذف نوبت
+            </button>
 
           </div>
 
@@ -997,65 +950,81 @@ function showAppointments() {
 }
 
 
-/* =====================================
+/* ================================
    آمار
-===================================== */
+================================ */
 
 function updateStatistics() {
 
-  const total =
-    appointments.length;
-
-
-  const pending =
-    appointments.filter(
-      function(item) {
-        return getStatus(item) === "pending";
-      }
-    ).length;
-
-
-  const confirmed =
-    appointments.filter(
-      function(item) {
-        return getStatus(item) === "confirmed";
-      }
-    ).length;
-
-
-  const cancelled =
-    appointments.filter(
-      function(item) {
-        return getStatus(item) === "cancelled";
-      }
-    ).length;
-
-
   document.getElementById(
     "totalAppointments"
-  ).textContent = total;
+  ).textContent =
+    appointments.length;
 
 
   document.getElementById(
     "pendingAppointments"
-  ).textContent = pending;
+  ).textContent =
+    appointments.filter(
+      item =>
+        getStatus(item) === "pending"
+    ).length;
 
 
   document.getElementById(
     "confirmedAppointments"
-  ).textContent = confirmed;
+  ).textContent =
+    appointments.filter(
+      item =>
+        getStatus(item) === "confirmed"
+    ).length;
 
 
   document.getElementById(
     "cancelledAppointments"
-  ).textContent = cancelled;
+  ).textContent =
+    appointments.filter(
+      item =>
+        getStatus(item) === "cancelled"
+    ).length;
 
 }
 
 
-/* =====================================
+/* ================================
+   حذف نوبت
+================================ */
+
+function deleteAppointment(index) {
+
+  const ok =
+    confirm(
+      "آیا مطمئن هستید که می‌خواهید این نوبت را حذف کنید؟"
+    );
+
+
+  if (!ok) {
+    return;
+  }
+
+
+  appointments.splice(index, 1);
+
+
+  localStorage.setItem(
+    "appointments",
+    JSON.stringify(appointments)
+  );
+
+
+  showAppointments();
+
+}
+
+
+/* ================================
    جلوگیری از HTML ناخواسته
-===================================== */
+================================ */
 
 function escapeHTML(value) {
 
@@ -1069,9 +1038,9 @@ function escapeHTML(value) {
 }
 
 
-/* =====================================
-   شروع صفحه
-===================================== */
+/* ================================
+   شروع
+================================ */
 
 showAppointments();
 
