@@ -8,1045 +8,841 @@
   <title>مدیریت نوبت‌ها | داکتر یار</title>
 
   <style>
-
     * {
       box-sizing: border-box;
     }
 
     body {
       margin: 0;
+      padding: 20px;
       font-family: Tahoma, Arial, sans-serif;
-      background: #f4f7f9;
+      background: #f3f7f7;
       color: #263238;
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: auto;
     }
 
     .header {
       background: #0d9488;
       color: white;
-      padding: 18px 20px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
+      padding: 22px;
+      border-radius: 15px;
+      text-align: center;
+      margin-bottom: 20px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
     }
 
     .header h1 {
-      margin: 0;
-      font-size: 21px;
-    }
-
-    .back {
-      color: white;
-      text-decoration: none;
-      font-size: 14px;
-    }
-
-    .container {
-      max-width: 1100px;
-      margin: 25px auto;
-      padding: 0 15px;
-    }
-
-    .page-title {
-      background: white;
-      padding: 22px;
-      border-radius: 16px;
-      margin-bottom: 20px;
-      box-shadow: 0 3px 10px rgba(0,0,0,0.07);
-    }
-
-    .page-title h2 {
       margin: 0 0 8px;
-      color: #0d9488;
-    }
-
-    .page-title p {
-      margin: 0;
-      color: #78909c;
-      line-height: 1.8;
-    }
-
-    .doctor-note {
-      margin-top: 15px;
-      background: #ecfdf5;
-      color: #047857;
-      padding: 13px;
-      border-radius: 10px;
-      line-height: 1.8;
-      font-size: 14px;
-    }
-
-    .stats {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 15px;
-      margin-bottom: 20px;
-    }
-
-    .stat {
-      background: white;
-      padding: 18px;
-      border-radius: 15px;
-      text-align: center;
-      box-shadow: 0 3px 10px rgba(0,0,0,0.07);
-    }
-
-    .stat-icon {
-      font-size: 30px;
-    }
-
-    .stat-number {
       font-size: 25px;
-      font-weight: bold;
-      color: #0d9488;
-      margin-top: 5px;
     }
 
-    .stat-title {
-      color: #78909c;
-      margin-top: 5px;
-      font-size: 13px;
+    .header p {
+      margin: 0;
+      font-size: 14px;
+      opacity: 0.95;
     }
 
-    .search-box {
+    .back-btn {
+      display: inline-block;
+      margin-top: 15px;
+      padding: 9px 18px;
       background: white;
-      padding: 18px;
-      border-radius: 15px;
-      margin-bottom: 20px;
+      color: #0d9488;
+      text-decoration: none;
+      border-radius: 8px;
+      font-weight: bold;
     }
 
-    .search-box input {
-      width: 100%;
-      padding: 14px;
-      border: 1px solid #d9e3e5;
-      border-radius: 10px;
+    /* گزینه‌های مدیریت */
+
+    .menu {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 15px;
+      margin-bottom: 25px;
+    }
+
+    .menu-btn {
+      border: none;
+      background: white;
+      padding: 20px 12px;
+      border-radius: 14px;
+      cursor: pointer;
       font-family: inherit;
       font-size: 15px;
+      font-weight: bold;
+      color: #37474f;
+      box-shadow: 0 3px 10px rgba(0, 0, 0, 0.07);
+      transition: 0.2s;
+    }
+
+    .menu-btn:hover {
+      transform: translateY(-2px);
+    }
+
+    .menu-btn.active {
+      background: #0d9488;
+      color: white;
+    }
+
+    .menu-btn .icon {
+      display: block;
+      font-size: 28px;
+      margin-bottom: 8px;
+    }
+
+    /* محتوای نوبت‌ها */
+
+    .content {
+      background: white;
+      border-radius: 15px;
+      padding: 20px;
+      box-shadow: 0 3px 12px rgba(0, 0, 0, 0.06);
+    }
+
+    .content-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 18px;
+      flex-wrap: wrap;
+    }
+
+    .content-header h2 {
+      margin: 0;
+      font-size: 20px;
+      color: #0d9488;
+    }
+
+    .count {
+      background: #e0f2f1;
+      color: #00695c;
+      padding: 7px 12px;
+      border-radius: 20px;
+      font-size: 13px;
+      font-weight: bold;
+    }
+
+    /* جستجو */
+
+    .search-box {
+      width: 100%;
+      padding: 13px;
+      border: 1px solid #d7e0e0;
+      border-radius: 10px;
+      font-family: inherit;
+      font-size: 14px;
+      margin-bottom: 18px;
       outline: none;
     }
 
-    .filter-box {
-      background: white;
-      padding: 15px;
-      border-radius: 15px;
-      margin-bottom: 20px;
+    .search-box:focus {
+      border-color: #0d9488;
     }
 
-    .filter-box select {
-      width: 100%;
-      padding: 13px;
-      border: 1px solid #d9e3e5;
-      border-radius: 10px;
-      font-family: inherit;
-      font-size: 14px;
-      background: white;
+    /* کارت نوبت */
+
+    .appointment {
+      border: 1px solid #e5eaea;
+      border-radius: 13px;
+      padding: 17px;
+      margin-bottom: 13px;
+      background: #fafcfc;
     }
 
-    .appointment-card {
-      background: white;
-      border-radius: 17px;
-      margin-bottom: 18px;
-      padding: 22px;
-      box-shadow: 0 3px 12px rgba(0,0,0,0.07);
-      border: 1px solid #e6eeee;
-    }
-
-    .appointment-header {
+    .appointment-top {
       display: flex;
       justify-content: space-between;
-      align-items: flex-start;
-      gap: 15px;
-      margin-bottom: 18px;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-bottom: 12px;
     }
 
-    .appointment-title h3 {
-      margin: 0 0 7px;
-      font-size: 18px;
-    }
-
-    .appointment-title p {
-      margin: 0;
-      color: #607d8b;
-      font-size: 13px;
+    .appointment-id {
+      color: #78909c;
+      font-size: 12px;
     }
 
     .status {
-      display: inline-block;
-      padding: 7px 12px;
+      padding: 6px 10px;
       border-radius: 20px;
       font-size: 12px;
-      white-space: nowrap;
+      font-weight: bold;
     }
 
     .pending {
-      background: #fef3c7;
-      color: #b45309;
+      background: #fff3cd;
+      color: #856404;
     }
 
     .confirmed {
-      background: #dcfce7;
-      color: #15803d;
+      background: #d1fae5;
+      color: #065f46;
     }
 
     .cancelled {
       background: #fee2e2;
-      color: #dc2626;
+      color: #991b1b;
     }
 
-    .completed {
-      background: #e0e7ff;
-      color: #4338ca;
+    .cancel-doctor {
+      background: #fce7f3;
+      color: #9d174d;
     }
 
-    .appointment-info {
+    .cancel-patient {
+      background: #ede9fe;
+      color: #5b21b6;
+    }
+
+    .info-grid {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
       gap: 10px;
-      border-top: 1px solid #eee;
-      padding-top: 15px;
     }
 
-    .info-item {
-      background: #f8fafb;
-      padding: 12px;
-      border-radius: 10px;
-      font-size: 13px;
-      line-height: 1.7;
+    .info {
+      background: white;
+      padding: 10px;
+      border-radius: 8px;
+      border: 1px solid #edf1f1;
     }
 
-    .info-item strong {
-      color: #455a64;
+    .info-label {
+      display: block;
+      font-size: 11px;
+      color: #78909c;
+      margin-bottom: 4px;
     }
 
-    /* فقط حذف برای مدیر */
-
-    .actions {
-      margin-top: 18px;
-      border-top: 1px solid #eee;
-      padding-top: 15px;
-      text-align: left;
-    }
-
-    .delete-btn {
-      border: none;
-      background: #333;
-      color: white;
-      padding: 11px 20px;
-      border-radius: 10px;
-      font-family: inherit;
-      cursor: pointer;
-      font-size: 13px;
+    .info-value {
+      font-size: 14px;
+      font-weight: bold;
     }
 
     .empty {
-      background: white;
-      padding: 40px 20px;
-      border-radius: 16px;
       text-align: center;
-      color: #78909c;
+      padding: 45px 20px;
+      color: #90a4ae;
     }
 
     .empty-icon {
-      font-size: 48px;
+      font-size: 45px;
       margin-bottom: 10px;
     }
 
+    /* موبایل */
+
     @media (max-width: 700px) {
-
-      .header h1 {
-        font-size: 17px;
+      body {
+        padding: 12px;
       }
 
-      .back {
-        font-size: 12px;
-      }
-
-      .stats {
+      .menu {
         grid-template-columns: repeat(2, 1fr);
       }
 
-      .appointment-info {
+      .info-grid {
         grid-template-columns: 1fr;
       }
 
-      .appointment-header {
-        flex-direction: column;
+      .header h1 {
+        font-size: 21px;
       }
-
     }
 
+    @media (max-width: 400px) {
+      .menu {
+        grid-template-columns: 1fr;
+      }
+    }
   </style>
-
 </head>
-
 
 <body>
 
+  <div class="container">
 
-<header class="header">
+    <!-- سربرگ -->
 
-  <h1>
-    📅 مدیریت نوبت‌ها
-  </h1>
+    <div class="header">
+      <h1>📅 مدیریت نوبت‌ها</h1>
+      <p>مدیریت و بررسی تمام نوبت‌های داکتر یار</p>
 
-  <a
-    href="admin-dashboard.html"
-    class="back"
-  >
-    ← بازگشت به مدیریت
-  </a>
-
-</header>
-
-
-<main class="container">
-
-
-  <div class="page-title">
-
-    <h2>
-      📅 تمام نوبت‌های داکتر یار
-    </h2>
-
-    <p>
-      تمام نوبت‌هایی که توسط مریضان ثبت شده‌اند،
-      در این قسمت برای مدیر نمایش داده می‌شوند.
-    </p>
-
-    <div class="doctor-note">
-
-      👨‍⚕️ <strong>توجه:</strong>
-      تأیید یا لغو نوبت فقط توسط خود داکتر انجام می‌شود.
-      مدیر فقط می‌تواند نوبت‌ها را مشاهده و در صورت نیاز حذف کند.
-
+      <a href="admin.html" class="back-btn">
+        ← بازگشت به مدیریت
+      </a>
     </div>
 
-  </div>
 
+    <!-- گزینه‌های مدیریت -->
 
-  <!-- آمار -->
+    <div class="menu">
 
-  <div class="stats">
-
-    <div class="stat">
-
-      <div class="stat-icon">📅</div>
-
-      <div
-        class="stat-number"
-        id="totalAppointments"
-      >
-        0
-      </div>
-
-      <div class="stat-title">
+      <button class="menu-btn active" onclick="showAppointments('all', this)">
+        <span class="icon">📋</span>
         تمام نوبت‌ها
-      </div>
+      </button>
+
+      <button class="menu-btn" onclick="showAppointments('pending', this)">
+        <span class="icon">⏳</span>
+        نوبت‌های در انتظار
+      </button>
+
+      <button class="menu-btn" onclick="showAppointments('confirmed', this)">
+        <span class="icon">✅</span>
+        نوبت‌های تأییدشده
+      </button>
+
+      <button class="menu-btn" onclick="showAppointments('cancelled', this)">
+        <span class="icon">❌</span>
+        نوبت‌های لغوشده
+      </button>
+
+      <button class="menu-btn" onclick="showAppointments('doctor-cancelled', this)">
+        <span class="icon">👨‍⚕️</span>
+        لغو توسط داکتر
+      </button>
+
+      <button class="menu-btn" onclick="showAppointments('patient-cancelled', this)">
+        <span class="icon">👤</span>
+        لغو توسط مریض
+      </button>
 
     </div>
 
 
-    <div class="stat">
+    <!-- محتوای نوبت‌ها -->
 
-      <div class="stat-icon">⏳</div>
+    <div class="content">
 
-      <div
-        class="stat-number"
-        id="pendingAppointments"
+      <div class="content-header">
+        <h2 id="sectionTitle">تمام نوبت‌ها</h2>
+        <span class="count" id="appointmentCount">0 نوبت</span>
+      </div>
+
+      <input
+        type="text"
+        id="searchInput"
+        class="search-box"
+        placeholder="🔍 جستجوی نام مریض، داکتر یا شماره نوبت..."
+        oninput="searchAppointments()"
       >
-        0
-      </div>
 
-      <div class="stat-title">
-        در انتظار داکتر
-      </div>
-
-    </div>
-
-
-    <div class="stat">
-
-      <div class="stat-icon">✅</div>
-
-      <div
-        class="stat-number"
-        id="confirmedAppointments"
-      >
-        0
-      </div>
-
-      <div class="stat-title">
-        تأیید شده
-      </div>
-
-    </div>
-
-
-    <div class="stat">
-
-      <div class="stat-icon">❌</div>
-
-      <div
-        class="stat-number"
-        id="cancelledAppointments"
-      >
-        0
-      </div>
-
-      <div class="stat-title">
-        لغو شده
-      </div>
+      <div id="appointmentsList"></div>
 
     </div>
 
   </div>
 
 
-  <!-- جستجو -->
+  <script>
 
-  <div class="search-box">
+    /* --------------------------------
+       نوبت‌های نمونه
+       بعداً به سیستم اصلی وصل می‌شود
+    -------------------------------- */
 
-    <input
-      type="text"
-      id="searchInput"
-      placeholder="🔎 جستجو بر اساس نام مریض، داکتر، تاریخ یا ساعت..."
-      oninput="showAppointments()"
-    >
+    let appointments = JSON.parse(
+      localStorage.getItem("appointments")
+    ) || [
 
-  </div>
+      {
+        id: "APT-1001",
+        patient: "احمد احمدی",
+        doctor: "داکتر محمد رضایی",
+        specialty: "متخصص قلب",
+        date: "۱۴۰۵/۰۵/۲۰",
+        time: "۱۰:۰۰",
+        status: "confirmed",
+        cancelledBy: ""
+      },
 
+      {
+        id: "APT-1002",
+        patient: "فاطمه محمدی",
+        doctor: "داکتر سمیرا احمدی",
+        specialty: "متخصص نسایی ولادی",
+        date: "۱۴۰۵/۰۵/۲۱",
+        time: "۱۱:۳۰",
+        status: "pending",
+        cancelledBy: ""
+      },
 
-  <!-- فیلتر -->
+      {
+        id: "APT-1003",
+        patient: "حامد کریمی",
+        doctor: "داکتر علی رحیمی",
+        specialty: "متخصص داخله",
+        date: "۱۴۰۵/۰۵/۲۲",
+        time: "۰۹:۰۰",
+        status: "cancelled",
+        cancelledBy: "doctor"
+      },
 
-  <div class="filter-box">
+      {
+        id: "APT-1004",
+        patient: "مریم احمدی",
+        doctor: "داکتر ناهید حسینی",
+        specialty: "متخصص اطفال",
+        date: "۱۴۰۵/۰۵/۲۳",
+        time: "۱۴:۰۰",
+        status: "cancelled",
+        cancelledBy: "patient"
+      }
 
-    <select
-      id="statusFilter"
-      onchange="showAppointments()"
-    >
-
-      <option value="all">
-        نمایش تمام نوبت‌ها
-      </option>
-
-      <option value="pending">
-        ⏳ در انتظار
-      </option>
-
-      <option value="confirmed">
-        ✅ تأیید شده
-      </option>
-
-      <option value="cancelled">
-        ❌ لغو شده
-      </option>
-
-      <option value="completed">
-        ✔️ تکمیل شده
-      </option>
-
-    </select>
-
-  </div>
-
-
-  <div id="appointmentsList"></div>
-
-
-</main>
-
-
-<script>
-
-
-/* ================================
-   بررسی ورود مدیر
-================================ */
-
-if (
-  localStorage.getItem("adminLoggedIn") !== "true"
-) {
-
-  window.location.replace("admin-login.html");
-
-}
+    ];
 
 
-/* ================================
-   دریافت نوبت‌ها
-================================ */
-
-let appointments =
-  JSON.parse(
-    localStorage.getItem("appointments") || "[]"
-  );
+    let currentFilter = "all";
 
 
-/* ================================
-   دریافت مقدار
-================================ */
+    /* --------------------------------
+       نمایش نوبت‌ها
+    -------------------------------- */
 
-function getValue(item, names) {
+    function showAppointments(filter, button) {
 
-  for (let name of names) {
+      currentFilter = filter;
 
-    if (
-      item[name] !== undefined &&
-      item[name] !== null &&
-      item[name] !== ""
-    ) {
+      document.querySelectorAll(".menu-btn")
+        .forEach(btn => btn.classList.remove("active"));
 
-      return item[name];
+      if (button) {
+        button.classList.add("active");
+      }
+
+      const titles = {
+
+        all: "تمام نوبت‌ها",
+
+        pending: "نوبت‌های در انتظار",
+
+        confirmed: "نوبت‌های تأییدشده",
+
+        cancelled: "نوبت‌های لغوشده",
+
+        "doctor-cancelled": "نوبت‌های لغوشده توسط داکتر",
+
+        "patient-cancelled": "نوبت‌های لغوشده توسط مریض"
+
+      };
+
+      document.getElementById("sectionTitle").textContent =
+        titles[filter];
+
+      renderAppointments();
 
     }
 
-  }
 
-  return "ثبت نشده";
+    /* --------------------------------
+       فیلتر نوبت‌ها
+    -------------------------------- */
 
-}
+    function getFilteredAppointments() {
 
+      if (currentFilter === "all") {
+        return appointments;
+      }
 
-/* ================================
-   وضعیت نوبت
-================================ */
+      if (currentFilter === "pending") {
 
-function getStatus(appointment) {
-
-  const status =
-    getValue(
-      appointment,
-      [
-        "status",
-        "appointmentStatus"
-      ]
-    );
-
-
-  if (
-    status === "confirmed" ||
-    status === "تأیید شده"
-  ) {
-
-    return "confirmed";
-
-  }
-
-
-  if (
-    status === "cancelled" ||
-    status === "لغو شده" ||
-    status === "canceled"
-  ) {
-
-    return "cancelled";
-
-  }
-
-
-  if (
-    status === "completed" ||
-    status === "تکمیل شده"
-  ) {
-
-    return "completed";
-
-  }
-
-
-  return "pending";
-
-}
-
-
-/* ================================
-   متن وضعیت
-================================ */
-
-function getStatusText(status) {
-
-  if (status === "confirmed") {
-    return "✅ تأیید شده";
-  }
-
-  if (status === "cancelled") {
-    return "❌ لغو شده";
-  }
-
-  if (status === "completed") {
-    return "✔️ تکمیل شده";
-  }
-
-  return "⏳ در انتظار داکتر";
-
-}
-
-
-/* ================================
-   نمایش نوبت‌ها
-================================ */
-
-function showAppointments() {
-
-  const list =
-    document.getElementById(
-      "appointmentsList"
-    );
-
-
-  const search =
-    document.getElementById(
-      "searchInput"
-    ).value
-    .trim()
-    .toLowerCase();
-
-
-  const filter =
-    document.getElementById(
-      "statusFilter"
-    ).value;
-
-
-  const filtered =
-    appointments.filter(
-      function(appointment) {
-
-
-        const patientName =
-          getValue(
-            appointment,
-            [
-              "patientName",
-              "patient",
-              "patientFullName",
-              "name"
-            ]
-          );
-
-
-        const doctorName =
-          getValue(
-            appointment,
-            [
-              "doctorName",
-              "doctor",
-              "doctorFullName"
-            ]
-          );
-
-
-        const date =
-          getValue(
-            appointment,
-            [
-              "date",
-              "appointmentDate",
-              "day"
-            ]
-          );
-
-
-        const time =
-          getValue(
-            appointment,
-            [
-              "time",
-              "appointmentTime"
-            ]
-          );
-
-
-        const status =
-          getStatus(appointment);
-
-
-        const text =
-          (
-            patientName +
-            " " +
-            doctorName +
-            " " +
-            date +
-            " " +
-            time
-          ).toLowerCase();
-
-
-        return (
-          text.includes(search) &&
-          (
-            filter === "all" ||
-            status === filter
-          )
+        return appointments.filter(
+          a => a.status === "pending"
         );
 
       }
-    );
 
+      if (currentFilter === "confirmed") {
 
-  updateStatistics();
-
-
-  if (filtered.length === 0) {
-
-    list.innerHTML = `
-
-      <div class="empty">
-
-        <div class="empty-icon">
-          📅
-        </div>
-
-        <h3>
-          هنوز نوبتی ثبت نشده است
-        </h3>
-
-        <p>
-          وقتی یک مریض برای داکتر نوبت بگیرد،
-          نوبت او در اینجا نمایش داده می‌شود.
-        </p>
-
-      </div>
-
-    `;
-
-    return;
-
-  }
-
-
-  list.innerHTML = "";
-
-
-  filtered.forEach(
-    function(appointment) {
-
-
-      const realIndex =
-        appointments.indexOf(
-          appointment
+        return appointments.filter(
+          a => a.status === "confirmed"
         );
 
+      }
 
-      const patientName =
-        getValue(
-          appointment,
-          [
-            "patientName",
-            "patient",
-            "patientFullName",
-            "name"
-          ]
+      if (currentFilter === "cancelled") {
+
+        return appointments.filter(
+          a => a.status === "cancelled"
         );
 
+      }
 
-      const doctorName =
-        getValue(
-          appointment,
-          [
-            "doctorName",
-            "doctor",
-            "doctorFullName"
-          ]
+      if (currentFilter === "doctor-cancelled") {
+
+        return appointments.filter(
+          a =>
+            a.status === "cancelled" &&
+            a.cancelledBy === "doctor"
         );
 
+      }
 
-      const date =
-        getValue(
-          appointment,
-          [
-            "date",
-            "appointmentDate",
-            "day"
-          ]
+      if (currentFilter === "patient-cancelled") {
+
+        return appointments.filter(
+          a =>
+            a.status === "cancelled" &&
+            a.cancelledBy === "patient"
         );
 
+      }
 
-      const time =
-        getValue(
-          appointment,
-          [
-            "time",
-            "appointmentTime"
-          ]
-        );
-
-
-      const phone =
-        getValue(
-          appointment,
-          [
-            "patientPhone",
-            "phone",
-            "mobile"
-          ]
-        );
-
-
-      const specialty =
-        getValue(
-          appointment,
-          [
-            "doctorSpecialty",
-            "specialty",
-            "doctorSpeciality"
-          ]
-        );
-
-
-      const type =
-        getValue(
-          appointment,
-          [
-            "visitType",
-            "appointmentType",
-            "type"
-          ]
-        );
-
-
-      const price =
-        getValue(
-          appointment,
-          [
-            "visitPrice",
-            "price",
-            "consultationPrice"
-          ]
-        );
-
-
-      const status =
-        getStatus(appointment);
-
-
-      list.innerHTML += `
-
-        <div class="appointment-card">
-
-          <div class="appointment-header">
-
-            <div class="appointment-title">
-
-              <h3>
-                📅 نوبت مریض:
-                ${escapeHTML(patientName)}
-              </h3>
-
-              <p>
-                👨‍⚕️ داکتر:
-                ${escapeHTML(doctorName)}
-              </p>
-
-            </div>
-
-
-            <span class="status ${status}">
-              ${getStatusText(status)}
-            </span>
-
-          </div>
-
-
-          <div class="appointment-info">
-
-
-            <div class="info-item">
-
-              <strong>👤 مریض:</strong>
-
-              ${escapeHTML(patientName)}
-
-            </div>
-
-
-            <div class="info-item">
-
-              <strong>👨‍⚕️ داکتر:</strong>
-
-              ${escapeHTML(doctorName)}
-
-            </div>
-
-
-            <div class="info-item">
-
-              <strong>🩺 تخصص:</strong>
-
-              ${escapeHTML(specialty)}
-
-            </div>
-
-
-            <div class="info-item">
-
-              <strong>📅 تاریخ:</strong>
-
-              ${escapeHTML(date)}
-
-            </div>
-
-
-            <div class="info-item">
-
-              <strong>⏰ ساعت:</strong>
-
-              ${escapeHTML(time)}
-
-            </div>
-
-
-            <div class="info-item">
-
-              <strong>📞 شماره مریض:</strong>
-
-              ${escapeHTML(phone)}
-
-            </div>
-
-
-            <div class="info-item">
-
-              <strong>🩺 نوع ویزیت:</strong>
-
-              ${escapeHTML(type)}
-
-            </div>
-
-
-            <div class="info-item">
-
-              <strong>💰 قیمت:</strong>
-
-              ${escapeHTML(price)}
-
-            </div>
-
-
-          </div>
-
-
-          <!-- فقط مدیر می‌تواند حذف کند -->
-
-          <div class="actions">
-
-            <button
-              class="delete-btn"
-              onclick="deleteAppointment(${realIndex})"
-            >
-              🗑️ حذف نوبت
-            </button>
-
-          </div>
-
-
-        </div>
-
-      `;
+      return [];
 
     }
-  );
-
-}
 
 
-/* ================================
-   آمار
-================================ */
+    /* --------------------------------
+       نمایش کارت‌ها
+    -------------------------------- */
 
-function updateStatistics() {
+    function renderAppointments() {
 
-  document.getElementById(
-    "totalAppointments"
-  ).textContent =
-    appointments.length;
+      const list =
+        document.getElementById("appointmentsList");
 
+      const data = getFilteredAppointments();
 
-  document.getElementById(
-    "pendingAppointments"
-  ).textContent =
-    appointments.filter(
-      item =>
-        getStatus(item) === "pending"
-    ).length;
+      document.getElementById("appointmentCount").textContent =
+        data.length + " نوبت";
 
 
-  document.getElementById(
-    "confirmedAppointments"
-  ).textContent =
-    appointments.filter(
-      item =>
-        getStatus(item) === "confirmed"
-    ).length;
+      if (data.length === 0) {
+
+        list.innerHTML = `
+          <div class="empty">
+            <div class="empty-icon">📭</div>
+            <div>هیچ نوبتی در این بخش وجود ندارد.</div>
+          </div>
+        `;
+
+        return;
+      }
 
 
-  document.getElementById(
-    "cancelledAppointments"
-  ).textContent =
-    appointments.filter(
-      item =>
-        getStatus(item) === "cancelled"
-    ).length;
+      list.innerHTML = data.map(appointment => {
 
-}
+        let statusText = "";
+        let statusClass = "";
 
+        if (appointment.status === "pending") {
 
-/* ================================
-   حذف نوبت
-================================ */
+          statusText = "در انتظار";
+          statusClass = "pending";
 
-function deleteAppointment(index) {
+        }
 
-  const ok =
-    confirm(
-      "آیا مطمئن هستید که می‌خواهید این نوبت را حذف کنید؟"
-    );
+        else if (appointment.status === "confirmed") {
 
+          statusText = "تأییدشده";
+          statusClass = "confirmed";
 
-  if (!ok) {
-    return;
-  }
+        }
 
+        else if (
+          appointment.status === "cancelled"
+        ) {
 
-  appointments.splice(index, 1);
+          statusText = "لغوشده";
 
+          if (appointment.cancelledBy === "doctor") {
 
-  localStorage.setItem(
-    "appointments",
-    JSON.stringify(appointments)
-  );
+            statusText = "لغو توسط داکتر";
+            statusClass = "cancel-doctor";
 
+          }
 
-  showAppointments();
+          else if (
+            appointment.cancelledBy === "patient"
+          ) {
 
-}
+            statusText = "لغو توسط مریض";
+            statusClass = "cancel-patient";
 
+          }
 
-/* ================================
-   جلوگیری از HTML ناخواسته
-================================ */
+          else {
 
-function escapeHTML(value) {
+            statusClass = "cancelled";
 
-  return String(value)
-    .replace(/&/g, "&amp;")
-    .replace(/</g, "&lt;")
-    .replace(/>/g, "&gt;")
-    .replace(/"/g, "&quot;")
-    .replace(/'/g, "&#039;");
+          }
 
-}
+        }
 
 
-/* ================================
-   شروع
-================================ */
+        return `
 
-showAppointments();
+          <div class="appointment">
+
+            <div class="appointment-top">
+
+              <span class="appointment-id">
+                شماره نوبت: ${appointment.id}
+              </span>
+
+              <span class="status ${statusClass}">
+                ${statusText}
+              </span>
+
+            </div>
 
 
-</script>
+            <div class="info-grid">
 
+              <div class="info">
+
+                <span class="info-label">
+                  نام مریض
+                </span>
+
+                <span class="info-value">
+                  ${appointment.patient}
+                </span>
+
+              </div>
+
+
+              <div class="info">
+
+                <span class="info-label">
+                  نام داکتر
+                </span>
+
+                <span class="info-value">
+                  ${appointment.doctor}
+                </span>
+
+              </div>
+
+
+              <div class="info">
+
+                <span class="info-label">
+                  تخصص
+                </span>
+
+                <span class="info-value">
+                  ${appointment.specialty}
+                </span>
+
+              </div>
+
+
+              <div class="info">
+
+                <span class="info-label">
+                  تاریخ
+                </span>
+
+                <span class="info-value">
+                  ${appointment.date}
+                </span>
+
+              </div>
+
+
+              <div class="info">
+
+                <span class="info-label">
+                  ساعت
+                </span>
+
+                <span class="info-value">
+                  ${appointment.time}
+                </span>
+
+              </div>
+
+            </div>
+
+          </div>
+
+        `;
+
+      }).join("");
+
+    }
+
+
+    /* --------------------------------
+       جستجو
+    -------------------------------- */
+
+    function searchAppointments() {
+
+      const search =
+        document.getElementById("searchInput")
+          .value
+          .trim()
+          .toLowerCase();
+
+
+      const data = getFilteredAppointments().filter(a => {
+
+        return (
+
+          a.id.toLowerCase().includes(search) ||
+
+          a.patient.toLowerCase().includes(search) ||
+
+          a.doctor.toLowerCase().includes(search) ||
+
+          a.specialty.toLowerCase().includes(search)
+
+        );
+
+      });
+
+
+      const list =
+        document.getElementById("appointmentsList");
+
+
+      document.getElementById("appointmentCount").textContent =
+        data.length + " نوبت";
+
+
+      if (data.length === 0) {
+
+        list.innerHTML = `
+          <div class="empty">
+            <div class="empty-icon">🔍</div>
+            <div>نتیجه‌ای پیدا نشد.</div>
+          </div>
+        `;
+
+        return;
+
+      }
+
+
+      list.innerHTML = data.map(appointment => {
+
+        let statusText = "";
+        let statusClass = "";
+
+        if (appointment.status === "pending") {
+
+          statusText = "در انتظار";
+          statusClass = "pending";
+
+        }
+
+        else if (appointment.status === "confirmed") {
+
+          statusText = "تأییدشده";
+          statusClass = "confirmed";
+
+        }
+
+        else {
+
+          if (appointment.cancelledBy === "doctor") {
+
+            statusText = "لغو توسط داکتر";
+            statusClass = "cancel-doctor";
+
+          }
+
+          else if (
+            appointment.cancelledBy === "patient"
+          ) {
+
+            statusText = "لغو توسط مریض";
+            statusClass = "cancel-patient";
+
+          }
+
+          else {
+
+            statusText = "لغوشده";
+            statusClass = "cancelled";
+
+          }
+
+        }
+
+
+        return `
+
+          <div class="appointment">
+
+            <div class="appointment-top">
+
+              <span class="appointment-id">
+                شماره نوبت: ${appointment.id}
+              </span>
+
+              <span class="status ${statusClass}">
+                ${statusText}
+              </span>
+
+            </div>
+
+            <div class="info-grid">
+
+              <div class="info">
+                <span class="info-label">نام مریض</span>
+                <span class="info-value">
+                  ${appointment.patient}
+                </span>
+              </div>
+
+              <div class="info">
+                <span class="info-label">نام داکتر</span>
+                <span class="info-value">
+                  ${appointment.doctor}
+                </span>
+              </div>
+
+              <div class="info">
+                <span class="info-label">تخصص</span>
+                <span class="info-value">
+                  ${appointment.specialty}
+                </span>
+              </div>
+
+              <div class="info">
+                <span class="info-label">تاریخ</span>
+                <span class="info-value">
+                  ${appointment.date}
+                </span>
+              </div>
+
+              <div class="info">
+                <span class="info-label">ساعت</span>
+                <span class="info-value">
+                  ${appointment.time}
+                </span>
+              </div>
+
+            </div>
+
+          </div>
+
+        `;
+
+      }).join("");
+
+    }
+
+
+    /* --------------------------------
+       شروع صفحه
+    -------------------------------- */
+
+    renderAppointments();
+
+  </script>
 
 </body>
 
