@@ -66,6 +66,15 @@
       line-height: 1.8;
     }
 
+    .admin-note {
+      margin-top: 15px;
+      padding: 13px;
+      background: #e6fffb;
+      color: #0d766e;
+      border-radius: 10px;
+      font-size: 13px;
+    }
+
     /* آمار */
 
     .stats {
@@ -226,44 +235,18 @@
       color: #455a64;
     }
 
-    /* دکمه‌ها */
+    /* فقط مشاهده */
 
-    .actions {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
+    .view-only {
       margin-top: 18px;
       border-top: 1px solid #eee;
       padding-top: 15px;
-    }
-
-    button {
-      border: none;
-      padding: 11px 15px;
-      border-radius: 10px;
-      font-family: inherit;
-      cursor: pointer;
+      text-align: center;
+      color: #78909c;
       font-size: 13px;
-    }
-
-    .confirm-btn {
-      background: #0d9488;
-      color: white;
-    }
-
-    .cancel-btn {
-      background: #fee2e2;
-      color: #dc2626;
-    }
-
-    .complete-btn {
-      background: #e0e7ff;
-      color: #4338ca;
-    }
-
-    .delete-btn {
-      background: #333;
-      color: white;
+      background: #f8fafb;
+      padding: 12px;
+      border-radius: 10px;
     }
 
     /* خالی */
@@ -302,10 +285,6 @@
 
       .appointment-header {
         flex-direction: column;
-      }
-
-      .actions button {
-        flex: 1;
       }
 
     }
@@ -347,6 +326,11 @@
       تمام نوبت‌هایی که توسط مریضان ثبت شده‌اند،
       در این قسمت برای مدیر نمایش داده می‌شوند.
     </p>
+
+    <div class="admin-note">
+      👨‍💼 این بخش فقط برای مشاهده و نظارت مدیر است.
+      تأیید، لغو و تکمیل نوبت فقط توسط داکتر انجام می‌شود.
+    </div>
 
   </div>
 
@@ -564,8 +548,7 @@ function getStatus(appointment) {
 
   if (
     status === "confirmed" ||
-    status === "تأیید شده" ||
-    status === "confirmed"
+    status === "تأیید شده"
   ) {
 
     return "confirmed";
@@ -606,18 +589,18 @@ function getStatus(appointment) {
 function getStatusText(status) {
 
   if (status === "confirmed") {
-    return "✅ تأیید شده";
+    return "✅ تأیید شده توسط داکتر";
   }
 
   if (status === "cancelled") {
-    return "❌ لغو شده";
+    return "❌ لغو شده توسط داکتر";
   }
 
   if (status === "completed") {
-    return "✔️ تکمیل شده";
+    return "✔️ تکمیل شده توسط داکتر";
   }
 
-  return "⏳ در انتظار";
+  return "⏳ در انتظار تصمیم داکتر";
 
 }
 
@@ -771,12 +754,6 @@ function showAppointments() {
 
   filtered.forEach(
     function(appointment) {
-
-
-      const realIndex =
-        appointments.indexOf(
-          appointment
-        );
 
 
       const patientName =
@@ -1000,70 +977,12 @@ function showAppointments() {
           </div>
 
 
-          <div class="actions">
+          <div class="view-only">
 
+            👁️ این نوبت فقط برای مشاهده مدیر نمایش داده می‌شود.
+            <br>
 
-            ${
-              status !== "confirmed"
-
-              ?
-
-              `<button
-                class="confirm-btn"
-                onclick="changeStatus(${realIndex}, 'confirmed')"
-              >
-                ✅ تأیید نوبت
-              </button>`
-
-              :
-
-              ``
-            }
-
-
-            ${
-              status !== "cancelled"
-
-              ?
-
-              `<button
-                class="cancel-btn"
-                onclick="changeStatus(${realIndex}, 'cancelled')"
-              >
-                ❌ لغو نوبت
-              </button>`
-
-              :
-
-              ``
-            }
-
-
-            ${
-              status === "confirmed"
-
-              ?
-
-              `<button
-                class="complete-btn"
-                onclick="changeStatus(${realIndex}, 'completed')"
-              >
-                ✔️ تکمیل نوبت
-              </button>`
-
-              :
-
-              ``
-            }
-
-
-            <button
-              class="delete-btn"
-              onclick="deleteAppointment(${realIndex})"
-            >
-              🗑️ حذف
-            </button>
-
+            وضعیت نوبت توسط داکتر تعیین می‌شود.
 
           </div>
 
@@ -1130,104 +1049,6 @@ function updateStatistics() {
   document.getElementById(
     "cancelledAppointments"
   ).textContent = cancelled;
-
-}
-
-
-/* =====================================
-   تغییر وضعیت نوبت
-===================================== */
-
-function changeStatus(
-  index,
-  newStatus
-) {
-
-  const appointment =
-    appointments[index];
-
-
-  if (
-    newStatus === "confirmed"
-  ) {
-
-    const ok =
-      confirm(
-        "آیا می‌خواهید این نوبت را تأیید کنید؟"
-      );
-
-    if (!ok) {
-      return;
-    }
-
-  }
-
-
-  if (
-    newStatus === "cancelled"
-  ) {
-
-    const ok =
-      confirm(
-        "آیا می‌خواهید این نوبت را لغو کنید؟"
-      );
-
-    if (!ok) {
-      return;
-    }
-
-  }
-
-
-  appointment.status =
-    newStatus;
-
-
-  appointment.appointmentStatus =
-    newStatus;
-
-
-  localStorage.setItem(
-    "appointments",
-    JSON.stringify(appointments)
-  );
-
-
-  showAppointments();
-
-}
-
-
-/* =====================================
-   حذف نوبت
-===================================== */
-
-function deleteAppointment(index) {
-
-  const ok =
-    confirm(
-      "آیا مطمئن هستید که می‌خواهید این نوبت را حذف کنید؟"
-    );
-
-
-  if (!ok) {
-    return;
-  }
-
-
-  appointments.splice(
-    index,
-    1
-  );
-
-
-  localStorage.setItem(
-    "appointments",
-    JSON.stringify(appointments)
-  );
-
-
-  showAppointments();
 
 }
 
