@@ -2,186 +2,684 @@
 <html lang="fa" dir="rtl">
 
 <head>
+
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
 
   <title>پروفایل بیمار | داکتر یار</title>
 
+
   <style>
+
     * {
       box-sizing: border-box;
     }
 
+
     body {
+
       margin: 0;
       padding: 20px;
+
       font-family: Tahoma, Arial, sans-serif;
+
       background: #f5f7f7;
+
       color: #444;
+
     }
+
 
     .container {
+
       width: 100%;
+
       max-width: 650px;
+
       margin: auto;
+
     }
+
+
+    .header {
+
+      background: #149e9a;
+
+      color: white;
+
+      padding: 25px;
+
+      border-radius: 25px;
+
+      text-align: center;
+
+      box-shadow:
+        0 3px 15px rgba(0,0,0,0.08);
+
+    }
+
+
+    .user-icon {
+
+      font-size: 55px;
+
+      margin-bottom: 8px;
+
+    }
+
+
+    .header-title {
+
+      font-size: 27px;
+
+      font-weight: bold;
+
+    }
+
+
+    .header-subtitle {
+
+      margin-top: 8px;
+
+      font-size: 16px;
+
+    }
+
 
     .card {
+
       background: white;
+
+      margin-top: 20px;
+
       padding: 25px;
+
       border-radius: 25px;
-      box-shadow: 0 3px 15px rgba(0,0,0,0.08);
+
+      box-shadow:
+        0 3px 15px rgba(0,0,0,0.08);
+
     }
 
-    h1 {
-      text-align: center;
+
+    .card-title {
+
       color: #149e9a;
-      margin-bottom: 30px;
+
+      font-size: 21px;
+
+      font-weight: bold;
+
+      margin-bottom: 20px;
+
     }
+
 
     label {
+
       display: block;
+
       margin-top: 18px;
+
       margin-bottom: 8px;
-      font-size: 18px;
+
+      font-size: 17px;
+
       font-weight: bold;
+
+      color: #555;
+
     }
+
 
     input {
+
       width: 100%;
+
       padding: 15px;
+
       border: 1px solid #ddd;
+
       border-radius: 15px;
+
       font-family: Tahoma;
+
       font-size: 17px;
+
+      background: #f7f7f7;
+
+      color: #444;
+
+      outline: none;
+
     }
 
-    .save {
-      width: 100%;
-      margin-top: 25px;
-      padding: 17px;
-      background: #149e9a;
-      color: white;
-      border: none;
-      border-radius: 15px;
-      font-size: 19px;
-      font-family: Tahoma;
+
+    input:disabled {
+
+      background: #f3f5f5;
+
+      color: #555;
+
+      cursor: not-allowed;
+
     }
+
+
+    input:not(:disabled):focus {
+
+      border-color: #149e9a;
+
+      background: white;
+
+    }
+
+
+    .edit-btn {
+
+      width: 100%;
+
+      margin-top: 20px;
+
+      padding: 17px;
+
+      background: #149e9a;
+
+      color: white;
+
+      border: none;
+
+      border-radius: 15px;
+
+      font-size: 19px;
+
+      font-family: Tahoma;
+
+      cursor: pointer;
+
+    }
+
+
+    .save-btn {
+
+      width: 100%;
+
+      margin-top: 12px;
+
+      padding: 17px;
+
+      background: #149e9a;
+
+      color: white;
+
+      border: none;
+
+      border-radius: 15px;
+
+      font-size: 19px;
+
+      font-family: Tahoma;
+
+      cursor: pointer;
+
+      display: none;
+
+    }
+
+
+    .cancel-btn {
+
+      width: 100%;
+
+      margin-top: 12px;
+
+      padding: 15px;
+
+      background: #fff0f0;
+
+      color: #b32626;
+
+      border: none;
+
+      border-radius: 15px;
+
+      font-size: 17px;
+
+      font-family: Tahoma;
+
+      cursor: pointer;
+
+      display: none;
+
+    }
+
+
+    .message {
+
+      text-align: center;
+
+      margin-top: 15px;
+
+      line-height: 2;
+
+      font-size: 16px;
+
+    }
+
 
     .back {
+
       display: block;
+
       text-align: center;
-      margin-top: 20px;
+
+      margin-top: 22px;
+
       color: #149e9a;
+
       text-decoration: none;
-      font-size: 17px;
+
+      font-size: 18px;
+
     }
 
-    #message {
-      text-align: center;
-      margin-top: 15px;
-      color: #149e9a;
-    }
   </style>
 
 </head>
 
+
 <body>
 
-  <div class="container">
 
-    <div class="card">
+<div class="container">
 
-      <h1>👤 پروفایل من</h1>
 
-      <label>اسم</label>
-      <input
-        type="text"
-        id="name"
-        placeholder="اسم خود را وارد کنید"
-      >
+  <!-- سرصفحه -->
 
-      <label>سن</label>
-      <input
-        type="number"
-        id="age"
-        placeholder="سن"
-      >
+  <div class="header">
 
-      <label>شماره موبایل</label>
-      <input
-        type="tel"
-        id="phone"
-        placeholder="شماره موبایل"
-      >
+    <div class="user-icon">
+      👤
+    </div>
 
-      <button
-        class="save"
-        onclick="saveProfile()"
-      >
-        ذخیره مشخصات
-      </button>
+    <div class="header-title">
+      پروفایل من
+    </div>
 
-      <p id="message"></p>
-
-      <a
-        href="patient-dashboard.html"
-        class="back"
-      >
-        ← بازگشت به صفحه بیمار
-      </a>
-
+    <div class="header-subtitle">
+      اطلاعات شخصی بیمار
     </div>
 
   </div>
 
-  <script>
 
-    function saveProfile() {
+  <!-- فرم پروفایل -->
 
-      const profile = {
-        name: document.getElementById("name").value,
-        age: document.getElementById("age").value,
-        phone: document.getElementById("phone").value
-      };
+  <div class="card">
 
-      localStorage.setItem(
-        "patientProfile",
-        JSON.stringify(profile)
-      );
 
-      document.getElementById("message").textContent =
-        "✅ مشخصات شما ذخیره شد.";
+    <div class="card-title">
+      👤 مشخصات بیمار
+    </div>
 
-    }
 
-    const saved =
-      localStorage.getItem("patientProfile");
+    <label>
+      اسم
+    </label>
 
-    if (saved) {
+    <input
+      type="text"
+      id="name"
+      placeholder="اسم خود را وارد کنید"
+      disabled
+    >
 
-      try {
 
-        const profile = JSON.parse(saved);
+    <label>
+      سن
+    </label>
 
-        document.getElementById("name").value =
-          profile.name || "";
+    <input
+      type="number"
+      id="age"
+      placeholder="سن"
+      disabled
+    >
 
-        document.getElementById("age").value =
-          profile.age || "";
 
-        document.getElementById("phone").value =
-          profile.phone || "";
+    <label>
+      شماره موبایل
+    </label>
 
-      } catch (error) {
+    <input
+      type="tel"
+      id="phone"
+      placeholder="شماره موبایل"
+      disabled
+    >
 
-        console.log("خطا در اطلاعات پروفایل");
 
-      }
+    <!-- دکمه ویرایش -->
 
-    }
+    <button
+      id="editBtn"
+      class="edit-btn"
+      onclick="enableEdit()"
+    >
+      ✏️ ویرایش پروفایل
+    </button>
 
-  </script>
+
+    <!-- دکمه ذخیره -->
+
+    <button
+      id="saveBtn"
+      class="save-btn"
+      onclick="saveProfile()"
+    >
+      💾 ذخیره تغییرات
+    </button>
+
+
+    <!-- دکمه لغو -->
+
+    <button
+      id="cancelBtn"
+      class="cancel-btn"
+      onclick="cancelEdit()"
+    >
+      ❌ لغو ویرایش
+    </button>
+
+
+    <div
+      id="message"
+      class="message"
+    ></div>
+
+
+  </div>
+
+
+  <!-- بازگشت -->
+
+  <a
+    href="patient-dashboard.html"
+    class="back"
+  >
+    ← بازگشت به صفحه بیمار
+  </a>
+
+
+</div>
+
+
+
+<script>
+
+
+/* =========================
+   دریافت اطلاعات قبلی
+========================= */
+
+
+let oldProfile = null;
+
+
+const saved =
+  localStorage.getItem("patientProfile");
+
+
+if (saved) {
+
+  try {
+
+    oldProfile =
+      JSON.parse(saved);
+
+
+    document.getElementById("name").value =
+      oldProfile.name || "";
+
+
+    document.getElementById("age").value =
+      oldProfile.age || "";
+
+
+    document.getElementById("phone").value =
+      oldProfile.phone || "";
+
+
+  } catch (error) {
+
+    console.log(
+      "خطا در خواندن پروفایل بیمار"
+    );
+
+  }
+
+}
+
+
+
+/* =========================
+   فعال کردن ویرایش
+========================= */
+
+
+function enableEdit() {
+
+
+  oldProfile = {
+
+    name:
+      document.getElementById("name").value,
+
+    age:
+      document.getElementById("age").value,
+
+    phone:
+      document.getElementById("phone").value
+
+  };
+
+
+  document.getElementById("name")
+    .disabled = false;
+
+
+  document.getElementById("age")
+    .disabled = false;
+
+
+  document.getElementById("phone")
+    .disabled = false;
+
+
+  document.getElementById("editBtn")
+    .style.display = "none";
+
+
+  document.getElementById("saveBtn")
+    .style.display = "block";
+
+
+  document.getElementById("cancelBtn")
+    .style.display = "block";
+
+
+  document.getElementById("message")
+    .textContent =
+      "✏️ اکنون می‌توانید اطلاعات خود را تغییر دهید.";
+
+
+}
+
+
+
+/* =========================
+   ذخیره تغییرات
+========================= */
+
+
+function saveProfile() {
+
+
+  const name =
+    document.getElementById("name")
+      .value.trim();
+
+
+  const age =
+    document.getElementById("age")
+      .value.trim();
+
+
+  const phone =
+    document.getElementById("phone")
+      .value.trim();
+
+
+  if (!name) {
+
+    document.getElementById("message")
+      .textContent =
+        "⚠️ لطفاً اسم خود را وارد کنید.";
+
+    return;
+
+  }
+
+
+  const profile = {
+
+    name: name,
+
+    age: age,
+
+    phone: phone
+
+  };
+
+
+  localStorage.setItem(
+
+    "patientProfile",
+
+    JSON.stringify(profile)
+
+  );
+
+
+  oldProfile = profile;
+
+
+  /* غیرفعال کردن دوباره */
+
+  document.getElementById("name")
+    .disabled = true;
+
+
+  document.getElementById("age")
+    .disabled = true;
+
+
+  document.getElementById("phone")
+    .disabled = true;
+
+
+  /* نمایش دکمه ویرایش */
+
+  document.getElementById("editBtn")
+    .style.display = "block";
+
+
+  document.getElementById("saveBtn")
+    .style.display = "none";
+
+
+  document.getElementById("cancelBtn")
+    .style.display = "none";
+
+
+  document.getElementById("message")
+    .textContent =
+      "✅ تغییرات پروفایل با موفقیت ذخیره شد.";
+
+}
+
+
+
+/* =========================
+   لغو ویرایش
+========================= */
+
+
+function cancelEdit() {
+
+
+  if (oldProfile) {
+
+
+    document.getElementById("name")
+      .value =
+        oldProfile.name || "";
+
+
+    document.getElementById("age")
+      .value =
+        oldProfile.age || "";
+
+
+    document.getElementById("phone")
+      .value =
+        oldProfile.phone || "";
+
+
+  }
+
+
+  /* غیرفعال کردن فیلدها */
+
+  document.getElementById("name")
+    .disabled = true;
+
+
+  document.getElementById("age")
+    .disabled = true;
+
+
+  document.getElementById("phone")
+    .disabled = true;
+
+
+  /* نمایش دکمه ویرایش */
+
+  document.getElementById("editBtn")
+    .style.display = "block";
+
+
+  document.getElementById("saveBtn")
+    .style.display = "none";
+
+
+  document.getElementById("cancelBtn")
+    .style.display = "none";
+
+
+  document.getElementById("message")
+    .textContent =
+      "ویرایش لغو شد.";
+
+}
+
+
+</script>
+
 
 </body>
 
