@@ -1,0 +1,582 @@
+<!DOCTYPE html><html lang="fa" dir="rtl"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">  <title>آمار و گزارش‌ها | داکتر یار</title>  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Tahoma, Arial, sans-serif;
+      background: #f3f8fa;
+      color: #263238;
+    }
+
+    header {
+      background: #119e98;
+      color: white;
+      padding: 22px 15px;
+      text-align: center;
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 25px;
+    }
+
+    header p {
+      margin: 8px 0 0;
+      font-size: 14px;
+    }
+
+    .container {
+      width: 94%;
+      max-width: 1100px;
+      margin: 25px auto;
+    }
+
+    .back {
+      display: inline-block;
+      background: #607d8b;
+      color: white;
+      text-decoration: none;
+      padding: 10px 18px;
+      border-radius: 9px;
+      margin-bottom: 20px;
+    }
+
+    .back:hover {
+      background: #455a64;
+    }
+
+    /* آمار */
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 15px;
+      margin-bottom: 20px;
+    }
+
+    .card {
+      background: white;
+      border-radius: 15px;
+      padding: 22px;
+      text-align: center;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.07);
+    }
+
+    .icon {
+      font-size: 34px;
+    }
+
+    .card h3 {
+      margin: 10px 0 7px;
+      color: #119e98;
+      font-size: 16px;
+    }
+
+    .number {
+      font-size: 30px;
+      font-weight: bold;
+    }
+
+    /* بخش گزارش */
+    .section {
+      background: white;
+      border-radius: 16px;
+      padding: 20px;
+      margin-bottom: 20px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.07);
+    }
+
+    .section h2 {
+      margin-top: 0;
+      color: #119e98;
+      font-size: 20px;
+    }
+
+    .section p {
+      line-height: 2;
+      color: #607d8b;
+    }
+
+    /* جدول */
+    .table-wrapper {
+      overflow-x: auto;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 650px;
+    }
+
+    th {
+      background: #f0fdfa;
+      padding: 13px;
+      border-bottom: 2px solid #d1d5db;
+    }
+
+    td {
+      padding: 13px;
+      text-align: center;
+      border-bottom: 1px solid #e5e7eb;
+    }
+
+    /* وضعیت */
+    .status {
+      display: inline-block;
+      padding: 6px 10px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: bold;
+    }
+
+    .green {
+      background: #dcfce7;
+      color: #166534;
+    }
+
+    .orange {
+      background: #ffedd5;
+      color: #c2410c;
+    }
+
+    .red {
+      background: #fee2e2;
+      color: #b91c1c;
+    }
+
+    /* دکمه‌ها */
+    .buttons {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    button {
+      border: none;
+      padding: 11px 17px;
+      border-radius: 9px;
+      font-family: inherit;
+      cursor: pointer;
+      font-size: 14px;
+    }
+
+    .refresh {
+      background: #119e98;
+      color: white;
+    }
+
+    .print {
+      background: #334155;
+      color: white;
+    }
+
+    .report {
+      background: #e0f2fe;
+      color: #0369a1;
+    }
+
+    /* موبایل */
+    @media (max-width: 750px) {
+
+      .stats {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+    }
+
+    @media (max-width: 500px) {
+
+      .stats {
+        grid-template-columns: 1fr;
+      }
+
+      .container {
+        width: 93%;
+      }
+
+      .section {
+        padding: 15px;
+      }
+
+    }
+
+    @media print {
+
+      .back,
+      .buttons {
+        display: none;
+      }
+
+      body {
+        background: white;
+      }
+
+      .card,
+      .section {
+        box-shadow: none;
+      }
+
+    }
+
+  </style></head><body><header>  <h1>📊 آمار و گزارش‌ها</h1>  <p>گزارش کلی فعالیت‌های داکتر یار</p></header><div class="container">  <a href="admin.html" class="back">
+    ← برگشت به مدیریت
+  </a>  <!-- آمار اصلی -->  <div class="stats"><div class="card">
+
+  <div class="icon">👨‍⚕️</div>
+
+  <h3>تمام داکتران</h3>
+
+  <div class="number" id="doctors">
+    4
+  </div>
+
+</div>
+
+
+<div class="card">
+
+  <div class="icon">🧑‍🤝‍🧑</div>
+
+  <h3>تمام مریضان</h3>
+
+  <div class="number" id="patients">
+    12
+  </div>
+
+</div>
+
+
+<div class="card">
+
+  <div class="icon">📅</div>
+
+  <h3>تمام نوبت‌ها</h3>
+
+  <div class="number" id="appointments">
+    18
+  </div>
+
+</div>
+
+
+<div class="card">
+
+  <div class="icon">⏳</div>
+
+  <h3>نوبت‌های در انتظار</h3>
+
+  <div class="number" id="pending">
+    5
+  </div>
+
+</div>
+
+
+<div class="card">
+
+  <div class="icon">✅</div>
+
+  <h3>نوبت‌های تکمیل‌شده</h3>
+
+  <div class="number" id="completed">
+    10
+  </div>
+
+</div>
+
+
+<div class="card">
+
+  <div class="icon">❌</div>
+
+  <h3>نوبت‌های لغوشده</h3>
+
+  <div class="number" id="cancelled">
+    3
+  </div>
+
+</div>
+
+
+<div class="card">
+
+  <div class="icon">📢</div>
+
+  <h3>شکایت‌ها</h3>
+
+  <div class="number" id="complaints">
+    4
+  </div>
+
+</div>
+
+
+<div class="card">
+
+  <div class="icon">📝</div>
+
+  <h3>گزارش‌ها</h3>
+
+  <div class="number" id="reports">
+    7
+  </div>
+
+</div>
+
+
+<div class="card">
+
+  <div class="icon">👥</div>
+
+  <h3>کاربران فعال</h3>
+
+  <div class="number" id="activeUsers">
+    9
+  </div>
+
+</div>
+
+  </div>  <!-- گزارش ماهانه -->  <div class="section"><h2>📅 گزارش ماهانه</h2>
+
+<p>
+  آمار فعالیت سیستم در ماه‌های اخیر:
+</p>
+
+
+<div class="table-wrapper">
+
+  <table>
+
+    <thead>
+
+      <tr>
+        <th>ماه</th>
+        <th>داکتران جدید</th>
+        <th>مریضان جدید</th>
+        <th>نوبت‌ها</th>
+        <th>شکایت‌ها</th>
+        <th>وضعیت</th>
+      </tr>
+
+    </thead>
+
+
+    <tbody>
+
+      <tr>
+
+        <td>حمل</td>
+
+        <td>2</td>
+
+        <td>5</td>
+
+        <td>8</td>
+
+        <td>1</td>
+
+        <td>
+          <span class="status green">
+            خوب
+          </span>
+        </td>
+
+      </tr>
+
+
+      <tr>
+
+        <td>ثور</td>
+
+        <td>3</td>
+
+        <td>7</td>
+
+        <td>12</td>
+
+        <td>2</td>
+
+        <td>
+          <span class="status green">
+            خوب
+          </span>
+        </td>
+
+      </tr>
+
+
+      <tr>
+
+        <td>جوزا</td>
+
+        <td>4</td>
+
+        <td>10</td>
+
+        <td>18</td>
+
+        <td>4</td>
+
+        <td>
+          <span class="status green">
+            خوب
+          </span>
+        </td>
+
+      </tr>
+
+
+      <tr>
+
+        <td>سرطان</td>
+
+        <td>2</td>
+
+        <td>8</td>
+
+        <td>15</td>
+
+        <td>3</td>
+
+        <td>
+          <span class="status orange">
+            متوسط
+          </span>
+        </td>
+
+      </tr>
+
+    </tbody>
+
+  </table>
+
+</div>
+
+  </div>  <!-- گزارش نوبت‌ها -->  <div class="section"><h2>📋 وضعیت نوبت‌ها</h2>
+
+<div class="table-wrapper">
+
+  <table>
+
+    <thead>
+
+      <tr>
+        <th>وضعیت</th>
+        <th>تعداد</th>
+        <th>درصد</th>
+      </tr>
+
+    </thead>
+
+
+    <tbody>
+
+      <tr>
+
+        <td>
+          <span class="status green">
+            تکمیل‌شده
+          </span>
+        </td>
+
+        <td>10</td>
+
+        <td>56%</td>
+
+      </tr>
+
+
+      <tr>
+
+        <td>
+          <span class="status orange">
+            در انتظار
+          </span>
+        </td>
+
+        <td>5</td>
+
+        <td>28%</td>
+
+      </tr>
+
+
+      <tr>
+
+        <td>
+          <span class="status red">
+            لغوشده
+          </span>
+        </td>
+
+        <td>3</td>
+
+        <td>16%</td>
+
+      </tr>
+
+    </tbody>
+
+  </table>
+
+</div>
+
+  </div>  <!-- دکمه‌های گزارش -->  <div class="section"><h2>⚙️ ابزار گزارش</h2>
+
+<div class="buttons">
+
+  <button
+    class="refresh"
+    onclick="refreshStats()">
+    🔄 تازه‌سازی آمار
+  </button>
+
+
+  <button
+    class="print"
+    onclick="window.print()">
+    🖨️ چاپ گزارش
+  </button>
+
+
+  <button
+    class="report"
+    onclick="showMessage()">
+    📄 گزارش کلی
+  </button>
+
+</div>
+
+  </div></div><script>
+
+  function refreshStats() {
+
+    alert("آمار با موفقیت تازه‌سازی شد.");
+
+  }
+
+
+  function showMessage() {
+
+    alert(
+      "گزارش کلی داکتر یار آماده است.\n\n" +
+      "داکتران: " +
+      document.getElementById("doctors").textContent +
+      "\n" +
+      "مریضان: " +
+      document.getElementById("patients").textContent +
+      "\n" +
+      "نوبت‌ها: " +
+      document.getElementById("appointments").textContent +
+      "\n" +
+      "شکایت‌ها: " +
+      document.getElementById("complaints").textContent
+    );
+
+  }
+
+</script></body>
+</html>
