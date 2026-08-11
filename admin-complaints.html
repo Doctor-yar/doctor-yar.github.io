@@ -1,0 +1,792 @@
+<!DOCTYPE html><html lang="fa" dir="rtl"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">  <title>شکایت و گزارش‌ها | داکتر یار</title>  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Tahoma, Arial, sans-serif;
+      background: #f3f8fa;
+      color: #263238;
+    }
+
+    header {
+      background: #119e98;
+      color: white;
+      padding: 22px 15px;
+      text-align: center;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.12);
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 24px;
+    }
+
+    header p {
+      margin: 8px 0 0;
+      font-size: 14px;
+    }
+
+    .container {
+      width: 95%;
+      max-width: 1100px;
+      margin: 25px auto;
+    }
+
+    .back {
+      display: inline-block;
+      background: #607d8b;
+      color: white;
+      text-decoration: none;
+      padding: 10px 18px;
+      border-radius: 9px;
+      margin-bottom: 20px;
+      font-size: 14px;
+    }
+
+    .back:hover {
+      background: #455a64;
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 15px;
+      margin-bottom: 20px;
+    }
+
+    .stat {
+      background: white;
+      padding: 20px;
+      border-radius: 15px;
+      text-align: center;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.07);
+    }
+
+    .stat .icon {
+      font-size: 30px;
+    }
+
+    .stat h3 {
+      margin: 8px 0;
+      color: #119e98;
+      font-size: 15px;
+    }
+
+    .stat .number {
+      font-size: 28px;
+      font-weight: bold;
+    }
+
+    .section {
+      background: white;
+      padding: 20px;
+      border-radius: 16px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.07);
+      margin-bottom: 20px;
+    }
+
+    .section-title {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-bottom: 18px;
+    }
+
+    .section-title h2 {
+      margin: 0;
+      color: #119e98;
+      font-size: 20px;
+    }
+
+    .search {
+      width: 100%;
+      max-width: 320px;
+      padding: 11px 14px;
+      border: 1px solid #d1d5db;
+      border-radius: 9px;
+      font-family: inherit;
+      outline: none;
+    }
+
+    .search:focus {
+      border-color: #119e98;
+    }
+
+    .complaint {
+      border: 1px solid #e2e8f0;
+      border-radius: 13px;
+      padding: 18px;
+      margin-bottom: 15px;
+      background: #ffffff;
+    }
+
+    .complaint:last-child {
+      margin-bottom: 0;
+    }
+
+    .complaint-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-bottom: 12px;
+    }
+
+    .complaint h3 {
+      margin: 0;
+      color: #263238;
+      font-size: 17px;
+    }
+
+    .type {
+      display: inline-block;
+      background: #e0f2fe;
+      color: #0369a1;
+      padding: 5px 10px;
+      border-radius: 20px;
+      font-size: 12px;
+    }
+
+    .info {
+      line-height: 2;
+      font-size: 14px;
+      color: #475569;
+    }
+
+    .message {
+      background: #f8fafc;
+      padding: 13px;
+      border-radius: 9px;
+      margin: 12px 0;
+      line-height: 2;
+      font-size: 14px;
+    }
+
+    .status {
+      display: inline-block;
+      padding: 6px 11px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: bold;
+    }
+
+    .pending {
+      background: #fff7ed;
+      color: #c2410c;
+    }
+
+    .reviewing {
+      background: #eff6ff;
+      color: #1d4ed8;
+    }
+
+    .solved {
+      background: #f0fdf4;
+      color: #15803d;
+    }
+
+    .rejected {
+      background: #fef2f2;
+      color: #b91c1c;
+    }
+
+    .actions {
+      margin-top: 14px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 7px;
+    }
+
+    button {
+      border: none;
+      padding: 9px 14px;
+      border-radius: 8px;
+      font-family: inherit;
+      cursor: pointer;
+      font-size: 13px;
+    }
+
+    .view {
+      background: #e0f2fe;
+      color: #0369a1;
+    }
+
+    .review {
+      background: #dbeafe;
+      color: #1d4ed8;
+    }
+
+    .solve {
+      background: #dcfce7;
+      color: #166534;
+    }
+
+    .reject {
+      background: #fee2e2;
+      color: #b91c1c;
+    }
+
+    .delete {
+      background: #334155;
+      color: white;
+    }
+
+    .empty {
+      text-align: center;
+      padding: 30px;
+      color: #78909c;
+      display: none;
+    }
+
+    .modal {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.55);
+      z-index: 1000;
+      padding: 20px;
+      overflow-y: auto;
+    }
+
+    .modal-content {
+      background: white;
+      max-width: 650px;
+      margin: 40px auto;
+      border-radius: 16px;
+      overflow: hidden;
+    }
+
+    .modal-header {
+      background: #119e98;
+      color: white;
+      padding: 16px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .modal-header h3 {
+      margin: 0;
+    }
+
+    .close {
+      font-size: 27px;
+      cursor: pointer;
+    }
+
+    .modal-body {
+      padding: 20px;
+      line-height: 2;
+    }
+
+    .detail {
+      background: #f8fafc;
+      padding: 12px;
+      border-radius: 9px;
+      margin-bottom: 10px;
+    }
+
+    .detail strong {
+      display: block;
+      color: #607d8b;
+      font-size: 12px;
+    }
+
+    .modal-buttons {
+      text-align: center;
+      margin-top: 18px;
+    }
+
+    @media (max-width: 800px) {
+      .stats {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 500px) {
+      .stats {
+        grid-template-columns: 1fr;
+      }
+
+      .container {
+        width: 94%;
+      }
+
+      .section {
+        padding: 15px;
+      }
+    }
+  </style></head><body><header>
+  <h1>📢 شکایت و گزارش‌ها</h1>
+  <p>مدیریت شکایت‌ها و گزارش‌های داکتر یار</p>
+</header><div class="container"><a href="admin.html" class="back">← برگشت به مدیریت</a>
+
+  <!-- آمار -->  <div class="stats"><div class="stat">
+  <div class="icon">📋</div>
+  <h3>تمام شکایت‌ها</h3>
+  <div class="number" id="totalCount">4</div>
+</div>
+
+<div class="stat">
+  <div class="icon">⏳</div>
+  <h3>در انتظار بررسی</h3>
+  <div class="number" id="pendingCount">2</div>
+</div>
+
+<div class="stat">
+  <div class="icon">🔎</div>
+  <h3>در حال بررسی</h3>
+  <div class="number" id="reviewingCount">1</div>
+</div>
+
+<div class="stat">
+  <div class="icon">✅</div>
+  <h3>حل‌شده</h3>
+  <div class="number" id="solvedCount">1</div>
+</div>
+
+  </div>  <!-- لیست شکایت‌ها -->  <div class="section"><div class="section-title">
+  <h2>📢 شکایت‌ها و گزارش‌ها</h2>
+
+  <input
+    type="text"
+    id="search"
+    class="search"
+    placeholder="جستجوی نام، موضوع یا شماره..."
+    onkeyup="searchComplaints()"
+  >
+</div>
+
+<!-- شکایت ۱ -->
+<div
+  class="complaint"
+  data-search="احمد احمدی نوبت داکتر 0700000000">
+
+  <div class="complaint-top">
+    <h3>شکایت شماره #1001</h3>
+    <span class="type">مریض</span>
+  </div>
+
+  <div class="info">
+    👤 فرستنده: محمد احمدی<br>
+    🩺 مربوط به: داکتر احمد احمدی<br>
+    📅 تاریخ: ۱۴۰۵/۰۵/۲۲<br>
+    📞 تماس: 0700000000
+  </div>
+
+  <div class="message">
+    <strong>موضوع:</strong> مشکل در نوبت‌دهی<br>
+    داکتر در زمان تعیین‌شده در دسترس نبود.
+  </div>
+
+  <span class="status pending">در انتظار بررسی</span>
+
+  <div class="actions">
+    <button class="view" onclick="viewComplaint(
+      '1001',
+      'محمد احمدی',
+      'مریض',
+      'داکتر احمد احمدی',
+      'مشکل در نوبت‌دهی',
+      'داکتر در زمان تعیین‌شده در دسترس نبود.',
+      '۱۴۰۵/۰۵/۲۲',
+      'در انتظار بررسی'
+    )">
+      👁 مشاهده
+    </button>
+
+    <button class="review" onclick="changeStatus(this,'در حال بررسی','reviewing')">
+      🔎 بررسی
+    </button>
+
+    <button class="solve" onclick="changeStatus(this,'حل‌شده','solved')">
+      ✅ حل شد
+    </button>
+
+    <button class="reject" onclick="changeStatus(this,'رد شده','rejected')">
+      ❌ رد
+    </button>
+
+    <button class="delete" onclick="deleteComplaint(this)">
+      🗑 حذف
+    </button>
+  </div>
+
+</div>
+
+<!-- شکایت ۲ -->
+<div
+  class="complaint"
+  data-search="فاطمه محمدی رفتار داکتر 0711111111">
+
+  <div class="complaint-top">
+    <h3>شکایت شماره #1002</h3>
+    <span class="type">مریض</span>
+  </div>
+
+  <div class="info">
+    👤 فرستنده: فاطمه محمدی<br>
+    🩺 مربوط به: داکتر سمیع‌الله<br>
+    📅 تاریخ: ۱۴۰۵/۰۵/۲۳<br>
+    📞 تماس: 0711111111
+  </div>
+
+  <div class="message">
+    <strong>موضوع:</strong> رفتار نامناسب<br>
+    در هنگام مراجعه با برخورد نامناسب روبه‌رو شدم.
+  </div>
+
+  <span class="status pending">در انتظار بررسی</span>
+
+  <div class="actions">
+    <button class="view" onclick="viewComplaint(
+      '1002',
+      'فاطمه محمدی',
+      'مریض',
+      'داکتر سمیع‌الله',
+      'رفتار نامناسب',
+      'در هنگام مراجعه با برخورد نامناسب روبه‌رو شدم.',
+      '۱۴۰۵/۰۵/۲۳',
+      'در انتظار بررسی'
+    )">
+      👁 مشاهده
+    </button>
+
+    <button class="review" onclick="changeStatus(this,'در حال بررسی','reviewing')">
+      🔎 بررسی
+    </button>
+
+    <button class="solve" onclick="changeStatus(this,'حل‌شده','solved')">
+      ✅ حل شد
+    </button>
+
+    <button class="reject" onclick="changeStatus(this,'رد شده','rejected')">
+      ❌ رد
+    </button>
+
+    <button class="delete" onclick="deleteComplaint(this)">
+      🗑 حذف
+    </button>
+  </div>
+
+</div>
+
+<!-- گزارش ۳ -->
+<div
+  class="complaint"
+  data-search="داکتر علی رضایی گزارش حساب جعلی">
+
+  <div class="complaint-top">
+    <h3>گزارش شماره #1003</h3>
+    <span class="type">داکتر</span>
+  </div>
+
+  <div class="info">
+    👤 فرستنده: داکتر علی رضایی<br>
+    🩺 گزارش مربوط به: یک حساب کاربری<br>
+    📅 تاریخ: ۱۴۰۵/۰۵/۲۴<br>
+    📞 تماس: 0722222222
+  </div>
+
+  <div class="message">
+    <strong>موضوع:</strong> حساب جعلی<br>
+    یک حساب با نام و مشخصات جعلی در سیستم مشاهده شده است.
+  </div>
+
+  <span class="status reviewing">در حال بررسی</span>
+
+  <div class="actions">
+    <button class="view" onclick="viewComplaint(
+      '1003',
+      'داکتر علی رضایی',
+      'داکتر',
+      'حساب کاربری',
+      'حساب جعلی',
+      'یک حساب با نام و مشخصات جعلی در سیستم مشاهده شده است.',
+      '۱۴۰۵/۰۵/۲۴',
+      'در حال بررسی'
+    )">
+      👁 مشاهده
+    </button>
+
+    <button class="solve" onclick="changeStatus(this,'حل‌شده','solved')">
+      ✅ حل شد
+    </button>
+
+    <button class="reject" onclick="changeStatus(this,'رد شده','rejected')">
+      ❌ رد
+    </button>
+
+    <button class="delete" onclick="deleteComplaint(this)">
+      🗑 حذف
+    </button>
+  </div>
+
+</div>
+
+<!-- شکایت ۴ -->
+<div
+  class="complaint"
+  data-search="مریض نوبت لغو شده">
+
+  <div class="complaint-top">
+    <h3>شکایت شماره #1004</h3>
+    <span class="type">مریض</span>
+  </div>
+
+  <div class="info">
+    👤 فرستنده: عبدالرحمن<br>
+    🩺 مربوط به: داکتر فاطمه محمدی<br>
+    📅 تاریخ: ۱۴۰۵/۰۵/۱۸<br>
+    📞 تماس: 0733333333
+  </div>
+
+  <div class="message">
+    <strong>موضوع:</strong> لغو نوبت<br>
+    نوبت بدون اطلاع قبلی لغو شده است.
+  </div>
+
+  <span class="status solved">حل‌شده</span>
+
+  <div class="actions">
+    <button class="view" onclick="viewComplaint(
+      '1004',
+      'عبدالرحمن',
+      'مریض',
+      'داکتر فاطمه محمدی',
+      'لغو نوبت',
+      'نوبت بدون اطلاع قبلی لغو شده است.',
+      '۱۴۰۵/۰۵/۱۸',
+      'حل‌شده'
+    )">
+      👁 مشاهده
+    </button>
+
+    <button class="delete" onclick="deleteComplaint(this)">
+      🗑 حذف
+    </button>
+  </div>
+
+</div>
+
+<div id="empty" class="empty">
+  هیچ شکایت یا گزارشی پیدا نشد.
+</div>
+
+  </div></div><!-- پنجره مشاهده جزئیات --><div id="modal" class="modal">  <div class="modal-content"><div class="modal-header">
+  <h3>جزئیات شکایت / گزارش</h3>
+  <span class="close" onclick="closeModal()">×</span>
+</div>
+
+<div class="modal-body">
+
+  <div class="detail">
+    <strong>شماره</strong>
+    <span id="mId"></span>
+  </div>
+
+  <div class="detail">
+    <strong>فرستنده</strong>
+    <span id="mSender"></span>
+  </div>
+
+  <div class="detail">
+    <strong>نوع فرستنده</strong>
+    <span id="mType"></span>
+  </div>
+
+  <div class="detail">
+    <strong>مربوط به</strong>
+    <span id="mRelated"></span>
+  </div>
+
+  <div class="detail">
+    <strong>موضوع</strong>
+    <span id="mSubject"></span>
+  </div>
+
+  <div class="detail">
+    <strong>متن شکایت / گزارش</strong>
+    <span id="mMessage"></span>
+  </div>
+
+  <div class="detail">
+    <strong>تاریخ</strong>
+    <span id="mDate"></span>
+  </div>
+
+  <div class="detail">
+    <strong>وضعیت</strong>
+    <span id="mStatus"></span>
+  </div>
+
+  <div class="modal-buttons">
+    <button class="solve" onclick="alert('شکایت به عنوان حل‌شده ثبت شد.')">
+      ✅ حل شد
+    </button>
+
+    <button class="reject" onclick="alert('گزارش رد شد.')">
+      ❌ رد گزارش
+    </button>
+
+    <button class="cancel-main" onclick="closeModal()">
+      بستن
+    </button>
+  </div>
+
+</div>
+
+  </div></div><script>
+
+  function viewComplaint(
+    id,
+    sender,
+    type,
+    related,
+    subject,
+    message,
+    date,
+    status
+  ) {
+
+    document.getElementById("mId").textContent = "#" + id;
+    document.getElementById("mSender").textContent = sender;
+    document.getElementById("mType").textContent = type;
+    document.getElementById("mRelated").textContent = related;
+    document.getElementById("mSubject").textContent = subject;
+    document.getElementById("mMessage").textContent = message;
+    document.getElementById("mDate").textContent = date;
+    document.getElementById("mStatus").textContent = status;
+
+    document.getElementById("modal").style.display = "block";
+  }
+
+  function closeModal() {
+    document.getElementById("modal").style.display = "none";
+  }
+
+  function changeStatus(button, text, className) {
+
+    const complaint = button.closest(".complaint");
+
+    const status = complaint.querySelector(".status");
+
+    status.textContent = text;
+
+    status.className = "status " + className;
+
+    updateStats();
+
+    alert("وضعیت با موفقیت تغییر کرد.");
+  }
+
+  function deleteComplaint(button) {
+
+    const complaint = button.closest(".complaint");
+
+    const confirmDelete =
+      confirm("آیا مطمئن هستید که می‌خواهید این شکایت را حذف کنید؟");
+
+    if (!confirmDelete) {
+      return;
+    }
+
+    complaint.remove();
+
+    updateStats();
+
+    alert("شکایت با موفقیت حذف شد.");
+  }
+
+  function searchComplaints() {
+
+    const value =
+      document.getElementById("search")
+      .value
+      .toLowerCase()
+      .trim();
+
+    const complaints =
+      document.querySelectorAll(".complaint");
+
+    let found = 0;
+
+    complaints.forEach(function(item) {
+
+      const text =
+        item.getAttribute("data-search").toLowerCase();
+
+      if (text.includes(value)) {
+        item.style.display = "block";
+        found++;
+      } else {
+        item.style.display = "none";
+      }
+
+    });
+
+    document.getElementById("empty").style.display =
+      found === 0 ? "block" : "none";
+  }
+
+  function updateStats() {
+
+    const complaints =
+      document.querySelectorAll(".complaint");
+
+    let pending = 0;
+    let reviewing = 0;
+    let solved = 0;
+
+    complaints.forEach(function(item) {
+
+      const status =
+        item.querySelector(".status");
+
+      if (status.classList.contains("pending")) {
+        pending++;
+      }
+
+      if (status.classList.contains("reviewing")) {
+        reviewing++;
+      }
+
+      if (status.classList.contains("solved")) {
+        solved++;
+      }
+
+    });
+
+    document.getElementById("totalCount").textContent =
+      complaints.length;
+
+    document.getElementById("pendingCount").textContent =
+      pending;
+
+    document.getElementById("reviewingCount").textContent =
+      reviewing;
+
+    document.getElementById("solvedCount").textContent =
+      solved;
+  }
+
+  window.onclick = function(event) {
+
+    const modal =
+      document.getElementById("modal");
+
+    if (event.target === modal) {
+      closeModal();
+    }
+
+  };
+
+</script></body>
+  </html>
