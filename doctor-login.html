@@ -1,140 +1,189 @@
-
+<!DOCTYPE html>
 <html lang="fa" dir="rtl">
+
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ورود داکتر - داکتر یار</title>
+
+<title>ورود داکتر | داکتر یار</title>
 
 <style>
-*{
-  box-sizing:border-box;
-}
 
 body{
   margin:0;
-  font-family:Tahoma, Arial, sans-serif;
+  font-family:Tahoma,Arial,sans-serif;
   background:#f5f8fa;
-  color:#222;
 }
 
-.login-box{
+.box{
   width:90%;
-  max-width:600px;
-  margin:80px auto;
+  max-width:550px;
+  margin:60px auto;
   background:white;
-  padding:45px 30px;
-  border-radius:35px;
-  box-shadow:0 10px 35px rgba(0,0,0,.08);
+  padding:30px;
+  border-radius:25px;
+  box-shadow:0 5px 25px rgba(0,0,0,.08);
   text-align:center;
 }
 
 h1{
   color:#129b94;
-  font-size:42px;
-  margin-bottom:20px;
-}
-
-.subtitle{
-  color:#777;
-  font-size:22px;
-  margin-bottom:45px;
 }
 
 input{
   width:100%;
-  padding:20px;
-  margin:12px 0;
+  padding:16px;
+  margin:10px 0;
   border:2px solid #ddd;
-  border-radius:22px;
-  font-size:20px;
-  text-align:right;
-  outline:none;
-}
-
-input:focus{
-  border-color:#129b94;
+  border-radius:15px;
+  font-size:18px;
+  box-sizing:border-box;
 }
 
 button{
   width:100%;
-  padding:20px;
-  margin-top:25px;
+  padding:16px;
+  margin-top:15px;
   border:0;
-  border-radius:22px;
+  border-radius:15px;
   background:#129b94;
   color:white;
-  font-size:22px;
-  cursor:pointer;
+  font-size:18px;
 }
 
-button:active{
-  transform:scale(.98);
+.register{
+  display:block;
+  margin-top:18px;
+  padding:15px;
+  background:#e9f8f7;
+  color:#129b94;
+  border-radius:15px;
+  text-decoration:none;
 }
 
 #error{
   color:red;
-  font-size:20px;
-  margin-top:20px;
+  margin-top:15px;
   display:none;
 }
 
-.back{
-  display:block;
-  margin-top:30px;
-  color:#129b94;
-  text-decoration:none;
-  font-size:19px;
-}
 </style>
+
 </head>
 
 <body>
 
-<div class="login-box">
+<div class="box">
 
 <h1>🩺 ورود داکتر</h1>
 
-<div class="subtitle">
-به پنل داکتر یار خوش آمدید
-</div>
+<p>
+برای ورود شماره تماس و رمز چهار رقمی خود را وارد کنید.
+</p>
 
 <input
-  type="text"
-  id="username"
-  placeholder="نام کاربری"
+type="tel"
+id="phone"
+placeholder="شماره تماس"
 >
 
 <input
-  type="password"
-  id="password"
-  placeholder="رمز عبور"
+type="password"
+id="pin"
+maxlength="4"
+inputmode="numeric"
+placeholder="رمز چهار رقمی"
 >
 
 <button onclick="login()">
-ورود به پنل
+🔓 ورود به پنل داکتر
 </button>
 
-<div id="error">
-❌ نام کاربری یا رمز عبور اشتباه است
-</div>
+<div id="error"></div>
 
-<a class="back" href="index.html">
-← بازگشت به صفحه اصلی
+<a
+href="doctor-register.html"
+class="register"
+>
+👨‍⚕️ ثبت نام داکتر
 </a>
 
 </div>
-<script>
-function login() {
-    const username = document.getElementById("username").value.trim().toLowerCase();
-    const password = document.getElementById("password").value;
 
-    if (username === "doctor" && password === "1234") {
-        window.location.href = "doctor-profile.html";
-    } else {
-        document.getElementById("error").style.display = "block";
-    }
+
+<script>
+
+function login(){
+
+const phone =
+document.getElementById("phone").value.trim();
+
+const pin =
+document.getElementById("pin").value.trim();
+
+const saved =
+localStorage.getItem("doctorProfile");
+
+const error =
+document.getElementById("error");
+
+
+if(!saved){
+
+error.innerHTML =
+"❌ هنوز داکتری ثبت نام نکرده است.";
+
+error.style.display="block";
+
+return;
+
 }
+
+
+let doctor;
+
+try{
+
+doctor=JSON.parse(saved);
+
+}catch(e){
+
+error.innerHTML =
+"❌ اطلاعات داکتر خراب است.";
+
+error.style.display="block";
+
+return;
+
+}
+
+
+if(
+phone === doctor.phone &&
+pin === doctor.doctorPin
+){
+
+localStorage.setItem(
+"doctorLoggedIn",
+"true"
+);
+
+window.location.href =
+"doctor-profile.html";
+
+}else{
+
+error.innerHTML =
+"❌ شماره تماس یا رمز چهار رقمی اشتباه است.";
+
+error.style.display="block";
+
+}
+
+}
+
 </script>
 
 </body>
+
 </html>
