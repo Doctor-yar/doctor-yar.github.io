@@ -1,0 +1,771 @@
+<!DOCTYPE html><html lang="fa" dir="rtl"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">  <title>تنظیمات سیستم | داکتر یار</title>  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Tahoma, Arial, sans-serif;
+      background: #f1f5f9;
+      color: #1e293b;
+    }
+
+    /* Header */
+    .header {
+      background: #0d9488;
+      color: white;
+      padding: 18px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+    }
+
+    .header h1 {
+      margin: 0;
+      font-size: 22px;
+    }
+
+    .back-btn {
+      background: white;
+      color: #0d9488;
+      border: none;
+      padding: 9px 15px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 14px;
+      font-weight: bold;
+    }
+
+    .back-btn:hover {
+      background: #f0fdfa;
+    }
+
+    /* Container */
+    .container {
+      max-width: 900px;
+      margin: 25px auto;
+      padding: 0 15px;
+    }
+
+    /* Card */
+    .card {
+      background: white;
+      border-radius: 14px;
+      padding: 22px;
+      margin-bottom: 20px;
+      box-shadow: 0 3px 12px rgba(0,0,0,0.08);
+    }
+
+    .card-title {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      border-bottom: 1px solid #e2e8f0;
+      padding-bottom: 14px;
+      margin-bottom: 20px;
+    }
+
+    .card-title span {
+      font-size: 25px;
+    }
+
+    .card-title h2 {
+      margin: 0;
+      font-size: 18px;
+      color: #0f766e;
+    }
+
+    /* Form */
+    .form-group {
+      margin-bottom: 17px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 7px;
+      font-weight: bold;
+      font-size: 14px;
+    }
+
+    input,
+    textarea,
+    select {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid #cbd5e1;
+      border-radius: 9px;
+      font-family: inherit;
+      font-size: 14px;
+      outline: none;
+      background: white;
+    }
+
+    input:focus,
+    textarea:focus,
+    select:focus {
+      border-color: #0d9488;
+      box-shadow: 0 0 0 2px rgba(13,148,136,0.10);
+    }
+
+    textarea {
+      min-height: 90px;
+      resize: vertical;
+    }
+
+    .row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 15px;
+    }
+
+    /* Toggle */
+    .setting-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 14px 0;
+      border-bottom: 1px solid #e2e8f0;
+    }
+
+    .setting-row:last-child {
+      border-bottom: none;
+    }
+
+    .setting-info strong {
+      display: block;
+      margin-bottom: 5px;
+    }
+
+    .setting-info small {
+      color: #64748b;
+      font-size: 12px;
+    }
+
+    .switch {
+      position: relative;
+      width: 50px;
+      height: 27px;
+      flex-shrink: 0;
+      margin-right: 15px;
+    }
+
+    .switch input {
+      display: none;
+    }
+
+    .slider {
+      position: absolute;
+      inset: 0;
+      background: #cbd5e1;
+      border-radius: 30px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .slider:before {
+      content: "";
+      position: absolute;
+      width: 21px;
+      height: 21px;
+      right: 3px;
+      top: 3px;
+      background: white;
+      border-radius: 50%;
+      transition: 0.3s;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+    }
+
+    .switch input:checked + .slider {
+      background: #0d9488;
+    }
+
+    .switch input:checked + .slider:before {
+      transform: translateX(-23px);
+    }
+
+    /* Buttons */
+    .buttons {
+      display: flex;
+      gap: 10px;
+      margin-top: 10px;
+      flex-wrap: wrap;
+    }
+
+    .save-btn {
+      background: #0d9488;
+      color: white;
+      border: none;
+      padding: 13px 25px;
+      border-radius: 9px;
+      cursor: pointer;
+      font-family: inherit;
+      font-size: 15px;
+      font-weight: bold;
+    }
+
+    .save-btn:hover {
+      background: #0f766e;
+    }
+
+    .reset-btn {
+      background: #e2e8f0;
+      color: #334155;
+      border: none;
+      padding: 13px 25px;
+      border-radius: 9px;
+      cursor: pointer;
+      font-family: inherit;
+      font-size: 15px;
+    }
+
+    .reset-btn:hover {
+      background: #cbd5e1;
+    }
+
+    /* Password */
+    .danger-card {
+      border: 1px solid #fecaca;
+    }
+
+    .danger-card .card-title h2 {
+      color: #dc2626;
+    }
+
+    .logout-btn {
+      background: #dc2626;
+      color: white;
+      border: none;
+      padding: 12px 20px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-family: inherit;
+      font-weight: bold;
+    }
+
+    .logout-btn:hover {
+      background: #b91c1c;
+    }
+
+    /* Message */
+    #message {
+      display: none;
+      padding: 12px;
+      margin-bottom: 18px;
+      border-radius: 9px;
+      text-align: center;
+      font-weight: bold;
+    }
+
+    .success {
+      background: #dcfce7;
+      color: #166534;
+    }
+
+    .error {
+      background: #fee2e2;
+      color: #991b1b;
+    }
+
+    /* Mobile */
+    @media (max-width: 650px) {
+      .header {
+        padding: 15px;
+      }
+
+      .header h1 {
+        font-size: 18px;
+      }
+
+      .container {
+        margin-top: 18px;
+      }
+
+      .card {
+        padding: 17px;
+      }
+
+      .row {
+        grid-template-columns: 1fr;
+        gap: 0;
+      }
+
+      .setting-row {
+        align-items: flex-start;
+      }
+
+      .switch {
+        margin-right: 10px;
+      }
+
+      .buttons button {
+        width: 100%;
+      }
+    }
+  </style></head><body>  <!-- Header -->  <div class="header">
+    <h1>⚙️ تنظیمات سیستم</h1><button class="back-btn" onclick="goBack()">
+  ← برگشت به مدیریت
+</button>
+
+  </div>  <div class="container"><div id="message"></div>
+
+<!-- تنظیمات عمومی -->
+<div class="card">
+
+  <div class="card-title">
+    <span>🏥</span>
+    <h2>تنظیمات عمومی</h2>
+  </div>
+
+  <div class="form-group">
+    <label>نام سایت</label>
+    <input
+      type="text"
+      id="siteName"
+      placeholder="نام سایت">
+  </div>
+
+  <div class="form-group">
+    <label>توضیح کوتاه سایت</label>
+    <textarea
+      id="siteDescription"
+      placeholder="توضیح کوتاه درباره داکتر یار"></textarea>
+  </div>
+
+  <div class="row">
+
+    <div class="form-group">
+      <label>شماره تماس مدیریت</label>
+      <input
+        type="tel"
+        id="adminPhone"
+        placeholder="مثلاً 0700000000">
+    </div>
+
+    <div class="form-group">
+      <label>ایمیل مدیریت</label>
+      <input
+        type="email"
+        id="adminEmail"
+        placeholder="example@email.com">
+    </div>
+
+  </div>
+
+</div>
+
+
+<!-- زبان -->
+<div class="card">
+
+  <div class="card-title">
+    <span>🌐</span>
+    <h2>زبان سیستم</h2>
+  </div>
+
+  <div class="form-group">
+    <label>زبان پیش‌فرض</label>
+
+    <select id="language">
+
+      <option value="fa">
+        فارسی / دری
+      </option>
+
+      <option value="ps">
+        پشتو
+      </option>
+
+      <option value="en">
+        English
+      </option>
+
+    </select>
+  </div>
+
+</div>
+
+
+<!-- اعلان‌ها -->
+<div class="card">
+
+  <div class="card-title">
+    <span>🔔</span>
+    <h2>تنظیمات اعلان‌ها</h2>
+  </div>
+
+  <div class="setting-row">
+
+    <div class="setting-info">
+      <strong>ثبت داکتر جدید</strong>
+      <small>
+        هنگام ثبت‌نام داکتر جدید به مدیر اطلاع داده شود.
+      </small>
+    </div>
+
+    <label class="switch">
+      <input
+        type="checkbox"
+        id="doctorNotification">
+
+      <span class="slider"></span>
+    </label>
+
+  </div>
+
+
+  <div class="setting-row">
+
+    <div class="setting-info">
+      <strong>نوبت جدید</strong>
+      <small>
+        هنگام ثبت نوبت جدید اعلان نمایش داده شود.
+      </small>
+    </div>
+
+    <label class="switch">
+      <input
+        type="checkbox"
+        id="appointmentNotification">
+
+      <span class="slider"></span>
+    </label>
+
+  </div>
+
+
+  <div class="setting-row">
+
+    <div class="setting-info">
+      <strong>شکایت جدید</strong>
+      <small>
+        هنگام ثبت شکایت جدید به مدیر اطلاع داده شود.
+      </small>
+    </div>
+
+    <label class="switch">
+      <input
+        type="checkbox"
+        id="complaintNotification">
+
+      <span class="slider"></span>
+    </label>
+
+  </div>
+
+</div>
+
+
+<!-- امنیت -->
+<div class="card danger-card">
+
+  <div class="card-title">
+    <span>🔐</span>
+    <h2>امنیت حساب مدیریت</h2>
+  </div>
+
+  <div class="row">
+
+    <div class="form-group">
+      <label>رمز عبور جدید</label>
+
+      <input
+        type="password"
+        id="newPassword"
+        placeholder="رمز عبور جدید">
+    </div>
+
+    <div class="form-group">
+      <label>تکرار رمز عبور</label>
+
+      <input
+        type="password"
+        id="confirmPassword"
+        placeholder="تکرار رمز عبور">
+    </div>
+
+  </div>
+
+  <div class="buttons">
+
+    <button
+      class="save-btn"
+      onclick="changePassword()">
+      🔑 تغییر رمز عبور
+    </button>
+
+    <button
+      class="logout-btn"
+      onclick="logout()">
+      🚪 خروج از مدیریت
+    </button>
+
+  </div>
+
+</div>
+
+
+<!-- ذخیره -->
+<div class="card">
+
+  <div class="card-title">
+    <span>💾</span>
+    <h2>ذخیره تنظیمات</h2>
+  </div>
+
+  <p style="color:#64748b; font-size:14px; line-height:1.8;">
+    تغییرات این صفحه در مرورگر ذخیره می‌شود و با بستن یا
+    تازه‌سازی صفحه از بین نمی‌رود.
+  </p>
+
+  <div class="buttons">
+
+    <button
+      class="save-btn"
+      onclick="saveSettings()">
+      💾 ذخیره تنظیمات
+    </button>
+
+    <button
+      class="reset-btn"
+      onclick="resetSettings()">
+      🔄 بازنشانی تنظیمات
+    </button>
+
+  </div>
+
+</div>
+
+  </div>  <script>
+
+    /* =========================
+       بارگذاری تنظیمات
+    ========================= */
+
+    function loadSettings() {
+
+      const settings =
+        JSON.parse(
+          localStorage.getItem("doctoryarSettings")
+        ) || {};
+
+      document.getElementById("siteName").value =
+        settings.siteName || "داکتر یار";
+
+      document.getElementById("siteDescription").value =
+        settings.siteDescription ||
+        "سامانه جستجو و نوبت‌دهی داکتران";
+
+      document.getElementById("adminPhone").value =
+        settings.adminPhone || "";
+
+      document.getElementById("adminEmail").value =
+        settings.adminEmail || "";
+
+      document.getElementById("language").value =
+        settings.language || "fa";
+
+      document.getElementById("doctorNotification").checked =
+        settings.doctorNotification !== false;
+
+      document.getElementById("appointmentNotification").checked =
+        settings.appointmentNotification !== false;
+
+      document.getElementById("complaintNotification").checked =
+        settings.complaintNotification !== false;
+    }
+
+
+    /* =========================
+       ذخیره تنظیمات
+    ========================= */
+
+    function saveSettings() {
+
+      const settings = {
+
+        siteName:
+          document.getElementById("siteName").value.trim(),
+
+        siteDescription:
+          document.getElementById("siteDescription").value.trim(),
+
+        adminPhone:
+          document.getElementById("adminPhone").value.trim(),
+
+        adminEmail:
+          document.getElementById("adminEmail").value.trim(),
+
+        language:
+          document.getElementById("language").value,
+
+        doctorNotification:
+          document.getElementById("doctorNotification").checked,
+
+        appointmentNotification:
+          document.getElementById("appointmentNotification").checked,
+
+        complaintNotification:
+          document.getElementById("complaintNotification").checked
+
+      };
+
+
+      localStorage.setItem(
+        "doctoryarSettings",
+        JSON.stringify(settings)
+      );
+
+
+      showMessage(
+        "تنظیمات با موفقیت ذخیره شد ✅",
+        "success"
+      );
+    }
+
+
+    /* =========================
+       بازنشانی
+    ========================= */
+
+    function resetSettings() {
+
+      const confirmReset =
+        confirm(
+          "آیا مطمئن هستید که می‌خواهید تنظیمات به حالت اولیه برگردد؟"
+        );
+
+      if (!confirmReset) {
+        return;
+      }
+
+      localStorage.removeItem("doctoryarSettings");
+
+      loadSettings();
+
+      showMessage(
+        "تنظیمات به حالت اولیه برگشت 🔄",
+        "success"
+      );
+    }
+
+
+    /* =========================
+       تغییر رمز
+    ========================= */
+
+    function changePassword() {
+
+      const newPassword =
+        document.getElementById("newPassword").value;
+
+      const confirmPassword =
+        document.getElementById("confirmPassword").value;
+
+
+      if (newPassword.length < 6) {
+
+        showMessage(
+          "رمز عبور باید حداقل ۶ حرف یا عدد باشد.",
+          "error"
+        );
+
+        return;
+      }
+
+
+      if (newPassword !== confirmPassword) {
+
+        showMessage(
+          "رمزهای عبور یکسان نیستند.",
+          "error"
+        );
+
+        return;
+      }
+
+
+      localStorage.setItem(
+        "adminPassword",
+        newPassword
+      );
+
+
+      document.getElementById("newPassword").value = "";
+      document.getElementById("confirmPassword").value = "";
+
+
+      showMessage(
+        "رمز عبور با موفقیت تغییر کرد 🔐",
+        "success"
+      );
+    }
+
+
+    /* =========================
+       خروج
+    ========================= */
+
+    function logout() {
+
+      const confirmLogout =
+        confirm(
+          "آیا می‌خواهید از بخش مدیریت خارج شوید؟"
+        );
+
+      if (!confirmLogout) {
+        return;
+      }
+
+      window.location.href = "admin-login.html";
+    }
+
+
+    /* =========================
+       برگشت
+    ========================= */
+
+    function goBack() {
+
+      window.location.href = "admin.html";
+    }
+
+
+    /* =========================
+       پیام
+    ========================= */
+
+    function showMessage(text, type) {
+
+      const message =
+        document.getElementById("message");
+
+      message.textContent = text;
+
+      message.className = type;
+
+      message.style.display = "block";
+
+
+      setTimeout(function() {
+
+        message.style.display = "none";
+
+      }, 3000);
+    }
+
+
+    /* =========================
+       شروع صفحه
+    ========================= */
+
+    window.onload = function() {
+
+      loadSettings();
+
+    };
+
+  </script></body>
+  </html>
