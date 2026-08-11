@@ -14,931 +14,828 @@
 
     body {
       margin: 0;
-      padding: 15px;
+      padding: 0;
       font-family: Tahoma, Arial, sans-serif;
-      background: #f3f7f7;
+      background: #f4f7f9;
       color: #263238;
     }
 
-    .container {
-      max-width: 1000px;
-      margin: auto;
-    }
-
-    .header {
+    /* Header */
+    header {
       background: #0d9488;
       color: white;
-      padding: 25px 15px;
-      border-radius: 15px;
+      padding: 18px 20px;
       text-align: center;
-      margin-bottom: 18px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.12);
     }
 
-    .header h1 {
-      margin: 0 0 8px;
+    header h1 {
+      margin: 0;
       font-size: 24px;
     }
 
-    .header p {
-      margin: 0;
-      font-size: 13px;
+    header p {
+      margin: 7px 0 0;
+      font-size: 14px;
+      opacity: 0.95;
     }
 
-    .back {
+    /* Main */
+    .container {
+      max-width: 1200px;
+      margin: 25px auto;
+      padding: 0 15px;
+    }
+
+    /* Back */
+    .back-btn {
       display: inline-block;
-      margin-top: 15px;
-      background: white;
-      color: #0d9488;
-      padding: 9px 18px;
-      border-radius: 8px;
       text-decoration: none;
-      font-weight: bold;
+      background: #607d8b;
+      color: white;
+      padding: 10px 18px;
+      border-radius: 8px;
+      margin-bottom: 20px;
+      font-size: 14px;
     }
 
-    .tabs {
+    .back-btn:hover {
+      background: #455a64;
+    }
+
+    /* Statistics */
+    .stats {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 10px;
-      margin-bottom: 18px;
+      gap: 15px;
+      margin-bottom: 25px;
     }
 
-    .tab {
-      border: none;
+    .stat-card {
       background: white;
-      padding: 15px 8px;
       border-radius: 12px;
-      font-family: inherit;
-      font-size: 14px;
+      padding: 20px;
+      text-align: center;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    }
+
+    .stat-card .number {
+      font-size: 30px;
       font-weight: bold;
-      cursor: pointer;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+      margin-bottom: 8px;
     }
 
-    .tab.active {
-      background: #0d9488;
-      color: white;
+    .stat-card.pending .number {
+      color: #f59e0b;
     }
 
-    .content {
+    .stat-card.approved .number {
+      color: #16a34a;
+    }
+
+    .stat-card.rejected .number {
+      color: #dc2626;
+    }
+
+    .stat-card span {
+      color: #607d8b;
+      font-size: 14px;
+    }
+
+    /* Section */
+    .section {
       background: white;
-      padding: 18px;
-      border-radius: 15px;
-      box-shadow: 0 3px 10px rgba(0,0,0,0.06);
+      border-radius: 14px;
+      padding: 20px;
+      margin-bottom: 25px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
     }
 
-    .top {
+    .section-title {
       display: flex;
       justify-content: space-between;
       align-items: center;
       gap: 10px;
+      margin-bottom: 18px;
       flex-wrap: wrap;
-      margin-bottom: 15px;
     }
 
-    .top h2 {
+    .section-title h2 {
       margin: 0;
-      color: #0d9488;
-      font-size: 19px;
+      font-size: 20px;
     }
 
-    .count {
-      background: #e0f2f1;
-      color: #00695c;
-      padding: 7px 12px;
-      border-radius: 20px;
-      font-size: 12px;
-      font-weight: bold;
-    }
-
-    .search {
+    /* Search */
+    .search-box {
       width: 100%;
-      border: 1px solid #d8e2e2;
-      border-radius: 9px;
-      padding: 12px;
+      max-width: 350px;
+      padding: 11px 14px;
+      border: 1px solid #d1d5db;
+      border-radius: 8px;
       font-family: inherit;
       font-size: 14px;
       outline: none;
-      margin-bottom: 15px;
     }
 
-    .search:focus {
+    .search-box:focus {
       border-color: #0d9488;
     }
 
-    .doctor {
-      border: 1px solid #e2eaea;
-      background: #fafcfc;
-      padding: 16px;
-      border-radius: 13px;
-      margin-bottom: 12px;
+    /* Table */
+    .table-wrapper {
+      width: 100%;
+      overflow-x: auto;
     }
 
-    .doctor-head {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 10px;
-      flex-wrap: wrap;
-      margin-bottom: 13px;
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 850px;
     }
 
-    .name {
-      font-size: 17px;
-      font-weight: bold;
+    th {
+      background: #f0fdfa;
+      color: #374151;
+      padding: 13px 10px;
+      border-bottom: 2px solid #d1d5db;
+      font-size: 14px;
+      white-space: nowrap;
     }
 
-    .id {
-      display: block;
-      margin-top: 4px;
-      color: #90a4ae;
-      font-size: 11px;
+    td {
+      padding: 13px 10px;
+      border-bottom: 1px solid #e5e7eb;
+      text-align: center;
+      font-size: 14px;
     }
 
+    tr:hover {
+      background: #fafafa;
+    }
+
+    /* Status */
     .status {
+      display: inline-block;
       padding: 6px 10px;
       border-radius: 20px;
-      font-size: 11px;
+      font-size: 12px;
       font-weight: bold;
     }
 
-    .pending {
-      background: #fff3cd;
-      color: #856404;
+    .status.pending {
+      background: #fff7ed;
+      color: #c2410c;
     }
 
-    .approved {
-      background: #dcfce7;
-      color: #166534;
+    .status.approved {
+      background: #f0fdf4;
+      color: #15803d;
     }
 
-    .rejected {
-      background: #fee2e2;
-      color: #991b1b;
+    .status.rejected {
+      background: #fef2f2;
+      color: #b91c1c;
     }
 
-    .info {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 8px;
-    }
-
-    .item {
-      background: white;
-      border: 1px solid #edf1f1;
-      padding: 9px;
-      border-radius: 8px;
-    }
-
-    .label {
-      display: block;
-      color: #90a4ae;
-      font-size: 10px;
-      margin-bottom: 4px;
-    }
-
-    .value {
-      font-size: 13px;
-      font-weight: bold;
-    }
-
-    .buttons {
-      display: flex;
-      gap: 8px;
-      flex-wrap: wrap;
-      margin-top: 13px;
-    }
-
+    /* Buttons */
     .btn {
       border: none;
-      padding: 9px 13px;
-      border-radius: 8px;
+      padding: 8px 12px;
+      border-radius: 7px;
       font-family: inherit;
-      font-weight: bold;
       cursor: pointer;
       font-size: 12px;
+      margin: 2px;
     }
 
-    .details {
-      background: #e0f2f1;
-      color: #00695c;
+    .btn-view {
+      background: #e0f2fe;
+      color: #0369a1;
     }
 
-    .approve {
+    .btn-view:hover {
+      background: #bae6fd;
+    }
+
+    .btn-approve {
       background: #dcfce7;
       color: #166534;
     }
 
-    .reject {
-      background: #fee2e2;
-      color: #991b1b;
+    .btn-approve:hover {
+      background: #bbf7d0;
     }
 
+    .btn-reject {
+      background: #fee2e2;
+      color: #b91c1c;
+    }
+
+    .btn-reject:hover {
+      background: #fecaca;
+    }
+
+    /* Empty */
     .empty {
       text-align: center;
-      padding: 45px 10px;
-      color: #90a4ae;
+      padding: 35px 15px;
+      color: #78909c;
+      display: none;
     }
 
-    .empty-icon {
-      font-size: 42px;
-      margin-bottom: 8px;
-    }
-
-    /* پنجره جزئیات */
-
+    /* Modal */
     .modal {
       display: none;
       position: fixed;
-      inset: 0;
-      background: rgba(0,0,0,0.45);
-      padding: 15px;
-      overflow-y: auto;
       z-index: 1000;
-    }
-
-    .modal-box {
-      max-width: 600px;
-      margin: 30px auto;
-      background: white;
-      border-radius: 15px;
+      inset: 0;
+      background: rgba(0,0,0,0.55);
       padding: 20px;
+      overflow-y: auto;
     }
 
-    .modal-head {
+    .modal-content {
+      background: white;
+      max-width: 650px;
+      margin: 40px auto;
+      border-radius: 14px;
+      overflow: hidden;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    }
+
+    .modal-header {
+      background: #0d9488;
+      color: white;
+      padding: 17px 20px;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: 15px;
     }
 
-    .modal-head h2 {
+    .modal-header h3 {
       margin: 0;
-      color: #0d9488;
-      font-size: 19px;
-    }
-
-    .close {
-      border: none;
-      width: 35px;
-      height: 35px;
-      border-radius: 50%;
-      background: #f1f5f5;
-      cursor: pointer;
       font-size: 18px;
     }
 
-    .detail {
-      background: #f8faf9;
-      padding: 11px;
+    .close {
+      font-size: 26px;
+      cursor: pointer;
+      line-height: 1;
+    }
+
+    .modal-body {
+      padding: 22px;
+    }
+
+    .info-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 14px;
+    }
+
+    .info-item {
+      background: #f8fafc;
+      padding: 12px;
       border-radius: 8px;
-      margin-bottom: 8px;
     }
 
-    .detail strong {
+    .info-item strong {
       display: block;
-      color: #78909c;
-      font-size: 11px;
-      margin-bottom: 4px;
+      color: #607d8b;
+      font-size: 12px;
+      margin-bottom: 5px;
     }
 
-    @media (max-width: 600px) {
-      .tabs {
+    .info-item span {
+      font-size: 14px;
+      color: #263238;
+    }
+
+    .modal-actions {
+      margin-top: 20px;
+      display: flex;
+      gap: 8px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .modal-actions button {
+      padding: 10px 20px;
+      border: none;
+      border-radius: 8px;
+      font-family: inherit;
+      cursor: pointer;
+    }
+
+    .approve-main {
+      background: #16a34a;
+      color: white;
+    }
+
+    .reject-main {
+      background: #dc2626;
+      color: white;
+    }
+
+    .cancel-main {
+      background: #64748b;
+      color: white;
+    }
+
+    /* Reject box */
+    .reject-box {
+      display: none;
+      margin-top: 15px;
+    }
+
+    .reject-box textarea {
+      width: 100%;
+      min-height: 100px;
+      resize: vertical;
+      padding: 12px;
+      border: 1px solid #d1d5db;
+      border-radius: 8px;
+      font-family: inherit;
+      outline: none;
+    }
+
+    .reject-box textarea:focus {
+      border-color: #dc2626;
+    }
+
+    /* Responsive */
+    @media (max-width: 700px) {
+      .stats {
         grid-template-columns: 1fr;
       }
 
-      .info {
+      .info-grid {
         grid-template-columns: 1fr;
       }
 
-      .header h1 {
-        font-size: 21px;
+      header h1 {
+        font-size: 20px;
+      }
+
+      .container {
+        margin-top: 15px;
+      }
+
+      .section {
+        padding: 15px;
       }
     }
   </style>
 </head>
 
-
 <body>
 
-<div class="container">
+  <header>
+    <h1>بررسی ثبت‌نام داکتران</h1>
+    <p>مدیریت و بررسی درخواست‌های ثبت‌نام داکتران</p>
+  </header>
 
-  <div class="header">
+  <div class="container">
 
-    <h1>👨‍⚕️ بررسی ثبت‌نام داکتران</h1>
+    <a href="admin.html" class="back-btn">← برگشت به مدیریت</a>
 
-    <p>
-      ثبت‌نام‌های جدید ابتدا توسط مدیر بررسی می‌شوند
-    </p>
+    <!-- Statistics -->
+    <div class="stats">
 
-    <a href="admin.html" class="back">
-      ← بازگشت به مدیریت
-    </a>
+      <div class="stat-card pending">
+        <div class="number" id="pendingCount">2</div>
+        <span>در انتظار بررسی</span>
+      </div>
 
-  </div>
+      <div class="stat-card approved">
+        <div class="number" id="approvedCount">1</div>
+        <span>تأیید شده</span>
+      </div>
 
-
-  <div class="tabs">
-
-    <button
-      class="tab active"
-      onclick="setFilter('pending', this)">
-      ⏳ در انتظار بررسی
-    </button>
-
-    <button
-      class="tab"
-      onclick="setFilter('approved', this)">
-      ✅ تأییدشده
-    </button>
-
-    <button
-      class="tab"
-      onclick="setFilter('rejected', this)">
-      ❌ ردشده
-    </button>
-
-  </div>
-
-
-  <div class="content">
-
-    <div class="top">
-
-      <h2 id="title">
-        ثبت‌نام‌های در انتظار بررسی
-      </h2>
-
-      <span class="count" id="count">
-        0 مورد
-      </span>
+      <div class="stat-card rejected">
+        <div class="number" id="rejectedCount">1</div>
+        <span>رد شده</span>
+      </div>
 
     </div>
 
+    <!-- Pending -->
+    <div class="section">
 
-    <input
-      id="search"
-      class="search"
-      type="text"
-      placeholder="🔍 جستجوی نام داکتر، تخصص یا شهر..."
-      oninput="render()"
-    >
+      <div class="section-title">
+        <h2>📝 درخواست‌های جدید</h2>
 
+        <input
+          type="text"
+          id="searchInput"
+          class="search-box"
+          placeholder="جستجوی نام یا تخصص..."
+          onkeyup="searchDoctors()"
+        >
+      </div>
 
-    <div id="list"></div>
+      <div class="table-wrapper">
 
-  </div>
+        <table id="doctorTable">
 
-</div>
+          <thead>
+            <tr>
+              <th>نام داکتر</th>
+              <th>تخصص</th>
+              <th>شهر</th>
+              <th>شماره تماس</th>
+              <th>تاریخ ثبت</th>
+              <th>وضعیت</th>
+              <th>عملیات</th>
+            </tr>
+          </thead>
 
+          <tbody>
 
-<!-- Modal -->
+            <tr data-name="داکتر احمد احمدی" data-specialty="قلب">
+              <td>داکتر احمد احمدی</td>
+              <td>متخصص قلب</td>
+              <td>کابل</td>
+              <td>0700000000</td>
+              <td>۱۴۰۵/۰۵/۲۰</td>
+              <td>
+                <span class="status pending">در انتظار</span>
+              </td>
+              <td>
+                <button class="btn btn-view"
+                  onclick="viewDoctor('داکتر احمد احمدی','متخصص قلب','کابل','0700000000','احمدی@example.com','۱۴۰۵/۰۵/۲۰')">
+                  مشاهده
+                </button>
 
-<div id="modal" class="modal">
+                <button class="btn btn-approve"
+                  onclick="approveDoctor(this)">
+                  تأیید
+                </button>
 
-  <div class="modal-box">
+                <button class="btn btn-reject"
+                  onclick="rejectDoctor(this)">
+                  رد
+                </button>
+              </td>
+            </tr>
 
-    <div class="modal-head">
+            <tr data-name="داکتر مریم محمدی" data-specialty="اطفال">
+              <td>داکتر مریم محمدی</td>
+              <td>متخصص اطفال</td>
+              <td>هرات</td>
+              <td>0711111111</td>
+              <td>۱۴۰۵/۰۵/۲۱</td>
+              <td>
+                <span class="status pending">در انتظار</span>
+              </td>
+              <td>
+                <button class="btn btn-view"
+                  onclick="viewDoctor('داکتر مریم محمدی','متخصص اطفال','هرات','0711111111','maryam@example.com','۱۴۰۵/۰۵/۲۱')">
+                  مشاهده
+                </button>
 
-      <h2>
-        جزئیات داکتر
-      </h2>
+                <button class="btn btn-approve"
+                  onclick="approveDoctor(this)">
+                  تأیید
+                </button>
 
-      <button
-        class="close"
-        onclick="closeModal()">
-        ×
-      </button>
+                <button class="btn btn-reject"
+                  onclick="rejectDoctor(this)">
+                  رد
+                </button>
+              </td>
+            </tr>
+
+          </tbody>
+
+        </table>
+
+        <div id="emptyMessage" class="empty">
+          موردی برای نمایش پیدا نشد.
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Reviewed -->
+    <div class="section">
+
+      <div class="section-title">
+        <h2>📋 درخواست‌های بررسی‌شده</h2>
+      </div>
+
+      <div class="table-wrapper">
+
+        <table>
+
+          <thead>
+            <tr>
+              <th>نام داکتر</th>
+              <th>تخصص</th>
+              <th>شهر</th>
+              <th>تاریخ</th>
+              <th>وضعیت</th>
+            </tr>
+          </thead>
+
+          <tbody>
+
+            <tr>
+              <td>داکتر علی رضایی</td>
+              <td>متخصص داخله</td>
+              <td>کابل</td>
+              <td>۱۴۰۵/۰۵/۱۵</td>
+              <td>
+                <span class="status approved">تأیید شده</span>
+              </td>
+            </tr>
+
+            <tr>
+              <td>داکتر فاطمه حسینی</td>
+              <td>متخصص نسایی ولادی</td>
+              <td>مزار شریف</td>
+              <td>۱۴۰۵/۰۵/۱۶</td>
+              <td>
+                <span class="status rejected">رد شده</span>
+              </td>
+            </tr>
+
+          </tbody>
+
+        </table>
+
+      </div>
 
     </div>
 
-    <div id="details"></div>
+  </div>
+
+  <!-- Doctor Details Modal -->
+  <div id="doctorModal" class="modal">
+
+    <div class="modal-content">
+
+      <div class="modal-header">
+        <h3>مشخصات داکتر</h3>
+        <span class="close" onclick="closeModal()">×</span>
+      </div>
+
+      <div class="modal-body">
+
+        <div class="info-grid">
+
+          <div class="info-item">
+            <strong>نام داکتر</strong>
+            <span id="doctorName"></span>
+          </div>
+
+          <div class="info-item">
+            <strong>تخصص</strong>
+            <span id="doctorSpecialty"></span>
+          </div>
+
+          <div class="info-item">
+            <strong>شهر</strong>
+            <span id="doctorCity"></span>
+          </div>
+
+          <div class="info-item">
+            <strong>شماره تماس</strong>
+            <span id="doctorPhone"></span>
+          </div>
+
+          <div class="info-item">
+            <strong>ایمیل</strong>
+            <span id="doctorEmail"></span>
+          </div>
+
+          <div class="info-item">
+            <strong>تاریخ ثبت‌نام</strong>
+            <span id="doctorDate"></span>
+          </div>
+
+        </div>
+
+        <div class="reject-box" id="rejectBox">
+
+          <textarea
+            id="rejectReason"
+            placeholder="دلیل رد درخواست را بنویسید...">
+          </textarea>
+
+        </div>
+
+        <div class="modal-actions">
+
+          <button class="approve-main" onclick="approveFromModal()">
+            ✓ تأیید داکتر
+          </button>
+
+          <button class="reject-main" onclick="showRejectBox()">
+            ✕ رد درخواست
+          </button>
+
+          <button class="cancel-main" onclick="closeModal()">
+            بستن
+          </button>
+
+        </div>
+
+      </div>
+
+    </div>
 
   </div>
 
-</div>
+  <script>
 
+    let selectedRow = null;
 
-<script>
+    /* View Doctor */
+    function viewDoctor(name, specialty, city, phone, email, date) {
 
-  /*
-  ==========================================
-  سیستم ثبت‌نام داکتران
-  ==========================================
+      document.getElementById("doctorName").textContent = name;
+      document.getElementById("doctorSpecialty").textContent = specialty;
+      document.getElementById("doctorCity").textContent = city;
+      document.getElementById("doctorPhone").textContent = phone;
+      document.getElementById("doctorEmail").textContent = email;
+      document.getElementById("doctorDate").textContent = date;
 
-  اطلاعات در این قسمت ذخیره می‌شود:
+      document.getElementById("rejectBox").style.display = "none";
+      document.getElementById("rejectReason").value = "";
 
-  doctorRegistrations
-
-  وضعیت‌ها:
-
-  pending  = در انتظار بررسی
-  approved = تأییدشده
-  rejected = ردشده
-
-  ==========================================
-  */
-
-
-  let doctors = JSON.parse(
-    localStorage.getItem("doctorRegistrations")
-  );
-
-
-  /*
-  اگر هنوز هیچ داکتری ثبت نشده باشد،
-  آرایه خالی ایجاد می‌شود.
-  */
-
-  if (!Array.isArray(doctors)) {
-    doctors = [];
-  }
-
-
-  let currentFilter = "pending";
-
-
-  /*
-  ------------------------------------------
-  تغییر تب
-  ------------------------------------------
-  */
-
-  function setFilter(filter, button) {
-
-    currentFilter = filter;
-
-    document
-      .querySelectorAll(".tab")
-      .forEach(function(btn) {
-        btn.classList.remove("active");
-      });
-
-    button.classList.add("active");
-
-
-    if (filter === "pending") {
-
-      document.getElementById("title").textContent =
-        "ثبت‌نام‌های در انتظار بررسی";
-
+      document.getElementById("doctorModal").style.display = "block";
     }
 
-    else if (filter === "approved") {
-
-      document.getElementById("title").textContent =
-        "داکتران تأییدشده";
-
+    /* Close Modal */
+    function closeModal() {
+      document.getElementById("doctorModal").style.display = "none";
+      selectedRow = null;
     }
 
-    else {
+    /* Approve */
+    function approveDoctor(button) {
 
-      document.getElementById("title").textContent =
-        "ثبت‌نام‌های ردشده";
+      const row = button.closest("tr");
 
+      const name = row.cells[0].textContent.trim();
+
+      const confirmApprove =
+        confirm("آیا مطمئن هستید که می‌خواهید " + name + " را تأیید کنید؟");
+
+      if (!confirmApprove) {
+        return;
+      }
+
+      row.remove();
+
+      updateCounts();
+
+      alert("درخواست داکتر با موفقیت تأیید شد.");
     }
 
+    /* Reject */
+    function rejectDoctor(button) {
 
-    render();
-  }
+      const row = button.closest("tr");
 
+      const name = row.cells[0].textContent.trim();
 
-  /*
-  ------------------------------------------
-  نمایش داکتران
-  ------------------------------------------
-  */
+      const reason = prompt(
+        "دلیل رد درخواست " + name + " را وارد کنید:"
+      );
 
-  function render() {
+      if (reason === null) {
+        return;
+      }
 
-    const search =
-      document.getElementById("search")
-      .value
-      .trim()
-      .toLowerCase();
+      if (reason.trim() === "") {
+        alert("لطفاً دلیل رد درخواست را وارد کنید.");
+        return;
+      }
 
+      row.remove();
 
-    let filtered = doctors.filter(function(doctor) {
+      updateCounts();
 
-      return doctor.status === currentFilter;
-
-    });
-
-
-    if (search !== "") {
-
-      filtered = filtered.filter(function(doctor) {
-
-        return (
-
-          String(doctor.name || "")
-            .toLowerCase()
-            .includes(search)
-
-          ||
-
-          String(doctor.specialty || "")
-            .toLowerCase()
-            .includes(search)
-
-          ||
-
-          String(doctor.city || "")
-            .toLowerCase()
-            .includes(search)
-
-        );
-
-      });
-
+      alert("درخواست داکتر رد شد.");
     }
 
+    /* Approve From Modal */
+    function approveFromModal() {
 
-    document.getElementById("count").textContent =
-      filtered.length + " مورد";
+      const name = document.getElementById("doctorName").textContent;
 
+      const confirmApprove =
+        confirm("آیا مطمئن هستید که می‌خواهید " + name + " را تأیید کنید؟");
 
-    const list =
-      document.getElementById("list");
+      if (!confirmApprove) {
+        return;
+      }
 
+      closeModal();
 
-    if (filtered.length === 0) {
-
-      list.innerHTML = `
-
-        <div class="empty">
-
-          <div class="empty-icon">
-            📭
-          </div>
-
-          <div>
-            در این بخش داکتری وجود ندارد.
-          </div>
-
-        </div>
-
-      `;
-
-      return;
+      alert("داکتر با موفقیت تأیید شد.");
     }
 
+    /* Reject Box */
+    function showRejectBox() {
 
-    list.innerHTML =
-      filtered.map(function(doctor) {
+      const box = document.getElementById("rejectBox");
 
-        return createDoctorCard(doctor);
+      box.style.display = "block";
 
-      }).join("");
+      document.getElementById("rejectReason").focus();
 
-  }
+      const oldButton = document.querySelector(".reject-main");
 
+      oldButton.textContent = "تأیید رد درخواست";
 
-  /*
-  ------------------------------------------
-  کارت داکتر
-  ------------------------------------------
-  */
-
-  function createDoctorCard(doctor) {
-
-    let statusText = "";
-    let statusClass = "";
-
-
-    if (doctor.status === "pending") {
-
-      statusText = "در انتظار بررسی";
-      statusClass = "pending";
-
+      oldButton.onclick = confirmReject;
     }
 
-    else if (doctor.status === "approved") {
+    /* Confirm Reject */
+    function confirmReject() {
 
-      statusText = "تأییدشده";
-      statusClass = "approved";
+      const reason =
+        document.getElementById("rejectReason").value.trim();
 
+      if (reason === "") {
+
+        alert("لطفاً دلیل رد درخواست را بنویسید.");
+
+        return;
+      }
+
+      closeModal();
+
+      alert("درخواست داکتر رد شد.");
     }
 
-    else {
+    /* Search */
+    function searchDoctors() {
 
-      statusText = "ردشده";
-      statusClass = "rejected";
+      const input =
+        document.getElementById("searchInput").value
+        .toLowerCase()
+        .trim();
 
-    }
+      const rows =
+        document.querySelectorAll("#doctorTable tbody tr");
 
+      let visible = 0;
 
-    let buttons = `
+      rows.forEach(function(row) {
 
-      <button
-        class="btn details"
-        onclick="showDetails('${doctor.id}')">
-        👁 جزئیات
-      </button>
+        const name =
+          row.getAttribute("data-name").toLowerCase();
 
-    `;
+        const specialty =
+          row.getAttribute("data-specialty").toLowerCase();
 
+        if (
+          name.includes(input) ||
+          specialty.includes(input)
+        ) {
 
-    if (doctor.status === "pending") {
+          row.style.display = "";
+          visible++;
 
-      buttons += `
+        } else {
 
-        <button
-          class="btn approve"
-          onclick="approveDoctor('${doctor.id}')">
-          ✅ تأیید
-        </button>
+          row.style.display = "none";
 
-        <button
-          class="btn reject"
-          onclick="rejectDoctor('${doctor.id}')">
-          ❌ رد
-        </button>
-
-      `;
-
-    }
-
-
-    return `
-
-      <div class="doctor">
-
-        <div class="doctor-head">
-
-          <div>
-
-            <div class="name">
-              ${doctor.name || "بدون نام"}
-            </div>
-
-            <span class="id">
-              شماره ثبت: ${doctor.id || "-"}
-            </span>
-
-          </div>
-
-          <span class="status ${statusClass}">
-            ${statusText}
-          </span>
-
-        </div>
-
-
-        <div class="info">
-
-          <div class="item">
-
-            <span class="label">
-              تخصص
-            </span>
-
-            <span class="value">
-              ${doctor.specialty || "-"}
-            </span>
-
-          </div>
-
-
-          <div class="item">
-
-            <span class="label">
-              شهر
-            </span>
-
-            <span class="value">
-              ${doctor.city || "-"}
-            </span>
-
-          </div>
-
-
-          <div class="item">
-
-            <span class="label">
-              شماره تماس
-            </span>
-
-            <span class="value">
-              ${doctor.phone || "-"}
-            </span>
-
-          </div>
-
-
-          <div class="item">
-
-            <span class="label">
-              تجربه کاری
-            </span>
-
-            <span class="value">
-              ${doctor.experience || "-"}
-            </span>
-
-          </div>
-
-        </div>
-
-
-        <div class="buttons">
-
-          ${buttons}
-
-        </div>
-
-      </div>
-
-    `;
-
-  }
-
-
-  /*
-  ------------------------------------------
-  مشاهده جزئیات
-  ------------------------------------------
-  */
-
-  function showDetails(id) {
-
-    const doctor =
-      doctors.find(function(item) {
-
-        return item.id === id;
+        }
 
       });
 
+      document.getElementById("emptyMessage").style.display =
+        visible === 0 ? "block" : "none";
+    }
 
-    if (!doctor) return;
+    /* Counts */
+    function updateCounts() {
 
+      const pendingRows =
+        document.querySelectorAll("#doctorTable tbody tr");
 
-    document.getElementById("details").innerHTML = `
+      document.getElementById("pendingCount").textContent =
+        pendingRows.length;
+    }
 
-      <div class="detail">
-        <strong>نام داکتر</strong>
-        ${doctor.name || "-"}
-      </div>
+    /* Close modal when clicking outside */
+    window.onclick = function(event) {
 
-      <div class="detail">
-        <strong>تخصص</strong>
-        ${doctor.specialty || "-"}
-      </div>
+      const modal =
+        document.getElementById("doctorModal");
 
-      <div class="detail">
-        <strong>شماره تماس</strong>
-        ${doctor.phone || "-"}
-      </div>
+      if (event.target === modal) {
+        closeModal();
+      }
 
-      <div class="detail">
-        <strong>شهر</strong>
-        ${doctor.city || "-"}
-      </div>
+    };
 
-      <div class="detail">
-        <strong>تحصیلات</strong>
-        ${doctor.education || "-"}
-      </div>
-
-      <div class="detail">
-        <strong>شماره جواز / ثبت</strong>
-        ${doctor.license || "-"}
-      </div>
-
-      <div class="detail">
-        <strong>تجربه کاری</strong>
-        ${doctor.experience || "-"}
-      </div>
-
-      <div class="detail">
-        <strong>قیمت ویزیت</strong>
-        ${doctor.visitPrice || "وارد نشده"}
-      </div>
-
-    `;
-
-
-    document.getElementById("modal").style.display =
-      "block";
-
-  }
-
-
-  /*
-  ------------------------------------------
-  بستن جزئیات
-  ------------------------------------------
-  */
-
-  function closeModal() {
-
-    document.getElementById("modal").style.display =
-      "none";
-
-  }
-
-
-  /*
-  ------------------------------------------
-  تأیید داکتر
-  ------------------------------------------
-  */
-
-  function approveDoctor(id) {
-
-    const doctor =
-      doctors.find(function(item) {
-
-        return item.id === id;
-
-      });
-
-
-    if (!doctor) return;
-
-
-    const answer = confirm(
-      "آیا از تأیید ثبت‌نام این داکتر مطمئن هستید؟"
-    );
-
-
-    if (!answer) return;
-
-
-    doctor.status = "approved";
-
-
-    localStorage.setItem(
-      "doctorRegistrations",
-      JSON.stringify(doctors)
-    );
-
-
-    alert(
-      "ثبت‌نام داکتر با موفقیت تأیید شد."
-    );
-
-
-    render();
-
-  }
-
-
-  /*
-  ------------------------------------------
-  رد داکتر
-  ------------------------------------------
-  */
-
-  function rejectDoctor(id) {
-
-    const doctor =
-      doctors.find(function(item) {
-
-        return item.id === id;
-
-      });
-
-
-    if (!doctor) return;
-
-
-    const answer = confirm(
-      "آیا از رد کردن ثبت‌نام این داکتر مطمئن هستید؟"
-    );
-
-
-    if (!answer) return;
-
-
-    doctor.status = "rejected";
-
-
-    localStorage.setItem(
-      "doctorRegistrations",
-      JSON.stringify(doctors)
-    );
-
-
-    alert(
-      "ثبت‌نام داکتر رد شد."
-    );
-
-
-    render();
-
-  }
-
-
-  /*
-  ------------------------------------------
-  شروع صفحه
-  ------------------------------------------
-  */
-
-  render();
-
-</script>
+  </script>
 
 </body>
-
-</html>
+                                    </html>
