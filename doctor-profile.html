@@ -7,6 +7,9 @@
 
   <title>پروفایل داکتر | داکتر یار</title>
 
+  <!-- اتصال به Supabase -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
   <style>
 
     * {
@@ -96,13 +99,7 @@
       padding: 13px;
       border-radius: 15px;
       font-size: 16px;
-    }
-
-    .day-name {
-      font-weight: bold;
-      color: #149e9a;
-      display: inline-block;
-      min-width: 80px;
+      line-height: 1.8;
     }
 
     .contact-btn {
@@ -117,12 +114,7 @@
       border-radius: 18px;
       font-size: 19px;
       border: none;
-      font-family: Tahoma;
       cursor: pointer;
-    }
-
-    .appointments-btn {
-      background: #0b8f87;
     }
 
     .back-link {
@@ -134,13 +126,21 @@
       font-size: 18px;
     }
 
-    .no-doctor {
+    .message {
       background: white;
       padding: 30px;
       border-radius: 22px;
       text-align: center;
       font-size: 18px;
       line-height: 2;
+    }
+
+    .loading {
+      padding: 40px 20px;
+    }
+
+    .error {
+      color: #b32626;
     }
 
   </style>
@@ -151,13 +151,16 @@
 
   <div class="container">
 
-    <div id="profile"></div>
+    <div id="profile">
 
-    <a
-      href="index.html"
-      class="back-link"
-    >
-      ← بازگشت به صفحه اصلی
+      <div class="message loading">
+        ⏳ در حال دریافت اطلاعات داکتر...
+      </div>
+
+    </div>
+
+    <a href="doctor-search.html" class="back-link">
+      ← بازگشت به جستجوی داکتر
     </a>
 
   </div>
@@ -165,277 +168,439 @@
 
   <script>
 
-    const savedProfile =
-      localStorage.getItem("doctorProfile");
+    /* =====================================================
+       اطلاعات Supabase
+       ===================================================== */
+
+    const SUPABASE_URL =
+      "اینجا آدرس پروژه Supabase را قرار می‌دهیم";
+
+    const SUPABASE_ANON_KEY =
+      "اینجا کلید Anon پروژه را قرار می‌دهیم";
+
+
+    /* =====================================================
+       ساخت اتصال Supabase
+       ===================================================== */
+
+    const supabaseClient =
+      window.supabase.createClient(
+        SUPABASE_URL,
+        SUPABASE_ANON_KEY
+      );
+
+
+    /* =====================================================
+       گرفتن ID داکتر از آدرس
+       ===================================================== */
+
+    const urlParams =
+      new URLSearchParams(window.location.search);
+
+    const doctorId =
+      urlParams.get("id");
+
 
     const profileBox =
       document.getElementById("profile");
 
 
-    if (!savedProfile) {
+    /* =====================================================
+       نوع ویزیت
+       ===================================================== */
+
+    function createVisitTypes(value) {
+
+      if (!value) {
+        return "ثبت نشده";
+      }
+
+      let types = [];
+
+      if (Array.isArray(value)) {
+
+        types = value;
+
+      } else {
+
+        try {
+
+          const parsed =
+            JSON.parse(value);
+
+          if (Array.isArray(parsed)) {
+
+            types = parsed;
+
+          } else {
+
+            types =
+              String(value)
+                .split(",")
+                .map(item => item.trim());
+
+          }
+
+        } catch {
+
+          types =
+            String(value)
+              .split(",")
+              .map(item => item.trim());
+
+        }
+
+      }
+
+      if (types.length === 0) {
+        return "ثبت نشده";
+      }
+
+      return types.map(type => `
+
+        <span class="visit-type">
+          ${type}
+        </span>
+
+      `).join("");
+
+    }
+
+
+    /* =====================================================
+       ساعات کاری
+       ===================================================== */
+
+    function createWorkingHours(value) {
+
+      if (!value) {
+
+        return `
+          <div class="day">
+            ساعات کاری ثبت نشده است.
+          </div>
+        `;
+
+      }
+
+      return `
+        <div class="day">
+          ${String(value).replace(/\n/g, "<br>")}
+        </div>
+      `;
+
+    }
+
+
+    /* =====================================================
+       نمایش پروفایل داکتر
+       ===================================================== */
+
+    function showDoctor(doctor) {
+
+      const price =
+        doctor.visit_price !== null &&
+        doctor.visit_price !== undefined &&
+        doctor.visit_price !== ""
+          ? doctor.visit_price + " افغانی"
+          : "ثبت نشده";
+
+
+      const visitTypes =
+        createVisitTypes(
+          doctor.visit_types
+        );
+
+
+      const workingHours =
+        createWorkingHours(
+          doctor.working_hours
+        );
+
 
       profileBox.innerHTML = `
 
-        <div class="no-doctor">
+        <!-- سرصفحه -->
 
-          هنوز مشخصات داکتری ثبت نشده است.
+        <div class="header">
 
-          <br><br>
+          <div class="doctor-icon">
+            👨‍⚕️
+          </div>
 
-          لطفاً ابتدا مشخصات داکتر را ثبت کنید.
+          <div class="doctor-name">
+            ${doctor.doctor_name || "نام ثبت نشده"}
+          </div>
+
+          <div class="specialty">
+            ${doctor.specialty || "تخصص ثبت نشده"}
+          </div>
+
+        </div>
+
+
+        <!-- اطلاعات داکتر -->
+
+        <div class="card">
+
+          <div class="card-title">
+            👨‍⚕️ اطلاعات داکتر
+          </div>
+
+          <div class="info-row">
+            <span class="label">
+              📍 شهر:
+            </span>
+
+            ${doctor.city || "ثبت نشده"}
+          </div>
+
+          <div class="info-row">
+            <span class="label">
+              📍 آدرس مطب:
+            </span>
+
+            ${doctor.address || "ثبت نشده"}
+          </div>
+
+          <div class="info-row">
+            <span class="label">
+              📞 شماره تماس:
+            </span>
+
+            ${doctor.phone || "ثبت نشده"}
+          </div>
+
+        </div>
+
+
+        <!-- نوبت‌دهی -->
+
+        <div class="card">
+
+          <div class="card-title">
+            📅 نوبت‌دهی
+          </div>
+
+          <a
+            href="appointment.html?id=${doctor.id}"
+            class="contact-btn"
+          >
+            📅 گرفتن نوبت
+          </a>
+
+        </div>
+
+
+        <!-- ساعات کاری -->
+
+        <div class="card">
+
+          <div class="card-title">
+            🕐 ساعات کاری
+          </div>
+
+          ${workingHours}
+
+        </div>
+
+
+        <!-- اطلاعات ویزیت -->
+
+        <div class="card">
+
+          <div class="card-title">
+            💰 اطلاعات ویزیت
+          </div>
+
+          <div class="info-row">
+
+            <span class="label">
+              قیمت ویزیت:
+            </span>
+
+            ${price}
+
+          </div>
+
+          <div class="info-row">
+
+            <span class="label">
+              نوع ویزیت:
+            </span>
+
+            <br>
+
+            ${visitTypes}
+
+          </div>
+
+        </div>
+
+
+        <!-- معرفی داکتر -->
+
+        <div class="card">
+
+          <div class="card-title">
+            👨‍⚕️ معرفی داکتر
+          </div>
+
+          <div class="info-row">
+            ${doctor.about || "معرفی داکتر ثبت نشده است."}
+          </div>
+
+        </div>
+
+
+        <!-- خدمات پزشکی -->
+
+        <div class="card">
+
+          <div class="card-title">
+            🩺 خدمات پزشکی
+          </div>
+
+          <div class="info-row">
+            ${doctor.services || "خدمات ثبت نشده است."}
+          </div>
+
+        </div>
+
+
+        <!-- تماس -->
+
+        <div class="card">
+
+          <div class="card-title">
+            📞 تماس با داکتر
+          </div>
+
+          <a
+            href="tel:${doctor.phone || ""}"
+            class="contact-btn"
+          >
+            📞 تماس با داکتر
+          </a>
 
         </div>
 
       `;
 
-    } else {
+    }
+
+
+    /* =====================================================
+       دریافت اطلاعات داکتر از جدول Doctors
+       ===================================================== */
+
+    async function loadDoctor() {
 
       try {
 
-        const doctor =
-          JSON.parse(savedProfile);
+        let query =
+          supabaseClient
+            .from("Doctors")
+            .select("*");
 
 
-        /* نوع ویزیت */
+        /* اگر ID داکتر در آدرس وجود داشت */
 
-        let visitTypesHTML = "";
+        if (doctorId) {
 
-        if (
-          Array.isArray(doctor.visitTypes) &&
-          doctor.visitTypes.length > 0
-        ) {
-
-          doctor.visitTypes.forEach(function(type) {
-
-            visitTypesHTML += `
-
-              <span class="visit-type">
-                ${type}
-              </span>
-
-            `;
-
-          });
+          query =
+            query
+              .eq("id", doctorId)
+              .single();
 
         } else {
 
-          visitTypesHTML = "ثبت نشده";
+          /* آخرین داکتر ثبت شده */
+
+          query =
+            query
+              .order("created_at", {
+                ascending: false
+              })
+              .limit(1)
+              .maybeSingle();
 
         }
 
 
-        /* قیمت ویزیت */
-
-        const price =
-          doctor.visitPrice
-            ? doctor.visitPrice + " افغانی"
-            : "ثبت نشده";
+        const {
+          data,
+          error
+        } = await query;
 
 
-        /* ساعات کاری */
+        /* خطای Supabase */
 
-        let workingHoursHTML = "";
+        if (error) {
 
-        if (doctor.workingHours) {
+          console.error(error);
 
-          workingHoursHTML = `
+          profileBox.innerHTML = `
 
-            <div class="day">
+            <div class="message error">
 
-              <span class="day-name">
-                ساعات کاری
-              </span>
+              ❌ دریافت اطلاعات داکتر موفق نشد.
 
-              ${doctor.workingHours}
+              <br><br>
+
+              جدول <b>Doctors</b>
+              را بررسی کنید.
 
             </div>
 
           `;
 
-        } else {
-
-          workingHoursHTML = `
-
-            <div class="day">
-              ساعات کاری ثبت نشده است.
-            </div>
-
-          `;
+          return;
 
         }
 
 
-        /* نمایش پروفایل */
+        /* هیچ داکتری پیدا نشد */
 
-        profileBox.innerHTML = `
+        if (!data) {
 
-          <div class="header">
+          profileBox.innerHTML = `
 
-            <div class="doctor-icon">
-              👨‍⚕️
-            </div>
+            <div class="message">
 
-            <div class="doctor-name">
-              ${doctor.doctorName || "نام ثبت نشده"}
-            </div>
+              هنوز اطلاعات داکتری ثبت نشده است.
 
-            <div class="specialty">
-              ${doctor.specialty || "تخصص ثبت نشده"}
-            </div>
+              <br><br>
 
-          </div>
-
-
-          <!-- اطلاعات داکتر -->
-
-          <div class="card">
-
-            <div class="card-title">
-              اطلاعات داکتر
-            </div>
-
-            <div class="info-row">
-              <span class="label">📍 شهر:</span>
-              ${doctor.city || "ثبت نشده"}
-            </div>
-
-            <div class="info-row">
-              <span class="label">📍 آدرس مطب:</span>
-              ${doctor.address || "ثبت نشده"}
-            </div>
-
-            <div class="info-row">
-              <span class="label">📞 شماره تماس:</span>
-              ${doctor.phone || "ثبت نشده"}
-            </div>
-
-          </div>
-
-
-          <!-- نوبت‌های بیماران -->
-
-          <div class="card">
-
-            <div class="card-title">
-              📅 مدیریت نوبت‌ها
-            </div>
-
-          
-  <a
-  href="./doctor-appointments.html"
-  class="contact-btn appointments-btn"
-  >
-  📅 مشاهده نوبت‌های بیماران
-  </a>
-          </div>
-
-
-          <!-- ساعات کاری -->
-
-          <div class="card">
-
-            <div class="card-title">
-              🕐 ساعات کاری
-            </div>
-
-            ${workingHoursHTML}
-
-          </div>
-
-
-          <!-- اطلاعات ویزیت -->
-
-          <div class="card">
-
-            <div class="card-title">
-              💰 اطلاعات ویزیت
-            </div>
-
-            <div class="info-row">
-
-              <span class="label">
-                قیمت ویزیت:
-              </span>
-
-              ${price}
+              ابتدا مشخصات داکتر را ثبت کنید.
 
             </div>
 
-            <div class="info-row">
+          `;
 
-              <span class="label">
-                نوع ویزیت:
-              </span>
+          return;
 
-              <br>
-
-              ${visitTypesHTML}
-
-            </div>
-
-          </div>
+        }
 
 
-          <!-- معرفی -->
+        /* نمایش داکتر */
 
-          <div class="card">
+        showDoctor(data);
 
-            <div class="card-title">
-              👨‍⚕️ معرفی داکتر
-            </div>
-
-            <div class="info-row">
-
-              ${doctor.about || "معرفی داکتر ثبت نشده است."}
-
-            </div>
-
-          </div>
-
-
-          <!-- خدمات -->
-
-          <div class="card">
-
-            <div class="card-title">
-              🩺 خدمات پزشکی
-            </div>
-
-            <div class="info-row">
-
-              ${doctor.services || "خدمات ثبت نشده است."}
-
-            </div>
-
-          </div>
-
-
-          <!-- تماس -->
-
-          <div class="card">
-
-            <div class="card-title">
-              📞 تماس با داکتر
-            </div>
-
-            <a
-              href="tel:${doctor.phone || ""}"
-              class="contact-btn"
-            >
-              📞 تماس با داکتر
-            </a>
-
-          </div>
-
-        `;
 
       } catch (error) {
 
+        console.error(error);
+
         profileBox.innerHTML = `
 
-          <div class="no-doctor">
+          <div class="message error">
 
-            اطلاعات داکتر قابل خواندن نیست.
+            ❌ خطایی هنگام دریافت اطلاعات رخ داد.
+
+            <br><br>
+
+            دوباره تلاش کنید.
 
           </div>
 
@@ -444,6 +609,13 @@
       }
 
     }
+
+
+    /* =====================================================
+       شروع برنامه
+       ===================================================== */
+
+    loadDoctor();
 
   </script>
 
