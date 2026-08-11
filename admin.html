@@ -1,4 +1,4 @@
-
+<!DOCTYPE html>
 <html lang="fa" dir="rtl">
 
 <head>
@@ -17,123 +17,149 @@
       margin: 0;
       font-family: Tahoma, Arial, sans-serif;
       background: #f3f8fa;
-      color: #222;
+      color: #263238;
     }
 
     header {
       background: #119e98;
       color: white;
-      padding: 22px;
+      padding: 25px 15px;
       text-align: center;
     }
 
     header h1 {
       margin: 0 0 8px;
+      font-size: 25px;
     }
 
     header p {
       margin: 0;
+      font-size: 14px;
     }
 
     .container {
-      max-width: 900px;
+      width: 94%;
+      max-width: 1100px;
       margin: 25px auto;
-      padding: 15px;
     }
 
     .dashboard {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-      gap: 15px;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 16px;
     }
 
     .box {
       background: white;
-      padding: 25px;
-      border-radius: 18px;
+      padding: 22px;
+      border-radius: 16px;
       text-align: center;
-      box-shadow: 0 5px 18px rgba(0,0,0,0.08);
+      box-shadow: 0 4px 14px rgba(0,0,0,0.08);
     }
 
-    .box .icon {
+    .icon {
       font-size: 40px;
+      margin-bottom: 8px;
     }
 
     .box h3 {
-      margin: 12px 0 5px;
+      margin: 8px 0;
       color: #119e98;
+      font-size: 18px;
+    }
+
+    .box p {
+      color: #607d8b;
+      font-size: 13px;
+      line-height: 1.8;
+      min-height: 45px;
     }
 
     .number {
       font-size: 28px;
       font-weight: bold;
+      color: #263238;
+      margin-top: 8px;
     }
 
-    .section {
-      background: white;
-      margin-top: 20px;
-      padding: 22px;
-      border-radius: 18px;
-      box-shadow: 0 5px 18px rgba(0,0,0,0.08);
-    }
-
-    .section h2 {
-      margin-top: 0;
-      color: #119e98;
-    }
-
-    .doctor {
-      border: 1px solid #ddd;
-      padding: 15px;
-      border-radius: 12px;
-      margin-top: 12px;
-    }
-
-    .doctor h3 {
-      margin-top: 0;
-    }
-
-    button {
+    .btn {
+      display: inline-block;
+      width: 100%;
+      padding: 12px;
+      margin-top: 8px;
+      border-radius: 9px;
+      text-decoration: none;
       border: none;
-      padding: 11px 18px;
-      border-radius: 10px;
+      font-family: Tahoma, Arial, sans-serif;
+      font-size: 14px;
       cursor: pointer;
-      font-family: inherit;
-      margin: 5px;
     }
 
-    .approve {
+    .btn-main {
       background: #119e98;
       color: white;
     }
 
-    .delete {
-      background: #dc3545;
-      color: white;
+    .btn-main:hover {
+      background: #0f857f;
     }
 
-    .edit {
-      background: #eee;
-      color: #333;
+    .btn-blue {
+      background: #e0f2fe;
+      color: #0369a1;
+    }
+
+    .btn-red {
+      background: #fee2e2;
+      color: #b91c1c;
     }
 
     .logout {
       display: block;
       width: 100%;
       margin-top: 25px;
+      padding: 14px;
       background: #333;
       color: white;
-      padding: 14px;
+      border: none;
+      border-radius: 10px;
+      font-family: inherit;
       font-size: 16px;
+      cursor: pointer;
     }
 
-    .empty {
-      text-align: center;
-      color: #777;
+    .logout:hover {
+      background: #222;
+    }
+
+    .info {
+      background: white;
       padding: 20px;
+      margin-top: 20px;
+      border-radius: 16px;
+      box-shadow: 0 4px 14px rgba(0,0,0,0.08);
+      text-align: center;
+    }
+
+    .info h2 {
+      color: #119e98;
+      margin-top: 0;
+    }
+
+    @media (max-width: 500px) {
+
+      .container {
+        width: 92%;
+      }
+
+      .dashboard {
+        grid-template-columns: 1fr;
+      }
+
     }
 
   </style>
+
 </head>
 
 <body>
@@ -142,7 +168,7 @@
 
   <h1>🩺 داکتر یار</h1>
 
-  <p>پنل مدیریت</p>
+  <p>پنل مدیریت سیستم</p>
 
 </header>
 
@@ -153,89 +179,156 @@
   <div class="dashboard">
 
 
+    <!-- مدیریت داکتران -->
+
     <div class="box">
 
       <div class="icon">👨‍⚕️</div>
 
-      <h3>تمام داکترها</h3>
+      <h3>مدیریت داکتران</h3>
 
-      <div class="number" id="totalDoctors">
-        4
-      </div>
-<!-- شکایت و گزارش‌ها --><div class="box">  <div class="icon">📢</div>  <h3>شکایت و گزارش‌ها</h3>  <p>مشاهده و مدیریت شکایت‌ها و گزارش‌های مریضان و داکتران</p><a
-href="admin-complaints.html"
-style="
-display:inline-block;
-margin-top:10px;
-padding:11px 22px;
-background:#119e98;
-color:white;
-text-decoration:none;
-border-radius:9px;
-font-family:Tahoma,Arial,sans-serif;
-font-size:14px;
-"
+      <p>
+        مشاهده و مدیریت داکتران ثبت‌شده در سیستم
+      </p>
 
-«»
-
-ورود به شکایت‌ها
-
-  </a></div>
-    </div>
-<!-- آمار و گزارش‌ها --><div class="box">  <div class="icon">📊</div>  <h3>آمار و گزارش‌ها</h3>  <p>مشاهده آمار و گزارش‌های کلی داکتر یار</p><a
-href="admin-reports.html"
-style="
-display:inline-block;
-margin-top:10px;
-padding:11px 22px;
-background:#119e98;
-color:white;
-text-decoration:none;
-border-radius:9px;
-font-family:Tahoma,Arial,sans-serif;
-font-size:14px;
-"
-
-«»
-
-مشاهده آمار و گزارش‌ها
-
-  </a></div>
-
-    <div class="box">
-
-      <div class="icon">✅</div>
-
-      <h3>تأیید شده</h3>
-
-      <div class="number" id="approvedDoctors">
-        4
-      </div>
+      <a
+        href="admin-doctors.html"
+        class="btn btn-main"
+      >
+        ورود به مدیریت داکتران
+      </a>
 
     </div>
 
 
+    <!-- مدیریت مریضان -->
+
     <div class="box">
 
-      <div class="icon">⏳</div>
+      <div class="icon">🧑‍🤝‍🧑</div>
 
-      <h3>در انتظار</h3>
+      <h3>مدیریت مریضان</h3>
 
-      <div class="number" id="pendingDoctors">
-        0
-      </div>
+      <p>
+        مشاهده و مدیریت حساب‌های مریضان
+      </p>
+
+      <a
+        href="admin-patients.html"
+        class="btn btn-main"
+      >
+        ورود به مدیریت مریضان
+      </a>
 
     </div>
 
 
+    <!-- مدیریت نوبت‌ها -->
+
     <div class="box">
 
-      <div class="icon">📄</div>
+      <div class="icon">📅</div>
 
-      <h3>اسناد</h3>
+      <h3>مدیریت نوبت‌ها</h3>
+
+      <p>
+        مشاهده و مدیریت نوبت‌های ثبت‌شده
+      </p>
+
+      <a
+        href="admin-appointments.html"
+        class="btn btn-main"
+      >
+        ورود به مدیریت نوبت‌ها
+      </a>
+
+    </div>
+
+
+    <!-- شکایت و گزارش‌ها -->
+
+    <div class="box">
+
+      <div class="icon">📢</div>
+
+      <h3>شکایت و گزارش‌ها</h3>
+
+      <p>
+        مشاهده و مدیریت شکایت‌ها و گزارش‌های کاربران
+      </p>
+
+      <a
+        href="admin-complaints.html"
+        class="btn btn-main"
+      >
+        ورود به شکایت و گزارش‌ها
+      </a>
+
+    </div>
+
+
+    <!-- آمار و گزارش‌ها -->
+
+    <div class="box">
+
+      <div class="icon">📊</div>
+
+      <h3>آمار و گزارش‌ها</h3>
+
+      <p>
+        مشاهده آمار کلی و گزارش فعالیت سیستم
+      </p>
+
+      <a
+        href="admin-reports.html"
+        class="btn btn-main"
+      >
+        مشاهده آمار و گزارش‌ها
+      </a>
+
+    </div>
+
+
+    <!-- تعداد داکتران -->
+
+    <div class="box">
+
+      <div class="icon">👨‍⚕️</div>
+
+      <h3>تعداد داکتران</h3>
 
       <div class="number">
-        0
+        4
+      </div>
+
+    </div>
+
+
+    <!-- تعداد مریضان -->
+
+    <div class="box">
+
+      <div class="icon">🧑‍🤝‍🧑</div>
+
+      <h3>تعداد مریضان</h3>
+
+      <div class="number">
+        12
+      </div>
+
+    </div>
+
+
+    <!-- تعداد نوبت‌ها -->
+
+    <div class="box">
+
+      <div class="icon">📅</div>
+
+      <h3>تعداد نوبت‌ها</h3>
+
+      <div class="number">
+        18
       </div>
 
     </div>
@@ -244,149 +337,50 @@ font-size:14px;
   </div>
 
 
-  <div class="section">
-  >
+  <!-- اطلاعات -->
 
+  <div class="info">
 
-    <div class="doctor">
+    <h2>🩺 مدیریت داکتر یار</h2>
 
-      <h3>داکتر احمد احمدی</h3>
-
-      <p>🩺 تخصص: قلب</p>
-
-      <p>📍 شهر: کابل</p>
-
-      <p>📞 تماس: 0700000000</p>
-
-      <button class="approve">
-        ✅ تأیید شده
-      </button>
-
-      <button class="edit">
-        ✏️ ویرایش
-      </button>
-
-      <button class="delete">
-        🗑️ حذف
-      </button>
-
-    </div>
-
-
-    <div class="doctor">
-
-      <h3>داکتر فاطمه محمدی</h3>
-
-      <p>🩺 تخصص: اطفال</p>
-
-      <p>📍 شهر: کابل</p>
-
-      <p>📞 تماس: 0711111111</p>
-
-      <button class="approve">
-        ✅ تأیید شده
-      </button>
-
-      <button class="edit">
-        ✏️ ویرایش
-      </button>
-
-      <button class="delete">
-        🗑️ حذف
-      </button>
-
-    </div>
-
-
-    <div class="doctor">
-
-      <h3>داکتر محمد رحیمی</h3>
-
-      <p>🩺 تخصص: داخله</p>
-
-      <p>📍 شهر: هرات</p>
-
-      <p>📞 تماس: 0722222222</p>
-
-      <button class="approve">
-        ✅ تأیید شده
-      </button>
-
-      <button class="edit">
-        ✏️ ویرایش
-      </button>
-
-      <button class="delete">
-        🗑️ حذف
-      </button>
-
-    </div>
-
-
-    <div class="doctor">
-
-      <h3>داکتر سمیع الله</h3>
-
-      <p>🩺 تخصص: جراحی</p>
-
-      <p>📍 شهر: مزار شریف</p>
-
-      <p>📞 تماس: 0733333333</p>
-
-      <button class="approve">
-        ✅ تأیید شده
-      </button>
-
-      <button class="edit">
-        ✏️ ویرایش
-      </button>
-
-      <button class="delete">
-        🗑️ حذف
-      </button>
-
-    </div>
+    <p>
+      از این قسمت می‌توانید بخش‌های مختلف سیستم داکتر یار را مدیریت کنید.
+    </p>
 
   </div>
 
-  <!-- بررسی ثبت نام داکتران --><div class="section">  <h2>📝 بررسی ثبت‌نام داکتران</h2>  <p style="color:#666; line-height:2;">
-    درخواست‌های ثبت‌نام داکتران را بررسی و تأیید یا رد کنید.
-  </p><button
-type="button"
-onclick="window.location.href='admin-doctor-registrations.html'"
-style="
-width:100%;
-padding:16px;
-background:#119e98;
-color:white;
-border:none;
-border-radius:12px;
-font-family:Tahoma,Arial,sans-serif;
-font-size:16px;
-cursor:pointer;
-"
 
-«»
-
-👨‍⚕️ بررسی ثبت‌نام داکتران
-
-  </button></div>
-
-  <div class="section">
-
-    <h2>📋 درخواست‌های جدید</h2>
-
-    <div class="empty">
-      فعلاً درخواست جدیدی وجود ندارد.
-    </div>
-
-  </div>
-
+  <!-- خروج -->
 
   <button
     class="logout"
-    onclick="logout()">
-
+    onclick="logout()"
+  >
     🚪 خروج از پنل
-
   </button>
+
+
+</div>
+
+
+<script>
+
+  function logout() {
+
+    const confirmLogout =
+      confirm("آیا می‌خواهید از پنل مدیریت خارج شوید؟");
+
+    if (!confirmLogout) {
+      return;
+    }
+
+    window.location.href = "admin-login.html";
+
+  }
+
+</script>
+
+
+</body>
+
+</html>
