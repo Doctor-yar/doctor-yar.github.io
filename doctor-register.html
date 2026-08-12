@@ -3,758 +3,333 @@
 
 <head>
 
-  <meta charset="UTF-8">
+<meta charset="UTF-8">
 
-  <meta
-    name="viewport"
-    content="width=device-width, initial-scale=1.0"
-  >
+<meta
+  name="viewport"
+  content="width=device-width, initial-scale=1.0"
+>
 
-  <title>ثبت نام داکتر | داکتر یار</title>
+<title>ثبت نام داکتر | داکتر یار</title>
 
-  <style>
+<style>
 
-    * {
-      box-sizing: border-box;
-    }
+*{
+  box-sizing:border-box;
+}
 
-    body {
-      margin: 0;
-      font-family: Tahoma, Arial, sans-serif;
-      background: #f3f8f8;
-      color: #333;
-    }
+body{
+  margin:0;
+  font-family:Tahoma,Arial,sans-serif;
+  background:#f5f8fa;
+  color:#333;
+}
 
-    .container {
-      width: 92%;
-      max-width: 700px;
-      margin: 25px auto 40px;
-    }
+.container{
+  width:92%;
+  max-width:700px;
+  margin:25px auto 50px;
+}
 
-    .header {
-      background: #149e9a;
-      color: white;
-      padding: 28px 20px;
-      border-radius: 24px;
-      text-align: center;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.08);
-    }
+.header{
+  background:#149e9a;
+  color:white;
+  padding:30px 20px;
+  border-radius:25px;
+  text-align:center;
+  box-shadow:0 5px 20px rgba(0,0,0,.08);
+}
 
-    .header-icon {
-      font-size: 55px;
-      margin-bottom: 8px;
-    }
+.header h1{
+  margin:0 0 10px;
+  font-size:28px;
+}
 
-    .header h1 {
-      margin: 0;
-      font-size: 27px;
-    }
+.header p{
+  margin:0;
+  font-size:16px;
+}
 
-    .header p {
-      margin: 10px 0 0;
-      font-size: 15px;
-      line-height: 1.8;
-    }
+.card{
+  background:white;
+  margin-top:18px;
+  padding:25px;
+  border-radius:22px;
+  box-shadow:0 3px 15px rgba(0,0,0,.07);
+}
 
-    .card {
-      background: white;
-      margin-top: 18px;
-      padding: 22px;
-      border-radius: 22px;
-      box-shadow: 0 3px 14px rgba(0,0,0,0.07);
-    }
+.card-title{
+  color:#149e9a;
+  font-size:21px;
+  font-weight:bold;
+  margin-bottom:18px;
+}
 
-    .card-title {
-      color: #149e9a;
-      font-size: 21px;
-      font-weight: bold;
-      margin-bottom: 18px;
-    }
+label{
+  display:block;
+  margin-top:15px;
+  margin-bottom:7px;
+  font-weight:bold;
+  color:#555;
+}
 
-    .field {
-      margin-bottom: 16px;
-    }
+input,
+textarea,
+select{
+  width:100%;
+  padding:15px;
+  border:1px solid #ddd;
+  border-radius:14px;
+  font-family:Tahoma,Arial,sans-serif;
+  font-size:16px;
+  outline:none;
+}
 
-    .field:last-child {
-      margin-bottom: 0;
-    }
+input:focus,
+textarea:focus,
+select:focus{
+  border-color:#149e9a;
+}
 
-    label {
-      display: block;
-      margin-bottom: 7px;
-      font-weight: bold;
-      color: #444;
-      font-size: 15px;
-    }
+textarea{
+  min-height:110px;
+  resize:vertical;
+}
 
-    .required {
-      color: #c62828;
-    }
+.row{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:12px;
+}
 
-    input,
-    select,
-    textarea {
-      width: 100%;
-      padding: 14px;
-      border: 1px solid #d8dddd;
-      border-radius: 12px;
-      font-family: Tahoma, Arial, sans-serif;
-      font-size: 15px;
-      outline: none;
-      background: white;
-    }
+.visit-options{
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+}
 
-    input:focus,
-    select:focus,
-    textarea:focus {
-      border-color: #149e9a;
-      box-shadow: 0 0 0 2px rgba(20,158,154,0.08);
-    }
+.visit-option{
+  flex:1;
+  min-width:130px;
+}
 
-    textarea {
-      min-height: 110px;
-      resize: vertical;
-      line-height: 1.8;
-    }
+.visit-option input{
+  display:none;
+}
 
-    .hint {
-      color: #777;
-      font-size: 12px;
-      margin-top: 6px;
-      line-height: 1.7;
-    }
+.visit-option span{
+  display:block;
+  padding:13px;
+  text-align:center;
+  background:#f3f5f5;
+  border:1px solid #ddd;
+  border-radius:13px;
+  cursor:pointer;
+}
 
-    .row {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 14px;
-    }
+.visit-option input:checked + span{
+  background:#e8f8f7;
+  color:#149e9a;
+  border-color:#149e9a;
+  font-weight:bold;
+}
 
-    .visit-options {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 10px;
-    }
+.hours{
+  margin-top:10px;
+}
 
-    .visit-option {
-      border: 1px solid #d8dddd;
-      border-radius: 12px;
-      padding: 12px;
-      cursor: pointer;
-      background: #fafcfc;
-    }
+.hour-row{
+  display:grid;
+  grid-template-columns:100px 1fr;
+  gap:10px;
+  align-items:center;
+  margin-bottom:10px;
+}
 
-    .visit-option:hover {
-      border-color: #149e9a;
-    }
+.day-name{
+  font-weight:bold;
+  color:#149e9a;
+}
 
-    .visit-option input {
-      width: auto;
-      margin-left: 7px;
-      vertical-align: middle;
-    }
+.pin-box{
+  position:relative;
+}
 
-    .days {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 10px;
-    }
+.pin-box input{
+  padding-left:55px;
+}
 
-    .day-box {
-      background: #f5f8f8;
-      border-radius: 12px;
-      padding: 12px;
-      border: 1px solid #e3e8e8;
-    }
+.pin-show{
+  position:absolute;
+  left:10px;
+  top:50%;
+  transform:translateY(-50%);
+  border:0;
+  background:none;
+  font-size:20px;
+  cursor:pointer;
+}
 
-    .day-box label {
-      margin-bottom: 8px;
-      color: #149e9a;
-    }
+.agreement{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  margin-top:20px;
+  line-height:1.8;
+}
 
-    .day-box input {
-      background: white;
-    }
+.agreement input{
+  width:20px;
+  height:20px;
+}
 
-    .security-box {
-      background: #fff8e1;
-      border: 1px solid #ffe082;
-      padding: 15px;
-      border-radius: 14px;
-      line-height: 1.9;
-      font-size: 14px;
-      margin-bottom: 16px;
-    }
+.register-btn{
+  width:100%;
+  margin-top:22px;
+  padding:17px;
+  border:0;
+  border-radius:17px;
+  background:#149e9a;
+  color:white;
+  font-family:Tahoma,Arial,sans-serif;
+  font-size:19px;
+  cursor:pointer;
+}
 
-    .security-title {
-      font-weight: bold;
-      color: #8a6200;
-      margin-bottom: 5px;
-    }
+.register-btn:disabled{
+  opacity:.6;
+}
 
-    .password-wrap {
-      position: relative;
-    }
+.message{
+  display:none;
+  margin-top:18px;
+  padding:16px;
+  border-radius:15px;
+  line-height:2;
+  text-align:center;
+}
 
-    .password-wrap input {
-      padding-left: 48px;
-      letter-spacing: 5px;
-      text-align: center;
-      font-size: 20px;
-    }
+.success{
+  display:block;
+  background:#e8f8f7;
+  color:#08756f;
+}
 
-    .show-password {
-      position: absolute;
-      left: 8px;
-      top: 7px;
-      width: 38px;
-      height: 38px;
-      border: none;
-      background: transparent;
-      cursor: pointer;
-      font-size: 18px;
-    }
+.error{
+  display:block;
+  background:#fff0f0;
+  color:#b32626;
+}
 
-    .agreement {
-      display: flex;
-      align-items: flex-start;
-      gap: 8px;
-      line-height: 1.8;
-      font-size: 14px;
-      margin-top: 15px;
-    }
+.back{
+  display:block;
+  text-align:center;
+  margin:22px 0;
+  color:#149e9a;
+  text-decoration:none;
+  font-size:17px;
+}
 
-    .agreement input {
-      width: auto;
-      margin-top: 5px;
-    }
+.note{
+  background:#fff9e8;
+  color:#765d13;
+  padding:14px;
+  border-radius:14px;
+  line-height:1.9;
+  margin-top:15px;
+}
 
-    .submit-btn {
-      width: 100%;
-      padding: 17px;
-      margin-top: 20px;
-      border: none;
-      border-radius: 15px;
-      background: #149e9a;
-      color: white;
-      font-family: Tahoma, Arial, sans-serif;
-      font-size: 18px;
-      cursor: pointer;
-    }
+@media(max-width:550px){
 
-    .submit-btn:hover {
-      background: #0f8581;
-    }
+  .row{
+    grid-template-columns:1fr;
+  }
 
-    .login-btn {
-      display: block;
-      width: 100%;
-      padding: 15px;
-      margin-top: 12px;
-      border-radius: 15px;
-      background: #e9f8f7;
-      color: #149e9a;
-      text-decoration: none;
-      text-align: center;
-      font-size: 16px;
-    }
+  .hour-row{
+    grid-template-columns:85px 1fr;
+  }
 
-    .message {
-      display: none;
-      margin-top: 18px;
-      padding: 15px;
-      border-radius: 13px;
-      text-align: center;
-      line-height: 1.9;
-      font-size: 15px;
-    }
+}
 
-    .success {
-      display: block;
-      background: #e8f5e9;
-      color: #217a28;
-      border: 1px solid #b7dfba;
-    }
-
-    .error {
-      display: block;
-      background: #ffebee;
-      color: #b32626;
-      border: 1px solid #f3b7bd;
-    }
-
-    .back-link {
-      display: block;
-      text-align: center;
-      margin-top: 20px;
-      color: #149e9a;
-      text-decoration: none;
-      font-size: 17px;
-    }
-
-    @media (max-width: 550px) {
-
-      .container {
-        width: 94%;
-      }
-
-      .row {
-        grid-template-columns: 1fr;
-        gap: 0;
-      }
-
-      .visit-options,
-      .days {
-        grid-template-columns: 1fr;
-      }
-
-      .header h1 {
-        font-size: 24px;
-      }
-
-    }
-
-  </style>
+</style>
 
 </head>
 
 
 <body>
 
-
 <div class="container">
 
 
-  <!-- سربرگ -->
+<div class="header">
 
-  <div class="header">
+  <h1>👨‍⚕️ ثبت نام داکتر</h1>
 
-    <div class="header-icon">
-      👨‍⚕️
-    </div>
+  <p>
+    مشخصات خود را برای بررسی و تأیید در داکتر یار ثبت کنید
+  </p>
 
-    <h1>
-      ثبت نام داکتر
-    </h1>
+</div>
 
-    <p>
-      لطفاً مشخصات خود را با دقت وارد کنید.
-      اطلاعات شما برای بررسی مدیریت داکتر یار ارسال می‌شود.
-    </p>
 
+<!-- اطلاعات شخصی -->
+
+<div class="card">
+
+  <div class="card-title">
+    👤 اطلاعات داکتر
   </div>
 
 
-  <!-- اطلاعات شخصی -->
+  <label>
+    نام و نام خانوادگی داکتر *
+  </label>
 
-  <div class="card">
+  <input
+    type="text"
+    id="doctorName"
+    placeholder="مثلاً داکتر احمد احمدی"
+  >
 
-    <div class="card-title">
-      👨‍⚕️ اطلاعات داکتر
-    </div>
+
+  <label>
+    تخصص *
+  </label>
+
+  <input
+    type="text"
+    id="specialty"
+    placeholder="مثلاً متخصص قلب"
+  >
 
 
-    <div class="field">
+  <div class="row">
+
+    <div>
 
       <label>
-        نام و نام خانوادگی
-        <span class="required">*</span>
+        شهر *
       </label>
 
       <input
         type="text"
-        id="doctorName"
-        placeholder="مثلاً داکتر احمد احمدی"
+        id="city"
+        placeholder="مثلاً کابل"
       >
 
     </div>
 
 
-    <div class="row">
-
-
-      <div class="field">
-
-        <label>
-          تخصص
-          <span class="required">*</span>
-        </label>
-
-        <input
-          type="text"
-          id="specialty"
-          placeholder="مثلاً متخصص قلب"
-        >
-
-      </div>
-
-
-      <div class="field">
-
-        <label>
-          شهر
-          <span class="required">*</span>
-        </label>
-
-        <input
-          type="text"
-          id="city"
-          placeholder="مثلاً کابل"
-        >
-
-      </div>
-
-
-    </div>
-
-
-    <div class="field">
+    <div>
 
       <label>
-        شماره تماس
-        <span class="required">*</span>
+        شماره تماس *
       </label>
 
       <input
         type="tel"
         id="phone"
-        placeholder="مثلاً 0700000000"
-      >
-
-    </div>
-
-
-    <div class="field">
-
-      <label>
-        آدرس مطب
-        <span class="required">*</span>
-      </label>
-
-      <textarea
-        id="address"
-        placeholder="آدرس دقیق مطب یا کلینیک"
-      ></textarea>
-
-    </div>
-
-  </div>
-
-
-  <!-- اطلاعات کاری -->
-
-  <div class="card">
-
-    <div class="card-title">
-      🕐 ساعات کاری
-    </div>
-
-
-    <div class="hint">
-      ساعت کاری هر روز را وارد کنید. اگر روزی کار نمی‌کنید، آن را خالی بگذارید.
-    </div>
-
-    <br>
-
-
-    <div class="days">
-
-
-      <div class="day-box">
-
-        <label>شنبه</label>
-
-        <input
-          type="text"
-          id="saturday"
-          placeholder="مثلاً 8 صبح تا 4 عصر"
-        >
-
-      </div>
-
-
-      <div class="day-box">
-
-        <label>یکشنبه</label>
-
-        <input
-          type="text"
-          id="sunday"
-          placeholder="مثلاً 8 صبح تا 4 عصر"
-        >
-
-      </div>
-
-
-      <div class="day-box">
-
-        <label>دوشنبه</label>
-
-        <input
-          type="text"
-          id="monday"
-          placeholder="مثلاً 8 صبح تا 4 عصر"
-        >
-
-      </div>
-
-
-      <div class="day-box">
-
-        <label>سه‌شنبه</label>
-
-        <input
-          type="text"
-          id="tuesday"
-          placeholder="مثلاً 8 صبح تا 4 عصر"
-        >
-
-      </div>
-
-
-      <div class="day-box">
-
-        <label>چهارشنبه</label>
-
-        <input
-          type="text"
-          id="wednesday"
-          placeholder="مثلاً 8 صبح تا 4 عصر"
-        >
-
-      </div>
-
-
-      <div class="day-box">
-
-        <label>پنجشنبه</label>
-
-        <input
-          type="text"
-          id="thursday"
-          placeholder="مثلاً 8 صبح تا 4 عصر"
-        >
-
-      </div>
-
-
-      <div class="day-box">
-
-        <label>جمعه</label>
-
-        <input
-          type="text"
-          id="friday"
-          placeholder="مثلاً تعطیل"
-        >
-
-      </div>
-
-
-    </div>
-
-  </div>
-
-
-  <!-- اطلاعات ویزیت -->
-
-  <div class="card">
-
-    <div class="card-title">
-      💰 اطلاعات ویزیت
-    </div>
-
-
-    <div class="field">
-
-      <label>
-        قیمت ویزیت
-        <span style="color:#777;">
-          (اختیاری)
-        </span>
-      </label>
-
-      <input
-        type="number"
-        id="visitPrice"
-        min="0"
-        placeholder="مثلاً 500"
-      >
-
-      <div class="hint">
-        اگر قیمت مشخصی ندارید، این قسمت را خالی بگذارید.
-      </div>
-
-    </div>
-
-
-    <div class="field">
-
-      <label>
-        نوع ویزیت
-        <span class="required">*</span>
-      </label>
-
-
-      <div class="visit-options">
-
-
-        <label class="visit-option">
-
-          <input
-            type="checkbox"
-            name="visitType"
-            value="حضوری"
-          >
-
-          🏥 ویزیت حضوری
-
-        </label>
-
-
-        <label class="visit-option">
-
-          <input
-            type="checkbox"
-            name="visitType"
-            value="آنلاین"
-          >
-
-          💻 ویزیت آنلاین
-
-        </label>
-
-
-        <label class="visit-option">
-
-          <input
-            type="checkbox"
-            name="visitType"
-            value="تلفنی"
-          >
-
-          📞 مشاوره تلفنی
-
-        </label>
-
-
-      </div>
-
-    </div>
-
-  </div>
-
-
-  <!-- معرفی و خدمات -->
-
-  <div class="card">
-
-    <div class="card-title">
-      📋 معرفی و خدمات
-    </div>
-
-
-    <div class="field">
-
-      <label>
-        معرفی داکتر
-      </label>
-
-      <textarea
-        id="about"
-        placeholder="درباره تجربه، تحصیلات و فعالیت‌های خود بنویسید..."
-      ></textarea>
-
-    </div>
-
-
-    <div class="field">
-
-      <label>
-        خدمات پزشکی
-      </label>
-
-      <textarea
-        id="services"
-        placeholder="خدماتی که ارائه می‌کنید را بنویسید..."
-      ></textarea>
-
-    </div>
-
-  </div>
-
-
-  <!-- رمز ورود -->
-
-  <div class="card">
-
-    <div class="card-title">
-      🔐 رمز ورود داکتر
-    </div>
-
-
-    <div class="security-box">
-
-      <div class="security-title">
-        توجه
-      </div>
-
-      برای ورود بعدی داکتر، یک رمز چهار رقمی انتخاب کنید.
-      این رمز را نزد خود نگه دارید و با کسی شریک نکنید.
-
-    </div>
-
-
-    <div class="field">
-
-      <label>
-        رمز چهار رقمی
-        <span class="required">*</span>
-      </label>
-
-
-      <div class="password-wrap">
-
-        <input
-          type="password"
-          id="doctorPin"
-          inputmode="numeric"
-          maxlength="4"
-          placeholder="••••"
-        >
-
-        <button
-          type="button"
-          class="show-password"
-          onclick="togglePin()"
-        >
-          👁️
-        </button>
-
-      </div>
-
-
-      <div class="hint">
-        رمز باید دقیقاً ۴ رقم باشد.
-      </div>
-
-    </div>
-
-
-    <div class="field">
-
-      <label>
-        تکرار رمز چهار رقمی
-        <span class="required">*</span>
-      </label>
-
-
-      <input
-        type="password"
-        id="doctorPinConfirm"
-        inputmode="numeric"
-        maxlength="4"
-        placeholder="••••"
+        placeholder="07XXXXXXXX"
       >
 
     </div>
@@ -762,56 +337,371 @@
   </div>
 
 
-  <!-- تأیید -->
+  <label>
+    آدرس مطب *
+  </label>
 
-  <div class="card">
+  <input
+    type="text"
+    id="address"
+    placeholder="آدرس کامل مطب"
+  >
 
-    <div class="agreement">
+</div>
+
+
+<!-- ویزیت -->
+
+<div class="card">
+
+  <div class="card-title">
+    💰 اطلاعات ویزیت
+  </div>
+
+
+  <label>
+    قیمت ویزیت
+  </label>
+
+  <input
+    type="number"
+    id="visitPrice"
+    min="0"
+    placeholder="مثلاً 500"
+  >
+
+
+  <label>
+    نوع ویزیت *
+  </label>
+
+
+  <div class="visit-options">
+
+
+    <label class="visit-option">
 
       <input
         type="checkbox"
-        id="agreement"
+        name="visitType"
+        value="حضوری"
       >
 
-      <label for="agreement">
-        تأیید می‌کنم اطلاعات واردشده مربوط به خودم است و
-        مدیریت داکتر یار می‌تواند اطلاعات را برای بررسی ثبت‌نام بررسی کند.
-      </label>
+      <span>
+        🏥 حضوری
+      </span>
+
+    </label>
+
+
+    <label class="visit-option">
+
+      <input
+        type="checkbox"
+        name="visitType"
+        value="آنلاین"
+      >
+
+      <span>
+        📱 آنلاین
+      </span>
+
+    </label>
+
+
+    <label class="visit-option">
+
+      <input
+        type="checkbox"
+        name="visitType"
+        value="مشاوره تلفنی"
+      >
+
+      <span>
+        ☎️ تلفنی
+      </span>
+
+    </label>
+
+
+  </div>
+
+</div>
+
+
+<!-- ساعات کاری -->
+
+<div class="card">
+
+  <div class="card-title">
+    🕐 ساعات کاری
+  </div>
+
+
+  <div class="hours">
+
+
+    <div class="hour-row">
+
+      <div class="day-name">
+        شنبه
+      </div>
+
+      <input
+        type="text"
+        id="saturday"
+        placeholder="مثلاً 8 صبح تا 4 عصر"
+      >
 
     </div>
 
 
+    <div class="hour-row">
+
+      <div class="day-name">
+        یکشنبه
+      </div>
+
+      <input
+        type="text"
+        id="sunday"
+        placeholder="مثلاً 8 صبح تا 4 عصر"
+      >
+
+    </div>
+
+
+    <div class="hour-row">
+
+      <div class="day-name">
+        دوشنبه
+      </div>
+
+      <input
+        type="text"
+        id="monday"
+        placeholder="مثلاً 8 صبح تا 4 عصر"
+      >
+
+    </div>
+
+
+    <div class="hour-row">
+
+      <div class="day-name">
+        سه‌شنبه
+      </div>
+
+      <input
+        type="text"
+        id="tuesday"
+        placeholder="مثلاً 8 صبح تا 4 عصر"
+      >
+
+    </div>
+
+
+    <div class="hour-row">
+
+      <div class="day-name">
+        چهارشنبه
+      </div>
+
+      <input
+        type="text"
+        id="wednesday"
+        placeholder="مثلاً 8 صبح تا 4 عصر"
+      >
+
+    </div>
+
+
+    <div class="hour-row">
+
+      <div class="day-name">
+        پنجشنبه
+      </div>
+
+      <input
+        type="text"
+        id="thursday"
+        placeholder="مثلاً 8 صبح تا 4 عصر"
+      >
+
+    </div>
+
+
+    <div class="hour-row">
+
+      <div class="day-name">
+        جمعه
+      </div>
+
+      <input
+        type="text"
+        id="friday"
+        placeholder="تعطیل"
+      >
+
+    </div>
+
+
+  </div>
+
+</div>
+
+
+<!-- معرفی -->
+
+<div class="card">
+
+  <div class="card-title">
+    👨‍⚕️ معرفی و خدمات
+  </div>
+
+
+  <label>
+    معرفی داکتر
+  </label>
+
+  <textarea
+    id="about"
+    placeholder="درباره خود، تجربه و سابقه کاری بنویسید..."
+  ></textarea>
+
+
+  <label>
+    خدمات پزشکی
+  </label>
+
+  <textarea
+    id="services"
+    placeholder="خدماتی که ارائه می‌کنید..."
+  ></textarea>
+
+</div>
+
+
+<!-- رمز -->
+
+<div class="card">
+
+  <div class="card-title">
+    🔐 رمز ورود داکتر
+  </div>
+
+
+  <p>
+    برای ورود بعدی، یک رمز چهار رقمی انتخاب کنید.
+  </p>
+
+
+  <label>
+    رمز چهار رقمی *
+  </label>
+
+
+  <div class="pin-box">
+
+    <input
+      type="password"
+      id="doctorPin"
+      maxlength="4"
+      inputmode="numeric"
+      placeholder="مثلاً 1234"
+    >
+
     <button
       type="button"
-      class="submit-btn"
-      onclick="registerDoctor()"
+      class="pin-show"
+      onclick="togglePin('doctorPin')"
     >
-      ✅ ثبت نام داکتر
+      👁️
     </button>
-
-
-    <div
-      id="message"
-      class="message"
-    ></div>
-
-
-    <a
-      href="doctor-login.html"
-      class="login-btn"
-    >
-      🔐 قبلاً ثبت نام کرده‌ام — ورود داکتر
-    </a>
 
   </div>
 
 
-  <a
-    href="index.html"
-    class="back-link"
+  <label>
+    تکرار رمز چهار رقمی *
+  </label>
+
+
+  <div class="pin-box">
+
+    <input
+      type="password"
+      id="doctorPinConfirm"
+      maxlength="4"
+      inputmode="numeric"
+      placeholder="تکرار رمز"
+    >
+
+    <button
+      type="button"
+      class="pin-show"
+      onclick="togglePin('doctorPinConfirm')"
+    >
+      👁️
+    </button>
+
+  </div>
+
+
+  <div class="note">
+
+    🔒 اطلاعات ثبت‌شده برای بررسی مدیریت ارسال می‌شود.
+    پس از تأیید، وضعیت داکتر از «در انتظار تأیید» تغییر خواهد کرد.
+
+  </div>
+
+
+  <label class="agreement">
+
+    <input
+      type="checkbox"
+      id="agreement"
+    >
+
+    <span>
+      اطلاعات واردشده را بررسی کرده‌ام و تأیید می‌کنم.
+    </span>
+
+  </label>
+
+
+  <button
+    type="button"
+    id="registerButton"
+    class="register-btn"
+    onclick="registerDoctor()"
   >
-    ← بازگشت به صفحه اصلی
-  </a>
+    ✅ ثبت نام داکتر
+  </button>
+
+
+  <div
+    id="message"
+    class="message"
+  ></div>
+
+</div>
+
+
+<a
+  href="doctor-login.html"
+  class="back"
+>
+  ← بازگشت به ورود داکتر
+</a>
+
+
+<a
+  href="index.html"
+  class="back"
+>
+  ← بازگشت به صفحه اصلی
+</a>
 
 
 </div>
@@ -820,63 +710,91 @@
 <script>
 
 
-/* نمایش و مخفی کردن رمز */
+/* =========================
+   تنظیمات Supabase
+========================= */
 
-function togglePin() {
 
-  const pin =
-    document.getElementById("doctorPin");
+const SUPABASE_URL =
+  "https://dzuilchtsnxncooixaib.supabase.co";
 
-  if (pin.type === "password") {
 
-    pin.type = "text";
+const SUPABASE_KEY =
+  "کلید Psb_publishable_gzKmKTsngGOlaoYSCiQB9w_VKSQj_H5
+ublishable خودت را اینجا قرار بده";
 
-  } else {
 
-    pin.type = "password";
+/* =========================
+   نمایش / مخفی کردن رمز
+========================= */
+
+
+function togglePin(id){
+
+  const input =
+    document.getElementById(id);
+
+  if(input.type === "password"){
+
+    input.type = "text";
+
+  }else{
+
+    input.type = "password";
 
   }
 
 }
 
 
-/* فقط اجازه ورود عدد */
+/* =========================
+   فقط اجازه ۴ رقم
+========================= */
+
 
 document
   .getElementById("doctorPin")
-  .addEventListener("input", function() {
+  .addEventListener("input",function(){
 
     this.value =
       this.value
-        .replace(/\D/g, "")
-        .slice(0, 4);
+      .replace(/\D/g,"")
+      .slice(0,4);
 
   });
 
 
 document
   .getElementById("doctorPinConfirm")
-  .addEventListener("input", function() {
+  .addEventListener("input",function(){
 
     this.value =
       this.value
-        .replace(/\D/g, "")
-        .slice(0, 4);
+      .replace(/\D/g,"")
+      .slice(0,4);
 
   });
 
 
-/* ثبت داکتر */
+/* =========================
+   ثبت داکتر
+========================= */
 
-function registerDoctor() {
+
+async function registerDoctor(){
 
 
   const message =
     document.getElementById("message");
 
 
+  const button =
+    document.getElementById("registerButton");
+
+
   message.className =
     "message";
+
 
   message.innerHTML =
     "";
@@ -917,7 +835,7 @@ function registerDoctor() {
       .trim();
 
 
-  const visitPrice =
+  const visitPriceText =
     document
       .getElementById("visitPrice")
       .value
@@ -958,35 +876,99 @@ function registerDoctor() {
       .checked;
 
 
-  /* ساعات کاری */
+  /* بررسی اطلاعات */
 
-  const workingHours = {
 
-    "شنبه":
-      document.getElementById("saturday").value.trim(),
+  if(!doctorName){
 
-    "یکشنبه":
-      document.getElementById("sunday").value.trim(),
+    showError(
+      "نام داکتر را وارد کنید."
+    );
 
-    "دوشنبه":
-      document.getElementById("monday").value.trim(),
+    return;
 
-    "سه‌شنبه":
-      document.getElementById("tuesday").value.trim(),
+  }
 
-    "چهارشنبه":
-      document.getElementById("wednesday").value.trim(),
 
-    "پنجشنبه":
-      document.getElementById("thursday").value.trim(),
+  if(!specialty){
 
-    "جمعه":
-      document.getElementById("friday").value.trim()
+    showError(
+      "تخصص داکتر را وارد کنید."
+    );
 
-  };
+    return;
+
+  }
+
+
+  if(!city){
+
+    showError(
+      "شهر را وارد کنید."
+    );
+
+    return;
+
+  }
+
+
+  if(!phone){
+
+    showError(
+      "شماره تماس را وارد کنید."
+    );
+
+    return;
+
+  }
+
+
+  if(!address){
+
+    showError(
+      "آدرس مطب را وارد کنید."
+    );
+
+    return;
+
+  }
+
+
+  if(!/^\d{4}$/.test(doctorPin)){
+
+    showError(
+      "رمز ورود باید دقیقاً ۴ رقم باشد."
+    );
+
+    return;
+
+  }
+
+
+  if(doctorPin !== doctorPinConfirm){
+
+    showError(
+      "رمز و تکرار رمز یکسان نیست."
+    );
+
+    return;
+
+  }
+
+
+  if(!agreement){
+
+    showError(
+      "لطفاً تأیید اطلاعات را علامت بزنید."
+    );
+
+    return;
+
+  }
 
 
   /* نوع ویزیت */
+
 
   const visitTypes = [];
 
@@ -995,96 +977,110 @@ function registerDoctor() {
     .querySelectorAll(
       'input[name="visitType"]:checked'
     )
-    .forEach(function(item) {
+    .forEach(function(item){
 
-      visitTypes.push(item.value);
+      visitTypes.push(
+        item.value
+      );
 
     });
 
 
-  /* بررسی اطلاعات */
+  if(visitTypes.length === 0){
 
-  if (!doctorName) {
+    showError(
+      "حداقل یک نوع ویزیت را انتخاب کنید."
+    );
 
-    showError("لطفاً نام داکتر را وارد کنید.");
     return;
 
   }
 
 
-  if (!specialty) {
-
-    showError("لطفاً تخصص داکتر را وارد کنید.");
-    return;
-
-  }
+  /* قیمت */
 
 
-  if (!city) {
-
-    showError("لطفاً شهر را وارد کنید.");
-    return;
-
-  }
+  let visitPrice = null;
 
 
-  if (!phone) {
+  if(visitPriceText !== ""){
 
-    showError("لطفاً شماره تماس را وارد کنید.");
-    return;
-
-  }
+    visitPrice =
+      Number(visitPriceText);
 
 
-  if (!address) {
+    if(
+      isNaN(visitPrice) ||
+      visitPrice < 0
+    ){
 
-    showError("لطفاً آدرس مطب را وارد کنید.");
-    return;
+      showError(
+        "قیمت ویزیت درست وارد نشده است."
+      );
+
+      return;
+
+    }
 
   }
 
 
-  if (visitTypes.length === 0) {
-
-    showError("لطفاً حداقل یک نوع ویزیت را انتخاب کنید.");
-    return;
-
-  }
+  /* ساعات کاری */
 
 
-  if (!/^\d{4}$/.test(doctorPin)) {
+  const workingHours = {
 
-    showError("رمز ورود باید دقیقاً ۴ رقم باشد.");
-    return;
+    "شنبه":
+      document
+        .getElementById("saturday")
+        .value
+        .trim(),
 
-  }
+    "یکشنبه":
+      document
+        .getElementById("sunday")
+        .value
+        .trim(),
+
+    "دوشنبه":
+      document
+        .getElementById("monday")
+        .value
+        .trim(),
+
+    "سه‌شنبه":
+      document
+        .getElementById("tuesday")
+        .value
+        .trim(),
+
+    "چهارشنبه":
+      document
+        .getElementById("wednesday")
+        .value
+        .trim(),
+
+    "پنجشنبه":
+      document
+        .getElementById("thursday")
+        .value
+        .trim(),
+
+    "جمعه":
+      document
+        .getElementById("friday")
+        .value
+        .trim()
+
+  };
 
 
-  if (doctorPin !== doctorPinConfirm) {
-
-    showError("رمز و تکرار رمز یکسان نیست.");
-    return;
-
-  }
+  /* اطلاعات نهایی */
 
 
-  if (!agreement) {
+  const doctorData = {
 
-    showError("لطفاً تأیید اطلاعات را علامت بزنید.");
-    return;
-
-  }
-
-
-  /* ساخت اطلاعات داکتر */
-
-  const doctor = {
-
-    id:
-      "DOC-" +
-      Date.now(),
-
-    doctorName:
+    doctor_name:
       doctorName,
 
     specialty:
@@ -1099,13 +1095,13 @@ function registerDoctor() {
     address:
       address,
 
-    workingHours:
+    working_hours:
       workingHours,
 
-    visitPrice:
+    visit_price:
       visitPrice,
 
-    visitTypes:
+    visit_types:
       visitTypes,
 
     about:
@@ -1114,62 +1110,220 @@ function registerDoctor() {
     services:
       services,
 
-    doctorPin:
+    doctor_pin:
       doctorPin,
 
     status:
-      "در انتظار تأیید",
-
-    createdAt:
-      new Date().toISOString()
+      "در انتظار تأیید"
 
   };
 
 
-  /* ذخیره */
-
-  localStorage.setItem(
-    "doctorProfile",
-    JSON.stringify(doctor)
-  );
+  /* جلوگیری از کلیک دوباره */
 
 
-  /* پیام موفقیت */
+  button.disabled = true;
 
-  message.className =
-    "message success";
-
-
-  message.innerHTML = `
-    ✅ ثبت نام شما با موفقیت انجام شد.
-    <br>
-    اطلاعات شما برای بررسی مدیریت داکتر یار ثبت شد.
-    <br><br>
-    <strong>
-      کد داکتر: ${doctor.id}
-    </strong>
-    <br><br>
-    لطفاً این کد را نزد خود نگه دارید.
-  `;
+  button.innerHTML =
+    "⏳ در حال ثبت اطلاعات...";
 
 
-  /* رفتن به بالای صفحه */
+  try{
 
-  window.scrollTo({
-    top: 0,
-    behavior: "smooth"
-  });
 
+    const response =
+      await fetch(
+        SUPABASE_URL +
+        "/rest/v1/doctors",
+        {
+
+          method:"POST",
+
+          headers:{
+
+            "apikey":
+              SUPABASE_KEY,
+
+            "Authorization":
+              "Bearer " +
+              SUPABASE_KEY,
+
+            "Content-Type":
+              "application/json",
+
+            "Prefer":
+              "return=representation"
+
+          },
+
+          body:
+            JSON.stringify(
+              doctorData
+            )
+
+        }
+      );
+
+
+    let result;
+
+
+    try{
+
+      result =
+        await response.json();
+
+    }catch(e){
+
+      result = null;
+
+    }
+
+
+    if(!response.ok){
+
+      console.error(
+        "Supabase Error:",
+        result
+      );
+
+
+      showError(
+        "ثبت اطلاعات انجام نشد. " +
+        "کلید Publishable و تنظیمات Supabase را بررسی کنید."
+      );
+
+
+      button.disabled = false;
+
+      button.innerHTML =
+        "✅ ثبت نام داکتر";
+
+
+      return;
+
+    }
+
+
+    /* ذخیره موقت برای صفحات فعلی پروژه */
+
+
+    if(
+      Array.isArray(result) &&
+      result.length > 0
+    ){
+
+      const savedDoctor = {
+
+        doctorName:
+          result[0].doctor_name,
+
+        specialty:
+          result[0].specialty,
+
+        city:
+          result[0].city,
+
+        phone:
+          result[0].phone,
+
+        address:
+          result[0].address,
+
+        workingHours:
+          result[0].working_hours,
+
+        visitPrice:
+          result[0].visit_price,
+
+        visitTypes:
+          result[0].visit_types,
+
+        about:
+          result[0].about,
+
+        services:
+          result[0].services,
+
+        doctorPin:
+          result[0].doctor_pin,
+
+        status:
+          result[0].status,
+
+        id:
+          result[0].id
+
+      };
+
+
+      localStorage.setItem(
+        "doctorProfile",
+        JSON.stringify(
+          savedDoctor
+        )
+      );
+
+    }
+
+
+    message.className =
+      "message success";
+
+
+    message.innerHTML = `
+      ✅ ثبت نام با موفقیت انجام شد.
+      <br>
+      اطلاعات شما در دیتابیس داکتر یار ثبت شد.
+      <br>
+      وضعیت شما:
+      <strong>در انتظار تأیید</strong>
+    `;
+
+
+    button.innerHTML =
+      "✅ ثبت شد";
+
+
+    window.scrollTo({
+      top:0,
+      behavior:"smooth"
+    });
+
+
+  }catch(error){
+
+
+    console.error(error);
+
+
+    showError(
+      "ارتباط با Supabase برقرار نشد."
+    );
+
+
+    button.disabled = false;
+
+
+    button.innerHTML =
+      "✅ ثبت نام داکتر";
+
+  }
 
 }
 
 
-/* نمایش خطا */
+/* =========================
+   نمایش خطا
+========================= */
 
-function showError(text) {
+
+function showError(text){
 
   const message =
-    document.getElementById("message");
+    document.getElementById(
+      "message"
+    );
 
 
   message.className =
@@ -1181,12 +1335,11 @@ function showError(text) {
 
 
   message.scrollIntoView({
-    behavior: "smooth",
-    block: "center"
+    behavior:"smooth",
+    block:"center"
   });
 
 }
-
 
 </script>
 
