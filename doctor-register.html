@@ -1,4 +1,4 @@
-
+<!DOCTYPE html>
 <html lang="fa" dir="rtl">
 
 <head>
@@ -100,9 +100,7 @@ textarea{
   gap:12px;
 }
 
-/* =========================
-   نوع ویزیت
-========================= */
+/* ویزیت */
 
 .visit-options{
   display:flex;
@@ -136,9 +134,7 @@ textarea{
   font-weight:bold;
 }
 
-/* =========================
-   ساعات کاری جدید
-========================= */
+/* ساعات */
 
 .hours{
   margin-top:10px;
@@ -202,6 +198,49 @@ textarea{
   margin-top:5px;
 }
 
+/* فایل */
+
+.file-box{
+  background:#f7fafa;
+  border:2px dashed #cfdede;
+  border-radius:16px;
+  padding:18px;
+  margin-top:10px;
+}
+
+.file-box input{
+  background:white;
+  padding:12px;
+}
+
+.file-help{
+  font-size:13px;
+  color:#777;
+  line-height:1.8;
+  margin-top:8px;
+}
+
+.required{
+  color:#d22;
+}
+
+.pin-box{
+  background:#f0fbfa;
+  border:1px solid #bfe8e5;
+  border-radius:16px;
+  padding:18px;
+  margin-top:10px;
+}
+
+.pin-box input{
+  text-align:center;
+  letter-spacing:8px;
+  font-size:24px;
+  font-weight:bold;
+}
+
+/* توافق */
+
 .agreement{
   display:flex;
   align-items:center;
@@ -214,6 +253,8 @@ textarea{
   width:20px;
   height:20px;
 }
+
+/* دکمه */
 
 .register-btn{
   width:100%;
@@ -231,6 +272,8 @@ textarea{
 .register-btn:disabled{
   opacity:.6;
 }
+
+/* پیام */
 
 .message{
   display:none;
@@ -302,9 +345,7 @@ textarea{
 </div>
 
 
-<!-- =========================
-     اطلاعات داکتر
-========================= -->
+<!-- اطلاعات داکتر -->
 
 <div class="card">
 
@@ -377,9 +418,62 @@ textarea{
 </div>
 
 
-<!-- =========================
-     اطلاعات ویزیت
-========================= -->
+<!-- عکس و اسناد -->
+
+<div class="card">
+
+  <div class="card-title">
+    📷 عکس و اسناد داکتر
+  </div>
+
+  <label>
+    عکس داکتر
+    <span style="color:#777;font-size:13px;">
+      (اختیاری)
+    </span>
+  </label>
+
+  <div class="file-box">
+
+    <input
+      type="file"
+      id="doctorPhoto"
+      accept="image/jpeg,image/png,image/webp"
+    >
+
+    <div class="file-help">
+      عکس واضح داکتر را انتخاب کنید.
+      حداکثر حجم: 5MB
+    </div>
+
+  </div>
+
+
+  <label>
+    اسناد داکتر
+    <span class="required">*</span>
+  </label>
+
+  <div class="file-box">
+
+    <input
+      type="file"
+      id="doctorDocuments"
+      accept="image/jpeg,image/png,application/pdf"
+      multiple
+    >
+
+    <div class="file-help">
+      سند فراغت، جواز یا سایر اسناد معتبر را برای بررسی مدیریت انتخاب کنید.
+      حداقل یک سند لازم است. حداکثر حجم هر فایل: 10MB
+    </div>
+
+  </div>
+
+</div>
+
+
+<!-- اطلاعات ویزیت -->
 
 <div class="card">
 
@@ -451,9 +545,7 @@ textarea{
 </div>
 
 
-<!-- =========================
-     ساعات کاری
-========================= -->
+<!-- ساعات کاری -->
 
 <div class="card">
 
@@ -463,466 +555,99 @@ textarea{
 
   <div class="note">
     ✓ روزهایی را که کار می‌کنید انتخاب کنید و برای هر روز ساعت شروع و پایان را مشخص کنید.
-    روزی که انتخاب نشود، تعطیل ثبت می‌شود.
   </div>
 
   <div class="hours">
 
-    <!-- شنبه -->
+    <script>
 
-    <div class="hour-row" id="row-saturday">
+      const days = [
+        ["شنبه","saturday"],
+        ["یکشنبه","sunday"],
+        ["دوشنبه","monday"],
+        ["سه‌شنبه","tuesday"],
+        ["چهارشنبه","wednesday"],
+        ["پنجشنبه","thursday"],
+        ["جمعه","friday"]
+      ];
 
-      <div class="day-top">
+      document.write(
+        days.map(function(day){
 
-        <input
-          type="checkbox"
-          class="day-check"
-          id="check-saturday"
-          onchange="toggleDay('saturday')"
-        >
+          return `
+            <div class="hour-row" id="row-${day[1]}">
 
-        <label
-          for="check-saturday"
-          class="day-name"
-        >
-          شنبه
-        </label>
+              <div class="day-top">
 
-      </div>
+                <input
+                  type="checkbox"
+                  class="day-check"
+                  id="check-${day[1]}"
+                  onchange="toggleDay('${day[1]}')"
+                >
 
-      <div class="time-box" id="time-saturday">
+                <label
+                  for="check-${day[1]}"
+                  class="day-name"
+                >
+                  ${day[0]}
+                </label>
 
-        <div class="time-field">
+              </div>
 
-          <label>
-            از ساعت
-          </label>
+              <div class="time-box">
 
-          <input
-            type="time"
-            id="start-saturday"
-            disabled
-          >
+                <div class="time-field">
 
-        </div>
+                  <label>
+                    از ساعت
+                  </label>
 
-        <div class="time-field">
+                  <input
+                    type="time"
+                    id="start-${day[1]}"
+                    disabled
+                  >
 
-          <label>
-            تا ساعت
-          </label>
+                </div>
 
-          <input
-            type="time"
-            id="end-saturday"
-            disabled
-          >
+                <div class="time-field">
 
-        </div>
+                  <label>
+                    تا ساعت
+                  </label>
 
-      </div>
+                  <input
+                    type="time"
+                    id="end-${day[1]}"
+                    disabled
+                  >
 
-      <div
-        class="closed-text"
-        id="closed-saturday"
-      >
-        تعطیل
-      </div>
+                </div>
 
-    </div>
+              </div>
 
+              <div
+                class="closed-text"
+                id="closed-${day[1]}"
+              >
+                تعطیل
+              </div>
 
-    <!-- یکشنبه -->
+            </div>
+          `;
 
-    <div class="hour-row" id="row-sunday">
+        }).join("")
+      );
 
-      <div class="day-top">
-
-        <input
-          type="checkbox"
-          class="day-check"
-          id="check-sunday"
-          onchange="toggleDay('sunday')"
-        >
-
-        <label
-          for="check-sunday"
-          class="day-name"
-        >
-          یکشنبه
-        </label>
-
-      </div>
-
-      <div class="time-box">
-
-        <div class="time-field">
-
-          <label>
-            از ساعت
-          </label>
-
-          <input
-            type="time"
-            id="start-sunday"
-            disabled
-          >
-
-        </div>
-
-        <div class="time-field">
-
-          <label>
-            تا ساعت
-          </label>
-
-          <input
-            type="time"
-            id="end-sunday"
-            disabled
-          >
-
-        </div>
-
-      </div>
-
-      <div
-        class="closed-text"
-        id="closed-sunday"
-      >
-        تعطیل
-      </div>
-
-    </div>
-
-
-    <!-- دوشنبه -->
-
-    <div class="hour-row">
-
-      <div class="day-top">
-
-        <input
-          type="checkbox"
-          class="day-check"
-          id="check-monday"
-          onchange="toggleDay('monday')"
-        >
-
-        <label
-          for="check-monday"
-          class="day-name"
-        >
-          دوشنبه
-        </label>
-
-      </div>
-
-      <div class="time-box">
-
-        <div class="time-field">
-
-          <label>
-            از ساعت
-          </label>
-
-          <input
-            type="time"
-            id="start-monday"
-            disabled
-          >
-
-        </div>
-
-        <div class="time-field">
-
-          <label>
-            تا ساعت
-          </label>
-
-          <input
-            type="time"
-            id="end-monday"
-            disabled
-          >
-
-        </div>
-
-      </div>
-
-      <div
-        class="closed-text"
-        id="closed-monday"
-      >
-        تعطیل
-      </div>
-
-    </div>
-
-
-    <!-- سه شنبه -->
-
-    <div class="hour-row">
-
-      <div class="day-top">
-
-        <input
-          type="checkbox"
-          class="day-check"
-          id="check-tuesday"
-          onchange="toggleDay('tuesday')"
-        >
-
-        <label
-          for="check-tuesday"
-          class="day-name"
-        >
-          سه‌شنبه
-        </label>
-
-      </div>
-
-      <div class="time-box">
-
-        <div class="time-field">
-
-          <label>
-            از ساعت
-          </label>
-
-          <input
-            type="time"
-            id="start-tuesday"
-            disabled
-          >
-
-        </div>
-
-        <div class="time-field">
-
-          <label>
-            تا ساعت
-          </label>
-
-          <input
-            type="time"
-            id="end-tuesday"
-            disabled
-          >
-
-        </div>
-
-      </div>
-
-      <div
-        class="closed-text"
-        id="closed-tuesday"
-      >
-        تعطیل
-      </div>
-
-    </div>
-
-
-    <!-- چهارشنبه -->
-
-    <div class="hour-row">
-
-      <div class="day-top">
-
-        <input
-          type="checkbox"
-          class="day-check"
-          id="check-wednesday"
-          onchange="toggleDay('wednesday')"
-        >
-
-        <label
-          for="check-wednesday"
-          class="day-name"
-        >
-          چهارشنبه
-        </label>
-
-      </div>
-
-      <div class="time-box">
-
-        <div class="time-field">
-
-          <label>
-            از ساعت
-          </label>
-
-          <input
-            type="time"
-            id="start-wednesday"
-            disabled
-          >
-
-        </div>
-
-        <div class="time-field">
-
-          <label>
-            تا ساعت
-          </label>
-
-          <input
-            type="time"
-            id="end-wednesday"
-            disabled
-          >
-
-        </div>
-
-      </div>
-
-      <div
-        class="closed-text"
-        id="closed-wednesday"
-      >
-        تعطیل
-      </div>
-
-    </div>
-
-
-    <!-- پنجشنبه -->
-
-    <div class="hour-row">
-
-      <div class="day-top">
-
-        <input
-          type="checkbox"
-          class="day-check"
-          id="check-thursday"
-          onchange="toggleDay('thursday')"
-        >
-
-        <label
-          for="check-thursday"
-          class="day-name"
-        >
-          پنجشنبه
-        </label>
-
-      </div>
-
-      <div class="time-box">
-
-        <div class="time-field">
-
-          <label>
-            از ساعت
-          </label>
-
-          <input
-            type="time"
-            id="start-thursday"
-            disabled
-          >
-
-        </div>
-
-        <div class="time-field">
-
-          <label>
-            تا ساعت
-          </label>
-
-          <input
-            type="time"
-            id="end-thursday"
-            disabled
-          >
-
-        </div>
-
-      </div>
-
-      <div
-        class="closed-text"
-        id="closed-thursday"
-      >
-        تعطیل
-      </div>
-
-    </div>
-
-
-    <!-- جمعه -->
-
-    <div class="hour-row">
-
-      <div class="day-top">
-
-        <input
-          type="checkbox"
-          class="day-check"
-          id="check-friday"
-          onchange="toggleDay('friday')"
-        >
-
-        <label
-          for="check-friday"
-          class="day-name"
-        >
-          جمعه
-        </label>
-
-      </div>
-
-      <div class="time-box">
-
-        <div class="time-field">
-
-          <label>
-            از ساعت
-          </label>
-
-          <input
-            type="time"
-            id="start-friday"
-            disabled
-          >
-
-        </div>
-
-        <div class="time-field">
-
-          <label>
-            تا ساعت
-          </label>
-
-          <input
-            type="time"
-            id="end-friday"
-            disabled
-          >
-
-        </div>
-
-      </div>
-
-      <div
-        class="closed-text"
-        id="closed-friday"
-      >
-        تعطیل
-      </div>
-
-    </div>
+    </script>
 
   </div>
 
 </div>
 
 
-<!-- =========================
-     معرفی
-========================= -->
+<!-- معرفی -->
 
 <div class="card">
 
@@ -951,9 +676,57 @@ textarea{
 </div>
 
 
-<!-- =========================
-     تأیید
-========================= -->
+<!-- کد چهار رقمی -->
+
+<div class="card">
+
+  <div class="card-title">
+    🔐 کد ورود داکتر
+  </div>
+
+  <div class="note">
+
+    این کد را خودتان تعیین کنید.
+    پس از تأیید ثبت‌نام توسط مدیریت، برای ورود به حساب داکتری خود به این کد نیاز دارید.
+
+  </div>
+
+  <div class="pin-box">
+
+    <label>
+      کد چهار رقمی *
+    </label>
+
+    <input
+      type="password"
+      id="doctorPin"
+      inputmode="numeric"
+      maxlength="4"
+      pattern="[0-9]{4}"
+      placeholder="••••"
+      autocomplete="new-password"
+    >
+
+    <label>
+      تأیید کد چهار رقمی *
+    </label>
+
+    <input
+      type="password"
+      id="doctorPinConfirm"
+      inputmode="numeric"
+      maxlength="4"
+      pattern="[0-9]{4}"
+      placeholder="••••"
+      autocomplete="new-password"
+    >
+
+  </div>
+
+</div>
+
+
+<!-- تأیید -->
 
 <div class="card">
 
@@ -963,8 +736,8 @@ textarea{
 
   <div class="note">
 
-    🔒 اطلاعات ثبت‌شده برای بررسی مدیریت ارسال می‌شود.
-    پس از بررسی، وضعیت داکتر توسط مدیریت مشخص خواهد شد.
+    🔒 اطلاعات شما برای بررسی مدیریت ارسال می‌شود.
+    تا زمانی که مدیریت تأیید نکند، حساب شما فعال نخواهد شد.
 
   </div>
 
@@ -1018,7 +791,7 @@ textarea{
 <script>
 
 /* =========================
-   تنظیمات Supabase
+   Supabase
 ========================= */
 
 const SUPABASE_URL =
@@ -1027,37 +800,30 @@ const SUPABASE_URL =
 const SUPABASE_KEY =
   "sb_publishable_gzKmKTsngGOlaoYSCiQB9w_VKSQj_H5";
 
+const BUCKET =
+  "doctor-files";
+
 
 /* =========================
-   فعال / غیرفعال کردن روز
+   فعال کردن روز
 ========================= */
 
 function toggleDay(day){
 
   const checkbox =
-    document.getElementById(
-      "check-" + day
-    );
+    document.getElementById("check-" + day);
 
   const start =
-    document.getElementById(
-      "start-" + day
-    );
+    document.getElementById("start-" + day);
 
   const end =
-    document.getElementById(
-      "end-" + day
-    );
+    document.getElementById("end-" + day);
 
   const row =
-    document.getElementById(
-      "row-" + day
-    );
+    document.getElementById("row-" + day);
 
   const closed =
-    document.getElementById(
-      "closed-" + day
-    );
+    document.getElementById("closed-" + day);
 
 
   if(checkbox.checked){
@@ -1065,9 +831,7 @@ function toggleDay(day){
     start.disabled = false;
     end.disabled = false;
 
-    row.classList.remove(
-      "day-disabled"
-    );
+    row.classList.remove("day-disabled");
 
     closed.style.display = "none";
 
@@ -1079,9 +843,7 @@ function toggleDay(day){
     start.value = "";
     end.value = "";
 
-    row.classList.add(
-      "day-disabled"
-    );
+    row.classList.add("day-disabled");
 
     closed.style.display = "block";
 
@@ -1091,7 +853,7 @@ function toggleDay(day){
 
 
 /* =========================
-   گرفتن ساعات کاری
+   ساعات کاری
 ========================= */
 
 function getWorkingHours(){
@@ -1135,16 +897,23 @@ function getWorkingHours(){
     if(!checked){
 
       result[name] = {
+
         active:false,
+
         status:"تعطیل"
+
       };
 
     }else{
 
       result[name] = {
+
         active:true,
+
         from:start,
+
         to:end
+
       };
 
     }
@@ -1157,38 +926,125 @@ function getWorkingHours(){
 
 
 /* =========================
-   تبدیل ساعت
+   Hash کردن کد
 ========================= */
 
-function formatTime(time){
+async function hashPin(pin){
 
-  if(!time){
-    return "";
+  const encoder =
+    new TextEncoder();
+
+  const data =
+    encoder.encode(pin);
+
+  const hashBuffer =
+    await crypto.subtle.digest(
+      "SHA-256",
+      data
+    );
+
+  const hashArray =
+    Array.from(
+      new Uint8Array(hashBuffer)
+    );
+
+  return hashArray
+    .map(
+      byte =>
+        byte
+          .toString(16)
+          .padStart(2,"0")
+    )
+    .join("");
+
+}
+
+
+/* =========================
+   آپلود فایل
+========================= */
+
+async function uploadFile(file, folder){
+
+  const safeName =
+    file.name
+      .replace(
+        /[^a-zA-Z0-9._-]/g,
+        "_"
+      );
+
+  const filePath =
+    folder +
+    "/" +
+    Date.now() +
+    "_" +
+    Math.random()
+      .toString(36)
+      .substring(2,8) +
+    "_" +
+    safeName;
+
+
+  const response =
+    await fetch(
+
+      SUPABASE_URL +
+      "/storage/v1/object/" +
+      BUCKET +
+      "/" +
+      filePath,
+
+      {
+
+        method:"POST",
+
+        headers:{
+
+          "apikey":
+            SUPABASE_KEY,
+
+          "Authorization":
+            "Bearer " +
+            SUPABASE_KEY,
+
+          "Content-Type":
+            file.type ||
+            "application/octet-stream"
+
+        },
+
+        body:file
+
+      }
+
+    );
+
+
+  if(!response.ok){
+
+    let errorText =
+      "خطا در آپلود فایل";
+
+    try{
+
+      const error =
+        await response.json();
+
+      errorText =
+        error.message ||
+        error.error ||
+        errorText;
+
+    }catch(e){}
+
+    throw new Error(
+      errorText
+    );
+
   }
 
-  const parts =
-    time.split(":");
 
-  let hour =
-    parseInt(parts[0]);
-
-  const minute =
-    parts[1];
-
-  const period =
-    hour >= 12
-      ? "بعد از ظهر"
-      : "صبح";
-
-  if(hour === 0){
-    hour = 12;
-  }
-
-  if(hour > 12){
-    hour -= 12;
-  }
-
-  return hour + ":" + minute + " " + period;
+  return filePath;
 
 }
 
@@ -1217,51 +1073,82 @@ async function registerDoctor(){
     "";
 
 
+  /* اطلاعات */
+
   const doctorName =
     document.getElementById(
       "doctorName"
     ).value.trim();
-
 
   const specialty =
     document.getElementById(
       "specialty"
     ).value.trim();
 
-
   const city =
     document.getElementById(
       "city"
     ).value.trim();
-
 
   const phone =
     document.getElementById(
       "phone"
     ).value.trim();
 
-
   const address =
     document.getElementById(
       "address"
     ).value.trim();
-
 
   const visitPriceText =
     document.getElementById(
       "visitPrice"
     ).value.trim();
 
-
   const about =
     document.getElementById(
       "about"
     ).value.trim();
 
-
   const services =
     document.getElementById(
       "services"
+    ).value.trim();
+
+
+  /* فایل‌ها */
+
+  const photoInput =
+    document.getElementById(
+      "doctorPhoto"
+    );
+
+  const documentsInput =
+    document.getElementById(
+      "doctorDocuments"
+    );
+
+
+  const photo =
+    photoInput.files[0] ||
+    null;
+
+  const documents =
+    Array.from(
+      documentsInput.files
+    );
+
+
+  /* کد */
+
+  const pin =
+    document.getElementById(
+      "doctorPin"
+    ).value.trim();
+
+  const pinConfirm =
+    document.getElementById(
+      "doctorPinConfirm"
     ).value.trim();
 
 
@@ -1330,6 +1217,82 @@ async function registerDoctor(){
   }
 
 
+  /* اسناد */
+
+  if(documents.length === 0){
+
+    showError(
+      "حداقل یک سند داکتر را انتخاب کنید."
+    );
+
+    return;
+
+  }
+
+
+  /* عکس */
+
+  if(photo){
+
+    if(photo.size > 5 * 1024 * 1024){
+
+      showError(
+        "حجم عکس نباید بیشتر از 5MB باشد."
+      );
+
+      return;
+
+    }
+
+  }
+
+
+  /* اسناد */
+
+  for(const file of documents){
+
+    if(
+      file.size >
+      10 * 1024 * 1024
+    ){
+
+      showError(
+        "حجم هر سند نباید بیشتر از 10MB باشد."
+      );
+
+      return;
+
+    }
+
+  }
+
+
+  /* کد */
+
+  if(!/^\d{4}$/.test(pin)){
+
+    showError(
+      "کد ورود باید دقیقاً ۴ رقم باشد."
+    );
+
+    return;
+
+  }
+
+
+  if(pin !== pinConfirm){
+
+    showError(
+      "کد چهار رقمی و تأیید آن یکسان نیست."
+    );
+
+    return;
+
+  }
+
+
+  /* توافق */
+
   if(!agreement){
 
     showError(
@@ -1341,9 +1304,7 @@ async function registerDoctor(){
   }
 
 
-  /* =========================
-     نوع ویزیت
-  ========================= */
+  /* نوع ویزیت */
 
   const visitTypes = [];
 
@@ -1372,9 +1333,7 @@ async function registerDoctor(){
   }
 
 
-  /* =========================
-     قیمت ویزیت
-  ========================= */
+  /* قیمت */
 
   let visitPrice = null;
 
@@ -1401,15 +1360,11 @@ async function registerDoctor(){
   }
 
 
-  /* =========================
-     ساعات کاری
-  ========================= */
+  /* ساعات */
 
   const workingHours =
     getWorkingHours();
 
-
-  /* بررسی ساعت روزهای فعال */
 
   const dayIds = [
 
@@ -1430,6 +1385,7 @@ async function registerDoctor(){
       document.getElementById(
         "check-" + day
       ).checked;
+
 
     if(checked){
 
@@ -1471,48 +1427,7 @@ async function registerDoctor(){
 
 
   /* =========================
-     اطلاعات نهایی
-  ========================= */
-
-  const doctorData = {
-
-    doctor_name:
-      doctorName,
-
-    specialty:
-      specialty,
-
-    city:
-      city,
-
-    phone:
-      phone,
-
-    address:
-      address,
-
-    visit_price:
-      visitPrice,
-
-    visit_type:
-      visitTypes.join(", "),
-
-    working_hours:
-      JSON.stringify(
-        workingHours
-      ),
-
-    bio:
-      about,
-
-    verification_status:
-      "pending"
-
-  };
-
-
-  /* =========================
-     جلوگیری از کلیک دوباره
+     شروع ثبت
   ========================= */
 
   button.disabled = true;
@@ -1522,6 +1437,132 @@ async function registerDoctor(){
 
 
   try{
+
+    /* Hash کد */
+
+    const pinHash =
+      await hashPin(pin);
+
+
+    /* =========================
+       آپلود عکس
+    ========================= */
+
+    let photoPath = null;
+
+
+    if(photo){
+
+      button.innerHTML =
+        "⏳ در حال آپلود عکس...";
+
+
+      photoPath =
+        await uploadFile(
+          photo,
+          "photos"
+        );
+
+    }
+
+
+    /* =========================
+       آپلود اسناد
+    ========================= */
+
+    const documentPaths = [];
+
+
+    for(
+      let i = 0;
+      i < documents.length;
+      i++
+    ){
+
+      button.innerHTML =
+        "⏳ در حال آپلود سند " +
+        (i + 1) +
+        " از " +
+        documents.length +
+        "...";
+
+
+      const path =
+        await uploadFile(
+          documents[i],
+          "documents"
+        );
+
+
+      documentPaths.push(
+        path
+      );
+
+    }
+
+
+    /* =========================
+       اطلاعات نهایی
+    ========================= */
+
+    const doctorData = {
+
+      doctor_name:
+        doctorName,
+
+      specialty:
+        specialty,
+
+      city:
+        city,
+
+      phone:
+        phone,
+
+      address:
+        address,
+
+      visit_price:
+        visitPrice,
+
+      visit_type:
+        visitTypes.join(", "),
+
+      working_hours:
+        JSON.stringify(
+          workingHours
+        ),
+
+      bio:
+        about,
+
+      services:
+        services,
+
+      photo_url:
+        photoPath,
+
+      document_url:
+        JSON.stringify(
+          documentPaths
+        ),
+
+      pin_hash:
+        pinHash,
+
+      verification_status:
+        "pending"
+
+    };
+
+
+    /* =========================
+       ارسال به Supabase
+    ========================= */
+
+    button.innerHTML =
+      "⏳ در حال ثبت در دیتابیس...";
+
 
     const response =
       await fetch(
@@ -1583,25 +1624,16 @@ async function registerDoctor(){
       );
 
 
-      showError(
-        "ثبت اطلاعات انجام نشد. تنظیمات Supabase و کلید Publishable را بررسی کنید."
+      throw new Error(
+        result?.message ||
+        result?.hint ||
+        "ثبت اطلاعات در دیتابیس انجام نشد."
       );
-
-
-      button.disabled = false;
-
-      button.innerHTML =
-        "✅ ثبت نام داکتر";
-
-
-      return;
 
     }
 
 
-    /* =========================
-       ذخیره موقت اطلاعات
-    ========================= */
+    /* ذخیره موقت */
 
     if(
       Array.isArray(result) &&
@@ -1609,7 +1641,7 @@ async function registerDoctor(){
     ){
 
       localStorage.setItem(
-        "doctorProfile",
+        "doctorRegistration",
         JSON.stringify(
           result[0]
         )
@@ -1628,18 +1660,23 @@ async function registerDoctor(){
 
     message.innerHTML = `
 
-      ✅ ثبت نام با موفقیت انجام شد.
+      ✅ ثبت نام شما با موفقیت انجام شد.
+
+      <br><br>
+
+      اطلاعات و اسناد شما برای مدیریت داکتر یار ارسال شد.
 
       <br>
 
-      اطلاعات شما در دیتابیس داکتر یار ثبت شد.
-
-      <br>
-
-      وضعیت:
+      وضعیت حساب:
       <strong>
-        در انتظار تأیید
+        در انتظار تأیید مدیریت
       </strong>
+
+      <br><br>
+
+      🔐 کد چهار رقمی شما ذخیره شد.
+      پس از تأیید مدیریت، با همین کد وارد صفحه داکتری خود شوید.
 
     `;
 
@@ -1665,7 +1702,8 @@ async function registerDoctor(){
 
 
     showError(
-      "ارتباط با Supabase برقرار نشد."
+      error.message ||
+      "ثبت اطلاعات انجام نشد."
     );
 
 
