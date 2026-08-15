@@ -3,212 +3,402 @@
 
 <head>
 
-  <meta charset="UTF-8">
+<meta charset="UTF-8">
 
-  <meta
-    name="viewport"
-    content="width=device-width, initial-scale=1.0"
-  >
+<meta
+  name="viewport"
+  content="width=device-width, initial-scale=1.0"
+>
 
-  <title>داکتر یار | صفحه اصلی</title>
+<title>داکتر یار | صفحه اصلی</title>
 
-  <style>
+<style>
 
-    * {
-      box-sizing: border-box;
-    }
+*{
+  box-sizing:border-box;
+}
 
-    body {
-      margin: 0;
-      font-family: Tahoma, Arial, sans-serif;
-      background: #f5f7f7;
-      color: #333;
-    }
+body{
+  margin:0;
+  font-family:Tahoma,Arial,sans-serif;
+  background:#f5f7f7;
+  color:#333;
+}
 
-    .container {
-      width: 92%;
-      max-width: 700px;
-      margin: auto;
-      padding: 20px 0 35px;
-    }
+.container{
+  width:92%;
+  max-width:700px;
+  margin:auto;
+  padding:12px 0 35px;
+}
 
-    /* هدر */
 
-    .header {
-      background: #149e9a;
-      color: white;
-      text-align: center;
-      padding: 35px 20px;
-      border-radius: 28px;
-      box-shadow: 0 4px 18px rgba(0,0,0,0.10);
-    }
+/* =========================
+   انتخاب زبان
+========================= */
 
-    .logo {
-      font-size: 65px;
-      margin-bottom: 8px;
-    }
+.language-bar{
+  background:white;
+  padding:12px;
+  border-radius:18px;
+  box-shadow:0 2px 10px rgba(0,0,0,.06);
+  margin-bottom:12px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:8px;
+  flex-wrap:wrap;
+}
 
-    .title {
-      font-size: 32px;
-      font-weight: bold;
-    }
+.language-title{
+  color:#555;
+  font-size:14px;
+  font-weight:bold;
+}
 
-    .subtitle {
-      font-size: 17px;
-      margin-top: 10px;
-      line-height: 1.8;
-    }
+.language-btn{
+  border:1px solid #ddd;
+  background:#f7f9f9;
+  color:#555;
+  padding:8px 12px;
+  border-radius:12px;
+  font-family:Tahoma,Arial,sans-serif;
+  cursor:pointer;
+}
 
-    /* جستجوی اصلی */
+.language-btn.active{
+  background:#149e9a;
+  color:white;
+  border-color:#149e9a;
+}
 
-    .search-card {
-      background: white;
-      margin-top: 20px;
-      padding: 22px;
-      border-radius: 23px;
-      box-shadow: 0 2px 14px rgba(0,0,0,0.07);
-    }
 
-    .search-title {
-      text-align: center;
-      color: #149e9a;
-      font-size: 21px;
-      font-weight: bold;
-      margin-bottom: 15px;
-    }
+/* =========================
+   هدر
+========================= */
 
-    .search-btn {
-      display: block;
-      width: 100%;
-      padding: 17px;
-      background: #149e9a;
-      color: white;
-      text-decoration: none;
-      text-align: center;
-      border-radius: 17px;
-      font-size: 19px;
-      font-weight: bold;
-    }
+.header{
+  background:#149e9a;
+  color:white;
+  text-align:center;
+  padding:35px 20px;
+  border-radius:28px;
+  box-shadow:0 4px 18px rgba(0,0,0,.10);
+}
 
-    /* گزینه‌ها */
+.logo{
+  font-size:65px;
+  margin-bottom:8px;
+}
 
-    .section-title {
-      text-align: center;
-      margin: 25px 0 15px;
-      font-size: 21px;
-      color: #444;
-    }
+.title{
+  font-size:32px;
+  font-weight:bold;
+}
 
-    .menu {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 13px;
-    }
+.subtitle{
+  font-size:17px;
+  margin-top:10px;
+  line-height:1.8;
+}
 
-    .menu-item {
-      background: white;
-      text-decoration: none;
-      color: #333;
-      padding: 20px 12px;
-      border-radius: 20px;
-      text-align: center;
-      box-shadow: 0 2px 12px rgba(0,0,0,0.07);
-      transition: 0.2s;
-    }
 
-    .menu-item:active {
-      transform: scale(0.97);
-    }
+/* =========================
+   جستجوی اصلی
+========================= */
 
-    .icon {
-      font-size: 38px;
-      margin-bottom: 9px;
-    }
+.search-card{
+  background:white;
+  margin-top:20px;
+  padding:22px;
+  border-radius:23px;
+  box-shadow:0 2px 14px rgba(0,0,0,.07);
+}
 
-    .menu-title {
-      font-size: 17px;
-      font-weight: bold;
-      color: #149e9a;
-    }
+.search-title{
+  text-align:center;
+  color:#149e9a;
+  font-size:21px;
+  font-weight:bold;
+  margin-bottom:15px;
+}
 
-    .menu-text {
-      font-size: 12px;
-      color: #777;
-      margin-top: 6px;
-      line-height: 1.6;
-    }
+.search-btn{
+  display:block;
+  width:100%;
+  padding:17px;
+  background:#149e9a;
+  color:white;
+  text-decoration:none;
+  text-align:center;
+  border-radius:17px;
+  font-size:19px;
+  font-weight:bold;
+}
 
-    /* شکایت */
 
-    .complaint {
-      display: block;
-      background: white;
-      margin-top: 15px;
-      padding: 18px;
-      border-radius: 20px;
-      text-align: center;
-      text-decoration: none;
-      color: #b32626;
-      box-shadow: 0 2px 12px rgba(0,0,0,0.07);
-    }
+/* =========================
+   گزینه‌ها
+========================= */
 
-    .complaint-icon {
-      font-size: 30px;
-    }
+.section-title{
+  text-align:center;
+  margin:25px 0 15px;
+  font-size:21px;
+  color:#444;
+}
 
-    .complaint-title {
-      font-size: 17px;
-      font-weight: bold;
-      margin-top: 5px;
-    }
+.menu{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:13px;
+}
 
-    /* معرفی */
+.menu-item{
+  background:white;
+  text-decoration:none;
+  color:#333;
+  padding:20px 12px;
+  border-radius:20px;
+  text-align:center;
+  box-shadow:0 2px 12px rgba(0,0,0,.07);
+  transition:.2s;
+}
 
-    .about {
-      background: white;
-      margin-top: 20px;
-      padding: 22px;
-      border-radius: 22px;
-      line-height: 2;
-      text-align: center;
-      color: #555;
-      box-shadow: 0 2px 12px rgba(0,0,0,0.06);
-    }
+.menu-item:active{
+  transform:scale(.97);
+}
 
-    .about-title {
-      color: #149e9a;
-      font-size: 20px;
-      font-weight: bold;
-      margin-bottom: 10px;
-    }
+.icon{
+  font-size:38px;
+  margin-bottom:9px;
+}
 
-    /* فوتر */
+.menu-title{
+  font-size:17px;
+  font-weight:bold;
+  color:#149e9a;
+}
 
-    .footer {
-      text-align: center;
-      margin-top: 25px;
-      color: #888;
-      font-size: 13px;
-      line-height: 1.8;
-    }
+.menu-text{
+  font-size:12px;
+  color:#777;
+  margin-top:6px;
+  line-height:1.6;
+}
 
-    @media (max-width: 500px) {
 
-      .menu {
-        grid-template-columns: 1fr 1fr;
-      }
+/* =========================
+   شکایت
+========================= */
 
-      .title {
-        font-size: 28px;
-      }
+.complaint{
+  display:block;
+  background:white;
+  margin-top:15px;
+  padding:18px;
+  border-radius:20px;
+  text-align:center;
+  text-decoration:none;
+  color:#b32626;
+  box-shadow:0 2px 12px rgba(0,0,0,.07);
+}
 
-      .subtitle {
-        font-size: 15px;
-      }
+.complaint-icon{
+  font-size:30px;
+}
 
-    }
+.complaint-title{
+  font-size:17px;
+  font-weight:bold;
+  margin-top:5px;
+}
 
-  </style>
+
+/* =========================
+   نمایش داکتران
+========================= */
+
+.doctors-section{
+  margin-top:25px;
+}
+
+.doctors-title{
+  text-align:center;
+  color:#149e9a;
+  font-size:22px;
+  font-weight:bold;
+  margin-bottom:6px;
+}
+
+.doctors-subtitle{
+  text-align:center;
+  color:#777;
+  font-size:13px;
+  margin-bottom:15px;
+}
+
+
+/* نمایش افقی */
+
+.doctors-slider{
+  display:flex;
+  overflow-x:auto;
+  gap:14px;
+  padding:5px 2px 15px;
+  scroll-behavior:smooth;
+  scrollbar-width:none;
+}
+
+.doctors-slider::-webkit-scrollbar{
+  display:none;
+}
+
+
+/* کارت داکتر */
+
+.doctor-card{
+  flex:0 0 230px;
+  background:white;
+  border-radius:22px;
+  overflow:hidden;
+  box-shadow:0 3px 15px rgba(0,0,0,.08);
+  border:1px solid #eef0f0;
+}
+
+.doctor-photo{
+  width:100%;
+  height:180px;
+  object-fit:cover;
+  background:#e9f8f7;
+  display:block;
+}
+
+.doctor-info{
+  padding:15px;
+}
+
+.doctor-name{
+  color:#149e9a;
+  font-size:18px;
+  font-weight:bold;
+  text-align:center;
+}
+
+.doctor-specialty{
+  text-align:center;
+  margin-top:7px;
+  font-size:14px;
+  color:#555;
+}
+
+.doctor-city{
+  text-align:center;
+  margin-top:6px;
+  font-size:13px;
+  color:#777;
+}
+
+.verified{
+  text-align:center;
+  margin-top:8px;
+  color:#08756f;
+  font-size:12px;
+  font-weight:bold;
+}
+
+.doctor-view{
+  display:block;
+  margin-top:12px;
+  padding:11px;
+  background:#149e9a;
+  color:white;
+  text-decoration:none;
+  text-align:center;
+  border-radius:12px;
+  font-size:14px;
+}
+
+
+/* loading */
+
+.doctors-loading{
+  background:white;
+  padding:25px;
+  border-radius:18px;
+  text-align:center;
+  color:#777;
+}
+
+
+/* بدون داکتر */
+
+.no-doctors{
+  background:white;
+  padding:22px;
+  border-radius:18px;
+  text-align:center;
+  color:#777;
+}
+
+
+/* =========================
+   معرفی
+========================= */
+
+.about{
+  background:white;
+  margin-top:20px;
+  padding:22px;
+  border-radius:22px;
+  line-height:2;
+  text-align:center;
+  color:#555;
+  box-shadow:0 2px 12px rgba(0,0,0,.06);
+}
+
+.about-title{
+  color:#149e9a;
+  font-size:20px;
+  font-weight:bold;
+  margin-bottom:10px;
+}
+
+
+/* =========================
+   فوتر
+========================= */
+
+.footer{
+  text-align:center;
+  margin-top:25px;
+  color:#888;
+  font-size:13px;
+  line-height:1.8;
+}
+
+
+@media(max-width:500px){
+
+  .menu{
+    grid-template-columns:1fr 1fr;
+  }
+
+  .title{
+    font-size:28px;
+  }
+
+  .subtitle{
+    font-size:15px;
+  }
+
+  .doctor-card{
+    flex-basis:220px;
+  }
+
+}
+
+</style>
 
 </head>
 
@@ -219,169 +409,280 @@
 <div class="container">
 
 
-  <!-- هدر -->
+<!-- =========================
+     زبان
+========================= -->
 
-  <div class="header">
+<div class="language-bar">
 
-    <div class="logo">
-      🩺
-    </div>
+  <span class="language-title" id="languageTitle">
+    🌐 زبان:
+  </span>
 
-    <div class="title">
-      داکتر یار
-    </div>
+  <button
+    class="language-btn active"
+    id="lang-fa"
+    onclick="changeLanguage('fa')"
+  >
+    🇦🇫 دری
+  </button>
 
-    <div class="subtitle">
-      راهی آسان برای پیدا کردن داکتر
-      <br>
-      و گرفتن نوبت پزشکی
-    </div>
+  <button
+    class="language-btn"
+    id="lang-ps"
+    onclick="changeLanguage('ps')"
+  >
+    🇦🇫 پښتو
+  </button>
 
+  <button
+    class="language-btn"
+    id="lang-en"
+    onclick="changeLanguage('en')"
+  >
+    🇬🇧 English
+  </button>
+
+</div>
+
+
+<!-- =========================
+     هدر
+========================= -->
+
+<div class="header">
+
+  <div class="logo">
+    🩺
   </div>
 
-
-  <!-- جستجوی داکتر -->
-
-  <div class="search-card">
-
-    <div class="search-title">
-      🔍 پیدا کردن داکتر
-    </div>
-
-    <a
-      href="doctor-search.html"
-      class="search-btn"
-    >
-      جستجوی داکتر
-    </a>
-
+  <div
+    class="title"
+    id="title"
+  >
+    داکتر یار
   </div>
 
-
-  <!-- گزینه‌های اصلی -->
-
-  <div class="section-title">
-    ورود به داکتر یار
+  <div
+    class="subtitle"
+    id="subtitle"
+  >
+    راهی آسان برای پیدا کردن داکتر
+    <br>
+    و گرفتن نوبت پزشکی
   </div>
 
-
-  <div class="menu">
-
-
-    <!-- بیمار -->
-
-    <a
-      href="patient-login.html"
-      class="menu-item"
-    >
-
-      <div class="icon">
-        👤
-      </div>
-
-      <div class="menu-title">
-        ورود بیمار
-      </div>
-
-      <div class="menu-text">
-        ورود به حساب بیمار
-      </div>
-
-    </a>
+</div>
 
 
-    <!-- داکتر -->
+<!-- =========================
+     جستجو
+========================= -->
 
-    <a
-      href="doctor-login.html"
-      class="menu-item"
-    >
+<div class="search-card">
 
-      <div class="icon">
-        👨‍⚕️
-      </div>
-
-      <div class="menu-title">
-        ورود داکتر
-      </div>
-
-      <div class="menu-text">
-        ورود به پنل داکتر
-      </div>
-
-    </a>
-
-
-    <!-- مدیریت -->
-
-    <a
-      href="admin-login.html"
-      class="menu-item"
-    >
-
-      <div class="icon">
-        🛡️
-      </div>
-
-      
-
-    </a>
-
-
-    <!-- جستجوی داکتر -->
-
-    <a
-      href="doctor-search.html"
-      class="menu-item"
-    >
-
-      <div class="icon">
-        🔎
-      </div>
-
-      <div class="menu-title">
-        جستجوی داکتر
-      </div>
-
-      <div class="menu-text">
-        مشاهده داکتران
-      </div>
-
-    </a>
-
-
+  <div
+    class="search-title"
+    id="searchTitle"
+  >
+    🔍 پیدا کردن داکتر
   </div>
-
-
-  <!-- شکایت -->
 
   <a
-    href="patient-complaint.html"
-    class="complaint"
+    href="doctor-search.html"
+    class="search-btn"
+    id="searchButton"
+  >
+    جستجوی داکتر
+  </a>
+
+</div>
+
+
+<!-- =========================
+     گزینه‌ها
+========================= -->
+
+<div
+  class="section-title"
+  id="loginTitle"
+>
+  ورود به داکتر یار
+</div>
+
+
+<div class="menu">
+
+
+  <!-- بیمار -->
+
+  <a
+    href="patient-login.html"
+    class="menu-item"
   >
 
-    <div class="complaint-icon">
-      ⚠️
+    <div class="icon">
+      👤
     </div>
 
-    <div class="complaint-title">
-      ثبت شکایت
+    <div
+      class="menu-title"
+      id="patientTitle"
+    >
+      ورود بیمار
     </div>
 
-    <div class="menu-text">
-      اگر مشکلی دارید، شکایت خود را ثبت کنید
+    <div
+      class="menu-text"
+      id="patientText"
+    >
+      ورود به حساب بیمار
     </div>
 
   </a>
 
 
-  <!-- درباره داکتر یار -->
+  <!-- داکتر -->
 
-  <div class="about">
+  <a
+    href="doctor-login.html"
+    class="menu-item"
+  >
 
-    <div class="about-title">
-      🩺 درباره داکتر یار
+    <div class="icon">
+      👨‍⚕️
     </div>
+
+    <div
+      class="menu-title"
+      id="doctorTitle"
+    >
+      ورود داکتر
+    </div>
+
+    <div
+      class="menu-text"
+      id="doctorText"
+    >
+      ورود به پنل داکتر
+    </div>
+
+  </a>
+
+
+  <!-- جستجوی داکتر -->
+
+  <a
+    href="doctor-search.html"
+    class="menu-item"
+  >
+
+    <div class="icon">
+      🔎
+    </div>
+
+    <div
+      class="menu-title"
+      id="doctorSearchTitle"
+    >
+      جستجوی داکتر
+    </div>
+
+    <div
+      class="menu-text"
+      id="doctorSearchText"
+    >
+      مشاهده داکتران
+    </div>
+
+  </a>
+
+
+</div>
+
+
+<!-- =========================
+     شکایت
+========================= -->
+
+<a
+  href="patient-complaint.html"
+  class="complaint"
+>
+
+  <div class="complaint-icon">
+    ⚠️
+  </div>
+
+  <div
+    class="complaint-title"
+    id="complaintTitle"
+  >
+    ثبت شکایت
+  </div>
+
+  <div
+    class="menu-text"
+    id="complaintText"
+  >
+    اگر مشکلی دارید، شکایت خود را ثبت کنید
+  </div>
+
+</a>
+
+
+<!-- =========================
+     داکتران تأیید شده
+========================= -->
+
+<div class="doctors-section">
+
+  <div
+    class="doctors-title"
+    id="doctorsTitle"
+  >
+    👨‍⚕️ داکتران داکتر یار
+  </div>
+
+  <div
+    class="doctors-subtitle"
+    id="doctorsSubtitle"
+  >
+    داکتران تأیید شده توسط مدیریت
+  </div>
+
+
+  <div
+    id="doctorsList"
+    class="doctors-slider"
+  >
+
+    <div
+      class="doctors-loading"
+      id="doctorsLoading"
+    >
+      ⏳ در حال دریافت داکتران...
+    </div>
+
+  </div>
+
+</div>
+
+
+<!-- =========================
+     درباره
+========================= -->
+
+<div class="about">
+
+  <div
+    class="about-title"
+    id="aboutTitle"
+  >
+    🩺 درباره داکتر یار
+  </div>
+
+  <span id="aboutText">
 
     داکتر یار یک پلتفرم برای آسان‌تر شدن
     پیدا کردن داکتران و گرفتن نوبت پزشکی است.
@@ -392,23 +693,884 @@
     داکتر مناسب خود را راحت‌تر پیدا کند
     و برای دریافت خدمات پزشکی نوبت بگیرد.
 
-  </div>
+  </span>
+
+</div>
 
 
-  <!-- فوتر -->
+<!-- =========================
+     فوتر
+========================= -->
 
-  <div class="footer">
+<div class="footer">
 
-    © داکتر یار
+  © داکتر یار
 
-    <br>
+  <br>
 
+  <span id="footerText">
     سیستم جستجو و نوبت‌دهی داکتران
+  </span>
 
-  </div>
+</div>
 
 
 </div>
+
+
+<script>
+
+
+/* =====================================================
+   تنظیمات Supabase
+===================================================== */
+
+const SUPABASE_URL =
+  "https://dzuilchtsnxncooixaib.supabase.co";
+
+const SUPABASE_KEY =
+  "sb_publishable_gzKmKTsngGOlaoYSCiQB9w_VKSQj_H5";
+
+
+/* =====================================================
+   زبان‌ها
+===================================================== */
+
+const translations = {
+
+  fa:{
+
+    direction:"rtl",
+
+    languageTitle:"🌐 زبان:",
+
+    title:"داکتر یار",
+
+    subtitle:
+      "راهی آسان برای پیدا کردن داکتر<br>و گرفتن نوبت پزشکی",
+
+    searchTitle:
+      "🔍 پیدا کردن داکتر",
+
+    searchButton:
+      "جستجوی داکتر",
+
+    loginTitle:
+      "ورود به داکتر یار",
+
+    patientTitle:
+      "ورود بیمار",
+
+    patientText:
+      "ورود به حساب بیمار",
+
+    doctorTitle:
+      "ورود داکتر",
+
+    doctorText:
+      "ورود به پنل داکتر",
+
+    doctorSearchTitle:
+      "جستجوی داکتر",
+
+    doctorSearchText:
+      "مشاهده داکتران",
+
+    complaintTitle:
+      "ثبت شکایت",
+
+    complaintText:
+      "اگر مشکلی دارید، شکایت خود را ثبت کنید",
+
+    doctorsTitle:
+      "👨‍⚕️ داکتران داکتر یار",
+
+    doctorsSubtitle:
+      "داکتران تأیید شده توسط مدیریت",
+
+    loading:
+      "⏳ در حال دریافت داکتران...",
+
+    noDoctors:
+      "فعلاً داکتر تأییدشده‌ای برای نمایش وجود ندارد.",
+
+    verified:
+      "✓ داکتر تأیید شده",
+
+    view:
+      "مشاهده پروفایل",
+
+    aboutTitle:
+      "🩺 درباره داکتر یار",
+
+    aboutText:
+      "داکتر یار یک پلتفرم برای آسان‌تر شدن پیدا کردن داکتران و گرفتن نوبت پزشکی است.<br><br>هدف ما این است که بیمار بتواند داکتر مناسب خود را راحت‌تر پیدا کند و برای دریافت خدمات پزشکی نوبت بگیرد.",
+
+    footer:
+      "سیستم جستجو و نوبت‌دهی داکتران"
+
+  },
+
+
+  ps:{
+
+    direction:"rtl",
+
+    languageTitle:"🌐 ژبه:",
+
+    title:"ډاکټر یار",
+
+    subtitle:
+      "د ډاکټر موندلو لپاره اسانه لاره<br>او د طبي ملاقات اخیستل",
+
+    searchTitle:
+      "🔍 ډاکټر پیدا کړئ",
+
+    searchButton:
+      "د ډاکټر لټون",
+
+    loginTitle:
+      "ډاکټر یار ته ننوتل",
+
+    patientTitle:
+      "د ناروغ ننوتل",
+
+    patientText:
+      "د ناروغ حساب ته ننوتل",
+
+    doctorTitle:
+      "د ډاکټر ننوتل",
+
+    doctorText:
+      "د ډاکټر پینل ته ننوتل",
+
+    doctorSearchTitle:
+      "د ډاکټر لټون",
+
+    doctorSearchText:
+      "ډاکټران وګورئ",
+
+    complaintTitle:
+      "شکایت ثبتول",
+
+    complaintText:
+      "که ستونزه لرئ، خپل شکایت ثبت کړئ",
+
+    doctorsTitle:
+      "👨‍⚕️ د ډاکټر یار ډاکټران",
+
+    doctorsSubtitle:
+      "د مدیریت لخوا تایید شوي ډاکټران",
+
+    loading:
+      "⏳ د ډاکټرانو معلومات ترلاسه کېږي...",
+
+    noDoctors:
+      "اوس مهال د ښودلو لپاره تایید شوی ډاکټر نشته.",
+
+    verified:
+      "✓ تایید شوی ډاکټر",
+
+    view:
+      "پروفایل وګورئ",
+
+    aboutTitle:
+      "🩺 د ډاکټر یار په اړه",
+
+    aboutText:
+      "ډاکټر یار یو پلاتفورم دی چې د ډاکټرانو موندل او طبي ملاقات اخیستل اسانه کوي.<br><br>زموږ هدف دا دی چې ناروغ وکولای شي مناسب ډاکټر په اسانۍ پیدا کړي او د طبي خدمت لپاره ملاقات واخلي.",
+
+    footer:
+      "د ډاکټرانو د لټون او ملاقات سیستم"
+
+  },
+
+
+  en:{
+
+    direction:"ltr",
+
+    languageTitle:"🌐 Language:",
+
+    title:"Doctor Yar",
+
+    subtitle:
+      "An easy way to find a doctor<br>and book a medical appointment",
+
+    searchTitle:
+      "🔍 Find a Doctor",
+
+    searchButton:
+      "Search Doctors",
+
+    loginTitle:
+      "Login to Doctor Yar",
+
+    patientTitle:
+      "Patient Login",
+
+    patientText:
+      "Login to patient account",
+
+    doctorTitle:
+      "Doctor Login",
+
+    doctorText:
+      "Login to doctor panel",
+
+    doctorSearchTitle:
+      "Doctor Search",
+
+    doctorSearchText:
+      "View doctors",
+
+    complaintTitle:
+      "Submit Complaint",
+
+    complaintText:
+      "If you have a problem, submit your complaint",
+
+    doctorsTitle:
+      "👨‍⚕️ Doctor Yar Doctors",
+
+    doctorsSubtitle:
+      "Doctors verified by management",
+
+    loading:
+      "⏳ Loading doctors...",
+
+    noDoctors:
+      "There are currently no verified doctors to display.",
+
+    verified:
+      "✓ Verified Doctor",
+
+    view:
+      "View Profile",
+
+    aboutTitle:
+      "🩺 About Doctor Yar",
+
+    aboutText:
+      "Doctor Yar is a platform designed to make finding doctors and booking medical appointments easier.<br><br>Our goal is to help patients find the right doctor more easily and book an appointment for medical services.",
+
+    footer:
+      "Doctor search and appointment system"
+
+  }
+
+};
+
+
+/* =====================================================
+   تغییر زبان
+===================================================== */
+
+function changeLanguage(lang){
+
+  const t =
+    translations[lang];
+
+  if(!t){
+    return;
+  }
+
+
+  document.documentElement.lang =
+    lang;
+
+  document.documentElement.dir =
+    t.direction;
+
+
+  document.getElementById(
+    "languageTitle"
+  ).innerHTML =
+    t.languageTitle;
+
+
+  document.getElementById(
+    "title"
+  ).innerHTML =
+    t.title;
+
+
+  document.getElementById(
+    "subtitle"
+  ).innerHTML =
+    t.subtitle;
+
+
+  document.getElementById(
+    "searchTitle"
+  ).innerHTML =
+    t.searchTitle;
+
+
+  document.getElementById(
+    "searchButton"
+  ).innerHTML =
+    t.searchButton;
+
+
+  document.getElementById(
+    "loginTitle"
+  ).innerHTML =
+    t.loginTitle;
+
+
+  document.getElementById(
+    "patientTitle"
+  ).innerHTML =
+    t.patientTitle;
+
+
+  document.getElementById(
+    "patientText"
+  ).innerHTML =
+    t.patientText;
+
+
+  document.getElementById(
+    "doctorTitle"
+  ).innerHTML =
+    t.doctorTitle;
+
+
+  document.getElementById(
+    "doctorText"
+  ).innerHTML =
+    t.doctorText;
+
+
+  document.getElementById(
+    "doctorSearchTitle"
+  ).innerHTML =
+    t.doctorSearchTitle;
+
+
+  document.getElementById(
+    "doctorSearchText"
+  ).innerHTML =
+    t.doctorSearchText;
+
+
+  document.getElementById(
+    "complaintTitle"
+  ).innerHTML =
+    t.complaintTitle;
+
+
+  document.getElementById(
+    "complaintText"
+  ).innerHTML =
+    t.complaintText;
+
+
+  document.getElementById(
+    "doctorsTitle"
+  ).innerHTML =
+    t.doctorsTitle;
+
+
+  document.getElementById(
+    "doctorsSubtitle"
+  ).innerHTML =
+    t.doctorsSubtitle;
+
+
+  document.getElementById(
+    "aboutTitle"
+  ).innerHTML =
+    t.aboutTitle;
+
+
+  document.getElementById(
+    "aboutText"
+  ).innerHTML =
+    t.aboutText;
+
+
+  document.getElementById(
+    "footerText"
+  ).innerHTML =
+    t.footer;
+
+
+  document
+    .querySelectorAll(
+      ".language-btn"
+    )
+    .forEach(function(btn){
+
+      btn.classList.remove(
+        "active"
+      );
+
+    });
+
+
+  document.getElementById(
+    "lang-" + lang
+  ).classList.add(
+    "active"
+  );
+
+
+  localStorage.setItem(
+    "selectedLanguage",
+    lang
+  );
+
+
+  loadDoctors();
+
+}
+
+
+/* =====================================================
+   عکس پیش‌فرض داکتر
+===================================================== */
+
+function defaultDoctorImage(){
+
+  return "data:image/svg+xml;charset=UTF-8," +
+  encodeURIComponent(`
+
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="500"
+      height="400"
+      viewBox="0 0 500 400"
+    >
+
+      <rect
+        width="500"
+        height="400"
+        fill="#e8f8f7"
+      />
+
+      <text
+        x="250"
+        y="190"
+        text-anchor="middle"
+        font-size="110"
+      >
+        👨‍⚕️
+      </text>
+
+      <text
+        x="250"
+        y="310"
+        text-anchor="middle"
+        font-family="Arial"
+        font-size="28"
+        fill="#149e9a"
+      >
+        Doctor Yar
+      </text>
+
+    </svg>
+
+  `);
+
+}
+
+
+/* =====================================================
+   پیدا کردن عکس داکتر
+===================================================== */
+
+function getDoctorImage(doctor){
+
+  const possibleFields = [
+
+    "photo_url",
+    "profile_photo",
+    "doctor_photo",
+    "image_url",
+    "image",
+    "photo",
+    "avatar_url"
+
+  ];
+
+
+  for(
+    const field of possibleFields
+  ){
+
+    if(
+      doctor[field] &&
+      String(
+        doctor[field]
+      ).trim() !== ""
+    ){
+
+      return doctor[field];
+
+    }
+
+  }
+
+
+  return defaultDoctorImage();
+
+}
+
+
+/* =====================================================
+   پیدا کردن ID داکتر
+===================================================== */
+
+function getDoctorId(doctor){
+
+  return (
+    doctor.id ||
+    doctor.doctor_id ||
+    doctor.user_id ||
+    ""
+  );
+
+}
+
+
+/* =====================================================
+   نمایش داکتران تأیید شده
+===================================================== */
+
+async function loadDoctors(){
+
+  const list =
+    document.getElementById(
+      "doctorsList"
+    );
+
+
+  const lang =
+    localStorage.getItem(
+      "selectedLanguage"
+    ) || "fa";
+
+
+  const t =
+    translations[lang];
+
+
+  list.innerHTML = `
+
+    <div class="doctors-loading">
+
+      ${t.loading}
+
+    </div>
+
+  `;
+
+
+  try{
+
+    const response =
+      await fetch(
+
+        SUPABASE_URL +
+        "/rest/v1/Doctors" +
+        "?select=*" +
+        "&verification_status=eq.approved" +
+        "&order=created_at.desc",
+
+        {
+
+          method:"GET",
+
+          headers:{
+
+            "apikey":
+              SUPABASE_KEY,
+
+            "Authorization":
+              "Bearer " +
+              SUPABASE_KEY
+
+          }
+
+        }
+
+      );
+
+
+    let doctors = [];
+
+
+    try{
+
+      doctors =
+        await response.json();
+
+    }catch(e){
+
+      doctors = [];
+
+    }
+
+
+    if(!response.ok){
+
+      console.error(
+        "Doctors Error:",
+        doctors
+      );
+
+      list.innerHTML = `
+
+        <div class="no-doctors">
+
+          ${t.noDoctors}
+
+        </div>
+
+      `;
+
+      return;
+
+    }
+
+
+    if(
+      !Array.isArray(doctors) ||
+      doctors.length === 0
+    ){
+
+      list.innerHTML = `
+
+        <div class="no-doctors">
+
+          ${t.noDoctors}
+
+        </div>
+
+      `;
+
+      return;
+
+    }
+
+
+    list.innerHTML = "";
+
+
+    doctors.forEach(
+      function(doctor){
+
+        const card =
+          document.createElement(
+            "div"
+          );
+
+        card.className =
+          "doctor-card";
+
+
+        const image =
+          getDoctorImage(
+            doctor
+          );
+
+
+        const id =
+          getDoctorId(
+            doctor
+          );
+
+
+        const name =
+          doctor.doctor_name ||
+          doctor.name ||
+          "داکتر";
+
+
+        const specialty =
+          doctor.specialty ||
+          doctor.specialization ||
+          "";
+
+
+        const city =
+          doctor.city ||
+          "";
+
+
+        card.innerHTML = `
+
+          <img
+            class="doctor-photo"
+            src="${escapeHtml(image)}"
+            alt="${escapeHtml(name)}"
+            onerror="this.src=defaultDoctorImage()"
+          >
+
+          <div class="doctor-info">
+
+            <div class="doctor-name">
+
+              👨‍⚕️
+              ${escapeHtml(name)}
+
+            </div>
+
+            <div class="doctor-specialty">
+
+              🩺
+              ${escapeHtml(specialty)}
+
+            </div>
+
+            <div class="doctor-city">
+
+              📍
+              ${escapeHtml(city)}
+
+            </div>
+
+            <div class="verified">
+
+              ${t.verified}
+
+            </div>
+
+            <a
+              href="#"
+              class="doctor-view"
+              data-id="${escapeHtml(id)}"
+            >
+              ${t.view}
+            </a>
+
+          </div>
+
+        `;
+
+
+        const viewButton =
+          card.querySelector(
+            ".doctor-view"
+          );
+
+
+        viewButton.addEventListener(
+          "click",
+          function(event){
+
+            event.preventDefault();
+
+
+            /*
+             ذخیره داکتر انتخاب شده
+             برای صفحه مشاهده پروفایل
+            */
+
+            localStorage.setItem(
+              "selectedDoctor",
+              JSON.stringify(
+                doctor
+              )
+            );
+
+
+            localStorage.setItem(
+              "doctorProfile",
+              JSON.stringify(
+                doctor
+              )
+            );
+
+
+            window.location.href =
+              "doctor-profile-view.html";
+
+          }
+        );
+
+
+        list.appendChild(
+          card
+        );
+
+      }
+    );
+
+
+  }catch(error){
+
+    console.error(
+      "Load Doctors Error:",
+      error
+    );
+
+
+    list.innerHTML = `
+
+      <div class="no-doctors">
+
+        ${t.noDoctors}
+
+      </div>
+
+    `;
+
+  }
+
+}
+
+
+/* =====================================================
+   جلوگیری از HTML ناامن
+===================================================== */
+
+function escapeHtml(value){
+
+  return String(
+    value ?? ""
+  )
+  .replace(
+    /&/g,
+    "&amp;"
+  )
+  .replace(
+    /</g,
+    "&lt;"
+  )
+  .replace(
+    />/g,
+    "&gt;"
+  )
+  .replace(
+    /"/g,
+    "&quot;"
+  )
+  .replace(
+    /'/g,
+    "&#039;"
+  );
+
+}
+
+
+/* =====================================================
+   شروع صفحه
+===================================================== */
+
+const savedLanguage =
+  localStorage.getItem(
+    "selectedLanguage"
+  ) || "fa";
+
+
+changeLanguage(
+  savedLanguage
+);
+
+</script>
 
 
 </body>
